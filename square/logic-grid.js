@@ -173,9 +173,11 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile) {
     this.height = map.tsize;
     this.attaque = attaque;
     this.defense = defense;
-    this.ecu = ecu;
-    this.bois = bois;
-    this.argile = argile;
+    this.supply = {
+        ecu:    ecu, 
+        bois:   bois, 
+        argile: argile
+    };
     this.image = Loader.getImage('hero');
 	
 	this.addBuild = function (x, y, map)
@@ -203,23 +205,17 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile) {
 	
 	this.creuse = function (x, y, map)
 	{
-		// var dirx = 0;
-		// var diry = 0;
-		// if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
-		// else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
-		// else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
-		// else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
-		// if(dirx!=0 || diry!=0) return false;
-		
-		pos = map.getRow(y)*map.rows+map.getCol(x);
-		if(abs2[pos]== 0 && abs1[pos]!=2){
-			abs1[pos]=2;
-			abs2[pos]=0;
-			this.ecu=this.ecu+10;
-			document.getElementById("argent_value").innerHTML = this.ecu;
-		}else if(abs1[pos]== 2){
-			this.ecu=this.ecu+2;
-			document.getElementById("argent_value").innerHTML = this.ecu;
+        var ecu = this.supply.ecu;
+        pos     = map.getRow(y)*map.rows+map.getCol(x);
+        
+		if (abs2[pos] == 0 && abs1[pos] != 2) {
+			abs1[pos] = 2;
+			abs2[pos] = 0;
+			this.supply.ecu = ecu + 10;
+			document.getElementById("argent_value").innerHTML = this.supply.ecu;
+		} else if (abs1[pos] == 2){
+			this.supply.ecu = ecu + 2;
+			document.getElementById("argent_value").innerHTML = this.supply.ecu;
 		}
 	}
 	
