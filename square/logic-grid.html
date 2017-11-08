@@ -9,22 +9,25 @@
     <script src="logic-grid.js"></script>
 </head>
 <body>
+    <div class="container">
+        <div class="left-supply">
+            <div class="argent">Bourse :    <span id="argent_value">0</span></div>
+            <div class="bois">BOIS :        <span id="bois_value">0</span></div>
+            <div class="argile">ARGILE :    <span id="argile_value">0</span></div>
+        </div>
+        
+        <div class="main-wrapper">
+            <canvas id="demo" width="1024" height="768"></canvas>
+            <footer class="main-footer">
+                <p>Source code on <a href="https://github.com/mozdevs/gamedev-js-tiles" target="_top">the Github repository</a>.</p>
+            </footer>
+        </div>
 
-
-
-<div class="main-wrapper">
-<div class="ressource">
-	<div class="argent">Bourse : <span id="argent_value">0</span></div>
-	<div class="bois">BOIS : <span id="bois_value"></span>0</div>
-	<div class="argile">ARGILE : <span id="argile_value">0</span></div>
-</div>
-    <canvas id="demo" width="512" height="512"></canvas>
-	<button id="addBuild">Ajouter un bâtiment</button>
-	<button id="creuse">Creuser</button>
-    <footer class="main-footer">
-        <p>Source code on <a href="https://github.com/mozdevs/gamedev-js-tiles" target="_top">the Github repository</a>.</p>
-    </footer>
-</div><!-- main wrapper -->
+        <div class="right-stuff">
+            <button id="addBuild">Ajouter un bâtiment</button>
+            <button id="creuse">Creuser</button>
+        </div>
+    </div>
 
 </body>
 </html>

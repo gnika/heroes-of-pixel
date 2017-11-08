@@ -430,7 +430,7 @@ Game.init = function () {
 		monsters.push(this.nameTroll);
 	}
 	
-    this.camera = new Camera(map, 512, 512);
+    this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 	document.getElementById("addBuild").addEventListener('click',
 		function(){
