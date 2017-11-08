@@ -1,39 +1,63 @@
 abs1 = [
-        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 3, 3, 1, 1, 2, 3, 3, 3, 3, 3, 3
+        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3,
+        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3,
+        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
+        3, 3, 3, 1, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 2, 3, 3, 3, 3, 3, 3
     ];
 
 abs2 = [
-        4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,//24-35: 26
-        4, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 4, 4, 0, 5, 4, 4, 4, 4, 4, 4, 4,
-        4, 4, 4, 0, 0, 3, 3, 3, 3, 3, 3, 3
+        4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 4, 4, 0, 5, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 0, 5, 4, 4, 4, 4, 4, 4, 4,
+        4, 4, 4, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 0, 0, 3, 3, 3, 3, 3, 3, 3
     ];
 	
 DUREE_ANIMATION = 55;
 builds = [];
 monsters = [];
 var map = {
-    cols: 12,
-    rows: 12,
+    cols: 24,
+    rows: 24,
     tsize: 64,
     layers: [abs1, abs2],
     getTile: function (layer, col, row) {
@@ -70,7 +94,7 @@ var map = {
 			var isSolid=0;
 				
 			monsters.forEach(function(element) {
-					if(element.name == col+'-'+row)
+					if(element.name == col+'_'+row)
 						isSolid= element;
 				});
 				
@@ -140,7 +164,7 @@ Camera.prototype.update = function () {
                
 };
  
-function Hero(map, x, y, life, attaque, defense) {
+function Hero(map, x, y, life, attaque, defense, ecu, bois, argile) {
     this.map = map;
     this.x = x;
     this.y = y;
@@ -149,7 +173,56 @@ function Hero(map, x, y, life, attaque, defense) {
     this.height = map.tsize;
     this.attaque = attaque;
     this.defense = defense;
+    this.ecu = ecu;
+    this.bois = bois;
+    this.argile = argile;
     this.image = Loader.getImage('hero');
+	
+	this.addBuild = function (x, y, map)
+	{
+		var dirx = 0;
+		var diry = 0;
+		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
+		else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
+		else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
+		else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+		if(dirx!=0 || diry!=0) return false;
+		
+		pos = map.getRow(y)*map.rows+map.getCol(x);
+		
+		if(abs2[pos+1]!= 6 && abs2[pos+1]!= 3 && abs2[pos+1]!= 5){
+			if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
+				Game.hero.x=32*Math.floor((Game.hero.x+32/2)/32)-32;
+			abs2[pos+1]=6;
+			var nameBuild = 'build-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
+			
+			Game.nameBuild = new Building(map, Math.floor((Math.random() * 60) + 5), nameBuild);
+			builds.push(Game.nameBuild);
+		}
+	}
+	
+	this.creuse = function (x, y, map)
+	{
+		// var dirx = 0;
+		// var diry = 0;
+		// if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
+		// else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
+		// else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
+		// else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+		// if(dirx!=0 || diry!=0) return false;
+		
+		pos = map.getRow(y)*map.rows+map.getCol(x);
+		if(abs2[pos]== 0 && abs1[pos]!=2){
+			abs1[pos]=2;
+			abs2[pos]=0;
+			this.ecu=this.ecu+10;
+			document.getElementById("argent_value").innerHTML = this.ecu;
+		}else if(abs1[pos]== 2){
+			this.ecu=this.ecu+2;
+			document.getElementById("argent_value").innerHTML = this.ecu;
+		}
+	}
+	
 }
  
 function Troll(map, x, y, life, name, attaque, defense) {
@@ -177,24 +250,20 @@ Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
     this.x += dirx * Hero.SPEED * delta;
     this.y += diry * Hero.SPEED * delta;
-    // move lifehero
-	
-	
-	
-	
-	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1){
-		// this.image = Loader.getImage('hero2');
-	// }
-	// if(dirx == 0 && diry == 0)
-		// this.image = Loader.getImage('hero');       
+    // move lifehero	
+	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1)//si mouvement
    
    if(Game.anim>=DUREE_ANIMATION/2){
 		this.image = Loader.getImage('hero2');
-		Game.troll.image = Loader.getImage('troll2');
+		monsters.forEach(function(element) {
+			element.image = Loader.getImage('troll2');
+		})
    }
 	else{
 		this.image = Loader.getImage('hero');
-		Game.troll.image = Loader.getImage('troll1');
+		monsters.forEach(function(element) {
+			element.image = Loader.getImage('troll1');
+		})
 	}
  
     // check if we walked into a non-walkable tile
@@ -321,7 +390,14 @@ Hero.prototype._ennemy = function (dirx, diry) {
 		if(lifeMonster < 0) lifeMonster =0.1;
 		
 		this.life = this.life-(lifeHero);
-		collision.life = collision.life-(lifeMonster);
+		
+		if(collision.life >0){
+			// if(collision.life-(lifeMonster)<0){
+				// lifeMonster=collision.life;
+			// }
+			collision.life = collision.life-(lifeMonster);
+		}
+			
     }         
 };
  
@@ -342,39 +418,31 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;
-    this.hero = new Hero(map, 160, 160, 60, 10, 20);//attaque - defense
-    this.troll = new Troll(map, 64, 64, 60, '1-1', 22, 18);
-    monsters.push(this.troll);
+    this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0);//map - x - y - vie - attaque - defense - ecu - bois - argile
+
+    
+	generateTroll(64, 64, '1_1');
+	generateTroll(256, 64, '4_1');
 	
-	
+	function generateTroll(x, y, name){
+		var nameTroll = 'troll'+name;
+		this.nameTroll = new Troll(map, x, y, 60, name, 22, 18);
+		monsters.push(this.nameTroll);
+	}
 	
     this.camera = new Camera(map, 512, 512);
     this.camera.follow(this.hero);
 	document.getElementById("addBuild").addEventListener('click',
-							 function(){
-								 
-								 addBuild(Game.hero.x, Game.hero.y, map);
-							 },
-							 false);
-	function addBuild(x, y, map)
-	{
-		pos = map.getRow(y)*map.rows+map.getCol(x);
-		
-		if(abs2[pos+1]!= 6 && abs2[pos+1]!= 3 && abs2[pos+1]!= 5){
-			// if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)
-				// Game.hero.x=32*Math.floor((Game.hero.x+32/2)/32)-32;
-			abs2[pos+1]=6;
-			var nameBuild = 'build-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
-			
-			Game.nameBuild = new Building(map, Math.floor((Math.random() * 60) + 5), nameBuild);
-			builds.push(Game.nameBuild);
-		}
-		
-		
-		// console.log(pos);
-		// console.log(map.getCol(x));
-		// console.log(map.getRow(y));
-	}
+		function(){
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map);
+		},
+	false);
+	document.getElementById("creuse").addEventListener('click',
+		function(){
+			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
+		},
+	false);
+	
 };
  
 Game.update = function (delta) {
@@ -491,27 +559,45 @@ Game.render = function () {
         this.hero.screenY - this.hero.height / 2
     );
    
-    // draw main character
-	this.ctx.drawImage(
-		this.troll.image, // image
-		0, // source x
-		0, // source y
-		map.tsize, // source width
-		map.tsize, // source height
-		// Math.round(x),  // target x
-		// Math.round(y), // target y
-		this.troll.x-this.camera.x,  // target x
-		this.troll.y-this.camera.y, // target y
-		map.tsize, // target width
-		map.tsize // target height
-	);
+   
+   monsters.forEach(function(element) {
+
+		if(element.life>0){
+			// draw main character
+			Game.ctx.drawImage(
+				element.image, // image
+				0, // source x
+				0, // source y
+				map.tsize, // source width
+				map.tsize, // source height
+				// Math.round(x),  // target x
+				// Math.round(y), // target y
+				element.x-Game.camera.x,  // target x
+				element.y-Game.camera.y, // target y
+				map.tsize, // target width
+				map.tsize // target height
+			);
+	
+		Game.ctx.fillStyle="#FF0000";
+		Game.ctx.fillRect(2+element.x-Game.camera.x, element.y+70-Game.camera.y, element.life, 10);
+	   }else{
+			for (var i=0; i<monsters.length; i++)
+			{
+				if (monsters[i].name == element.name) 
+					monsters.splice(i, 1);
+			}
+		   
+	   }
+		
+		
+	});
+   
    
                
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
 		   
-	this.ctx.fillStyle="#FF0000";
-	this.ctx.fillRect(2+this.troll.x-this.camera.x, this.troll.y+70-this.camera.y, this.troll.life, 10);
+	
                
                
                 if(this.hero.life<=0){
