@@ -53,8 +53,10 @@ abs2 = [
     ];
 	
 DUREE_ANIMATION = 55;
-builds = [];
-monsters = [];
+builds          = [];
+monsters        = [];
+supply          = [];
+
 var map = {
     cols: 24,
     rows: 24,
@@ -99,9 +101,20 @@ var map = {
 				});
 				
 			return isSolid;
-		
-		
+    },
+    isCornTileAtXY: function (x, y) {
+        var col = Math.floor(x / this.tsize);
+        var row = Math.floor(y / this.tsize);
         
+        var isSolid = 0;
+            
+        supply.forEach(function(element) {
+                if (element.name == col + '_' + row) {
+                    isSolid = element;
+                }
+            });
+            
+        return isSolid;
     },
     getCol: function (x) {
         return Math.floor(x / this.tsize);
@@ -170,8 +183,8 @@ function objet(name, media, life, attaque){
 	this.attaque=attaque;
 	this.image=Loader.getImage(media);
 }
-
-function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, equipement) {
+ 
+function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, equipement) {
     this.map = map;
     this.x = x;
     this.y = y;
@@ -181,9 +194,12 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, equipement) 
     this.attaque = attaque;
     this.defense = defense;
     this.equipement = equipement;
-    this.ecu = ecu;
-    this.bois = bois;
-    this.argile = argile;
+    this.supply = {
+        ecu:    ecu, 
+        bois:   bois, 
+        argile: argile, 
+        ble:    ble
+    };
     this.image = Loader.getImage('hero');
 	
 	this.addBuild = function (x, y, map)
@@ -211,21 +227,23 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, equipement) 
 	
 	this.creuse = function (x, y, map)
 	{
-		var equip = Game.getTool();
-		pos = map.getRow(y)*map.rows+map.getCol(x);
-		if(abs2[pos]== 0 && abs1[pos]!=2 && equip=='pelle'){
-			abs1[pos]=2;
-			abs2[pos]=0;
-			this.ecu=this.ecu+10;
-			document.getElementById("argent_value").innerHTML = this.ecu;
-		}else if(abs1[pos]== 2  && equip=='pelle'){
-			this.ecu=this.ecu+2;
-			document.getElementById("argent_value").innerHTML = this.ecu;
-		}else if((abs2[pos]== 8 || abs2[pos]== 9) && abs1[pos]== 1  && equip=='faux'){
-			abs1[pos]=2;
-			abs2[pos]=0;
-			this.ecu=this.ecu+2;
-			document.getElementById("argent_value").innerHTML = this.ecu;
+        var equip = Game.getTool();
+        var ecu = this.supply.ecu;
+        pos     = map.getRow(y)*map.rows+map.getCol(x);
+        
+		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
+			abs1[pos] = 2;
+			abs2[pos] = 0;
+			this.supply.ecu = ecu + 10;
+			document.getElementById("argent_value").innerHTML = this.supply.ecu;
+		} else if (abs1[pos] == 2  && equip == 'pelle'){
+			this.supply.ecu = ecu + 2;
+            document.getElementById("argent_value").innerHTML = this.supply.ecu;
+        } else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
+            abs1[pos] = 2;
+            abs2[pos] = 0;
+			this.supply.ecu = ecu + 2;
+            document.getElementById("argent_value").innerHTML = this.supply.ecu;
 		}
 	}
 	
@@ -241,13 +259,21 @@ function Troll(map, x, y, life, name, attaque, defense) {
     this.life = life;
     this.width = map.tsize;
     this.height = map.tsize;
-    this.image = Loader.getImage('troll1');
+    this.image = Loader.getImage('troll3');
 }
- 
+
 function Building(map, life, name) {
-    this.map = map;
-    this.life = life;
-    this.name = name;
+   this.map = map;
+   this.life = life;
+   this.name = name;
+}
+
+function Corn(map, x, y, name) {
+   this.map     = map;
+   this.x       = x;
+   this.y       = y;
+   this.name    = name;
+   this.image = Loader.getImage('corn');
 }
  
 Hero.SPEED = 256; // pixels per second
@@ -263,13 +289,13 @@ Hero.prototype.move = function (delta, dirx, diry) {
    if(Game.anim>=DUREE_ANIMATION/2){
 		this.image = Loader.getImage('hero2');
 		monsters.forEach(function(element) {
-			element.image = Loader.getImage('troll2');
+			element.image = Loader.getImage('troll3');
 		})
    }
 	else{
 		this.image = Loader.getImage('hero');
 		monsters.forEach(function(element) {
-			element.image = Loader.getImage('troll1');
+			element.image = Loader.getImage('troll3');
 		})
 	}
  
@@ -415,8 +441,10 @@ Game.load = function () {
         Loader.loadImage('hero', '../assets/character.png'),
         Loader.loadImage('hero2', '../assets/character2.png'),
         Loader.loadImage('build', '../assets/house.png'),
+        Loader.loadImage('corn', '../assets/corn.png'),
         Loader.loadImage('troll1', '../assets/troll1.jpg'),
-        Loader.loadImage('troll2', '../assets/troll2.jpg')
+        Loader.loadImage('troll2', '../assets/troll2.jpg'),
+        Loader.loadImage('troll3', '../assets/troll3.png')
     ];
 };
  
@@ -426,19 +454,30 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;
-    this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - argile
+    this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile
+
 
     
 	generateTroll(64, 64, '1_1');
 	generateTroll(256, 64, '4_1');
+	generateCorn(256, 256, '4_4');
+	generateCorn(256, 320, '4_5');
+	generateCorn(320, 256, '5_4');
+	generateCorn(320, 320, '5_5');
 	
+	function generateCorn(x, y, name){
+		var nameCorn = 'corn'+name;
+		this.nameCorn = new Corn(map, x, y, name);
+		supply.push(this.nameCorn);
+    }
+    
 	function generateTroll(x, y, name){
 		var nameTroll = 'troll'+name;
 		this.nameTroll = new Troll(map, x, y, 60, name, 22, 18);
 		monsters.push(this.nameTroll);
 	}
 	
-    this.camera = new Camera(map, 512, 512);
+    this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 	document.getElementById("addBuild").addEventListener('click',
 		function(){
@@ -586,39 +625,55 @@ Game.render = function () {
     );
    
    
-   monsters.forEach(function(element) {
+    monsters.forEach(function(element) {
+        
+                if(element.life>0){
+                    // draw main character
+                    Game.ctx.drawImage(
+                        element.image, // image
+                        0, // source x
+                        0, // source y
+                        map.tsize, // source width
+                        map.tsize, // source height
+                        // Math.round(x),  // target x
+                        // Math.round(y), // target y
+                        element.x-Game.camera.x,  // target x
+                        element.y-Game.camera.y, // target y
+                        map.tsize, // target width
+                        map.tsize // target height
+                    );
+            
+                Game.ctx.fillStyle="#FF0000";
+                Game.ctx.fillRect(2+element.x-Game.camera.x, element.y+70-Game.camera.y, element.life, 10);
+               }else{
+                    for (var i=0; i<monsters.length; i++)
+                    {
+                        if (monsters[i].name == element.name) 
+                            monsters.splice(i, 1);
+                    }
+                   
+               }
+                
+                
+            });   
 
-		if(element.life>0){
-			// draw main character
-			Game.ctx.drawImage(
-				element.image, // image
-				0, // source x
-				0, // source y
-				map.tsize, // source width
-				map.tsize, // source height
-				// Math.round(x),  // target x
-				// Math.round(y), // target y
-				element.x-Game.camera.x,  // target x
-				element.y-Game.camera.y, // target y
-				map.tsize, // target width
-				map.tsize // target height
-			);
-	
-		Game.ctx.fillStyle="#FF0000";
-		Game.ctx.fillRect(2+element.x-Game.camera.x, element.y+70-Game.camera.y, element.life, 10);
-	   }else{
-			for (var i=0; i<monsters.length; i++)
-			{
-				if (monsters[i].name == element.name) 
-					monsters.splice(i, 1);
-			}
-		   
-	   }
-		
-		
-	});
-   
-   
+            supply.forEach(function(element) {
+                // draw main character
+                Game.ctx.drawImage(
+                    element.image,  // image
+                    0,              // source x
+                    0,              // source y
+                    map.tsize,      // source width
+                    map.tsize,      // source height
+                    element.x-Game.camera.x,    // target x
+                    element.y-Game.camera.y,    // target y
+                    map.tsize,                  // target width
+                    map.tsize                   // target height
+                );
+            
+                Game.ctx.fillStyle="#FF0000";
+                Game.ctx.fillRect(2+element.x-Game.camera.x, element.y+70-Game.camera.y, element.life, 10);
+            });
                
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);

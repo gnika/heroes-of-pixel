@@ -1,6 +1,7 @@
 body {
     font-family: 'Source Code Pro', 'Courier', monospace;
     margin: 0;
+    padding: 0;
 }
 
 canvas {
@@ -20,11 +21,35 @@ a:hover {
     background:#31ffd5;
 }
 
+.container {
+    width: 100%;
+}
+
+.left-supply {
+    float: left;
+	width: 200px;
+    margin-left: 0px;
+    /* background-color: red; */
+    /* height: 1024px; */
+}
+
 .main-wrapper {
-    width: 512px;
-    padding-left: 1em;
-    padding-right: 1em;
-    margin: 0 auto;
+    float: left;
+    width: 1024px;
+    margin-left: 200px;
+    /* padding-left: 1em; */
+    /* padding-right: 1em; */
+    /* margin: 0 auto; */
+    /* height: 1024px; */
+}
+
+.right-stuff {
+    float: left;
+	width: 200px;
+    /* background-color: blue; */
+    /* margin-left: 1224px; */
+    /* height: 1024px; */
+
 }
 
 .main-header, .main-footer {
