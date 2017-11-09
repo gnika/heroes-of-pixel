@@ -1,134 +1,8 @@
-abs1 = [
-        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3
-    ];
-
-abs2 = [
-        4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 8, 0, 0, 0, 8, 8, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
-        4, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 4, 4, 0, 5, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 0, 5, 4, 4, 4, 4, 4, 4, 4,
-        4, 4, 4, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 0, 0, 3, 3, 3, 3, 3, 3, 3
-    ];
-	
 DUREE_ANIMATION = 55;
 builds          = [];
 monsters        = [];
 supply          = [];
 
-var map = {
-    cols: 24,
-    rows: 24,
-    tsize: 64,
-    layers: [abs1, abs2],
-    getTile: function (layer, col, row) {
-        return this.layers[layer][row * map.cols + col];
-    },
-    isLoseLife: function (x, y) {
-        var col = Math.floor(x / this.tsize);
-        var row = Math.floor(y / this.tsize);
- 
- 
-        return this.layers.reduce(function (res, layer, index) {
-            var tile = this.getTile(index, col, row);
-            var isSolid = tile === 8 || tile === 9;
-            return res || isSolid;
-        }.bind(this), false);
-    },
-    isSolidTileAtXY: function (x, y) {
-        var col = Math.floor(x / this.tsize);
-        var row = Math.floor(y / this.tsize);
-		
-        // tiles 3 and 5 6 and 7 are solid -- the rest are walkable
-        // loop through all layers and return TRUE if any tile is solid
-        return this.layers.reduce(function (res, layer, index) {
-            var tile = this.getTile(index, col, row);
-            var isSolid = tile === 3 || tile === 5 || tile === 6 || tile === 7;
-			
-            return res || isSolid;
-        }.bind(this), false);
-    },
-    isEnnemyTileAtXY: function (x, y) {
-			var col = Math.floor(x / this.tsize);
-			var row = Math.floor(y / this.tsize);
-			
-			var isSolid=0;
-				
-			monsters.forEach(function(element) {
-					if(element.name == col+'_'+row)
-						isSolid= element;
-				});
-				
-			return isSolid;
-    },
-    isCornTileAtXY: function (x, y) {
-        var col = Math.floor(x / this.tsize);
-        var row = Math.floor(y / this.tsize);
-        
-        var isSolid = 0;
-            
-        supply.forEach(function(element) {
-                if (element.name == col + '_' + row) {
-                    isSolid = element;
-                }
-            });
-            
-        return isSolid;
-    },
-    getCol: function (x) {
-        return Math.floor(x / this.tsize);
-    },
-    getRow: function (y) {
-        return Math.floor(y / this.tsize);
-    },
-    getX: function (col) {
-        return col * this.tsize;
-    },
-    getY: function (row) {
-        return row * this.tsize;
-    }
-};
  
 function Camera(map, width, height) {
     this.x = 0;
@@ -184,71 +58,6 @@ function objet(name, media, life, attaque){
 	this.image=Loader.getImage(media);
 }
  
-function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, equipement) {
-    this.map = map;
-    this.x = x;
-    this.y = y;
-    this.life = life;
-    this.width = map.tsize;
-    this.height = map.tsize;
-    this.attaque = attaque;
-    this.defense = defense;
-    this.equipement = equipement;
-    this.supply = {
-        ecu:    ecu, 
-        bois:   bois, 
-        argile: argile, 
-        ble:    ble
-    };
-    this.image = Loader.getImage('hero');
-	
-	this.addBuild = function (x, y, map)
-	{
-		var dirx = 0;
-		var diry = 0;
-		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
-		else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
-		else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
-		else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
-		if(dirx!=0 || diry!=0) return false;
-		
-		pos = map.getRow(y)*map.rows+map.getCol(x);
-		
-		if(abs2[pos+1]!= 6 && abs2[pos+1]!= 3 && abs2[pos+1]!= 5){
-			if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
-				Game.hero.x=32*Math.floor((Game.hero.x+32/2)/32)-32;
-			abs2[pos+1]=6;
-			var nameBuild = 'build-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
-			
-			Game.nameBuild = new Building(map, Math.floor((Math.random() * 60) + 5), nameBuild);
-			builds.push(Game.nameBuild);
-		}
-	}
-	
-	this.creuse = function (x, y, map)
-	{
-        var equip = Game.getTool();
-        var ecu = this.supply.ecu;
-        pos     = map.getRow(y)*map.rows+map.getCol(x);
-        
-		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
-			abs1[pos] = 2;
-			abs2[pos] = 0;
-			this.supply.ecu = ecu + 10;
-			document.getElementById("argent_value").innerHTML = this.supply.ecu;
-		} else if (abs1[pos] == 2  && equip == 'pelle'){
-			this.supply.ecu = ecu + 2;
-            document.getElementById("argent_value").innerHTML = this.supply.ecu;
-        } else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
-            abs1[pos] = 2;
-            abs2[pos] = 0;
-			this.supply.ecu = ecu + 2;
-            document.getElementById("argent_value").innerHTML = this.supply.ecu;
-		}
-	}
-	
-}
- 
 function Troll(map, x, y, life, name, attaque, defense) {
     this.map = map;
     this.attaque = attaque;
@@ -261,187 +70,14 @@ function Troll(map, x, y, life, name, attaque, defense) {
     this.height = map.tsize;
     this.image = Loader.getImage('troll3');
 }
-
-function Building(map, life, name) {
-   this.map = map;
-   this.life = life;
-   this.name = name;
-}
-
-function Corn(map, x, y, name) {
-   this.map     = map;
-   this.x       = x;
-   this.y       = y;
-   this.name    = name;
-   this.image = Loader.getImage('corn');
-}
  
-Hero.SPEED = 256; // pixels per second
  
-Hero.prototype.move = function (delta, dirx, diry) {
-    // move hero
-    this.x += dirx * Hero.SPEED * delta;
-    this.y += diry * Hero.SPEED * delta;
-    // move lifehero	
-	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1)//si mouvement
-   
-   
-   if(Game.anim>=DUREE_ANIMATION/2){
-		this.image = Loader.getImage('hero2');
-		monsters.forEach(function(element) {
-			element.image = Loader.getImage('troll3');
-		})
-   }
-	else{
-		this.image = Loader.getImage('hero');
-		monsters.forEach(function(element) {
-			element.image = Loader.getImage('troll3');
-		})
-	}
- 
-    // check if we walked into a non-walkable tile
-    this._collide(dirx, diry);
-    this._ennemy(dirx, diry);
-   
- 
-    // check if he loses life
-    this._loselifeTile(dirx, diry);
-	
- 
-    // clamp values
-    var maxX = this.map.cols * this.map.tsize;
-    var maxY = this.map.rows * this.map.tsize;
-    this.x = Math.max(0, Math.min(this.x, maxX));
-    this.y = Math.max(0, Math.min(this.y, maxY)); };
- 
-Hero.prototype._loselifeTile = function (dirx, diry) {
-    var row, col;
-    // -1 in right and bottom is because image ranges from 0..63
-    // and not up to 64
-    var left = this.x - this.width / 2;
-    var right = this.x + this.width / 2 - 1;
-    var top = this.y - this.height / 2;
-    var bottom = this.y + this.height / 2 - 1;
-               
-                var collision =
-        this.map.isLoseLife(left, top) ||
-        this.map.isLoseLife(right, top) ||
-        this.map.isLoseLife(right, bottom) ||
-        this.map.isLoseLife(left, bottom);
-                              
-                // var tileActuelle = this.map.isLoseLife(this.x, this.y);
-                if(collision==true){
-				   if(this.life>0)
-						this.life=this.life-0.1;
-                }
-                                              
-};
- 
-
- 
-Hero.prototype._collide = function (dirx, diry) {
-    var row, col;
-    // -1 in right and bottom is because image ranges from 0..63
-    // and not up to 64
-    var left = this.x - this.width / 2;
-    var right = this.x + this.width / 2 - 1;
-    var top = this.y - this.height / 2;
-    var bottom = this.y + this.height / 2 - 1;
-               
- 
-    // check for collisions on sprite sides
-    var collision =
-        this.map.isSolidTileAtXY(left, top) ||
-        this.map.isSolidTileAtXY(right, top) ||
-        this.map.isSolidTileAtXY(right, bottom) ||
-        this.map.isSolidTileAtXY(left, bottom);
-    if (!collision) { return; }
- 
-    if (diry > 0) {
-        row = this.map.getRow(bottom);
-        this.y = -this.height / 2 + this.map.getY(row);
-    }
-    else if (diry < 0) {
-        row = this.map.getRow(top);
-        this.y = this.height / 2 + this.map.getY(row + 1);
-    }
-    else if (dirx > 0) {
-        col = this.map.getCol(right);
-        this.x = -this.width / 2 + this.map.getX(col);
-    }
-    else if (dirx < 0) {
-        col = this.map.getCol(left);
-        this.x = this.width / 2 + this.map.getX(col + 1);
-    }
-               
-               
-               
-}; 
-
- 
-Hero.prototype._ennemy = function (dirx, diry) {
-    var row, col;
-    // -1 in right and bottom is because image ranges from 0..63
-    // and not up to 64
-    var left = this.x - this.width / 2;
-    var right = this.x + this.width / 2 - 1;
-    var top = this.y - this.height / 2;
-    var bottom = this.y + this.height / 2 - 1;
-               
- 
-    // check for collisions on sprite sides
-    var collision =
-        this.map.isEnnemyTileAtXY(left, top) ||
-        this.map.isEnnemyTileAtXY(right, top) ||
-        this.map.isEnnemyTileAtXY(right, bottom) ||
-        this.map.isEnnemyTileAtXY(left, bottom);
-    if (!collision) { return; }
- 
-    if (diry > 0) {
-        row = this.map.getRow(bottom);
-        this.y = -this.height / 2 + this.map.getY(row);
-    }
-    else if (diry < 0) {
-        row = this.map.getRow(top);
-        this.y = this.height / 2 + this.map.getY(row + 1);
-    }
-    else if (dirx > 0) {
-        col = this.map.getCol(right);
-        this.x = -this.width / 2 + this.map.getX(col);
-    }
-    else if (dirx < 0) {
-        col = this.map.getCol(left);
-        this.x = this.width / 2 + this.map.getX(col + 1);
-    }
-               
-	//ATTAQUER UN ENNEMI : A REVOIR POUR PLUS TARD : ENNEMI NE PERD DES POINTS DE VIE QUE QUAND ON ATTAQUE 
-    if(this.life >0){
-		
-		var lifeHero = collision.attaque-this.defense;
-		if(lifeHero < 0) lifeHero =0.1;
-		var lifeMonster = this.attaque-collision.defense;
-		if(lifeMonster < 0) lifeMonster =0.1;
-		
-		this.life = this.life-(lifeHero);
-		
-		var equip = Game.getTool();
-		if(collision.life >0 && equip=='epee'){
-			// if(collision.life-(lifeMonster)<0){
-				// lifeMonster=collision.life;
-			// }
-			collision.life = collision.life-(lifeMonster);
-		}
-			
-    }         
-};
  
 Game.load = function () {
     return [
         Loader.loadImage('tiles', '../assets/tiles_new.png'),
         Loader.loadImage('hero', '../assets/character.png'),
         Loader.loadImage('hero2', '../assets/character2.png'),
-        Loader.loadImage('build', '../assets/house.png'),
-        Loader.loadImage('corn', '../assets/corn.png'),
         Loader.loadImage('troll1', '../assets/troll1.jpg'),
         Loader.loadImage('troll2', '../assets/troll2.jpg'),
         Loader.loadImage('troll3', '../assets/troll3.png')
@@ -455,21 +91,7 @@ Game.init = function () {
  
 	this.anim = 0;
     this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile
-
-
-    
 	generateTroll(64, 64, '1_1');
-	generateTroll(256, 64, '4_1');
-	generateCorn(256, 256, '4_4');
-	generateCorn(256, 320, '4_5');
-	generateCorn(320, 256, '5_4');
-	generateCorn(320, 320, '5_5');
-	
-	function generateCorn(x, y, name){
-		var nameCorn = 'corn'+name;
-		this.nameCorn = new Corn(map, x, y, name);
-		supply.push(this.nameCorn);
-    }
     
 	function generateTroll(x, y, name){
 		var nameTroll = 'troll'+name;
@@ -482,6 +104,11 @@ Game.init = function () {
 	document.getElementById("addBuild").addEventListener('click',
 		function(){
 			Game.hero.addBuild(Game.hero.x, Game.hero.y, map);
+		},
+	false);
+	document.getElementById("addCorn").addEventListener('click',
+		function(){
+			Game.hero.addCorn(Game.hero.x, Game.hero.y, map, 'heure_plante', 3);
 		},
 	false);
 	document.getElementById("creuse").addEventListener('click',
@@ -657,23 +284,6 @@ Game.render = function () {
                 
             });   
 
-            supply.forEach(function(element) {
-                // draw main character
-                Game.ctx.drawImage(
-                    element.image,  // image
-                    0,              // source x
-                    0,              // source y
-                    map.tsize,      // source width
-                    map.tsize,      // source height
-                    element.x-Game.camera.x,    // target x
-                    element.y-Game.camera.y,    // target y
-                    map.tsize,                  // target width
-                    map.tsize                   // target height
-                );
-            
-                Game.ctx.fillStyle="#FF0000";
-                Game.ctx.fillRect(2+element.x-Game.camera.x, element.y+70-Game.camera.y, element.life, 10);
-            });
                
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
