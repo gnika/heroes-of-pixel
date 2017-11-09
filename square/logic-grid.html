@@ -4,27 +4,34 @@
     <title>Tilemaps examples - Collisions</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../styles.css" type="text/css">
-
+ 
     <script src="../common.js"></script>
     <script src="logic-grid.js"></script>
 </head>
 <body>
-
-
-
+ 
+ 
+ 
 <div class="main-wrapper">
 <div class="ressource">
-	<div class="argent">Bourse : <span id="argent_value">0</span></div>
-	<div class="bois">BOIS : <span id="bois_value"></span>0</div>
-	<div class="argile">ARGILE : <span id="argile_value">0</span></div>
+                <div class="argent">Bourse : <span id="argent_value">0</span></div>
+                <div class="bois">BOIS : <span id="bois_value"></span>0</div>
+                <div class="argile">ARGILE : <span id="argile_value">0</span></div>
 </div>
     <canvas id="demo" width="512" height="512"></canvas>
-	<button id="addBuild">Ajouter un bâtiment</button>
-	<button id="creuse">Creuser</button>
+	
+
+<div class="tools">
+                <input type="radio" checked="checked" name="tools" value="pelle"/> Pelle<br/>
+                <input type="radio" name="tools" value="faux"/> Faux<br/>
+                <input type="radio" name="tools" value="epee"/> Epée<br/>
+</div>
+                <button id="addBuild">Ajouter un bâtiment</button>
+                <button id="creuse">Creuser</button>
     <footer class="main-footer">
         <p>Source code on <a href="https://github.com/mozdevs/gamedev-js-tiles" target="_top">the Github repository</a>.</p>
     </footer>
 </div><!-- main wrapper -->
-
+ 
 </body>
 </html>

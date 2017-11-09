@@ -6,23 +6,23 @@ abs1 = [
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
         3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3,
-        3, 3, 3, 1, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 2, 3, 3, 3, 3, 3, 3
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+        3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3, 3, 3, 3, 3
     ];
 
 abs2 = [
@@ -31,11 +31,11 @@ abs2 = [
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 8, 0, 0, 0, 8, 8, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
+        4, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
@@ -70,7 +70,7 @@ var map = {
  
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
-            var isSolid = tile === 2;
+            var isSolid = tile === 8 || tile === 9;
             return res || isSolid;
         }.bind(this), false);
     },
@@ -163,8 +163,15 @@ Camera.prototype.update = function () {
     }
                
 };
- 
-function Hero(map, x, y, life, attaque, defense, ecu, bois, argile) {
+
+function objet(name, media, life, attaque){
+	this.name=name;
+	this.life=life;
+	this.attaque=attaque;
+	this.image=Loader.getImage(media);
+}
+
+function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, equipement) {
     this.map = map;
     this.x = x;
     this.y = y;
@@ -173,6 +180,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile) {
     this.height = map.tsize;
     this.attaque = attaque;
     this.defense = defense;
+    this.equipement = equipement;
     this.ecu = ecu;
     this.bois = bois;
     this.argile = argile;
@@ -203,21 +211,19 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile) {
 	
 	this.creuse = function (x, y, map)
 	{
-		// var dirx = 0;
-		// var diry = 0;
-		// if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
-		// else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
-		// else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
-		// else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
-		// if(dirx!=0 || diry!=0) return false;
-		
+		var equip = Game.getTool();
 		pos = map.getRow(y)*map.rows+map.getCol(x);
-		if(abs2[pos]== 0 && abs1[pos]!=2){
+		if(abs2[pos]== 0 && abs1[pos]!=2 && equip=='pelle'){
 			abs1[pos]=2;
 			abs2[pos]=0;
 			this.ecu=this.ecu+10;
 			document.getElementById("argent_value").innerHTML = this.ecu;
-		}else if(abs1[pos]== 2){
+		}else if(abs1[pos]== 2  && equip=='pelle'){
+			this.ecu=this.ecu+2;
+			document.getElementById("argent_value").innerHTML = this.ecu;
+		}else if((abs2[pos]== 8 || abs2[pos]== 9) && abs1[pos]== 1  && equip=='faux'){
+			abs1[pos]=2;
+			abs2[pos]=0;
 			this.ecu=this.ecu+2;
 			document.getElementById("argent_value").innerHTML = this.ecu;
 		}
@@ -252,6 +258,7 @@ Hero.prototype.move = function (delta, dirx, diry) {
     this.y += diry * Hero.SPEED * delta;
     // move lifehero	
 	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1)//si mouvement
+   
    
    if(Game.anim>=DUREE_ANIMATION/2){
 		this.image = Loader.getImage('hero2');
@@ -391,7 +398,8 @@ Hero.prototype._ennemy = function (dirx, diry) {
 		
 		this.life = this.life-(lifeHero);
 		
-		if(collision.life >0){
+		var equip = Game.getTool();
+		if(collision.life >0 && equip=='epee'){
 			// if(collision.life-(lifeMonster)<0){
 				// lifeMonster=collision.life;
 			// }
@@ -418,7 +426,7 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;
-    this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0);//map - x - y - vie - attaque - defense - ecu - bois - argile
+    this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - argile
 
     
 	generateTroll(64, 64, '1_1');
@@ -443,6 +451,7 @@ Game.init = function () {
 		},
 	false);
 	
+	
 };
  
 Game.update = function (delta) {
@@ -452,14 +461,20 @@ Game.update = function (delta) {
     // handle hero movement with arrow keys
     var dirx = 0;
     var diry = 0;
+	
     if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
     else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
     else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
     else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
 	// console.log(dirx);
+	if(this.hero.life<=0) return false;
     this.hero.move(delta, dirx, diry);
     this.camera.update();
 };
+ 
+Game.getTool = function(){
+	return document.querySelector('input[name="tools"]:checked').value;
+}
  
 Game._drawLayer = function (layer) {
     var startCol = Math.floor(this.camera.x / map.tsize);
@@ -484,6 +499,17 @@ Game._drawLayer = function (layer) {
 			else if(tile==7){
 				if(Game.anim>=DUREE_ANIMATION){
 					abs2[r*map.rows+c]=6;
+				}
+			}
+			
+			if(tile==8){
+				if(Game.anim>=DUREE_ANIMATION){
+					abs2[r*map.rows+c]=9;
+				}
+			}
+			else if(tile==9){
+				if(Game.anim>=DUREE_ANIMATION){
+					abs2[r*map.rows+c]=8;
 				}
 			}
 			if(tile==6 || tile==7){
