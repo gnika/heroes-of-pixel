@@ -37,13 +37,15 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
 		if(dirx!=0 || diry!=0) return false;
 		
+		
+		
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
 		// if(abs2[pos+1]!= 6 && abs2[pos+1]!= 3 && abs2[pos+1]!= 5){
 		if(abs2[pos+1]==0 && abs1[pos+1]==1){
 			// console.log(Game.hero.x);
-			if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
-				Game.hero.x=32*Math.floor((Game.hero.x+32/2)/32)-32;
+			// if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
+				Game.hero.x = 32+64*map.getCol(x);
 			abs2[pos+1]=6;
 			var nameBuild = 'build-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
