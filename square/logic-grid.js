@@ -276,8 +276,11 @@ Game.render = function () {
                }else{
                     for (var i=0; i<monsters.length; i++)
                     {
-                        if (monsters[i].name == element.name) 
-                            monsters.splice(i, 1);
+                        if (monsters[i].name == element.name){
+							Game.hero.xp = element.level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
+							document.getElementById("xp_value").innerHTML = Game.hero.xp;
+                            monsters.splice(i, 1);							
+						} 
                     }
                    
                }
