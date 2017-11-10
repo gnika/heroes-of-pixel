@@ -3,6 +3,9 @@ builds          = [];
 monsters        = [];
 supply          = [];
 
+xDelta = 0;
+yDelta = 0;
+
  
 function Camera(map, width, height) {
     this.x = 0;
@@ -65,13 +68,15 @@ function animation(map, x, y, imageName){
 	this.image = Loader.getImage(imageName);
 }
 
-function Troll(map, x, y, life, name, attaque, defense, level) {
+function Troll(map, x, y, row, col, life, name, attaque, defense, level) {
     this.map = map;
     this.level = level;
     this.attaque = attaque;
     this.defense = defense;
     this.x = x;
     this.y = y;
+    this.row = row;
+    this.col = col;
     this.name = name;
     this.life = life;
     this.width = map.tsize;
@@ -91,7 +96,8 @@ Game.load = function () {
         Loader.loadImage('troll3', '../assets/troll3.png'),
         Loader.loadImage('coin', '../assets/coin.png'),
         Loader.loadImage('cloud', '../assets/cloud.png'),
-        Loader.loadImage('xp', '../assets/xp.png')
+        Loader.loadImage('xp', '../assets/xp.png'),
+        Loader.loadImage('ball', '../assets/ball.png')
     ];
 };
  
@@ -103,11 +109,12 @@ Game.init = function () {
 	this.anim = 0;
 	this.animBref = 0;
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
-	generateTroll(64, 64, '1_1');
+	generateTroll(64, 64, 1, 1, '1_1');
+	generateTroll(192, 192, 3, 3, '3_3');
     
-	function generateTroll(x, y, name){
+	function generateTroll(x, y, row, col, name){
 		var nameTroll = 'troll'+name;
-		this.nameTroll = new Troll(map, x, y, 60, name, 22, 18, 1);
+		this.nameTroll = new Troll(map, x, y, row, col, 60, name, 22, 18, 1);
 		monsters.push(this.nameTroll);
 	}
 	
@@ -115,12 +122,12 @@ Game.init = function () {
     this.camera.follow(this.hero);
 	document.getElementById("addBuild").addEventListener('click',
 		function(){
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map);
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6);
 		},
 	false);
 	document.getElementById("addCorn").addEventListener('click',
 		function(){
-			Game.hero.addCorn(Game.hero.x, Game.hero.y, map, 'heure_plante', 3);
+			Game.hero.addCorn(Game.hero.x, Game.hero.y, map, 'heure_plante', 3, 10);
 		},
 	false);
 	document.getElementById("creuse").addEventListener('click',
@@ -167,7 +174,7 @@ Game._drawLayer = function (layer) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-			var nameBuild = 'build-'+r+c+'-ing';
+			var nameBuild = 'build-'+r+'-'+c+'-ing';
 			
 			if(tile==6){
 				if(Game.anim>=DUREE_ANIMATION){
@@ -240,6 +247,59 @@ Game._drawLayer = function (layer) {
 			Game.animBref=0;
 		}
 	}
+	
+	
+	//tir tourelles portée : 2
+	builds.forEach(function(batiment) {
+		if(batiment.batiment == 6){
+			monsters.forEach(function(monstre) {
+				if((monstre.row-2 == batiment.row || monstre.row-1 == batiment.row || monstre.row == batiment.row || monstre.row+1 == batiment.row || monstre.row+2 == batiment.row ) &&
+					(monstre.col-2 == batiment.col || monstre.col-1 == batiment.col || monstre.col == batiment.col || monstre.col+1 == batiment.col || monstre.col+2 == batiment.col )
+				){
+					// console.log(batiment.x+' - '+batiment.y);
+					// Game.ctx.beginPath();      // Début du chemin
+					// Game.ctx.moveTo(batiment.x+32, batiment.y);    // Le tracé part du point 50,50
+					// Game.ctx.lineTo(monstre.x,monstre.y);	
+					// Game.ctx.stroke();
+					
+					xFinal =  monstre.x+32;
+					yFinal =  monstre.y;
+					// console.log(xFinal);
+					// console.log(xDelta+' - '+xFinal);
+					// var operator = function(a, b) {
+						// if(a>b)
+							// return a - b;
+						// else
+							// return b - a;
+					// };
+					
+					if(xDelta <= xFinal || yDelta <= yFinal){
+						
+						// if(xDelta>=xFinal)xDelta=xFinal;
+						// if(yDelta>=yFinal)yDelta=yFinal;
+						
+						Game.ctx.drawImage(
+								Loader.getImage('ball'), // image
+								0, // source x
+								0, // source y
+								map.tsize, // source width
+								map.tsize, // source height
+								batiment.x-Game.camera.x - xDelta,  // target x
+								batiment.y-Game.camera.y - yDelta, 
+								map.tsize, // target width
+								map.tsize // target height
+							);
+						xDelta++;
+						yDelta++;
+					}else{
+						xDelta=0;
+						yDelta=0;
+					}
+				}
+			});
+			
+		}
+	});
 	
 	
    if(Game.anim>=DUREE_ANIMATION)

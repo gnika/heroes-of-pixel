@@ -1,11 +1,16 @@
 
 
 
-function Building(map, life, name, hourstart) {
+function Building(map, x, y, row, col, life, name, hourstart, batiment) {
    this.map = map;
    this.life = life;
    this.name = name;
+    this.x = x;
+    this.y = y;
+   this.col = col;
+   this.row = row;
    this.hourstart = hourstart;
+   this.batiment = batiment;
 }
 
 function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equipement) {
@@ -27,7 +32,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
     };
     this.image = Loader.getImage('hero');
 	
-	this.addBuild = function (x, y, map)
+	this.addBuild = function (x, y, map, typeBatiment)
 	{
 		var dirx = 0;
 		var diry = 0;
@@ -41,21 +46,19 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
-		// if(abs2[pos+1]!= 6 && abs2[pos+1]!= 3 && abs2[pos+1]!= 5){
 		if(abs2[pos+1]==0 && abs1[pos+1]==1){
-			// console.log(Game.hero.x);
-			// if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
+			// console.log(Game.hero.x);//pour éviter au héros de rester bloquer dans le batiment
 				Game.hero.x = 32+64*map.getCol(x);
-			abs2[pos+1]=6;
-			var nameBuild = 'build-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
+			abs2[pos+1]= typeBatiment;
+			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
-			Game.nameBuild = new Building(map, 60, nameBuild, 'hourstart');
+			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), 60, nameBuild, 'hourstart', typeBatiment);
 			builds.push(Game.nameBuild);
 			anim = new animation(map, x+32, y, 'cloud');
 		}
 	}
 	
-	this.addCorn = function (x, y, map, hourstart, life)
+	this.addCorn = function (x, y, map, hourstart, life, typeCulture)
 	{
 		var dirx = 0;
 		var diry = 0;
@@ -63,12 +66,12 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		posCorn = map.getRow(y)*map.rows+map.getCol(x);
 		
 		if(abs2[posCorn]==0 && abs1[posCorn]==1 && Game.hero.supply.ecu >=150){
-			abs2[posCorn]=10;
+			abs2[posCorn]=typeCulture;
 			var nameBuild = 'ble-'+map.getRow(y)+parseInt(map.getCol(x), 10);
 			Game.hero.supply.ecu = Game.hero.supply.ecu-150;
 			document.getElementById("argent_value").innerHTML = Game.hero.supply.ecu;
 			
-			Game.nameBuild = new Building(map, life, nameBuild, 'hourstart');
+			Game.nameBuild = new Building(map, map.getCol(x), map.getRow(y), life, nameBuild, 'hourstart', typeCulture);
 			builds.push(Game.nameBuild);
 			anim = new animation(map, x, y, 'cloud');
 		}
