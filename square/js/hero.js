@@ -41,6 +41,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 
 		// if(abs2[pos+1]!= 6 && abs2[pos+1]!= 3 && abs2[pos+1]!= 5){
 		if(abs2[pos+1]==0 && abs1[pos+1]==1){
+			// console.log(Game.hero.x);
 			if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
 				Game.hero.x=32*Math.floor((Game.hero.x+32/2)/32)-32;
 			abs2[pos+1]=6;
@@ -48,6 +49,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			
 			Game.nameBuild = new Building(map, 60, nameBuild, 'hourstart');
 			builds.push(Game.nameBuild);
+			anim = new animation(map, x+32, y, 'cloud');
 		}
 	}
 	
@@ -66,6 +68,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			
 			Game.nameBuild = new Building(map, life, nameBuild, 'hourstart');
 			builds.push(Game.nameBuild);
+			anim = new animation(map, x, y, 'cloud');
 		}
 		
 		

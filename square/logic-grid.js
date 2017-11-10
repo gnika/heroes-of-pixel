@@ -89,7 +89,9 @@ Game.load = function () {
         Loader.loadImage('troll1', '../assets/troll1.jpg'),
         Loader.loadImage('troll2', '../assets/troll2.jpg'),
         Loader.loadImage('troll3', '../assets/troll3.png'),
-        Loader.loadImage('coin', '../assets/coin.png')
+        Loader.loadImage('coin', '../assets/coin.png'),
+        Loader.loadImage('cloud', '../assets/cloud.png'),
+        Loader.loadImage('xp', '../assets/xp.png')
     ];
 };
  
@@ -265,11 +267,17 @@ Game._drawGrid = function () {
         this.ctx.stroke();
     }
 	
+	// draw main character joachim nouvel emplacement
 	this.ctx.drawImage(
         this.hero.image,
         this.hero.screenX - this.hero.width / 2,
         this.hero.screenY - this.hero.height / 2
     );
+	
+	if(this.hero.life<=0){
+	   this.ctx.font = "50px Arial";
+	   this.ctx.fillText("VOUS AVEZ PERDU !",0,this.hero.screenY);
+	}
 	
 };
  
@@ -283,7 +291,7 @@ Game.render = function () {
     // draw map background layer
     this._drawLayer(0);
     // draw main character
-    
+    //joachim change place juste après le dessin de la grille
    
    
     monsters.forEach(function(element) {
@@ -312,6 +320,7 @@ Game.render = function () {
                         if (monsters[i].name == element.name){
 							Game.hero.xp = element.level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
 							document.getElementById("xp_value").innerHTML = Game.hero.xp;
+							anim = new animation(map, element.x, element.y, 'xp');
                             monsters.splice(i, 1);							
 						} 
                     }
@@ -329,10 +338,6 @@ Game.render = function () {
 
                
                
-                if(this.hero.life<=0){
-                               this.ctx.font = "50px Arial";
-                               this.ctx.fillText("VOUS AVEZ PERDU !",0,this.hero.screenY);
-                }
                
     // draw map top layer
     this._drawLayer(1);
