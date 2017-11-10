@@ -57,7 +57,14 @@ function objet(name, media, life, attaque){
 	this.attaque=attaque;
 	this.image=Loader.getImage(media);
 }
- 
+
+function animation(map, x, y, imageName){
+	this.map = map;
+	this.x = x;
+    this.y = y;
+	this.image = Loader.getImage(imageName);
+}
+
 function Troll(map, x, y, life, name, attaque, defense, level) {
     this.map = map;
     this.level = level;
@@ -81,7 +88,8 @@ Game.load = function () {
         Loader.loadImage('hero2', '../assets/character2.png'),
         Loader.loadImage('troll1', '../assets/troll1.jpg'),
         Loader.loadImage('troll2', '../assets/troll2.jpg'),
-        Loader.loadImage('troll3', '../assets/troll3.png')
+        Loader.loadImage('troll3', '../assets/troll3.png'),
+        Loader.loadImage('coin', '../assets/coin.png')
     ];
 };
  
@@ -91,6 +99,7 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;
+	this.animBref = 0;
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, '1_1');
     
@@ -207,6 +216,30 @@ Game._drawLayer = function (layer) {
             }
         }
     }
+	
+	if(typeof(anim) != "undefined" && anim !== null) {
+		if(Game.animBref<=DUREE_ANIMATION){
+	
+				Game.ctx.drawImage(
+							anim.image, // image
+							0, // source x
+							0, // source y
+							map.tsize, // source width
+							map.tsize, // source height
+							anim.x-Game.camera.x,  // target x
+							anim.y-Game.camera.y-Game.animBref, 
+							map.tsize, // target width
+							map.tsize // target height
+						);
+			Game.animBref++;
+			Game.animBref++;
+		}else{
+			anim=null;
+			Game.animBref=0;
+		}
+	}
+	
+	
    if(Game.anim>=DUREE_ANIMATION)
 	   Game.anim=0;
 };
@@ -232,7 +265,11 @@ Game._drawGrid = function () {
         this.ctx.stroke();
     }
 	
-	
+	this.ctx.drawImage(
+        this.hero.image,
+        this.hero.screenX - this.hero.width / 2,
+        this.hero.screenY - this.hero.height / 2
+    );
 	
 };
  
@@ -246,11 +283,7 @@ Game.render = function () {
     // draw map background layer
     this._drawLayer(0);
     // draw main character
-    this.ctx.drawImage(
-        this.hero.image,
-        this.hero.screenX - this.hero.width / 2,
-        this.hero.screenY - this.hero.height / 2
-    );
+    
    
    
     monsters.forEach(function(element) {
@@ -292,7 +325,8 @@ Game.render = function () {
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
 		   
-	
+		
+
                
                
                 if(this.hero.life<=0){

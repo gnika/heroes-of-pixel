@@ -109,6 +109,11 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 				}
 			}
 		}
+		
+		if(this.supply.ecu > ecu){
+			//animation gold
+			anim = new animation(map, x, y, 'coin');
+		}
 	}
 	
 }
