@@ -28,7 +28,7 @@ abs1 = [
 abs2 = [
         4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 8, 0, 0, 0, 8, 8, 5, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 4,
@@ -60,13 +60,16 @@ var map = {
     getTile: function (layer, col, row) {
         return this.layers[layer][row * map.cols + col];
     },
-    isLoseLife: function (x, y) {
+    isLoseWinLife: function (x, y) {
         var col = Math.floor(x / this.tsize);
         var row = Math.floor(y / this.tsize);
  
  
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
+			if (tile==14)
+				return 'life';
+			
             var isSolid = tile === 8 || tile === 9;
             return res || isSolid;
         }.bind(this), false);

@@ -8,11 +8,12 @@ function Building(map, life, name, hourstart) {
    this.hourstart = hourstart;
 }
 
-function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, equipement) {
+function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equipement) {
     this.map = map;
     this.x = x;
     this.y = y;
     this.life = life;
+    this.xp = xp;
     this.width = map.tsize;
     this.height = map.tsize;
     this.attaque = attaque;
@@ -43,7 +44,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, equipem
 			if(((32*Math.floor((Game.hero.x+32/2)/32))/64) % 1 == 0)//pour éviter au héros de rester bloquer dans le batiment
 				Game.hero.x=32*Math.floor((Game.hero.x+32/2)/32)-32;
 			abs2[pos+1]=6;
-			var nameBuild = 'tour-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
+			var nameBuild = 'build-'+map.getRow(y)+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
 			Game.nameBuild = new Building(map, 60, nameBuild, 'hourstart');
 			builds.push(Game.nameBuild);
@@ -159,12 +160,15 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
     var bottom = this.y + this.height / 2 - 1;
                
                 var collision =
-        this.map.isLoseLife(left, top) ||
-        this.map.isLoseLife(right, top) ||
-        this.map.isLoseLife(right, bottom) ||
-        this.map.isLoseLife(left, bottom);
+        this.map.isLoseWinLife(left, top) ||
+        this.map.isLoseWinLife(right, top) ||
+        this.map.isLoseWinLife(right, bottom) ||
+        this.map.isLoseWinLife(left, bottom);
                               
                 // var tileActuelle = this.map.isLoseLife(this.x, this.y);
+				if(collision=='life')
+					if(this.life<60)
+						this.life=this.life+0.1;
                 if(collision==true){
 				   if(this.life>0)
 						this.life=this.life-0.1;
@@ -230,8 +234,14 @@ Hero.prototype._ennemy = function (dirx, diry) {
         this.map.isEnnemyTileAtXY(right, top) ||
         this.map.isEnnemyTileAtXY(right, bottom) ||
         this.map.isEnnemyTileAtXY(left, bottom);
-    if (!collision) { return; }
- 
+    if (!collision) {
+		monsters.forEach(function(element) {
+			if(element.life<60)
+				element.life = element.life+1;
+		})
+		return;
+	}
+	
     if (diry > 0) {
         row = this.map.getRow(bottom);
         this.y = -this.height / 2 + this.map.getY(row);
@@ -248,10 +258,10 @@ Hero.prototype._ennemy = function (dirx, diry) {
         col = this.map.getCol(left);
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
-               
+               // console.log('e');
 	//ATTAQUER UN ENNEMI : A REVOIR POUR PLUS TARD : ENNEMI NE PERD DES POINTS DE VIE QUE QUAND ON ATTAQUE 
     if(this.life >0){
-		
+		 
 		var lifeHero = collision.attaque-this.defense;
 		if(lifeHero < 0) lifeHero =0.1;
 		var lifeMonster = this.attaque-collision.defense;

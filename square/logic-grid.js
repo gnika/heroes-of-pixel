@@ -58,8 +58,9 @@ function objet(name, media, life, attaque){
 	this.image=Loader.getImage(media);
 }
  
-function Troll(map, x, y, life, name, attaque, defense) {
+function Troll(map, x, y, life, name, attaque, defense, level) {
     this.map = map;
+    this.level = level;
     this.attaque = attaque;
     this.defense = defense;
     this.x = x;
@@ -90,12 +91,12 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;
-    this.hero = new Hero(map, 160, 160, 60, 30, 200, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile
+    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, '1_1');
     
 	function generateTroll(x, y, name){
 		var nameTroll = 'troll'+name;
-		this.nameTroll = new Troll(map, x, y, 60, name, 22, 18);
+		this.nameTroll = new Troll(map, x, y, 60, name, 22, 18, 1);
 		monsters.push(this.nameTroll);
 	}
 	
