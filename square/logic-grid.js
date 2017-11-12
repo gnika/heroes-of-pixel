@@ -114,7 +114,8 @@ Game.init = function () {
 	function generateTroll(x, y, row, col){
 		var nameTroll = 'troll'+x+y;
 		this.nameTroll = new Troll(map, x, y, row, col, 60, 22, 18, 0.5, 1);
-		monsters.push(this.nameTroll);
+		monsters[row+'-'+col] = this.nameTroll;
+		// monsters.push(this.nameTroll);
 	}
 	// console.log(monsters);
     this.camera = new Camera(map, 1024, 768);
@@ -251,18 +252,20 @@ Game._drawLayer = function (layer) {
 	//tir tourelles portée : 2
 	Object.keys(builds).forEach(function(key) {
 		if(builds[key].batiment == 6){
-			monsters.forEach(function(monstre) {
-				if((monstre.row-2 == builds[key].row || monstre.row-1 == builds[key].row || monstre.row == builds[key].row || monstre.row+1 == builds[key].row || monstre.row+2 == builds[key].row ) &&
-					(monstre.col-2 == builds[key].col || monstre.col-1 == builds[key].col || monstre.col == builds[key].col || monstre.col+1 == builds[key].col || monstre.col+2 == builds[key].col )
+			Object.keys(monsters).forEach(function(keyMonster) {
+				if((monsters[keyMonster].row-2 == builds[key].row || monsters[keyMonster].row-1 == builds[key].row || monsters[keyMonster].row == builds[key].row
+				|| monsters[keyMonster].row+1 == builds[key].row || monsters[keyMonster].row+2 == builds[key].row ) &&
+					(monsters[keyMonster].col-2 == builds[key].col || monsters[keyMonster].col-1 == builds[key].col ||
+					monsters[keyMonster].col == builds[key].col || monsters[keyMonster].col+1 == builds[key].col || monsters[keyMonster].col+2 == builds[key].col )
 				){
 					
 
 					
 					
-					yFinal =  monstre.y;
-						xFinal =  monstre.x+20;
+					yFinal =  monsters[keyMonster].y;
+						xFinal =  monsters[keyMonster].x+20;
 					
-					if(builds[key].x>monstre.x){
+					if(builds[key].x>monsters[keyMonster].x){
 						xDistance = builds[key].x- xFinal;
 					}
 					else{
@@ -367,42 +370,38 @@ Game.render = function () {
     // draw main character
     //joachim change place juste après le dessin de la grille
    
-   
-    monsters.forEach(function(element) {
-        
-                if(element.life>0){
+	Object.keys(monsters).forEach(function(key) {
+			if(monsters[key].life>0){
                     // draw main character
                     Game.ctx.drawImage(
-                        element.image, // image
+                        monsters[key].image, // image
                         0, // source x
                         0, // source y
                         map.tsize, // source width
                         map.tsize, // source height
                         // Math.round(x),  // target x
                         // Math.round(y), // target y
-                        element.x-Game.camera.x,  // target x
-                        element.y-Game.camera.y, // target y
+                        monsters[key].x-Game.camera.x,  // target x
+                        monsters[key].y-Game.camera.y, // target y
                         map.tsize, // target width
                         map.tsize // target height
                     );
             
                 Game.ctx.fillStyle="#FF0000";
-                Game.ctx.fillRect(2+element.x-Game.camera.x, element.y+70-Game.camera.y, element.life, 10);
+                Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
                }else{
-                    for (var i=0; i<monsters.length; i++)
-                    {
-                        if (monsters[i].name == element.name){
-							Game.hero.xp = element.level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
-							document.getElementById("xp_value").innerHTML = Game.hero.xp;
-							anim = new animation(map, element.x, element.y, 'xp');
-                            monsters.splice(i, 1);							
-						} 
+						Game.hero.xp = monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
+						document.getElementById("xp_value").innerHTML = Game.hero.xp;
+						anim = new animation(map, monsters[key].x, monsters[key].y, 'xp');
+						
+						delete monsters[key];						
+						 
                     }
                    
-               }
-                
-                
-            });   
+			   
+			
+		})
+
 
                
 	this.ctx.fillStyle="#FF0000";

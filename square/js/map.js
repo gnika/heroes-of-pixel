@@ -96,10 +96,12 @@ var map = {
 			var row = Math.floor(y / this.tsize);
 			
 			var isSolid=0;
-			monsters.forEach(function(element) {
-					if(element.col  == col && element.row == row)
-						isSolid= element;
-				});
+			if(monsters[row+'-'+col])
+				isSolid = monsters[row+'-'+col];
+			// monsters.forEach(function(element) {
+					// if(element.col  == col && element.row == row)
+						// isSolid= element;
+				// });
 				
 			return isSolid;
     },

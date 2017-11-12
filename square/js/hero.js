@@ -122,11 +122,10 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			if(builds[vertical+'-'+horizontal].batiment == 10){
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
-					delete builds[horizontal+'-'+vertical];//DELETE MARCHE OU PAS ????
+					delete builds[vertical+'-'+horizontal];
 					abs1[pos] = 2;
-					abs2[pos] = 0;
+					abs2[pos] = 0;					
 				}else{
-					
 					abs2[pos]=10;
 				}
 				
@@ -156,14 +155,14 @@ Hero.prototype.move = function (delta, dirx, diry) {
    
    if(Game.anim>=DUREE_ANIMATION/2){
 		this.image = Loader.getImage('hero2');
-		monsters.forEach(function(element) {
-			element.image = Loader.getImage('troll3');
+		Object.keys(monsters).forEach(function(key) {
+			monsters[key].image = Loader.getImage('troll3');
 		})
    }
 	else{
 		this.image = Loader.getImage('hero');
-		monsters.forEach(function(element) {
-			element.image = Loader.getImage('troll3');
+		Object.keys(monsters).forEach(function(key) {
+			monsters[key].image = Loader.getImage('troll2');
 		})
 	}
  
@@ -267,10 +266,10 @@ Hero.prototype._ennemy = function (dirx, diry) {
         this.map.isEnnemyTileAtXY(right, bottom) ||
         this.map.isEnnemyTileAtXY(left, bottom);
     if (!collision) {
-		monsters.forEach(function(element) {
-
-			if(element.life<60)
-				element.life = element.life+element.regeneration;
+		
+		Object.keys(monsters).forEach(function(key) {
+			if(monsters[key].life<60)
+				monsters[key].life = monsters[key].life+monsters[key].regeneration;
 		})
 		return;
 	}
