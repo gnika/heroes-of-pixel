@@ -96,27 +96,12 @@ var map = {
 			var row = Math.floor(y / this.tsize);
 			
 			var isSolid=0;
-				
 			monsters.forEach(function(element) {
-					if(element.name == col+'_'+row)
+					if(element.col  == col && element.row == row)
 						isSolid= element;
 				});
 				
 			return isSolid;
-    },
-    isCornTileAtXY: function (x, y) {
-        var col = Math.floor(x / this.tsize);
-        var row = Math.floor(y / this.tsize);
-        
-        var isSolid = 0;
-            
-        supply.forEach(function(element) {
-                if (element.name == col + '_' + row) {
-                    isSolid = element;
-                }
-            });
-            
-        return isSolid;
     },
     getCol: function (x) {
         return Math.floor(x / this.tsize);

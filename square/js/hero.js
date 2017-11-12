@@ -1,7 +1,7 @@
 
 
 
-function Building(map, x, y, row, col, life, name, hourstart, batiment) {
+function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique) {
    this.map = map;
    this.life = life;
    this.name = name;
@@ -11,6 +11,8 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment) {
    this.row = row;
    this.hourstart = hourstart;
    this.batiment = batiment;
+   this.caracteristique=caracteristique;
+   //si batiment envoit des projectiles
    this.xDelta=0;
    this.yDelta=0;
 }
@@ -54,8 +56,16 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
-			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), 60, nameBuild, 'hourstart', typeBatiment);
-			builds.push(Game.nameBuild);
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =10;
+			caracteristique['showLife'] =1;
+			// console.log(caracteristique['showLife']);
+			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), 60, nameBuild, 'hourstart', typeBatiment, caracteristique);
+			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
+			// builds.push(Game.nameBuild);
+			
+			
 			anim = new animation(map, x+32, y, 'cloud');
 		}
 	}
@@ -67,14 +77,18 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		this.hourstart = hourstart;
 		posCorn = map.getRow(y)*map.rows+map.getCol(x);
 		
-		if(abs2[posCorn]==0 && abs1[posCorn]==1 && Game.hero.supply.ecu >=150){
+		// if(abs2[posCorn]==0 && abs1[posCorn]==1 && Game.hero.supply.ecu >=150){
+		if(abs2[posCorn]==0 && abs1[posCorn]==1 && Game.hero.supply.ecu >=0){
 			abs2[posCorn]=typeCulture;
 			var nameBuild = 'ble-'+map.getRow(y)+parseInt(map.getCol(x), 10);
 			Game.hero.supply.ecu = Game.hero.supply.ecu-150;
 			document.getElementById("argent_value").innerHTML = Game.hero.supply.ecu;
 			
-			Game.nameBuild = new Building(map, map.getCol(x), map.getRow(y), life, nameBuild, 'hourstart', typeCulture);
-			builds.push(Game.nameBuild);
+			var caracteristique = [];
+			caracteristique['showLife'] = 10;
+			Game.nameBuild = new Building(map, x, y, map.getCol(x), map.getRow(y), life, nameBuild, 'hourstart', typeCulture, caracteristique);
+			// builds.push(Game.nameBuild);
+			builds[map.getCol(x)+'-'+map.getRow(y)]=Game.nameBuild;
 			anim = new animation(map, x, y, 'cloud');
 		}
 		
@@ -86,7 +100,10 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
         var equip = Game.getTool();
         var ecu = this.supply.ecu;
         pos     = map.getRow(y)*map.rows+map.getCol(x);
-        
+		
+		var vertical = map.getCol(x);
+		var horizontal = map.getRow(y);
+		
 		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
 			abs1[pos] = 2;
 			abs2[pos] = 0;
@@ -101,23 +118,23 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			this.supply.ecu = ecu + 1;
             document.getElementById("argent_value").innerHTML = this.supply.ecu;
 		} else if ((abs2[pos] == 10)  && equip == 'faux') {
-			for (var i = 0; i < builds.length; i++) {
-				
-				if(builds[i].name=='ble-'+map.getRow(y)+map.getCol(x)){
-					builds[i].life = builds[i].life-1;
-					if(builds[i].life==0){
-						builds.splice(i, 1);
-						abs1[pos] = 2;
-						abs2[pos] = 0;
-					}else{
-						
-						abs2[pos]=10;
-					}
+
+			if(builds[vertical+'-'+horizontal].batiment == 10){
+				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
+				if(builds[vertical+'-'+horizontal].life==0){
+					delete builds[horizontal+'-'+vertical];//DELETE MARCHE OU PAS ????
+					abs1[pos] = 2;
+					abs2[pos] = 0;
+				}else{
 					
-					this.supply.ble=this.supply.ble+100;
-					document.getElementById("ble_value").innerHTML = this.supply.ble;
+					abs2[pos]=10;
 				}
+				
+				this.supply.ble=this.supply.ble+100;
+				document.getElementById("ble_value").innerHTML = this.supply.ble;
+			
 			}
+			// console.log(builds);
 		}
 		
 		if(this.supply.ecu > ecu){
@@ -251,8 +268,9 @@ Hero.prototype._ennemy = function (dirx, diry) {
         this.map.isEnnemyTileAtXY(left, bottom);
     if (!collision) {
 		monsters.forEach(function(element) {
+
 			if(element.life<60)
-				element.life = element.life+1;
+				element.life = element.life+element.regeneration;
 		})
 		return;
 	}
@@ -273,7 +291,7 @@ Hero.prototype._ennemy = function (dirx, diry) {
         col = this.map.getCol(left);
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
-               // console.log('e');
+
 	//ATTAQUER UN ENNEMI : A REVOIR POUR PLUS TARD : ENNEMI NE PERD DES POINTS DE VIE QUE QUAND ON ATTAQUE 
     if(this.life >0){
 		 
