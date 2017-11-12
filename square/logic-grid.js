@@ -3,8 +3,7 @@ builds          = [];
 monsters        = [];
 supply          = [];
 
-xDelta = 0;
-yDelta = 0;
+
 
  
 function Camera(map, width, height) {
@@ -117,7 +116,7 @@ Game.init = function () {
 		this.nameTroll = new Troll(map, x, y, row, col, 60, name, 22, 18, 1);
 		monsters.push(this.nameTroll);
 	}
-	
+	// console.log(monsters);
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 	document.getElementById("addBuild").addEventListener('click',
@@ -256,16 +255,25 @@ Game._drawLayer = function (layer) {
 				if((monstre.row-2 == batiment.row || monstre.row-1 == batiment.row || monstre.row == batiment.row || monstre.row+1 == batiment.row || monstre.row+2 == batiment.row ) &&
 					(monstre.col-2 == batiment.col || monstre.col-1 == batiment.col || monstre.col == batiment.col || monstre.col+1 == batiment.col || monstre.col+2 == batiment.col )
 				){
-					// console.log(batiment.x+' - '+batiment.y);
-					// Game.ctx.beginPath();      // Début du chemin
-					// Game.ctx.moveTo(batiment.x+32, batiment.y);    // Le tracé part du point 50,50
-					// Game.ctx.lineTo(monstre.x,monstre.y);	
-					// Game.ctx.stroke();
+					
+
 					
 					xFinal =  monstre.x+32;
 					yFinal =  monstre.y;
-					// console.log(xFinal);
-					// console.log(xDelta+' - '+xFinal);
+					
+					if(batiment.x>xFinal)
+						xDistance = batiment.x- xFinal;
+						else
+						xDistance = xFinal - batiment.x ;
+					if(batiment.y>yFinal)
+						yDistance = batiment.y- yFinal;
+						else
+						yDistance = yFinal - batiment.y ;
+					
+					
+					
+					console.log(batiment.xDelta+' - '+batiment.yDelta);
+					console.log('distance X : '+xDistance+' :::: distance Y : '+yDistance);
 					// var operator = function(a, b) {
 						// if(a>b)
 							// return a - b;
@@ -273,10 +281,22 @@ Game._drawLayer = function (layer) {
 							// return b - a;
 					// };
 					
-					if(xDelta <= xFinal || yDelta <= yFinal){
+					if(batiment.xDelta <= xDistance || batiment.yDelta <= yDistance){
 						
-						// if(xDelta>=xFinal)xDelta=xFinal;
-						// if(yDelta>=yFinal)yDelta=yFinal;
+						if(batiment.xDelta>= xDistance)
+							batiment.xDelta=xDistance;
+						if(batiment.yDelta>= yDistance)
+							batiment.yDelta=yDistance;
+						
+						if(batiment.x>xFinal)
+							var distX = batiment.x- batiment.xDelta-Game.camera.x;
+						else
+							var distX = batiment.x+ batiment.xDelta-Game.camera.x;
+						if(batiment.y>yFinal)
+							var distY = batiment.y- batiment.yDelta-Game.camera.y;
+						else
+							var distY = batiment.y+ batiment.yDelta-Game.camera.y;
+						
 						
 						Game.ctx.drawImage(
 								Loader.getImage('ball'), // image
@@ -284,16 +304,25 @@ Game._drawLayer = function (layer) {
 								0, // source y
 								map.tsize, // source width
 								map.tsize, // source height
-								batiment.x-Game.camera.x - xDelta,  // target x
-								batiment.y-Game.camera.y - yDelta, 
+								distX,  // target x
+								distY, 
 								map.tsize, // target width
 								map.tsize // target height
 							);
-						xDelta++;
-						yDelta++;
+							
+						batiment.xDelta++;
+						batiment.yDelta++;
+						// if(batiment.x-Game.camera.x - xDelta > xFinal)	
+							// xDelta++;
+						// else
+							// xDelta=0;
+						// if(batiment.y-Game.camera.y - yDelta > yFinal)	
+							// yDelta++;
+						// else
+							// yDelta=0;
 					}else{
-						xDelta=0;
-						yDelta=0;
+						batiment.xDelta=0;
+						batiment.yDelta=0;
 					}
 				}
 			});

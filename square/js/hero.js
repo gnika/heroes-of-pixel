@@ -11,6 +11,8 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment) {
    this.row = row;
    this.hourstart = hourstart;
    this.batiment = batiment;
+   this.xDelta=0;
+   this.yDelta=0;
 }
 
 function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equipement) {
