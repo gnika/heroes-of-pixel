@@ -311,6 +311,7 @@ Game._drawLayer = function (layer) {
 					}else{
 						builds[key].xDelta=0;
 						builds[key].yDelta=0;
+						monsters[keyMonster].life = monsters[keyMonster].life-10;
 					}
 				}
 			});
