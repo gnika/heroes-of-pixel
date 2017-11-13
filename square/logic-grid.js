@@ -84,8 +84,8 @@ Game.load = function () {
 };
  
 Game.init = function () {
-    this.time       = new Time();
-    var currentTime = setInterval(this.time.startTime, 1000);
+    var currentTime = new Time();
+    currentTime.startTime();
     
     Keyboard.listenForEvents(
         [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
@@ -101,6 +101,7 @@ Game.init = function () {
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
+
 	document.getElementById("addBuild").addEventListener('click',
 		function(){
 			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6);
@@ -116,6 +117,21 @@ Game.init = function () {
 			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
 		},
 	false);
+    document.getElementById("speed0").addEventListener('click', function () {
+        clearTimeout(currentTime.timeOut);
+    });
+    document.getElementById("speed1").addEventListener('click', function () {
+        clearTimeout(currentTime.timeOut);
+        currentTime.startTime(1000);
+    });
+    document.getElementById("speed2").addEventListener('click', function () {
+        clearTimeout(currentTime.timeOut);
+        currentTime.startTime(250);
+    });
+    document.getElementById("speed3").addEventListener('click', function () {
+        clearTimeout(currentTime.timeOut);
+        currentTime.startTime(100);
+    });
 	
 	
 };

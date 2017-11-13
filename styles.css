@@ -2,6 +2,7 @@ body {
     font-family: 'Source Code Pro', 'Courier', monospace;
     margin: 0;
     padding: 0;
+    background-color:lavender;
 }
 
 canvas {

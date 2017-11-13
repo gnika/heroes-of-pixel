@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Tilemaps examples - Collisions</title>
+    <title>Heroes of pixel</title>
     <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,9 +19,17 @@
 <body> 
     <div class="container">
 	<div class="row">
-		<div class="col-lg-12" id="gameTime" style="background-color:lavender; text-align: center;"></div>
+        <div class="col-lg-12 text-center" id="gameTime"></div>
+        <div class="text-center">
+            <div class="text-center btn-group" role="group" >
+                <button type="button" class="btn btn-danger btn-xs" id="speed0">||</button>
+                <button type="button" class="btn btn-success btn-xs" id="speed1">></button>
+                <button type="button" class="btn btn-success btn-xs" id="speed2">>></button>
+                <button type="button" class="btn btn-success btn-xs" id="speed3">>>></button>
+            </div>
+        </div>
 	<div class="row">
-    <div class="col-lg-2" style="background-color:lavender;">
+    <div class="col-lg-2">
         <div class="left-supply">
             <div class="xp">xp :    <span id="xp_value">0</span></div>
             <div class="argent">Bourse :    <span id="argent_value">0</span></div>
@@ -30,12 +38,12 @@
             <div class="argile">BLE :    <span id="ble_value">0</span></div>
         </div>
         </div>
-    <div class="col-lg-8" style="background-color:lavenderblush;">
+    <div class="col-lg-8">
         <div class="main-wrapper">
             <canvas id="demo" width="1000" height="768"></canvas>
         </div>
 	</div>
-    <div class="col-lg-2" style="background-color:lavender;">
+    <div class="col-lg-2">
         <div class="right-stuff">
             <p><input type="radio" checked="checked" name="tools" value="pelle"/> Pelle<br/>
             <input type="radio" name="tools" value="faux"/> Faux<br/>
