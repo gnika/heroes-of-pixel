@@ -91,7 +91,7 @@ Game.load = function () {
         Loader.loadImage('hero', '../assets/character.png'),
         Loader.loadImage('hero2', '../assets/character2.png'),
         Loader.loadImage('troll1', '../assets/troll1.jpg'),
-        Loader.loadImage('troll2', '../assets/troll2.jpg'),
+        Loader.loadImage('troll2', '../assets/troll2.png'),
         Loader.loadImage('troll3', '../assets/troll3.png'),
         Loader.loadImage('coin', '../assets/coin.png'),
         Loader.loadImage('cloud', '../assets/cloud.png'),
