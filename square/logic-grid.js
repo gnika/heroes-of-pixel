@@ -258,60 +258,66 @@ Game._drawLayer = function (layer) {
 					(monsters[keyMonster].col-2 == builds[key].col || monsters[keyMonster].col-1 == builds[key].col ||
 					monsters[keyMonster].col == builds[key].col || monsters[keyMonster].col+1 == builds[key].col || monsters[keyMonster].col+2 == builds[key].col )
 				){
+					if(builds[key].cible==0){
+						builds[key].cible = keyMonster;
+					}
 					
+					if(builds[key].cible == keyMonster){
 
 					
 					
-					yFinal =  monsters[keyMonster].y;
-						xFinal =  monsters[keyMonster].x+20;
-					
-					if(builds[key].x>monsters[keyMonster].x){
-						xDistance = builds[key].x- xFinal;
-					}
-					else{
-						xDistance = xFinal - builds[key].x ;
-					}
-					if(builds[key].y>yFinal)
-						yDistance = builds[key].y- yFinal;
-						else
-						yDistance = yFinal - builds[key].y ;
-
-					
-					if(builds[key].xDelta <= xDistance || builds[key].yDelta <= yDistance){
+						yFinal =  monsters[keyMonster].y;
+							xFinal =  monsters[keyMonster].x+20;
 						
-						if(builds[key].xDelta>= xDistance)
-							builds[key].xDelta=xDistance;
-						if(builds[key].yDelta>= yDistance)
-							builds[key].yDelta=yDistance;
-						
-						if(builds[key].x>xFinal)
-							var distX = builds[key].x- builds[key].xDelta-Game.camera.x;
-						else
-							var distX = builds[key].x+ builds[key].xDelta-Game.camera.x;
+						if(builds[key].x>monsters[keyMonster].x){
+							xDistance = builds[key].x- xFinal;
+						}
+						else{
+							xDistance = xFinal - builds[key].x ;
+						}
 						if(builds[key].y>yFinal)
-							var distY = builds[key].y- builds[key].yDelta-Game.camera.y;
-						else
-							var distY = builds[key].y+ builds[key].yDelta-Game.camera.y;
+							yDistance = builds[key].y- yFinal;
+							else
+							yDistance = yFinal - builds[key].y ;
+
 						
-						
-						Game.ctx.drawImage(
-								Loader.getImage('ball'), // image
-								0, // source x
-								0, // source y
-								map.tsize, // source width
-								map.tsize, // source height
-								distX,  // target x
-								distY, 
-								map.tsize, // target width
-								map.tsize // target height
-							);
+						if(builds[key].xDelta <= xDistance || builds[key].yDelta <= yDistance){
 							
-						builds[key].xDelta++;
-						builds[key].yDelta++;
-					}else{
-						builds[key].xDelta=0;
-						builds[key].yDelta=0;
-						monsters[keyMonster].life = monsters[keyMonster].life-10;
+							if(builds[key].xDelta>= xDistance)
+								builds[key].xDelta=xDistance;
+							if(builds[key].yDelta>= yDistance)
+								builds[key].yDelta=yDistance;
+							
+							if(builds[key].x>xFinal)
+								var distX = builds[key].x- builds[key].xDelta-Game.camera.x;
+							else
+								var distX = builds[key].x+ builds[key].xDelta-Game.camera.x;
+							if(builds[key].y>yFinal)
+								var distY = builds[key].y- builds[key].yDelta-Game.camera.y;
+							else
+								var distY = builds[key].y+ builds[key].yDelta-Game.camera.y;
+							
+							
+							Game.ctx.drawImage(
+									Loader.getImage('ball'), // image
+									0, // source x
+									0, // source y
+									map.tsize, // source width
+									map.tsize, // source height
+									distX,  // target x
+									distY, 
+									map.tsize, // target width
+									map.tsize // target height
+								);
+								
+							builds[key].xDelta++;
+							builds[key].yDelta++;
+						}else{
+							builds[key].xDelta=0;
+							builds[key].yDelta=0;
+							monsters[keyMonster].life = monsters[keyMonster].life-10;
+							builds[key].cible =0;
+						}
 					}
 				}
 			});
