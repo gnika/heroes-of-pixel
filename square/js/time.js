@@ -2,9 +2,11 @@ function Time() {
     var day     = 1;
     var hour    = 0;
     var minute  = 0;
+    
+    this.timeOut = null;
 
-    this.startTime = function () {
-        document.getElementById("gameTime").innerHTML = "Jour " + day + " - " + hour + "h" + isZero(minute);
+    this.startTime = function (speedValue = 1000) {
+        document.getElementById("gameTime").innerHTML = "Jour " + day + " - " + checkNumber(hour) + "h" + checkNumber(minute);
         
         if (minute == 50) {
             minute = 0;
@@ -18,32 +20,22 @@ function Time() {
             minute = 0;
             day++;
         }
+
+        var className = this; // A changer
+        this.timeOut  = setTimeout(function () { className.startTime(speedValue) }, speedValue);
     }
 
     /**
-     * Si le nombre est 0, retourne le String "00"
-     * Sinon retourne la valeur du nombre initial en Int
-     * @param {Int} number 
+     * Retourne un double digit dans le cas où number est inférieur à 0
+     * @param {mixed} number 
      */
-    function isZero(number) {
+    function checkNumber(number) {
         if (number == 0) {
             return "00";
+        } else if (number < 10) {
+            return "0" + number;
         } else {
             return number;
         }
-    }
-
-    /**
-     * COMING SOON
-     */
-    this.stopTime = function() {
-        clearInterval();
-    }
-
-    /**
-     * COMING SOON
-     */
-    this.speedUpTime = function(speed) {
-
     }
 }
