@@ -84,6 +84,9 @@ Game.load = function () {
 };
  
 Game.init = function () {
+    this.time       = new Time();
+    var currentTime = setInterval(this.time.startTime, 1000);
+    
     Keyboard.listenForEvents(
         [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
     this.tileAtlas = Loader.getImage('tiles');
