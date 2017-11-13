@@ -1,0 +1,1 @@
+function Time(){function e(e){return 0==e?"00":e<10?"0"+e:e}var t=1,i=0,n=0;this.timeOut=null,this.startTime=function(){speedValue=arguments[0],document.getElementById("gameTime").innerHTML="Jour "+t+" - "+e(i)+"h"+e(n),50==n?(n=0,i++):n+=10,24==i&&(i=0,n=0,t++);var u=this;this.timeOut=setTimeout(function(){u.startTime(speedValue)},speedValue)}}

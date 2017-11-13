@@ -1,0 +1,29 @@
+{
+  "name": "heroes-of-pixel",
+  "version": "1.0.0",
+  "description": "A game about a pixel",
+  "main": "common.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnika/heroes-of-pixel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gnika/heroes-of-pixel/issues"
+  },
+  "homepage": "https://github.com/gnika/heroes-of-pixel#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "pump": "^1.0.2"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
