@@ -3,7 +3,11 @@
 <head>
     <title>Tilemaps examples - Collisions</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../styles.css" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../styles.css" type="text/css">
  
     <script src="../common.js"></script>
     <script src="js/map.js"></script>
@@ -12,6 +16,8 @@
 </head>
 <body> 
     <div class="container">
+	<div class="row">
+    <div class="col-lg-2" style="background-color:lavender;">
         <div class="left-supply">
             <div class="xp">xp :    <span id="xp_value">0</span></div>
             <div class="argent">Bourse :    <span id="argent_value">0</span></div>
@@ -19,23 +25,28 @@
             <div class="argile">ARGILE :    <span id="argile_value">0</span></div>
             <div class="argile">BLE :    <span id="ble_value">0</span></div>
         </div>
-        
+        </div>
+    <div class="col-lg-8" style="background-color:lavenderblush;">
         <div class="main-wrapper">
-            <canvas id="demo" width="1024" height="768"></canvas>
-            <footer class="main-footer">
-                <p>Source code on <a href="https://github.com/mozdevs/gamedev-js-tiles" target="_top">the Github repository</a>.</p>
-            </footer>
+            <canvas id="demo" width="980" height="768"></canvas>
         </div>
-
+	</div>
+    <div class="col-lg-2" style="background-color:lavender;">
         <div class="right-stuff">
-            <input type="radio" checked="checked" name="tools" value="pelle"/> Pelle<br/>
+            <p><input type="radio" checked="checked" name="tools" value="pelle"/> Pelle<br/>
             <input type="radio" name="tools" value="faux"/> Faux<br/>
-            <input type="radio" name="tools" value="epee"/> Epée<br/>
-            <button id="addBuild">Ajouter une tourelle</button>
-            <button id="addCorn">Planter du maïs</button> (50 écus)
-            <button id="creuse">Creuser</button>
+            <input type="radio" name="tools" value="epee"/> Epée<br/></p>
+           <p> <button class="btn btn-primary" id="addBuild">Ajouter une tourelle</button></p>
+            <p><button class="btn btn-primary" id="addCorn">Planter du maïs</button></p>
+            <p><button class="btn btn-primary" id="creuse">Creuser</button></p>
         </div>
-    </div>
+	</div>
+  </div>
+
+	<footer class="main-footer">
+		<p>Heroes of pixel : 3 mad devs on it !</a>.</p>
+	</footer>
+</div>
 
 </body>
 </html>

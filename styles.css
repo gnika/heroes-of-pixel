@@ -25,32 +25,7 @@ a:hover {
     width: 100%;
 }
 
-.left-supply {
-    float: left;
-	width: 200px;
-    margin-left: 0px;
-    /* background-color: red; */
-    /* height: 1024px; */
-}
 
-.main-wrapper {
-    float: left;
-    width: 1024px;
-    margin-left: 200px;
-    /* padding-left: 1em; */
-    /* padding-right: 1em; */
-    /* margin: 0 auto; */
-    /* height: 1024px; */
-}
-
-.right-stuff {
-    float: left;
-	width: 200px;
-    /* background-color: blue; */
-    /* margin-left: 1224px; */
-    /* height: 1024px; */
-
-}
 
 .main-header, .main-footer {
     text-align: center;
@@ -86,4 +61,10 @@ li, p {
 
 li {
     margin: 0.5em 0;
+}
+
+@media (min-width: 1200px)
+grid.less:7
+.container {
+    width: 100%;
 }
