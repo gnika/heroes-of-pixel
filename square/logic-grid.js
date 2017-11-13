@@ -97,7 +97,7 @@ Game.init = function () {
 	generateTroll(64, 64, 1, 1);
 	generateTroll(192, 192, 3, 3);
 	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, 0, 1);
+	generateMonstre(map, 576, 192, 9, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2.5, 0, 1);
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
@@ -267,9 +267,9 @@ Game._drawLayer = function (layer) {
 							builds[key].cibleMouvante = 1;
 					}
 					
-					if(builds[key].cible == keyMonster || builds[key].cibleMouvante == 1){
+					if(builds[key].cible == keyMonster || (builds[key].cibleMouvante == 1 && monsters[keyMonster].vitesse>0 )){
 					
-					console.log(builds[key].cible);
+					// console.log(builds[key].cible);
 					
 						yFinal =  monsters[keyMonster].y;
 							xFinal =  monsters[keyMonster].x+20;

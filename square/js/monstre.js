@@ -59,19 +59,12 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		var tile = abs2[pos+this.map.rows];
 	}
 	if(this.directionY == -1){
-		var tile = abs2[pos-this.map.rows];
+		var tile = abs2[pos];
+		// console.log(tile, this.map.getRow(this.y), this.map.getCol(this.x));
 	}
 	
                
  
-    // check for collisions on sprite sides
-    var collision ='';
-    // var collision =
-        // this.map.isHeroTileAtXY(left, top, hx, hy) ||
-        // this.map.isHeroTileAtXY(right, top, hx, hy) ||
-        // this.map.isHeroTileAtXY(right, bottom, hx, hy) ||
-        // this.map.isHeroTileAtXY(left, bottom, hx, hy);
-		
 	var posHero = this.map.isHeroTileAtXY(hx, hy);
 		
 		
@@ -129,7 +122,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		
 		this.row = Math.round(this.x/this.map.tsize);
 		this.col = Math.round(this.y/this.map.tsize);
-		// console.log(this);
+		// console.log(this.col);
 	}
 	
 };
