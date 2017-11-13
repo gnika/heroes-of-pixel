@@ -96,8 +96,8 @@ Game.init = function () {
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, 1, 1);
 	generateTroll(192, 192, 3, 3);
-	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.1, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 10, 10, 0.1, 1, 'scorpion1', 'scorpion2', 0.5, 0, 1);
+	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, 0, 1);
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
@@ -139,7 +139,7 @@ Game.update = function (delta) {
 	//mouvement monstres
 	Object.keys(monsters).forEach(function(key) {
 		if(monsters[key].vitesse >0){
-			monsters[key].move(delta);
+			monsters[key].move(delta, Game.hero.x, Game.hero.y);
 		}
 	})
 	
@@ -216,13 +216,13 @@ Game._drawLayer = function (layer) {
 
    //sprite personnages
    if(Game.anim>=DUREE_ANIMATION/2){
-		this.image = Loader.getImage('hero2');
+		Game.hero.image = Loader.getImage('hero2');
 		Object.keys(monsters).forEach(function(key) {
 			monsters[key].image = Loader.getImage(monsters[key].image1);
 		})
    }
 	else{
-		this.image = Loader.getImage('hero');
+		Game.hero.image = Loader.getImage('hero');
 		Object.keys(monsters).forEach(function(key) {
 			monsters[key].image = Loader.getImage(monsters[key].image2);
 		})
@@ -250,7 +250,7 @@ Game._drawLayer = function (layer) {
 		}
 	}
 
-	
+
 
 	//tir tourelles portée : 2
 	Object.keys(builds).forEach(function(key) {
@@ -261,13 +261,15 @@ Game._drawLayer = function (layer) {
 					(monsters[keyMonster].col-2 == builds[key].col || monsters[keyMonster].col-1 == builds[key].col ||
 					monsters[keyMonster].col == builds[key].col || monsters[keyMonster].col+1 == builds[key].col || monsters[keyMonster].col+2 == builds[key].col )
 				){
-					if(builds[key].cible==0){
+					if(builds[key].cible==0){//pour ne cibler qu'un ennemi à la fois
 						builds[key].cible = keyMonster;
+						if(monsters[keyMonster].vitesse>0)
+							builds[key].cibleMouvante = 1;
 					}
 					
-					if(builds[key].cible == keyMonster){
-
+					if(builds[key].cible == keyMonster || builds[key].cibleMouvante == 1){
 					
+					console.log(builds[key].cible);
 					
 						yFinal =  monsters[keyMonster].y;
 							xFinal =  monsters[keyMonster].x+20;
@@ -320,6 +322,7 @@ Game._drawLayer = function (layer) {
 							builds[key].yDelta=0;
 							monsters[keyMonster].life = monsters[keyMonster].life-builds[key].caracteristique['attaque'];
 							builds[key].cible =0;
+							builds[key].cibleMouvante =0;
 						}
 					}
 				}

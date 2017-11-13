@@ -100,6 +100,11 @@ var map = {
 				
 			return isSolid;
     },
+    isHeroTileAtXY: function (hx, hy) {
+			var hrow = Math.floor(hx / this.tsize);
+			var hcol = Math.floor(hy / this.tsize);
+			return [hrow, hcol];
+    },
     getCol: function (x) {
         return Math.floor(x / this.tsize);
     },
