@@ -154,18 +154,15 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1)//si mouvement
    
    
-   if(Game.anim>=DUREE_ANIMATION/2){
-		this.image = Loader.getImage('hero2');
-		Object.keys(monsters).forEach(function(key) {
-			monsters[key].image = Loader.getImage('troll3');
-		})
-   }
-	else{
-		this.image = Loader.getImage('hero');
-		Object.keys(monsters).forEach(function(key) {
-			monsters[key].image = Loader.getImage('troll2');
-		})
-	}
+   //SI ON VEUT UNE IMAGE SPECIALE SI LE HEROS MARCHE
+   // if(Game.anim>=DUREE_ANIMATION/2){
+		// this.image = Loader.getImage('hero2');
+		
+   // }
+	// else{
+		// this.image = Loader.getImage('hero');
+		
+	// }
  
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
@@ -180,7 +177,8 @@ Hero.prototype.move = function (delta, dirx, diry) {
     var maxX = this.map.cols * this.map.tsize;
     var maxY = this.map.rows * this.map.tsize;
     this.x = Math.max(0, Math.min(this.x, maxX));
-    this.y = Math.max(0, Math.min(this.y, maxY)); };
+    this.y = Math.max(0, Math.min(this.y, maxY));
+};
  
 Hero.prototype._loselifeTile = function (dirx, diry) {
     var row, col;
@@ -221,6 +219,7 @@ Hero.prototype._collide = function (dirx, diry) {
                
  
     // check for collisions on sprite sides
+    // var collision = false;
     var collision =
         this.map.isSolidTileAtXY(left, top) ||
         this.map.isSolidTileAtXY(right, top) ||

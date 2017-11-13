@@ -27,8 +27,8 @@ abs1 = [
 
 abs2 = [
         4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 16, 3, 3, 3, 3, 3, 3, 3, 4,
-        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 16, 16, 15, 0, 0, 0, 0, 0, 0, 0, 4,
-        4, 0, 14, 0, 0, 0, 0, 0, 0, 0, 15, 16, 16, 16, 15, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 15, 15, 16, 16, 15, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 14, 3, 0, 0, 0, 0, 0, 0, 15, 16, 16, 16, 15, 0, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 16, 16, 15, 15, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 16, 16, 15, 15, 0, 0, 0, 0, 0, 0, 0, 4,
         4, 0, 0, 8, 0, 0, 0, 8, 8, 5, 15, 15, 16, 16, 15, 5, 0, 0, 0, 0, 0, 5, 0, 4,
@@ -81,27 +81,22 @@ var map = {
     isSolidTileAtXY: function (x, y) {
         var col = Math.floor(x / this.tsize);
         var row = Math.floor(y / this.tsize);
-		
         // tiles 3 and 5 6 and 7 are solid -- the rest are walkable
         // loop through all layers and return TRUE if any tile is solid
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
+			// console.log(row, col, tile);
             var isSolid = tile === 3 || tile === 5 || tile === 6 || tile === 7 || tile === 16 || tile === 17;
 			
             return res || isSolid;
         }.bind(this), false);
     },
     isEnnemyTileAtXY: function (x, y) {
-			var col = Math.floor(x / this.tsize);
-			var row = Math.floor(y / this.tsize);
-			
+			var row = Math.floor(x / this.tsize);
+			var col = Math.floor(y / this.tsize);
 			var isSolid=0;
 			if(monsters[row+'-'+col])
 				isSolid = monsters[row+'-'+col];
-			// monsters.forEach(function(element) {
-					// if(element.col  == col && element.row == row)
-						// isSolid= element;
-				// });
 				
 			return isSolid;
     },

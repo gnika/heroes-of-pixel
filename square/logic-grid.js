@@ -23,10 +23,8 @@ Camera.prototype.follow = function (sprite) {
 Camera.prototype.update = function () {
     // assume followed sprite should be placed at the center of the screen
     // whenever possible
-// if(this.following.life==0)
-// console.log(map.getCol(this.following.x));//////////////////////////////MAP
 
-                if(this.following.life==0)return;
+    if(this.following.life==0)return;
     this.following.screenX = this.width / 2;
     this.following.screenY = this.height / 2;
  
@@ -66,22 +64,6 @@ function animation(map, x, y, imageName){
     this.y = y;
 	this.image = Loader.getImage(imageName);
 }
-
-function Troll(map, x, y, row, col, life, attaque, defense, regeneration, level) {
-    this.map = map;
-    this.level = level;
-    this.attaque = attaque;
-    this.defense = defense;
-    this.regeneration = regeneration;
-    this.x = x;
-    this.y = y;
-    this.row = row;
-    this.col = col;
-    this.life = life;
-    this.width = map.tsize;
-    this.height = map.tsize;
-    this.image = Loader.getImage('troll3');
-}
  
  
  
@@ -90,9 +72,10 @@ Game.load = function () {
         Loader.loadImage('tiles', '../assets/tiles_new.png'),
         Loader.loadImage('hero', '../assets/character.png'),
         Loader.loadImage('hero2', '../assets/character2.png'),
-        Loader.loadImage('troll1', '../assets/troll1.jpg'),
         Loader.loadImage('troll2', '../assets/troll2.png'),
         Loader.loadImage('troll3', '../assets/troll3.png'),
+        Loader.loadImage('scorpion1', '../assets/scorpion1.png'),
+        Loader.loadImage('scorpion2', '../assets/scorpion2.png'),
         Loader.loadImage('coin', '../assets/coin.png'),
         Loader.loadImage('cloud', '../assets/cloud.png'),
         Loader.loadImage('xp', '../assets/xp.png'),
@@ -110,14 +93,9 @@ Game.init = function () {
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, 1, 1);
 	generateTroll(192, 192, 3, 3);
-    
-	function generateTroll(x, y, row, col){
-		var nameTroll = 'troll'+x+y;
-		this.nameTroll = new Troll(map, x, y, row, col, 60, 22, 18, 0.5, 1);
-		monsters[row+'-'+col] = this.nameTroll;
-		// monsters.push(this.nameTroll);
-	}
-	// console.log(monsters);
+	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.1, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 10, 10, 0.1, 1, 'scorpion1', 'scorpion2', 0.5, 0, 1);
+
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 	document.getElementById("addBuild").addEventListener('click',
@@ -154,6 +132,14 @@ Game.update = function (delta) {
 	// console.log(dirx);
 	if(this.hero.life<=0) return false;
     this.hero.move(delta, dirx, diry);
+	
+	//mouvement monstres
+	Object.keys(monsters).forEach(function(key) {
+		if(monsters[key].vitesse >0){
+			monsters[key].move(delta);
+		}
+	})
+	
     this.camera.update();
 };
  
@@ -225,6 +211,19 @@ Game._drawLayer = function (layer) {
 	})
 	
 
+   //sprite personnages
+   if(Game.anim>=DUREE_ANIMATION/2){
+		this.image = Loader.getImage('hero2');
+		Object.keys(monsters).forEach(function(key) {
+			monsters[key].image = Loader.getImage(monsters[key].image1);
+		})
+   }
+	else{
+		this.image = Loader.getImage('hero');
+		Object.keys(monsters).forEach(function(key) {
+			monsters[key].image = Loader.getImage(monsters[key].image2);
+		})
+	}
 	
 	if(typeof(anim) != "undefined" && anim !== null) {
 		if(Game.animBref<=DUREE_ANIMATION){
@@ -247,6 +246,7 @@ Game._drawLayer = function (layer) {
 			Game.animBref=0;
 		}
 	}
+
 	
 
 	//tir tourelles portée : 2
@@ -315,7 +315,7 @@ Game._drawLayer = function (layer) {
 						}else{
 							builds[key].xDelta=0;
 							builds[key].yDelta=0;
-							monsters[keyMonster].life = monsters[keyMonster].life-10;
+							monsters[keyMonster].life = monsters[keyMonster].life-builds[key].caracteristique['attaque'];
 							builds[key].cible =0;
 						}
 					}
@@ -376,6 +376,12 @@ Game.render = function () {
     this._drawLayer(0);
     // draw main character
     //joachim change place juste après le dessin de la grille
+   // console.log(monsters);
+   
+   
+   
+    // draw map top layer
+    this._drawLayer(1);
    
 	Object.keys(monsters).forEach(function(key) {
 			if(monsters[key].life>0){
@@ -419,8 +425,6 @@ Game.render = function () {
                
                
                
-    // draw map top layer
-    this._drawLayer(1);
  
     this._drawGrid();
     
