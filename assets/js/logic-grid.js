@@ -96,8 +96,9 @@ Game.init = function () {
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, 1, 1);
 	generateTroll(192, 192, 3, 3);
-	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2.5, 0, 1);
+	generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 30, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2.5, 0, 1);
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
@@ -148,7 +149,7 @@ Game.update = function (delta) {
     else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
     else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
     else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
-	// console.log(dirx);
+
 	if(this.hero.life<=0) return false;
     this.hero.move(delta, dirx, diry);
 	
@@ -168,7 +169,7 @@ Game.getTool = function(){
  
 Game._drawLayer = function (layer) {
     var startCol = Math.floor(this.camera.x / map.tsize);
-                // console.log(startCol);
+
     var endCol = startCol + (this.camera.width / map.tsize);
     var startRow = Math.floor(this.camera.y / map.tsize);
     var endRow = startRow + (this.camera.height / map.tsize);
@@ -288,7 +289,7 @@ Game._drawLayer = function (layer) {
 					// console.log(builds[key].cible);
 					
 						yFinal =  monsters[keyMonster].y;
-							xFinal =  monsters[keyMonster].x+20;
+						xFinal =  monsters[keyMonster].x+20;
 						
 						if(builds[key].x>monsters[keyMonster].x){
 							xDistance = builds[key].x- xFinal;

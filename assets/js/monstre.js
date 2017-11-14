@@ -47,31 +47,44 @@ Monstre.prototype.move = function (delta, hx, hy) {
 	
 	
 	pos = this.map.getRow(this.y)*this.map.rows+this.map.getCol(this.x);
-	
+
+	if( abs2[pos]==10 || abs2[pos]==11 || abs2[pos]==12 || abs2[pos]==13 )
+		abs2[pos]=2;
 	
 	if(this.directionX == 1){
 		var tile = abs2[pos+1];
+		var tile1 = abs1[pos+1];
 	}
 	if(this.directionX == -1){
 		var tile = abs2[pos];
+        var tile1 = abs1[pos];
 	}
 	if(this.directionY == 1){
 		var tile = abs2[pos+this.map.rows];
+        var tile1 = abs1[pos+this.map.rows];
 	}
 	if(this.directionY == -1){
 		var tile = abs2[pos];
+		var tile1 = abs1[pos];
 		// console.log(tile, this.map.getRow(this.y), this.map.getCol(this.x));
 	}
-	
-               
+
+
+    if( tile==6 || tile==7 ){
+        builds[this.map.getCol(this.x)+'-'+this.map.getRow(this.y)].life = builds[this.map.getCol(this.x)+'-'+this.map.getRow(this.y)].life-this.attaque;
+        if(builds[this.map.getCol(this.x)+'-'+this.map.getRow(this.y)].life<=0){
+            abs2[pos]=2;
+        	delete builds[this.map.getCol(this.x)+'-'+this.map.getRow(this.y)];
+		}
+	}
  
 	var posHero = this.map.isHeroTileAtXY(hx, hy);
 		
-		
+		// console.log(this.directionX);
 	var hautY =this.map.getRow(this.y)+1;
 	var basY =this.map.getRow(this.y)-1;
 	var hautX =this.map.getCol(this.x)+1;
-	var basX =this.map.getCol(this.x)-1;	
+	var basX =this.map.getCol(this.x)-2;
 
 	if((posHero[0] == hautX || posHero[0] == basX || posHero[0] == this.map.getCol(this.x)) &&  (posHero[1] == hautY || posHero[1] == basY || posHero[1] == this.map.getRow(this.y)))	{
 		if(this.collisionHero==0){
@@ -87,7 +100,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 			this.directionY = olddirectionY;
 			this.collisionHero = 0;
 		}
-		var isSolid = tile === 3 || tile === 5 || tile === 6 || tile === 7 || tile === 16 || tile === 17;
+		var isSolid = tile === 3 || tile === 5 || tile === 6 || tile === 7 || tile === 16 || tile === 17 || (tile === 4 && tile1 === 3);
 		if(isSolid){
 			
 				if(this.directionX == -1){
@@ -116,9 +129,8 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		
 		if(this.col != Math.round(this.y/this.map.tsize) || this.row != Math.round(this.x/this.map.tsize)){
 			monsters[Math.round(this.x/this.map.tsize)+'-'+Math.round(this.y/this.map.tsize)] = this;
-			delete monsters[this.row+'-'+this.col];		
+			delete monsters[this.row+'-'+this.col];
 		}
-		// delete monsters[this.row+'-'+this.col];		
 		
 		this.row = Math.round(this.x/this.map.tsize);
 		this.col = Math.round(this.y/this.map.tsize);
