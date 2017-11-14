@@ -89,19 +89,19 @@ Monstre.prototype.move = function (delta, hx, hy) {
  
 	var posHero = this.map.isHeroTileAtXY(hx, hy);
 		
-	var hautY =this.map.getRow(this.y)+1;
-	var basY =this.map.getRow(this.y)-2;
-	var hautX =this.map.getCol(this.x)+1;
-	var basX =this.map.getCol(this.x)-2;
+	var hautY =this.col+1;
+	var basY =this.col-1;
+	var hautX =this.row+1;
+	var basX =this.row-1;
 
+	
+	// console.log(monsters, hautY, hautX, basY, basX);
+	// console.log(monsters, basX+'-'+this.col);
     // si rencontre autre monstre
-	if(monsters[hautX+'-'+hautY] || monsters[basX+'-'+basY] || monsters[basX+'-'+basY]
-		|| monsters[basX+'-'+this.map.getRow(this.y)] || monsters[this.map.getCol(this.x)+'-'+basY]
-		|| monsters[basX+'-'+this.map.getRow(this.y)]
-		// ||
-		// (this.directionY == 1 &&  monsters[basX-1+'-'+this.map.getRow(this.y)] || this.directionY == -1 &&  monsters[basX+1+'-'+this.map.getRow(this.y)])
+	if((this.directionX!=0 && (monsters[basX+'-'+this.col] || monsters[hautX+'-'+this.col]))
+		|| (this.directionY!=0 && (monsters[this.row+'-'+basY] || monsters[this.row+'-'+hautY]))
+	){	
 
-	){
 
         if(this.directionX == -1){
             this.directionX = 1;
