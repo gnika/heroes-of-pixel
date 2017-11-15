@@ -79,7 +79,8 @@ Game.load = function () {
 		Loader.loadImage('coin', 'assets/coin.png'),
 		Loader.loadImage('cloud', 'assets/cloud.png'),
 		Loader.loadImage('xp', 'assets/xp.png'),
-		Loader.loadImage('ball', 'assets/ball.png')
+		Loader.loadImage('ball', 'assets/ball.png'),
+		Loader.loadImage('pain', 'assets/bread.png')
     ];
 };
  
