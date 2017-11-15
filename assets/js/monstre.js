@@ -22,18 +22,18 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
 }
 
 function generateTroll(x, y, row, col){
-	var nameTroll = 'troll'+x+y;
+	var nameTroll = 'monstre'+x+y;
 	this.nameTroll = new Monstre(map, x, y, row, col, 22, 18, 0.5, 2, 'troll3', 'troll2', 0, 0, 0);
 	monsters[row+'-'+col] = this.nameTroll;
 	// monsters.push(this.nameTroll);
 }
     
 function generateMonstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY){
-	var nameMonstre = 'troll'+x+y;
-	this.nameTroll = new Monstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY);
+	var nameMonstre = 'monstre'+row+'-'+col;
+	this.nameMonstre = new Monstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY);
 	
 	// console.log(this.nameTroll);
-	monsters[row+'-'+col] = this.nameTroll;
+	monsters[row+'-'+col] = this.nameMonstre;
 }
 	
 

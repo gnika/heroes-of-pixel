@@ -17,6 +17,37 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment, caracter
    this.yDelta=0;
    this.cible=0;
    this.cibleMouvante=0;
+   
+   this.calculPortee = function(x, y, portee, rowMonstre, colMonstre)
+   { 
+   
+	   xLimiteMoins = x - portee;
+	   xLimitePlus = x + portee;
+	   
+	   yLimiteMoins = y - portee;
+	   yLimitePlus = y + portee;
+	   
+	   if(xLimiteMoins<0)
+		   xLimiteMoins = 0;
+	   if(yLimiteMoins<0)
+		   yLimiteMoins = 0;
+	   
+	   var porteeX = [x];
+	   var porteeY = [y];
+	   
+	   for(var i=1;i<=portee;i++){
+		   porteeX.push(x-i); 
+		   porteeX.push(x+i); 
+		   porteeY.push(y-i); 
+		   porteeY.push(y+i); 
+	   }
+	   
+	   if(porteeX.includes(rowMonstre) && porteeY.includes(colMonstre))
+		   return true;
+	   else 
+		   return false;
+	   
+   }
 }
 
 function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equipement) {
@@ -38,7 +69,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
     };
     this.image = Loader.getImage('hero');
 	
-	this.addBuild = function (x, y, map, typeBatiment)
+	this.addBuild = function (x, y, map, typeBatiment, caracteristique)
 	{
 		var dirx = 0;
 		var diry = 0;
@@ -58,10 +89,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =10;
-			caracteristique['showLife'] =1;
+			
 			// console.log(caracteristique['showLife']);
 			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), 60, nameBuild, 'hourstart', typeBatiment, caracteristique);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;

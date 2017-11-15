@@ -95,7 +95,7 @@ Game.init = function () {
 	this.animBref = 0;
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, 1, 1);
-	generateTroll(192, 192, 3, 3);
+	// generateTroll(192, 192, 3, 3);
 	generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
 	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
 	generateMonstre(map, 576, 192, 9, 3, 30, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, 0, 1);
@@ -105,7 +105,12 @@ Game.init = function () {
 
 	document.getElementById("addBuild").addEventListener('click',
 		function(){
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6);
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =10;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =2;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique);
 		},
 	false);
 	document.getElementById("addCorn").addEventListener('click',
@@ -271,82 +276,96 @@ Game._drawLayer = function (layer) {
 
 	//tir tourelles portée : 2
 	Object.keys(builds).forEach(function(key) {
-		if(builds[key].batiment == 6){
+		if(builds[key].batiment == 6 && builds[key].cible==0){
 			Object.keys(monsters).forEach(function(keyMonster) {
-				if((monsters[keyMonster].row-2 == builds[key].row || monsters[keyMonster].row-1 == builds[key].row || monsters[keyMonster].row == builds[key].row
-				|| monsters[keyMonster].row+1 == builds[key].row || monsters[keyMonster].row+2 == builds[key].row ) &&
-					(monsters[keyMonster].col-2 == builds[key].col || monsters[keyMonster].col-1 == builds[key].col ||
-					monsters[keyMonster].col == builds[key].col || monsters[keyMonster].col+1 == builds[key].col || monsters[keyMonster].col+2 == builds[key].col )
-				){
-					if(builds[key].cible==0){//pour ne cibler qu'un ennemi à la fois
-						builds[key].cible = keyMonster;
-						if(monsters[keyMonster].vitesse>0)
-							builds[key].cibleMouvante = 1;
-					}
-					
-					if(builds[key].cible == keyMonster || (builds[key].cibleMouvante == 1 && monsters[keyMonster].vitesse>0 )){
-					
-					// console.log(builds[key].cible);
-					
-						yFinal =  monsters[keyMonster].y;
-						xFinal =  monsters[keyMonster].x+20;
-						
-						if(builds[key].x>monsters[keyMonster].x){
-							xDistance = builds[key].x- xFinal;
-						}
-						else{
-							xDistance = xFinal - builds[key].x ;
-						}
-						if(builds[key].y>yFinal)
-							yDistance = builds[key].y- yFinal;
-							else
-							yDistance = yFinal - builds[key].y ;
-
-						
-						if(builds[key].xDelta <= xDistance || builds[key].yDelta <= yDistance){
-							
-							if(builds[key].xDelta>= xDistance)
-								builds[key].xDelta=xDistance;
-							if(builds[key].yDelta>= yDistance)
-								builds[key].yDelta=yDistance;
-							
-							if(builds[key].x>xFinal)
-								var distX = builds[key].x- builds[key].xDelta-Game.camera.x;
-							else
-								var distX = builds[key].x+ builds[key].xDelta-Game.camera.x;
-							if(builds[key].y>yFinal)
-								var distY = builds[key].y- builds[key].yDelta-Game.camera.y;
-							else
-								var distY = builds[key].y+ builds[key].yDelta-Game.camera.y;
-							
-							
-							Game.ctx.drawImage(
-									Loader.getImage('ball'), // image
-									0, // source x
-									0, // source y
-									map.tsize, // source width
-									map.tsize, // source height
-									distX,  // target x
-									distY, 
-									map.tsize, // target width
-									map.tsize // target height
-								);
-								
-							builds[key].xDelta++;
-							builds[key].yDelta++;
-						}else{
-							builds[key].xDelta=0;
-							builds[key].yDelta=0;
-							monsters[keyMonster].life = monsters[keyMonster].life-builds[key].caracteristique['attaque'];
-							builds[key].cible =0;
-							builds[key].cibleMouvante =0;
-						}
-					}
-				}
+				
+				if(builds[key].calculPortee(
+					builds[key].row, 
+					builds[key].col, 
+					builds[key].caracteristique['portee'], 
+					monsters[keyMonster].row, 
+					monsters[keyMonster].col
+				)){
+					builds[key].cible = monsters[keyMonster];	
+				}	
 			});
+		}
 			
+	});
+	
+	
+	
+	
+	Object.keys(builds).forEach(function(key) {
+		if(builds[key].batiment == 6 && builds[key].cible!=0){
+			yFinal =  builds[key].cible.y;
+			xFinal =  builds[key].cible.x+20;
+			
+			if(builds[key].x>builds[key].cible.x){
+				xDistance = builds[key].x- xFinal;
+			}
+			else{
+				xDistance = xFinal - builds[key].x ;
+			}
+			if(builds[key].y>yFinal)
+				yDistance = builds[key].y- yFinal;
+				else
+				yDistance = yFinal - builds[key].y ;
+
+			
+			if((builds[key].xDelta <= xDistance || builds[key].yDelta <= yDistance) && builds[key].cible.life>0){
+				
+				if(builds[key].xDelta>= xDistance)
+					builds[key].xDelta=xDistance;
+				if(builds[key].yDelta>= yDistance)
+					builds[key].yDelta=yDistance;
+				
+				if(builds[key].x>xFinal)
+					var distX = builds[key].x- builds[key].xDelta-Game.camera.x;
+				else
+					var distX = builds[key].x+ builds[key].xDelta-Game.camera.x;
+				if(builds[key].y>yFinal)
+					var distY = builds[key].y- builds[key].yDelta-Game.camera.y;
+				else
+					var distY = builds[key].y+ builds[key].yDelta-Game.camera.y;
+				
+				
+				Game.ctx.drawImage(
+						Loader.getImage('ball'), // image
+						0, // source x
+						0, // source y
+						map.tsize, // source width
+						map.tsize, // source height
+						distX,  // target x
+						distY, 
+						map.tsize, // target width
+						map.tsize // target height
+					);
+					
+				builds[key].xDelta++;
+				builds[key].yDelta++;
+			}else{
+				builds[key].xDelta=0;
+				builds[key].yDelta=0;
+				builds[key].cible.life = builds[key].cible.life-builds[key].caracteristique['attaque'];
+				builds[key].cible =0;
+				builds[key].cibleMouvante =0;
+			}
 		}
 	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
    if(Game.anim>=DUREE_ANIMATION)
