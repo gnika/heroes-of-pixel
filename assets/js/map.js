@@ -86,8 +86,9 @@ var map = {
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
 			// console.log(row, col, tile);
-            var isSolid = tile === 3 || tile === 5 || tile === 6 || tile === 7 || tile === 16 || tile === 17;
-			
+            var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17;
+			if(builds[col+'-'+row] && builds[col+'-'+row].solid)
+				var isSolid=1
             return res || isSolid;
         }.bind(this), false);
     },

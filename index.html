@@ -6,21 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/min/styles.css" type="text/css">
+    <!-- <link rel="stylesheet" href="assets/css/min/styles.css" type="text/css"> -->
+    <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
 
-     <script src="assets/js/min/common.js"></script>
+     <!--<script src="assets/js/min/common.js"></script>
      <script src="assets/js/min/map.js"></script>
      <script src="assets/js/min/logic-grid.js"></script>
      <script src="assets/js/min/hero.js"></script> 
      <script src="assets/js/min/monstre.js"></script>
      <script src="assets/js/min/time.js"></script>
+     <script src="assets/js/min/menu.js"></script>-->
 
-     <!--<script src="assets/js/common.js"></script>
+     <script src="assets/js/common.js"></script>
      <script src="assets/js/map.js"></script>
      <script src="assets/js/logic-grid.js"></script>
      <script src="assets/js/hero.js"></script>
      <script src="assets/js/monstre.js"></script> 
-     <script src="assets/js/time.js"></script> -->
+     <script src="assets/js/time.js"></script>
 </head>
 
 <body>
@@ -66,7 +68,7 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="main-wrapper">
-                        <canvas id="demo" width="1000" height="768"></canvas>
+                        <canvas id="map_canvas" width="1000" height="768"></canvas>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -80,13 +82,25 @@
                             <br/>
                         </p>
                         <p>
-                            <button class="btn btn-primary" id="addBuild">Ajouter une tourelle</button>
-                        </p>
-                        <p>
                             <button class="btn btn-primary" id="addCorn">Planter du maïs</button>
                         </p>
                         <p>
-                            <button class="btn btn-primary" id="creuse">Creuser</button>
+                            <button class="btn btn-primary" id="addMoulin">Ajouter un moulin</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" id="addBoulangerie">Ajouter une boulangerie</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" id="addMineFer">Ajouter une mine de fer</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" id="addMineCuivre">Ajouter une mine de cuivre</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" id="addTour">Ajouter une tourelle</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" id="creuse">Action</button>
                         </p>
                     </div>
                 </div>
@@ -99,4 +113,5 @@
 
 </body>
 
+     <script src="assets/js/menu.js"></script>
 </html>
