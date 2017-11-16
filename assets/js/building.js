@@ -45,4 +45,4 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment, caracter
             return false;
         
     }
- }
+ } 
