@@ -36,7 +36,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
 		if(abs2[pos+1]==0 && abs1[pos+1]==1){
-			// console.log(Game.hero.x);//pour �viter au h�ros de rester bloquer dans le batiment
+			//pour �viter au h�ros de rester bloquer dans le batiment
 				Game.hero.x = 32+64*map.getCol(x);
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
