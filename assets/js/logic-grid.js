@@ -97,26 +97,83 @@ Game.init = function () {
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
 	generateTroll(64, 64, 1, 1);
 	// generateTroll(192, 192, 3, 3);
-	generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 30, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.5, 0, 1);
+	// generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 384, 192, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.2, 0, 1);
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 
-	document.getElementById("addBuild").addEventListener('click',
+	document.getElementById("addTour").addEventListener('click',
 		function(){
 			var caracteristique = [];
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =10;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =2;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique);
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
+		},
+	false);
+
+	document.getElementById("addMoulin").addEventListener('click',
+		function(){
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 20, caracteristique, 0, 60, 1);
+		},
+	false);
+
+	document.getElementById("addBoulangerie").addEventListener('click',
+		function(){
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 24, caracteristique, 0, 60, 1);
+		},
+	false);
+
+	document.getElementById("addMineFer").addEventListener('click',
+		function(){
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 28, caracteristique, 0, 60, 1);
+		},
+	false);
+
+	document.getElementById("addMineCuivre").addEventListener('click',
+		function(){
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 32, caracteristique, 0, 60, 1);
+		},
+	false);
+
+	document.getElementById("addTour").addEventListener('click',
+		function(){
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =10;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =2;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
 		},
 	false);
 	document.getElementById("addCorn").addEventListener('click',
 		function(){
-			Game.hero.addCorn(Game.hero.x, Game.hero.y, map, 'heure_plante', 3, 10);
+			var caracteristique = [];
+			caracteristique['showLife'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 10, caracteristique, 0, 3, 0);
 		},
 	false);
 	document.getElementById("creuse").addEventListener('click',
@@ -139,6 +196,7 @@ Game.init = function () {
         clearTimeout(currentTime.timeOut);
         currentTime.startTime(100);
     });
+	
 	
 	
 };
@@ -446,7 +504,7 @@ Game.render = function () {
 		Game.ctx.fillStyle="#FF0000";
 		Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
 		}else{
-				Game.hero.xp = monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
+				Game.hero.xp = Game.hero.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
 				document.getElementById("xp_value").innerHTML = Game.hero.xp;
 				anim = new animation(map, monsters[key].x, monsters[key].y, 'xp');
 				
@@ -458,4 +516,5 @@ Game.render = function () {
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
     this._drawGrid();
+	this._drawMenu();
 };

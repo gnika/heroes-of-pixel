@@ -1,7 +1,7 @@
 
 
 
-function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique) {
+function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique, tileType, solid) {
    this.map = map;
    this.life = life;
    this.name = name;
@@ -17,6 +17,8 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment, caracter
    this.yDelta=0;
    this.cible=0;
    this.cibleMouvante=0;
+   this.tileType=tileType;
+   this.solid=solid;
    
    this.calculPortee = function(x, y, portee, rowMonstre, colMonstre)
    { 
@@ -69,7 +71,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
     };
     this.image = Loader.getImage('hero');
 	
-	this.addBuild = function (x, y, map, typeBatiment, caracteristique)
+	this.addBuild = function (x, y, map, typeBatiment, caracteristique, typeTile, life, solid)
 	{
 		var dirx = 0;
 		var diry = 0;
@@ -89,40 +91,14 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
-			
 			// console.log(caracteristique['showLife']);
-			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), 60, nameBuild, 'hourstart', typeBatiment, caracteristique);
+			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, 'hourstart', typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
 			// builds.push(Game.nameBuild);
 			
 			
 			anim = new animation(map, x+32, y, 'cloud');
 		}
-	}
-	
-	this.addCorn = function (x, y, map, hourstart, life, typeCulture)
-	{
-		var dirx = 0;
-		var diry = 0;
-		this.hourstart = hourstart;
-		posCorn = map.getRow(y)*map.rows+map.getCol(x);
-		
-		// if(abs2[posCorn]==0 && abs1[posCorn]==1 && Game.hero.supply.ecu >=150){
-		if(abs2[posCorn]==0 && abs1[posCorn]==1 && Game.hero.supply.ecu >=0){
-			abs2[posCorn]=typeCulture;
-			var nameBuild = 'ble-'+map.getRow(y)+parseInt(map.getCol(x), 10);
-			Game.hero.supply.ecu = Game.hero.supply.ecu-150;
-			document.getElementById("argent_value").innerHTML = Game.hero.supply.ecu;
-			
-			var caracteristique = [];
-			caracteristique['showLife'] = 10;
-			Game.nameBuild = new Building(map, x, y, map.getCol(x), map.getRow(y), life, nameBuild, 'hourstart', typeCulture, caracteristique);
-			// builds.push(Game.nameBuild);
-			builds[map.getCol(x)+'-'+map.getRow(y)]=Game.nameBuild;
-			anim = new animation(map, x, y, 'cloud');
-		}
-		
-		
 	}
 	
 	this.creuse = function (x, y, map)

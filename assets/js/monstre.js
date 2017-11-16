@@ -49,8 +49,8 @@ Monstre.prototype.move = function (delta, hx, hy) {
 	
 	pos = this.map.getRow(this.y)*this.map.rows+this.map.getCol(this.x);
 
-	if( abs2[pos]==10 || abs2[pos]==11 || abs2[pos]==12 || abs2[pos]==13 )
-		abs2[pos]=2;
+	// if( abs2[pos]==10 || abs2[pos]==11 || abs2[pos]==12 || abs2[pos]==13 )
+		// abs2[pos]=2;
 	
 	if(this.directionX == 1){
 		var tile = abs2[pos+1];
@@ -65,7 +65,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 	if(this.directionY == 1){
 		var tile = abs2[pos+this.map.rows];
         var tile1 = abs1[pos+this.map.rows];
-        var enplus=0;
+        var enplus=1;
 	}
 	if(this.directionY == -1){
 		var tile = abs2[pos];
@@ -73,30 +73,48 @@ Monstre.prototype.move = function (delta, hx, hy) {
         var enplus=0;
 	}
 
-// console.log(tile, this.col, this.row);
-    if( tile==6 || tile==7 ){
-		// console.log(builds, this.map.getCol(this.x), (parseInt(this.map.getCol(this.x), 10)+enplus)+'-'+ this.map.getRow(this.y));
-		if(builds[(parseInt(this.map.getCol(this.x), 10)+enplus)+'-'+ this.map.getRow(this.y)]) {
-            builds[(parseInt(this.map.getCol(this.x), 10)+enplus) + '-' + this.map.getRow(this.y)].life = builds[(parseInt(this.map.getCol(this.x), 10)+enplus) + '-' + this.map.getRow(this.y)].life - this.attaque;
-            if (builds[(parseInt(this.map.getCol(this.x), 10)+enplus) + '-' + this.map.getRow(this.y)].life <= 0) {
-                abs2[pos] = 2;
-                anim = new animation(map, builds[(parseInt(this.map.getCol(this.x), 10)+enplus) + '-' + this.map.getRow(this.y)].x, builds[(parseInt(this.map.getCol(this.x), 10)+enplus) + '-' + this.map.getRow(this.y)].y, 'cloud');
-                delete builds[(parseInt(this.map.getCol(this.x), 10)+enplus) + '-' + this.map.getRow(this.y)];
 
-            }
-        }
+//rencontre avec les batiments
+
+	if(this.directionY == 1 || this.directionY == -1)//vers le haut ou vers le bas
+		keyBatiment = parseInt(this.map.getRow(this.x), 10)+'-'+parseInt(this.map.getCol(this.y)+enplus, 10);
+	else
+		keyBatiment = parseInt(this.map.getRow(this.x)+enplus, 10)+'-'+parseInt(this.map.getCol(this.y), 10);
+
+		
+	if(builds[keyBatiment]) {
+		builds[keyBatiment].life = builds[keyBatiment].life - this.attaque;
+		if (builds[keyBatiment].life <= 0) {
+			
+			posTuile = builds[keyBatiment].col*this.map.rows+builds[keyBatiment].row;
+			abs2[posTuile] = 2;
+			anim = new animation(map, builds[keyBatiment].x, builds[keyBatiment].y, 'cloud');
+			delete builds[keyBatiment];
+		}else{
+			
+			if(this.directionX == -1){
+				this.directionX = 1;
+			}
+			else if(this.directionX ==1){
+				this.directionX=-1;
+			}
+			if(this.directionY==-1)
+				this.directionY=1;
+			else if(this.directionY==1)
+				this.directionY=-1;
+		}
 	}
+
  
-	var posHero = this.map.isHeroTileAtXY(hx, hy);
 		
 	var hautY =this.col+1;
 	var basY =this.col-1;
 	var hautX =this.row+1;
 	var basX =this.row-1;
+	var posHero = this.map.isHeroTileAtXY(hx, hy);
 
 	
 	// console.log(monsters, hautY, hautX, basY, basX);
-	// console.log(monsters, basX+'-'+this.col);
     // si rencontre autre monstre
 	if((this.directionX!=0 && (monsters[basX+'-'+this.col] || monsters[hautX+'-'+this.col]))
 		|| (this.directionY!=0 && (monsters[this.row+'-'+basY] || monsters[this.row+'-'+hautY]))
@@ -132,7 +150,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 			this.directionY = olddirectionY;
 			this.collisionHero = 0;
 		}
-		var isSolid = tile === 3 || tile === 5 || tile === 6 || tile === 7 || tile === 16 || tile === 17 || (tile === 4 && tile1 === 3);
+		var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17 || (tile === 4 && tile1 === 3);
 		if(isSolid){
 			
 				if(this.directionX == -1){
