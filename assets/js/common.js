@@ -58,6 +58,20 @@ Keyboard._onKeyDown = function (event) {
     }
 };
 
+Keyboard._onKeyDownByClick = function (keyCode) {//joachim
+    if (keyCode in this._keys) {
+        event.preventDefault();
+        this._keys[keyCode] = true;
+    }
+};
+
+Keyboard._onKeyUpByClick = function (keyCode) {
+    if (keyCode in this._keys) {
+        event.preventDefault();
+        this._keys[keyCode] = false;
+    }
+};
+
 Keyboard._onKeyUp = function (event) {
     var keyCode = event.keyCode;
     if (keyCode in this._keys) {

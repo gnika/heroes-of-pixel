@@ -48,9 +48,6 @@ Monstre.prototype.move = function (delta, hx, hy) {
 	
 	
 	pos = this.map.getRow(this.y)*this.map.rows+this.map.getCol(this.x);
-
-	// if( abs2[pos]==10 || abs2[pos]==11 || abs2[pos]==12 || abs2[pos]==13 )
-		// abs2[pos]=2;
 	
 	if(this.directionX == 1){
 		var tile = abs2[pos+1];

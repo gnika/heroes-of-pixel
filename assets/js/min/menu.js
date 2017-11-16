@@ -1,0 +1,1 @@
+Game._drawMenu=function(){};

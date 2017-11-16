@@ -104,6 +104,50 @@ Game.init = function () {
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 
+	
+	
+
+	document.getElementById("map_canvas").addEventListener('click',
+		function(){
+			this.getBoundingClientRect();
+			var rect = this.getBoundingClientRect();
+			var xClick = event.clientX - rect.left;
+			var yClick = event.clientY - rect.top;
+			var rowClick = Game.hero.map.getRow(xClick);
+			var colClick = Game.hero.map.getCol(yClick);
+			var rowHero = Game.hero.map.getRow(Game.hero.x);
+			var colHero = Game.hero.map.getCol(Game.hero.y);
+			var xHero = Game.hero.x;
+			var yHero = Game.hero.y;
+			
+			var touche = 0;
+			
+			if(rowClick > rowHero && rowClick < rowHero+3)
+				touche = Keyboard.RIGHT;
+			if(rowClick < rowHero && rowClick > rowHero-3)
+				touche = Keyboard.LEFT;
+			if(colClick > colHero && colClick < colHero +3)
+				touche = Keyboard.DOWN;
+			if(colClick < colHero && colClick > colHero-3)
+				touche = Keyboard.UP;
+			
+			function move1Tile(){
+				console.log(Game.hero.y);
+				setTimeout(move1Tile,10); /* rappel après 2 secondes = 2000 millisecondes */
+			}
+			 
+			move1Tile();
+				
+				
+				
+				
+				Keyboard._onKeyDownByClick(touche);
+				// if(Game.hero.x>=xHero+Game.hero.map.tsize || Game.hero.y>=yHero+Game.hero.map.tsize)
+					// Keyboard._onKeyUpByClick(touche);
+			// }
+		},
+	false);
+
 	document.getElementById("addTour").addEventListener('click',
 		function(){
 			var caracteristique = [];
