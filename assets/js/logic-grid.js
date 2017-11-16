@@ -188,32 +188,34 @@ Game._drawLayer = function (layer) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-			if(tile==6){
-				if(Game.anim>=DUREE_ANIMATION){
-					abs2[r*map.rows+c]=7;
+			if(layer == 0){
+				if(tile==6){
+					if(Game.anim>=DUREE_ANIMATION){
+						abs2[r*map.rows+c]=7;
+					}
 				}
-			}
-			else if(tile==7){
-				if(Game.anim>=DUREE_ANIMATION){
-					abs2[r*map.rows+c]=6;
+				else if(tile==7){
+					if(Game.anim>=DUREE_ANIMATION){
+						abs2[r*map.rows+c]=6;
+					}
 				}
-			}
-			
-			if(tile==8){
-				if(Game.anim>=DUREE_ANIMATION){
-					abs2[r*map.rows+c]=9;
+				
+				if(tile==8){
+					if(Game.anim>=DUREE_ANIMATION){
+						abs2[r*map.rows+c]=9;
+					}
 				}
-			}
-			else if(tile==9){
-				if(Game.anim>=DUREE_ANIMATION){
-					abs2[r*map.rows+c]=8;
+				else if(tile==9){
+					if(Game.anim>=DUREE_ANIMATION){
+						abs2[r*map.rows+c]=8;
+					}
 				}
 			}
 			
             var x = (c - startCol) * map.tsize + offsetX;
             var y = (r - startRow) * map.tsize + offsetY;
 			
-            if (tile !== 0) { // 0 => empty tile
+			if (tile !== 0) { // 0 => empty tile
                 this.ctx.drawImage(
                     this.tileAtlas, // image
                     (tile - 1) * map.tsize, // source x
@@ -227,150 +229,140 @@ Game._drawLayer = function (layer) {
                 );
 				
 				
-            }
+			}
         }
     }
 	
-	Object.keys(builds).forEach(function(key) {//barre de vie
-		if(builds[key].caracteristique['showLife']==1)
-			Game._drawRectangle('#FFFFFF', builds[key].row*map.tsize-Math.round(Game.camera.x), builds[key].col*map.tsize-Math.round(Game.camera.y)+map.tsize+5, builds[key].life);
-	})
+	if(layer == 1){
+
+		Object.keys(builds).forEach(function(key) {//barre de vie
+			if(builds[key].caracteristique['showLife']==1)
+				Game._drawRectangle('#FFFFFF', builds[key].row*map.tsize-Math.round(Game.camera.x), builds[key].col*map.tsize-Math.round(Game.camera.y)+map.tsize+5, builds[key].life);
+		})
+	
 	
 
-   //sprite personnages
-   if(Game.anim>=DUREE_ANIMATION/2){
-		Game.hero.image = Loader.getImage('hero2');
-		Object.keys(monsters).forEach(function(key) {
-			monsters[key].image = Loader.getImage(monsters[key].image1);
-		})
-   }
-	else{
-		Game.hero.image = Loader.getImage('hero');
-		Object.keys(monsters).forEach(function(key) {
-			monsters[key].image = Loader.getImage(monsters[key].image2);
-		})
-	}
+		//sprite personnages
+		if(Game.anim>=DUREE_ANIMATION/2){
+				Game.hero.image = Loader.getImage('hero2');
+				Object.keys(monsters).forEach(function(key) {
+					monsters[key].image = Loader.getImage(monsters[key].image1);
+				})
+		}
+		else{
+			Game.hero.image = Loader.getImage('hero');
+			Object.keys(monsters).forEach(function(key) {
+				monsters[key].image = Loader.getImage(monsters[key].image2);
+			})
+		}
 	
-	if(typeof(anim) != "undefined" && anim !== null) {
-		if(Game.animBref<=DUREE_ANIMATION){
+		if(typeof(anim) != "undefined" && anim !== null) {
+			if(Game.animBref<=DUREE_ANIMATION){
+		
+					Game.ctx.drawImage(
+								anim.image, // image
+								0, // source x
+								0, // source y
+								map.tsize, // source width
+								map.tsize, // source height
+								anim.x-Game.camera.x,  // target x
+								anim.y-Game.camera.y-Game.animBref, 
+								map.tsize, // target width
+								map.tsize // target height
+							);
+				Game.animBref++;
+				Game.animBref++;
+			}else{
+				anim=null;
+				Game.animBref=0;
+			}
+		}
+
+
+		/** start tourelle */
+		//tir tourelles portée : 2
+		Object.keys(builds).forEach(function(key) {
+			if(builds[key].batiment == 6 && builds[key].cible==0){
+				Object.keys(monsters).forEach(function(keyMonster) {
+					
+					if(builds[key].calculPortee(
+						builds[key].row, 
+						builds[key].col, 
+						builds[key].caracteristique['portee'], 
+						monsters[keyMonster].row, 
+						monsters[keyMonster].col
+					)){
+						builds[key].cible = monsters[keyMonster];	
+					}	
+				});
+			}
+				
+		});
 	
-				Game.ctx.drawImage(
-							anim.image, // image
+		Object.keys(builds).forEach(function(key) {
+			if(builds[key].batiment == 6 && builds[key].cible!=0){
+				yFinal =  builds[key].cible.y;
+				xFinal =  builds[key].cible.x+20;
+				
+				if(builds[key].x>builds[key].cible.x){
+					xDistance = builds[key].x- xFinal;
+				}
+				else{
+					xDistance = xFinal - builds[key].x ;
+				}
+				if(builds[key].y>yFinal)
+					yDistance = builds[key].y- yFinal;
+					else
+					yDistance = yFinal - builds[key].y ;
+
+				
+				if((builds[key].xDelta <= xDistance || builds[key].yDelta <= yDistance) && builds[key].cible.life>0){
+					
+					if(builds[key].xDelta>= xDistance)
+						builds[key].xDelta=xDistance;
+					if(builds[key].yDelta>= yDistance)
+						builds[key].yDelta=yDistance;
+					
+					if(builds[key].x>xFinal)
+						var distX = builds[key].x- builds[key].xDelta-Game.camera.x;
+					else
+						var distX = builds[key].x+ builds[key].xDelta-Game.camera.x;
+					if(builds[key].y>yFinal)
+						var distY = builds[key].y- builds[key].yDelta-Game.camera.y;
+					else
+						var distY = builds[key].y+ builds[key].yDelta-Game.camera.y;
+					
+					
+					Game.ctx.drawImage(
+							Loader.getImage('ball'), // image
 							0, // source x
 							0, // source y
 							map.tsize, // source width
 							map.tsize, // source height
-							anim.x-Game.camera.x,  // target x
-							anim.y-Game.camera.y-Game.animBref, 
+							distX,  // target x
+							distY, 
 							map.tsize, // target width
 							map.tsize // target height
 						);
-			Game.animBref++;
-			Game.animBref++;
-		}else{
-			anim=null;
-			Game.animBref=0;
-		}
+						
+					builds[key].xDelta++;
+					builds[key].yDelta++;
+				}else{
+					builds[key].xDelta=0;
+					builds[key].yDelta=0;
+					builds[key].cible.life = builds[key].cible.life-builds[key].caracteristique['attaque'];
+					builds[key].cible =0;
+					builds[key].cibleMouvante =0;
+				}
+			}
+		});
+
+		/** end tourelle */
 	}
-
-
-
-	//tir tourelles portée : 2
-	Object.keys(builds).forEach(function(key) {
-		if(builds[key].batiment == 6 && builds[key].cible==0){
-			Object.keys(monsters).forEach(function(keyMonster) {
-				
-				if(builds[key].calculPortee(
-					builds[key].row, 
-					builds[key].col, 
-					builds[key].caracteristique['portee'], 
-					monsters[keyMonster].row, 
-					monsters[keyMonster].col
-				)){
-					builds[key].cible = monsters[keyMonster];	
-				}	
-			});
-		}
-			
-	});
 	
 	
-	
-	
-	Object.keys(builds).forEach(function(key) {
-		if(builds[key].batiment == 6 && builds[key].cible!=0){
-			yFinal =  builds[key].cible.y;
-			xFinal =  builds[key].cible.x+20;
-			
-			if(builds[key].x>builds[key].cible.x){
-				xDistance = builds[key].x- xFinal;
-			}
-			else{
-				xDistance = xFinal - builds[key].x ;
-			}
-			if(builds[key].y>yFinal)
-				yDistance = builds[key].y- yFinal;
-				else
-				yDistance = yFinal - builds[key].y ;
-
-			
-			if((builds[key].xDelta <= xDistance || builds[key].yDelta <= yDistance) && builds[key].cible.life>0){
-				
-				if(builds[key].xDelta>= xDistance)
-					builds[key].xDelta=xDistance;
-				if(builds[key].yDelta>= yDistance)
-					builds[key].yDelta=yDistance;
-				
-				if(builds[key].x>xFinal)
-					var distX = builds[key].x- builds[key].xDelta-Game.camera.x;
-				else
-					var distX = builds[key].x+ builds[key].xDelta-Game.camera.x;
-				if(builds[key].y>yFinal)
-					var distY = builds[key].y- builds[key].yDelta-Game.camera.y;
-				else
-					var distY = builds[key].y+ builds[key].yDelta-Game.camera.y;
-				
-				
-				Game.ctx.drawImage(
-						Loader.getImage('ball'), // image
-						0, // source x
-						0, // source y
-						map.tsize, // source width
-						map.tsize, // source height
-						distX,  // target x
-						distY, 
-						map.tsize, // target width
-						map.tsize // target height
-					);
-					
-				builds[key].xDelta++;
-				builds[key].yDelta++;
-			}else{
-				builds[key].xDelta=0;
-				builds[key].yDelta=0;
-				builds[key].cible.life = builds[key].cible.life-builds[key].caracteristique['attaque'];
-				builds[key].cible =0;
-				builds[key].cibleMouvante =0;
-			}
-		}
-	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-   if(Game.anim>=DUREE_ANIMATION)
-	   Game.anim=0;
+	if(Game.anim>=DUREE_ANIMATION)
+		 Game.anim=0;
 };
  
 Game._drawGrid = function () {

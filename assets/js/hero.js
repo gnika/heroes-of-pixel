@@ -1,54 +1,7 @@
 
 
 
-function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique) {
-   this.map = map;
-   this.life = life;
-   this.name = name;
-    this.x = x;
-    this.y = y;
-   this.col = col;
-   this.row = row;
-   this.hourstart = hourstart;
-   this.batiment = batiment;
-   this.caracteristique=caracteristique;
-   //si batiment envoit des projectiles
-   this.xDelta=0;
-   this.yDelta=0;
-   this.cible=0;
-   this.cibleMouvante=0;
-   
-   this.calculPortee = function(x, y, portee, rowMonstre, colMonstre)
-   { 
-   
-	   xLimiteMoins = x - portee;
-	   xLimitePlus = x + portee;
-	   
-	   yLimiteMoins = y - portee;
-	   yLimitePlus = y + portee;
-	   
-	   if(xLimiteMoins<0)
-		   xLimiteMoins = 0;
-	   if(yLimiteMoins<0)
-		   yLimiteMoins = 0;
-	   
-	   var porteeX = [x];
-	   var porteeY = [y];
-	   
-	   for(var i=1;i<=portee;i++){
-		   porteeX.push(x-i); 
-		   porteeX.push(x+i); 
-		   porteeY.push(y-i); 
-		   porteeY.push(y+i); 
-	   }
-	   
-	   if(porteeX.includes(rowMonstre) && porteeY.includes(colMonstre))
-		   return true;
-	   else 
-		   return false;
-	   
-   }
-}
+
 
 function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equipement) {
     this.map = map;
@@ -73,7 +26,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 	{
 		var dirx = 0;
 		var diry = 0;
-		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
+		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se dï¿½place
 		else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
 		else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
 		else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
@@ -84,7 +37,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
 		if(abs2[pos+1]==0 && abs1[pos+1]==1){
-			// console.log(Game.hero.x);//pour éviter au héros de rester bloquer dans le batiment
+			// console.log(Game.hero.x);//pour ï¿½viter au hï¿½ros de rester bloquer dans le batiment
 				Game.hero.x = 32+64*map.getCol(x);
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
