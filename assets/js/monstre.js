@@ -105,8 +105,6 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		}
 	}
 
- 
-		
 	var hautY =this.col+1;
 	var basY =this.col-1;
 	var hautX =this.row+1;
@@ -134,9 +132,20 @@ Monstre.prototype.move = function (delta, hx, hy) {
 
         return;
 	}
+// rencontre héro
+	
+	//si le monstre bouge de haut en bas, si le héro est dessus ou dessous lui, le monstre s'arrête
+	//si le monstre bouge de gauche à droite, si le héro est à gauche ou à droite de lui, le monstre s'arrête
+	if((((this.directionY == 1 || this.directionY == -1 || (this.directionY==0 && this.directionX==0)) && posHero[0] == this.map.getRow(this.x)) && 
+	(posHero[1] == hautY || posHero[1] == basY || posHero[1] == this.map.getCol(this.y))) || 
+	
+	(((this.directionX == 1 || this.directionX == -1 || (this.directionY==0 && this.directionX==0))
+	&& posHero[1] == this.map.getCol(this.y)) && 
+	(posHero[0] == hautX || posHero[0] == basX || posHero[0] == this.map.getRow(this.x)))
+	
+	)	{
 
-
-	if((posHero[0] == hautX || posHero[0] == basX || posHero[0] == this.map.getCol(this.x)) &&  (posHero[1] == hautY || posHero[1] == basY || posHero[1] == this.map.getRow(this.y)))	{
+		
 		if(this.collisionHero==0){
 			this.collisionHero=1;
 			olddirectionX = this.directionX;
@@ -163,12 +172,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 					this.directionY=1;
 				else if(this.directionY==1)
 					this.directionY=-1;
-		}
-		
-		
-		
-		// this._ennemy(dirx, diry);
-	   
+		}	   
 		
 	 
 		// clamp values

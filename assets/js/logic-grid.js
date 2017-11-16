@@ -99,7 +99,7 @@ Game.init = function () {
 	// generateTroll(192, 192, 3, 3);
 	// generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
 	generateMonstre(map, 384, 192, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 0.2, 0, 1);
+	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
