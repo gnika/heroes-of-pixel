@@ -2,6 +2,10 @@ DUREE_ANIMATION = 50;
 builds          = [];
 monsters        = [];
 supply          = [];
+clickCanvasX 	= 0;
+clickCanvasY 	= 0;
+xHeroClick		= 0;
+yHeroClick		= 0;
 
 
 
@@ -109,6 +113,8 @@ Game.init = function () {
 
 	document.getElementById("map_canvas").addEventListener('click',
 		function(){
+			
+			
 			this.getBoundingClientRect();
 			var rect = this.getBoundingClientRect();
 			var xClick = event.clientX - rect.left;
@@ -120,31 +126,56 @@ Game.init = function () {
 			var xHero = Game.hero.x;
 			var yHero = Game.hero.y;
 			
-			var touche = 0;
+			xHeroClick = xHero;
+			yHeroClick = yHero;
 			
 			if(rowClick > rowHero && rowClick < rowHero+3)
-				touche = Keyboard.RIGHT;
+				clickCanvasX = 1;
 			if(rowClick < rowHero && rowClick > rowHero-3)
-				touche = Keyboard.LEFT;
-			if(colClick > colHero && colClick < colHero +3)
-				touche = Keyboard.DOWN;
-			if(colClick < colHero && colClick > colHero-3)
-				touche = Keyboard.UP;
-			
-			function move1Tile(){
-				console.log(Game.hero.y);
-				setTimeout(move1Tile,10); /* rappel après 2 secondes = 2000 millisecondes */
+				clickCanvasX = -1;
+			if(clickCanvasX==0){
+				if(colClick > colHero && colClick < colHero +3)
+					clickCanvasY = 1;
+				if(colClick < colHero && colClick > colHero-3)
+					clickCanvasY = -1;
 			}
-			 
-			move1Tile();
-				
-				
-				
-				
-				Keyboard._onKeyDownByClick(touche);
-				// if(Game.hero.x>=xHero+Game.hero.map.tsize || Game.hero.y>=yHero+Game.hero.map.tsize)
+			
+			
+			
+			// var touche = 0;
+			
+			// if(rowClick > rowHero && rowClick < rowHero+3)
+				// touche = Keyboard.RIGHT;
+			// if(rowClick < rowHero && rowClick > rowHero-3)
+				// touche = Keyboard.LEFT;
+			// if(colClick > colHero && colClick < colHero +3)
+				// touche = Keyboard.DOWN;
+			// if(colClick < colHero && colClick > colHero-3)
+				// touche = Keyboard.UP;
+			
+			// Keyboard._onKeyDownByClick(touche);
+			// count = 0;
+			// function move1Tile(xH, yH, tsize, touche){
+				// myTime = setTimeout(function(){move1Tile(xH, yH, tsize, touche)},1); 
+
+				// if(Game.hero.y>=yHero+tsize || Game.hero.x>=xHero+tsize || Game.hero.y<=yHero-tsize || Game.hero.x<=xHero-tsize ){
 					// Keyboard._onKeyUpByClick(touche);
+					// if(touche == Keyboard.RIGHT)
+						// Game.hero.x=xHero+tsize;
+					// else if( touche == Keyboard.LEFT)
+						// Game.hero.x = xHero-tsize;
+					// else if( touche == Keyboard.DOWN)
+					// Game.hero.y = yHero+tsize;
+					// else if( touche == Keyboard.UP)
+					// Game.hero.y = yHero-tsize;
+					// clearTimeout(myTime);
+				// }
+				// if(count>=200)
+					// clearTimeout(myTime);
+				// count++;
 			// }
+			// move1Tile(xHero, yHero, Game.hero.map.tsize, touche);
+
 		},
 	false);
 
@@ -252,13 +283,19 @@ Game.update = function (delta) {
     // handle hero movement with arrow keys
     var dirx = 0;
     var diry = 0;
-	
     if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
     else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
     else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
     else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
 
 	if(this.hero.life<=0) return false;
+	if(clickCanvasX!=0 || clickCanvasY!=0){
+		dirx = clickCanvasX;
+		diry = clickCanvasY;
+	}
+	
+	// console.log(dirx, diry);
+	
     this.hero.move(delta, dirx, diry);
 	
 	//mouvement monstres

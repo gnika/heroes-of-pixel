@@ -1,4 +1,4 @@
-function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique) {
+function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique, typeTile, solid) {
     this.map = map;
     this.life = life;
     this.name = name;
@@ -14,6 +14,8 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment, caracter
     this.yDelta=0;
     this.cible=0;
     this.cibleMouvante=0;
+    this.typeTile=typeTile;
+    this.solid=solid;
     
     this.calculPortee = function(x, y, portee, rowMonstre, colMonstre)
     { 

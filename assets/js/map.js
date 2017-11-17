@@ -85,10 +85,15 @@ var map = {
         // loop through all layers and return TRUE if any tile is solid
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
-			// console.log(row, col, tile);
+			// console.log(builds, row, 1+col);
             var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17;
-			if(builds[col+'-'+row] && builds[col+'-'+row].solid)
-				var isSolid=1
+			if(builds[col+'-'+row] && builds[col+'-'+row].solid==1)
+				var isSolid=1;
+			if(isSolid){
+				clickCanvasX = 0;
+				clickCanvasY = 0;
+			}
+			
             return res || isSolid;
         }.bind(this), false);
     },
@@ -99,6 +104,12 @@ var map = {
 			if(monsters[row+'-'+col])
 				isSolid = monsters[row+'-'+col];
 				
+
+			if(isSolid){
+				clickCanvasX = 0;
+				clickCanvasY = 0;
+			}
+			
 			return isSolid;
     },
     isHeroTileAtXY: function (hx, hy) {

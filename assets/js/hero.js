@@ -47,7 +47,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, 'hourstart', typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
 			// builds.push(Game.nameBuild);
-			
+			// console.log(builds);
 			
 			anim = new animation(map, x+32, y, 'cloud');
 		}
@@ -135,6 +135,20 @@ Hero.prototype.move = function (delta, dirx, diry) {
     var maxY = this.map.rows * this.map.tsize;
     this.x = Math.max(0, Math.min(this.x, maxX));
     this.y = Math.max(0, Math.min(this.y, maxY));
+	
+	if(this.x >= xHeroClick+this.map.tsize || this.y >= yHeroClick+this.map.tsize || this.x <= xHeroClick-this.map.tsize || this.y <= yHeroClick-this.map.tsize ){
+
+		if(clickCanvasX!=0 || clickCanvasY!=0){
+			this.y = this.map.getCol(this.y) * this.map.tsize+this.map.tsize/2;
+			this.x = this.map.getRow(this.x) * this.map.tsize+this.map.tsize/2;
+		}
+		
+		clickCanvasX = 0;
+		clickCanvasY = 0;
+	}
+	
+	
+		
 };
  
 Hero.prototype._loselifeTile = function (dirx, diry) {
@@ -183,7 +197,7 @@ Hero.prototype._collide = function (dirx, diry) {
         this.map.isSolidTileAtXY(right, bottom) ||
         this.map.isSolidTileAtXY(left, bottom);
     if (!collision) { return; }
- 
+
     if (diry > 0) {
         row = this.map.getRow(bottom);
         this.y = -this.height / 2 + this.map.getY(row);

@@ -67,7 +67,7 @@ Keyboard._onKeyDownByClick = function (keyCode) {//joachim
 
 Keyboard._onKeyUpByClick = function (keyCode) {
     if (keyCode in this._keys) {
-        event.preventDefault();
+        // event.preventDefault();
         this._keys[keyCode] = false;
     }
 };
