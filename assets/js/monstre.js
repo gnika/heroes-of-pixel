@@ -130,6 +130,14 @@ Monstre.prototype.move = function (delta, hx, hy) {
         return;
 	}
 // rencontre héro
+	// console.log(this.directionX, this.directionY, this.vitesse);
+	if(this.directionX == 0 && this.directionY == 0 && this.vitesse > 0){
+		
+		//monstre attaque le héros
+		var attaque = this.attaque - Game.hero.defense;
+		if (attaque < 0)attaque = 0.1;
+			Game.hero.life = Game.hero.life - attaque;
+	}
 	
 	//si le monstre bouge de haut en bas, si le héro est dessus ou dessous lui, le monstre s'arrête
 	//si le monstre bouge de gauche à droite, si le héro est à gauche ou à droite de lui, le monstre s'arrête
@@ -141,8 +149,13 @@ Monstre.prototype.move = function (delta, hx, hy) {
 	(posHero[0] == hautX || posHero[0] == basX || posHero[0] == this.map.getRow(this.x)))
 	
 	)	{
-
 		
+		//monstre s'enfuit si peu de vie
+		// if(this.life <= 15){
+			// this.directionX = this.directionX*-1;
+			// this.directionY = this.directionY*-1;
+		// }
+		// else 
 		if(this.collisionHero==0){
 			this.collisionHero=1;
 			olddirectionX = this.directionX;

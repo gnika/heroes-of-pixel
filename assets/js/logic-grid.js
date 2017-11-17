@@ -99,7 +99,7 @@ Game.init = function () {
 	this.anim = 0;
 	this.animBref = 0;
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
-	generateTroll(64, 64, 1, 1);
+	// generateTroll(64, 64, 1, 1);
 	// generateTroll(192, 192, 3, 3);
 	// generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
 	generateMonstre(map, 384, 192, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
@@ -114,17 +114,19 @@ Game.init = function () {
 	document.getElementById("map_canvas").addEventListener('click',
 		function(){
 			
-			
 			this.getBoundingClientRect();
 			var rect = this.getBoundingClientRect();
-			var xClick = event.clientX - rect.left;
-			var yClick = event.clientY - rect.top;
+			var xClick = event.clientX - rect.left+Game.camera.x;
+			var yClick = event.clientY - rect.top+Game.camera.y;
 			var rowClick = Game.hero.map.getRow(xClick);
 			var colClick = Game.hero.map.getCol(yClick);
 			var rowHero = Game.hero.map.getRow(Game.hero.x);
 			var colHero = Game.hero.map.getCol(Game.hero.y);
 			var xHero = Game.hero.x;
 			var yHero = Game.hero.y;
+			
+			
+			// console.log(Game.camera.x, Game.camera.y, xClick, yClick);
 			
 			xHeroClick = xHero;
 			yHeroClick = yHero;
