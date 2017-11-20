@@ -101,13 +101,13 @@ Game.init = function () {
 	this.anim = 0;
 	this.animBref = 0;
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
-	// generateTroll(64, 64, 1, 1);
-	// generateTroll(192, 192, 3, 3);
-	// generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	// generateMonstre(map, 384, 192, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
+	generateTroll(64, 64, 1, 1);
+	generateTroll(192, 192, 3, 3);
+	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
-    this.camera = new Camera(map, 1024, 768);
+    this.camera = new Camera(map, 1000, 768);
     this.camera.follow(this.hero);
 
 	document.getElementById("map_canvas").addEventListener('click',
@@ -149,6 +149,20 @@ Game.init = function () {
 			
 		},
 	false);
+	
+	// document.getElementById("map_canvas").addEventListener('mouseover',
+		// function(){
+			// this.getBoundingClientRect();
+			// var rect = this.getBoundingClientRect();
+			// var xClick = event.clientX - rect.left+Game.camera.x;
+			// var yClick = event.clientY - rect.top+Game.camera.y;
+			// var rowClick = Game.hero.map.getRow(xClick);
+			// var colClick = Game.hero.map.getCol(yClick);
+			
+			// console.log(xClick);
+			// var menuH = Game.hero.map.tsize/2;
+		// },
+	// false);
 	
 	document.getElementById("creuse").addEventListener('click',
 		function(){
@@ -224,7 +238,7 @@ Game._drawLayer = function (layer) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-			if(layer == 0){
+			// if(layer == 0){ // si non commenté, plus d'animation !
 				if(tile==6){
 					if(Game.anim>=DUREE_ANIMATION){
 						abs2[r*map.rows+c]=7;
@@ -246,7 +260,7 @@ Game._drawLayer = function (layer) {
 						abs2[r*map.rows+c]=8;
 					}
 				}
-			}
+			// }
 			
             var x = (c - startCol) * map.tsize + offsetX;
             var y = (r - startRow) * map.tsize + offsetY;

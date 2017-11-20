@@ -67,7 +67,7 @@ Game._drawMenu = function () {
 };
 
 Game._clickMenu = function (xClick, yClick, menuH, rect) {
-	
+	// console.log(width, height);
 	
 			if(yClick > rect.height-menuH && xClick < menuH){
 				if(menuclick==0){
@@ -78,7 +78,11 @@ Game._clickMenu = function (xClick, yClick, menuH, rect) {
 			}
 			
 			if(yClick > rect.height-menuH && xClick > menuH && menuclick==1){
-				
+					// console.log(Math.round(width/3), height/2);
+					// this.ctx.beginPath();
+					// this.ctx.rect(480, rect.height/2, 100, 100);
+					// this.ctx.fillStyle = 'yellow';
+					// this.ctx.fill();
 					
 					
 					if(xClick > menuH && xClick < menuH*2){//blé
