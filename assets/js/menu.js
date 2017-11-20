@@ -64,18 +64,24 @@ Game._drawMenu = function () {
 	}else
 		this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
 	
-	if(menussclick == 'blé'){
-		// this.ctx.beginPath();
-		// this.ctx.rect(0, height-tsizePar2*4, tsizePar2*8, tsizePar2*3);
-		// this.ctx.fill();
-		// this.ctx.fillStyle = 'yellow';
-		
+	
+	if(menussclick!=0){
 		img = new Image();
 		img.src = 'assets/menu/Woodmenu.jpg';
 		this.ctx.drawImage(img, 0, height-tsizePar2*6);
-		
+		this.ctx.font="20px Arial";
+		this.ctx.fillStyle = 'black';
+		this.ctx.fillText(menussclick + ' choisit !', 15, height-tsizePar2*5);
+		this.ctx.font="15px Arial";
+		var lines = description_fr.split("\n");
+		this.ctx.fillStyle = 'red';
+		var u = 1;
+		for (i = 0; i < lines.length; i++) {
+			 		this.ctx.fillText(lines[i],15, u+height-tsizePar2*4);
+					u = u+20;
+				}
+		// this.ctx.fillText(description_fr, 15, height-tsizePar2*4);
 	}
-	
 	
 	this.ctx.beginPath();
     this.ctx.rect(width-tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
@@ -98,59 +104,98 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 	
 	if(yClick > rect.height-menuH && xClick > menuH && menuclick==1){
 							
+		var supply 			= [];
+		var caracteristique = [];
+		
 		if(xClick > menuH && xClick < menuH*2){//blé
-			var caracteristique = [];
-			caracteristique['showLife'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 10, caracteristique, 0, 3, 0);
+			
+			caracteristique['showLife'] = 0;
+			supply['ecu'] = 150;
+			
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 10, caracteristique, supply, 0, 3, 0);
 			menussclick = 'blé';
+			description_fr = 'Le blé mets 3 jours pour pousser\net permet de nourrir le moulin\n qui le transforme en farine';
+			description_en = 'EN blé mets 3 jours pour pousser\net permet de nourrir le moulin\n qui le transforme en farine';
 		}
 		if(xClick > menuH*2 && xClick < menuH*3){//moulin
-			var caracteristique = [];
+		
+			supply['ecu'] = 150;
+			supply['bois'] = 150;
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 20, caracteristique, 0, 60, 1);
+			
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 20, caracteristique, supply, 0, 60, 1);
+			menussclick = 'moulin';
+			description_fr = 'Le moulin produit de la farine\n nécéssaire pour fabriquer du pain.';
+			description_en = 'EN moulin produit de la farine nécéssaire pour fabriquer du pain.';
 		}
 		
 		if(xClick > menuH*3 && xClick < menuH*4){//boulangerie
-			var caracteristique = [];
+		
+			supply['ecu'] = 150;
+			supply['bois'] = 150;
+			supply['cuivre'] = 150;
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 24, caracteristique, 0, 60, 1);
+			
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 24, caracteristique, supply, 0, 60, 1);
 			menussclick = 'boulangerie';
+			description_fr = 'La boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
+			description_fr = 'EN boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
 		}
 		
 		if(xClick > menuH*4 && xClick < menuH*5){//mine de cuivre
-			var caracteristique = [];
+			
+			supply['ecu'] = 350;
+			supply['bois'] = 150;
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 32, caracteristique, 0, 60, 1);
+			
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 32, caracteristique, supply, 0, 60, 1);
 			menussclick = 'cuivre';
+			description_fr = 'Les mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+			description_en = 'EN mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+
 		}
 		
 		if(xClick > menuH*5 && xClick < menuH*6){//mine de fer
-			var caracteristique = [];
+			
+			supply['ecu'] = 350;
+			supply['bois'] = 150;
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 28, caracteristique, 0, 60, 1);
+			
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 28, caracteristique, supply, 0, 60, 1);
 			menussclick = 'fer';
+			description_fr = 'Les mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+			description_en = 'EN mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+
 		}
 		
 		if(xClick > menuH*6 && xClick < menuH*7){//tourelle
-			var caracteristique = [];
+			
+			supply['ecu'] = 350;
+			supply['bois'] = 150;
+			supply['cuivre'] = 150;
+			supply['fer'] = 150;
+			
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =10;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =2;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, supply, 0, 60, 1);
 			menussclick = 'tourelle';
+			description_fr = 'Les tourelles permettent d\'attaquer\nles ennemis qui passent à proximité.';
+			description_en = 'EN tourelles permettent d\'attaquer\nles ennemis qui passent à proximité.';
+
 		}
 	}
 }

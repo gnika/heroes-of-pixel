@@ -101,7 +101,7 @@ Game.init = function () {
  
 	this.anim = 0;
 	this.animBref = 0;
-    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 0, 0, 0, 0, 'pelle');//map - x - y - vie - attaque - defense - ecu - bois - ble - argile - xp - objet
+    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	generateTroll(64, 64, 1, 1);
 	generateTroll(192, 192, 3, 3);
 	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);

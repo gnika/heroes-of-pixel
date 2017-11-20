@@ -2,7 +2,7 @@
 
 
 
-function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equipement) {
+function Hero(map, x, y, life, attaque, defense, xp, equipement) {
     this.map = map;
     this.x = x;
     this.y = y;
@@ -14,14 +14,17 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
     this.defense = defense;
     this.equipement = equipement;
     this.supply = {
-        ecu:    ecu, 
-        bois:   bois, 
-        argile: argile, 
-        ble:    ble
+        ecu:    0, 
+        bois:   0, 
+        argile: 0, 
+        ble:    0,
+		fer:    0,
+		cuivre: 0,
+		pain:   0
     };
     this.image = Loader.getImage('hero');
 	
-	this.addBuild = function (x, y, map, typeBatiment, caracteristique, typeTile, life, solid)
+	this.addBuild = function (x, y, map, typeBatiment, caracteristique, supply, typeTile, life, solid)
 	{
 		var dirx = 0;
 		var diry = 0;
@@ -31,6 +34,11 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
 		if(dirx!=0 || diry!=0) return false;
 		
+		var error = 0;
+		Object.keys(supply).forEach(function(key) {
+			if(Game.hero.supply[key] < supply[key])
+				var error = 1;
+		})
 		
 		
 		pos = map.getRow(y)*map.rows+map.getCol(x);
@@ -39,7 +47,7 @@ function Hero(map, x, y, life, attaque, defense, ecu, bois, argile, ble, xp, equ
 		if(abs2[pos+1]==typeTile && abs1[pos+1]==1){
 			//pour éviter au héros de rester bloquer dans le batiment
 
-				Game.hero.x = 32+64*map.getCol(x);
+			Game.hero.x = map.tsize/2+map.tsize*map.getCol(x);
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
