@@ -31,6 +31,10 @@ Game._drawMenu = function () {
 		this.ctx.rect(5*tsizePar2, height-tsizePar2, tsizePar2, height);
 		this.ctx.fillStyle = 'gray';
 		this.ctx.fill();
+		this.ctx.beginPath();
+		this.ctx.rect(6*tsizePar2, height-tsizePar2, tsizePar2, height);
+		this.ctx.fillStyle = 'pink';
+		this.ctx.fill();
 		
 		var imageObj = new Image();
 		imageObj.src = "assets/menu/corn.png";
@@ -60,79 +64,93 @@ Game._drawMenu = function () {
 	}else
 		this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
 	
+	if(menussclick == 'blé'){
+		// this.ctx.beginPath();
+		// this.ctx.rect(0, height-tsizePar2*4, tsizePar2*8, tsizePar2*3);
+		// this.ctx.fill();
+		// this.ctx.fillStyle = 'yellow';
+		
+		img = new Image();
+		img.src = 'assets/menu/Woodmenu.jpg';
+		this.ctx.drawImage(img, 0, height-tsizePar2*6);
+		
+	}
+	
+	
 	this.ctx.beginPath();
     this.ctx.rect(width-tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
     this.ctx.fillStyle = 'red';
     this.ctx.fill();
+		
 };
 
-Game._clickMenu = function (xClick, yClick, menuH, rect) {
+Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 	// console.log(width, height);
+	var tsizePar2 = tsizePar/2;
+	if(yClick > rect.height-menuH && xClick < menuH){
+		if(menuclick==0){
+			menuclick=1;
+		}else{
+			menuclick=0;
+			menussclick=0;
+		}
+	}
 	
-			if(yClick > rect.height-menuH && xClick < menuH){
-				if(menuclick==0){
-					menuclick=1;
-				}else{
-					menuclick=0;
-				}
-			}
-			
-			if(yClick > rect.height-menuH && xClick > menuH && menuclick==1){
-					// console.log(Math.round(width/3), height/2);
-					// this.ctx.beginPath();
-					// this.ctx.rect(480, rect.height/2, 100, 100);
-					// this.ctx.fillStyle = 'yellow';
-					// this.ctx.fill();
-					
-					
-					if(xClick > menuH && xClick < menuH*2){//blé
-						var caracteristique = [];
-						caracteristique['showLife'] =0;
-						Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 10, caracteristique, 0, 3, 0);
-					}
-					if(xClick > menuH*2 && xClick < menuH*3){//moulin
-						var caracteristique = [];
-						caracteristique['level'] =1;
-						caracteristique['attaque'] =0;
-						caracteristique['showLife'] =1;
-						caracteristique['portee'] =0;
-						Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 20, caracteristique, 0, 60, 1);
-					}
-					
-					if(xClick > menuH*3 && xClick < menuH*4){//boulangerie
-						var caracteristique = [];
-						caracteristique['level'] =1;
-						caracteristique['attaque'] =0;
-						caracteristique['showLife'] =1;
-						caracteristique['portee'] =0;
-						Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 24, caracteristique, 0, 60, 1);
-					}
-					
-					if(xClick > menuH*4 && xClick < menuH*5){//mine de cuivre
-						var caracteristique = [];
-						caracteristique['level'] =1;
-						caracteristique['attaque'] =0;
-						caracteristique['showLife'] =1;
-						caracteristique['portee'] =0;
-						Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 32, caracteristique, 0, 60, 1);
-					}
-					
-					if(xClick > menuH*5 && xClick < menuH*6){//mine de fer
-						var caracteristique = [];
-						caracteristique['level'] =1;
-						caracteristique['attaque'] =0;
-						caracteristique['showLife'] =1;
-						caracteristique['portee'] =0;
-						Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 28, caracteristique, 0, 60, 1);
-					}
-					
-					if(xClick > menuH*6 && xClick < menuH*7){//tourelle
-						var caracteristique = [];
-						caracteristique['level'] =1;
-						caracteristique['attaque'] =10;
-						caracteristique['showLife'] =1;
-						caracteristique['portee'] =2;
-						Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
-					}
-			}
+	if(yClick > rect.height-menuH && xClick > menuH && menuclick==1){
+							
+		if(xClick > menuH && xClick < menuH*2){//blé
+			var caracteristique = [];
+			caracteristique['showLife'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 10, caracteristique, 0, 3, 0);
+			menussclick = 'blé';
+		}
+		if(xClick > menuH*2 && xClick < menuH*3){//moulin
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 20, caracteristique, 0, 60, 1);
+		}
+		
+		if(xClick > menuH*3 && xClick < menuH*4){//boulangerie
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 24, caracteristique, 0, 60, 1);
+			menussclick = 'boulangerie';
+		}
+		
+		if(xClick > menuH*4 && xClick < menuH*5){//mine de cuivre
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 32, caracteristique, 0, 60, 1);
+			menussclick = 'cuivre';
+		}
+		
+		if(xClick > menuH*5 && xClick < menuH*6){//mine de fer
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =0;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =0;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 28, caracteristique, 0, 60, 1);
+			menussclick = 'fer';
+		}
+		
+		if(xClick > menuH*6 && xClick < menuH*7){//tourelle
+			var caracteristique = [];
+			caracteristique['level'] =1;
+			caracteristique['attaque'] =10;
+			caracteristique['showLife'] =1;
+			caracteristique['portee'] =2;
+			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
+			menussclick = 'tourelle';
+		}
+	}
 }

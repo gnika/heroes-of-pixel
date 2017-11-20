@@ -8,6 +8,7 @@ xHeroClick		= 0;
 yHeroClick		= 0;
 
 menuclick		= 0;
+menussclick		= 0;
 
 
 
@@ -126,8 +127,6 @@ Game.init = function () {
 			
 			var menuH = Game.hero.map.tsize/2;
 			
-			// console.log(Game.camera.x, Game.camera.y, xClick, yClick);
-			
 			xHeroClick = xHero;
 			yHeroClick = yHero;
 			
@@ -143,26 +142,18 @@ Game.init = function () {
 			}
 			
 		/*gestion menu*/
-		Game._clickMenu(xClick, yClick, menuH, rect);	
+		
+		var xClick = event.clientX - rect.left;
+		var yClick = event.clientY - rect.top;
+		
+		// console.log(yClick);
+		
+		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
 			
 			
 			
 		},
 	false);
-	
-	// document.getElementById("map_canvas").addEventListener('mouseover',
-		// function(){
-			// this.getBoundingClientRect();
-			// var rect = this.getBoundingClientRect();
-			// var xClick = event.clientX - rect.left+Game.camera.x;
-			// var yClick = event.clientY - rect.top+Game.camera.y;
-			// var rowClick = Game.hero.map.getRow(xClick);
-			// var colClick = Game.hero.map.getCol(yClick);
-			
-			// console.log(xClick);
-			// var menuH = Game.hero.map.tsize/2;
-		// },
-	// false);
 	
 	document.getElementById("creuse").addEventListener('click',
 		function(){
