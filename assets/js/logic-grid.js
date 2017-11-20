@@ -7,6 +7,8 @@ clickCanvasY 	= 0;
 xHeroClick		= 0;
 yHeroClick		= 0;
 
+menuclick		= 0;
+
 
 
  
@@ -102,18 +104,15 @@ Game.init = function () {
 	// generateTroll(64, 64, 1, 1);
 	// generateTroll(192, 192, 3, 3);
 	// generateMonstre(map, 192, 192, 3, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	generateMonstre(map, 384, 192, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
+	// generateMonstre(map, 384, 192, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
     this.camera = new Camera(map, 1024, 768);
     this.camera.follow(this.hero);
 
-	
-	
-
 	document.getElementById("map_canvas").addEventListener('click',
 		function(){
-			
+			//gestion deplacement héros
 			this.getBoundingClientRect();
 			var rect = this.getBoundingClientRect();
 			var xClick = event.clientX - rect.left+Game.camera.x;
@@ -125,6 +124,7 @@ Game.init = function () {
 			var xHero = Game.hero.x;
 			var yHero = Game.hero.y;
 			
+			var menuH = Game.hero.map.tsize/2;
 			
 			// console.log(Game.camera.x, Game.camera.y, xClick, yClick);
 			
@@ -142,117 +142,14 @@ Game.init = function () {
 					clickCanvasY = -1;
 			}
 			
+		/*gestion menu*/
+		Game._clickMenu(xClick, yClick, menuH, rect);	
 			
 			
-			// var touche = 0;
 			
-			// if(rowClick > rowHero && rowClick < rowHero+3)
-				// touche = Keyboard.RIGHT;
-			// if(rowClick < rowHero && rowClick > rowHero-3)
-				// touche = Keyboard.LEFT;
-			// if(colClick > colHero && colClick < colHero +3)
-				// touche = Keyboard.DOWN;
-			// if(colClick < colHero && colClick > colHero-3)
-				// touche = Keyboard.UP;
-			
-			// Keyboard._onKeyDownByClick(touche);
-			// count = 0;
-			// function move1Tile(xH, yH, tsize, touche){
-				// myTime = setTimeout(function(){move1Tile(xH, yH, tsize, touche)},1); 
-
-				// if(Game.hero.y>=yHero+tsize || Game.hero.x>=xHero+tsize || Game.hero.y<=yHero-tsize || Game.hero.x<=xHero-tsize ){
-					// Keyboard._onKeyUpByClick(touche);
-					// if(touche == Keyboard.RIGHT)
-						// Game.hero.x=xHero+tsize;
-					// else if( touche == Keyboard.LEFT)
-						// Game.hero.x = xHero-tsize;
-					// else if( touche == Keyboard.DOWN)
-					// Game.hero.y = yHero+tsize;
-					// else if( touche == Keyboard.UP)
-					// Game.hero.y = yHero-tsize;
-					// clearTimeout(myTime);
-				// }
-				// if(count>=200)
-					// clearTimeout(myTime);
-				// count++;
-			// }
-			// move1Tile(xHero, yHero, Game.hero.map.tsize, touche);
-
 		},
 	false);
-
-	document.getElementById("addTour").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =10;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =2;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
-		},
-	false);
-
-	document.getElementById("addMoulin").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =0;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 20, caracteristique, 0, 60, 1);
-		},
-	false);
-
-	document.getElementById("addBoulangerie").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =0;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 24, caracteristique, 0, 60, 1);
-		},
-	false);
-
-	document.getElementById("addMineFer").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =0;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 28, caracteristique, 0, 60, 1);
-		},
-	false);
-
-	document.getElementById("addMineCuivre").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =0;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 32, caracteristique, 0, 60, 1);
-		},
-	false);
-
-	document.getElementById("addTour").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =10;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =2;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 6, caracteristique, 0, 60, 1);
-		},
-	false);
-	document.getElementById("addCorn").addEventListener('click',
-		function(){
-			var caracteristique = [];
-			caracteristique['showLife'] =0;
-			Game.hero.addBuild(Game.hero.x, Game.hero.y, map, 10, caracteristique, 0, 3, 0);
-		},
-	false);
+	
 	document.getElementById("creuse").addEventListener('click',
 		function(){
 			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
@@ -273,8 +170,6 @@ Game.init = function () {
         clearTimeout(currentTime.timeOut);
         currentTime.startTime(100);
     });
-	
-	
 	
 };
  
@@ -504,9 +399,12 @@ Game._drawLayer = function (layer) {
 	
 	if(Game.anim>=DUREE_ANIMATION)
 		 Game.anim=0;
+	 
+	 
+	 
 };
  
-Game._drawGrid = function () {
+Game._drawGridMenu = function () {
         var width = map.cols * map.tsize;
     var height = map.rows * map.tsize;
     var x, y;
@@ -539,7 +437,12 @@ Game._drawGrid = function () {
 	   this.ctx.fillText("VOUS AVEZ PERDU !",0,this.hero.screenY);
 	}
 	
+	this._drawMenu();
+	
 };
+
+
+
  
 Game._drawRectangle = function (color, xpos, ypos, life) {
         this.ctx.fillStyle=color;
@@ -590,6 +493,5 @@ Game.render = function () {
 
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
-    this._drawGrid();
-	this._drawMenu();
+    this._drawGridMenu();
 };
