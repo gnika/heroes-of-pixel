@@ -6,7 +6,6 @@ clickCanvasX 	= 0;
 clickCanvasY 	= 0;
 xHeroClick		= 0;
 yHeroClick		= 0;
-
 menuclick		= 0;
 menussclick		= 0;
 
@@ -87,7 +86,17 @@ Game.load = function () {
 		Loader.loadImage('cloud', 'assets/cloud.png'),
 		Loader.loadImage('xp', 'assets/xp.png'),
 		Loader.loadImage('ball', 'assets/ball.png'),
-		Loader.loadImage('pain', 'assets/bread.png')
+		// pour le menu
+		Loader.loadImage('pain', 'assets/menu/bread.png'),
+		Loader.loadImage('fer', 'assets/menu/silver_ingot.png'),
+		Loader.loadImage('bois', 'assets/menu/wood.png'),
+		Loader.loadImage('ecu', 'assets/menu/bourse.png'),
+		Loader.loadImage('farine', 'assets/menu/flour.png'),
+		Loader.loadImage('cuivre', 'assets/menu/ironpowder.png'),
+		Loader.loadImage('blé', 'assets/menu/corn.png'),
+		Loader.loadImage('ok', 'assets/menu/ok.png'),
+		Loader.loadImage('ko', 'assets/menu/ko.png')
+		
     ];
 };
  
@@ -102,11 +111,11 @@ Game.init = function () {
 	this.anim = 0;
 	this.animBref = 0;
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
-	generateTroll(64, 64, 1, 1);
-	generateTroll(192, 192, 3, 3);
-	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
+	// generateTroll(64, 64, 1, 1);
+	// generateTroll(192, 192, 3, 3);
+	// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	// generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
     this.camera = new Camera(map, 1000, 768);
     this.camera.follow(this.hero);
@@ -130,9 +139,9 @@ Game.init = function () {
 			xHeroClick = xHero;
 			yHeroClick = yHero;
 			
-			if(rowClick > rowHero && rowClick < rowHero+3)
+			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3)
 				clickCanvasX = 1;
-			if(rowClick < rowHero && rowClick > rowHero-3)
+			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3)
 				clickCanvasX = -1;
 			if(clickCanvasX==0){
 				if(colClick > colHero && colClick < colHero +3)
@@ -146,7 +155,20 @@ Game.init = function () {
 		var xClick = event.clientX - rect.left;
 		var yClick = event.clientY - rect.top;
 		
-		// console.log(yClick);
+		if(menussclick!=0){
+			if(xClick >249 && xClick <278 && yClick >593 &&  yClick < 615 ){
+				console.log(paramBuild);
+				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, paramBuild['typeBatiment'], caracteristique, Game.supplyBuild, paramBuild['typeTile'], paramBuild['life'], paramBuild['solid']);
+				
+				
+				menussclick = 0;
+			}
+
+			if(xClick >289 && xClick <317 && yClick >590 &&  yClick < 617 ){
+				menussclick = 0;
+				menuclick = 0;
+			}
+		}
 		
 		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
 			
@@ -411,24 +433,24 @@ Game._drawLayer = function (layer) {
  
 Game._drawGridMenu = function () {
         var width = map.cols * map.tsize;
-    var height = map.rows * map.tsize;
-    var x, y;
-    for (var r = 0; r < map.rows; r++) {
-        x = - this.camera.x;
-        y = r * map.tsize - this.camera.y;
-        this.ctx.beginPath();
-        this.ctx.moveTo(x, y);
-        this.ctx.lineTo(width, y);
-        this.ctx.stroke();
-    }
-    for (var c = 0; c < map.cols; c++) {
-        x = c * map.tsize - this.camera.x;
-        y = - this.camera.y;
-        this.ctx.beginPath();
-        this.ctx.moveTo(x, y);
-       this.ctx.lineTo(x, height);
-        this.ctx.stroke();
-    }
+		var height = map.rows * map.tsize;
+		var x, y;
+		// for (var r = 0; r < map.rows; r++) {
+			// x = - this.camera.x;
+			// y = r * map.tsize - this.camera.y;
+			// this.ctx.beginPath();
+			// this.ctx.moveTo(x, y);
+			// this.ctx.lineTo(width, y);
+			// this.ctx.stroke();
+		// }
+		// for (var c = 0; c < map.cols; c++) {
+			// x = c * map.tsize - this.camera.x;
+			// y = - this.camera.y;
+			// this.ctx.beginPath();
+			// this.ctx.moveTo(x, y);
+		   // this.ctx.lineTo(x, height);
+			// this.ctx.stroke();
+		// }
 	
 	// draw main character joachim nouvel emplacement
 	this.ctx.drawImage(

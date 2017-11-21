@@ -28,7 +28,7 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 	{
 		var dirx = 0;
 		var diry = 0;
-		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se dï¿½place
+		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
 		else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
 		else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
 		else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
