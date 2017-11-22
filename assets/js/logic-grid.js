@@ -141,13 +141,13 @@ Game.init = function () {
 	objets['epee']  = {'img':'epee_bois', 'name':'epee'};
 	
 	
-    // this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
-	// generateTroll(64, 64, 1, 1);
-    this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
+    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
+	generateTroll(64, 64, 1, 1);
+    // this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
-	// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	// generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
+	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
     this.camera = new Camera(map, x-50, y-100);
     this.camera.follow(this.hero);
@@ -164,24 +164,10 @@ Game.init = function () {
 			var colHero = Game.hero.map.getCol(Game.hero.y);
 			var xHero = Game.hero.x;
 			var yHero = Game.hero.y;
-			
 			var menuH = Game.hero.map.tsize/2;
 			
-			xHeroClick = xHero;
-			yHeroClick = yHero;
 			
-			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
-				clickCanvasX = 1;
-			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
-				clickCanvasX = -1;
-			if(clickCanvasX==0){
-				if(colClick > colHero && colClick < colHero +3 && rowClick >0)
-					clickCanvasY = 1;
-				if(colClick < colHero && colClick > colHero-3 && rowClick >0)
-					clickCanvasY = -1;
-			}
-			
-		/*gestion menu*/
+			/*gestion menu*/
 		
 		var xClick = event.clientX - rect.left;
 		var yClick = event.clientY - rect.top;
@@ -204,7 +190,6 @@ Game.init = function () {
 		
 		if(menussclick!=0){
 			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){
-				console.log(paramBuild);
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, paramBuild['typeBatiment'], caracteristique, Game.supplyBuild, paramBuild['typeTile'], paramBuild['life'], paramBuild['solid']);
 				menussclick = 0;
 			}
@@ -214,6 +199,23 @@ Game.init = function () {
 				menuclick = 0;
 			}
 		}
+		if(menussclick!=0){	
+			// bouger avec le click de souris
+			xHeroClick = xHero;
+			yHeroClick = yHero;
+			
+			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
+				clickCanvasX = 1;
+			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
+				clickCanvasX = -1;
+			if(clickCanvasX==0){
+				if(colClick > colHero && colClick < colHero +3 && rowClick >0)
+					clickCanvasY = 1;
+				if(colClick < colHero && colClick > colHero-3 && rowClick >0)
+					clickCanvasY = -1;
+			}
+		}	
+		
 		
 		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
 			
