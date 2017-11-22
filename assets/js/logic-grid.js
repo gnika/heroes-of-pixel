@@ -2,6 +2,7 @@ DUREE_ANIMATION = 50;
 builds          = [];
 monsters        = [];
 supply          = [];
+objets		    = [];
 clickCanvasX 	= 0;
 clickCanvasY 	= 0;
 xHeroClick		= 0;
@@ -78,10 +79,10 @@ Game.load = function () {
         Loader.loadImage('tiles', 'assets/tiles_new.png'),
 		Loader.loadImage('hero', 'assets/character.png'),
 		Loader.loadImage('hero2', 'assets/character2.png'),
-		Loader.loadImage('troll2', 'assets/troll2.png'),
-		Loader.loadImage('troll3', 'assets/troll3.png'),
-		Loader.loadImage('scorpion1', 'assets/scorpion1.png'),
-		Loader.loadImage('scorpion2', 'assets/scorpion2.png'),
+		Loader.loadImage('troll2', 'assets/monstres/troll2.png'),
+		Loader.loadImage('troll3', 'assets/monstres/troll3.png'),
+		Loader.loadImage('scorpion1', 'assets/monstres/scorpion1.png'),
+		Loader.loadImage('scorpion2', 'assets/monstres/scorpion2.png'),
 		Loader.loadImage('coin', 'assets/coin.png'),
 		Loader.loadImage('cloud', 'assets/cloud.png'),
 		Loader.loadImage('xp', 'assets/xp.png'),
@@ -93,9 +94,17 @@ Game.load = function () {
 		Loader.loadImage('ecu', 'assets/menu/bourse.png'),
 		Loader.loadImage('farine', 'assets/menu/flour.png'),
 		Loader.loadImage('cuivre', 'assets/menu/ironpowder.png'),
-		Loader.loadImage('blé', 'assets/menu/corn.png'),
+		Loader.loadImage('culture_ble', 'assets/menu/corn.png'),
 		Loader.loadImage('ok', 'assets/menu/ok.png'),
-		Loader.loadImage('ko', 'assets/menu/ko.png')
+		Loader.loadImage('ko', 'assets/menu/ko.png'),
+		Loader.loadImage('action', 'assets/menu/action.png'),
+		
+		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),
+		Loader.loadImage('faux_bois', 'assets/objets/faux.png'),
+		Loader.loadImage('epee_bois', 'assets/objets/epee.png'),
+		Loader.loadImage('pelle_bois_use', 'assets/objets/pelle_use.png'),
+		Loader.loadImage('faux_bois_use', 'assets/objets/faux_use.png'),
+		Loader.loadImage('epee_bois_use', 'assets/objets/epee_use.png')
 		
     ];
 };
@@ -110,14 +119,21 @@ Game.init = function () {
  
 	this.anim = 0;
 	this.animBref = 0;
-    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
-	// generateTroll(64, 64, 1, 1);
+	
+	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle'};
+	objets['faux']  = {'img':'faux_bois', 'name':'faux'};
+	objets['epee']  = {'img':'epee_bois', 'name':'epee'};
+	
+	
+    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
+	generateTroll(64, 64, 1, 1);
+    // this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
-	// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	// generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
 	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
-    this.camera = new Camera(map, 1000, 768);
+    this.camera = new Camera(map, 1580, 768);
     this.camera.follow(this.hero);
 
 	document.getElementById("map_canvas").addEventListener('click',
@@ -139,14 +155,14 @@ Game.init = function () {
 			xHeroClick = xHero;
 			yHeroClick = yHero;
 			
-			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3)
+			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
 				clickCanvasX = 1;
-			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3)
+			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
 				clickCanvasX = -1;
 			if(clickCanvasX==0){
-				if(colClick > colHero && colClick < colHero +3)
+				if(colClick > colHero && colClick < colHero +3 && rowClick >0)
 					clickCanvasY = 1;
-				if(colClick < colHero && colClick > colHero-3)
+				if(colClick < colHero && colClick > colHero-3 && rowClick >0)
 					clickCanvasY = -1;
 			}
 			
@@ -155,12 +171,25 @@ Game.init = function () {
 		var xClick = event.clientX - rect.left;
 		var yClick = event.clientY - rect.top;
 		
+		
+		
+		if(xClick < 60 && yClick >78 && yClick < 145)
+			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
+		
+		
+		if(xClick < 60 && yClick >194 && yClick < 250)
+			Game.hero.equipement = objets['pelle'];
+		
+		if(xClick < 60 && yClick >294 && yClick < 350)
+			Game.hero.equipement = objets['faux'];
+		
+		if(xClick < 60 && yClick >394 && yClick < 450)
+			Game.hero.equipement = objets['epee'];
+		
 		if(menussclick!=0){
 			if(xClick >249 && xClick <278 && yClick >593 &&  yClick < 615 ){
 				console.log(paramBuild);
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, paramBuild['typeBatiment'], caracteristique, Game.supplyBuild, paramBuild['typeTile'], paramBuild['life'], paramBuild['solid']);
-				
-				
 				menussclick = 0;
 			}
 
@@ -177,11 +206,6 @@ Game.init = function () {
 		},
 	false);
 	
-	document.getElementById("creuse").addEventListener('click',
-		function(){
-			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
-		},
-	false);
     document.getElementById("speed0").addEventListener('click', function () {
         clearTimeout(currentTime.timeOut);
     });
@@ -231,10 +255,6 @@ Game.update = function (delta) {
 	
     this.camera.update();
 };
- 
-Game.getTool = function(){
-	return document.querySelector('input[name="tools"]:checked').value;
-}
  
 Game._drawLayer = function (layer) {
     var startCol = Math.floor(this.camera.x / map.tsize);
@@ -290,8 +310,6 @@ Game._drawLayer = function (layer) {
                     map.tsize, // target width
                     map.tsize // target height
                 );
-				
-				
 			}
         }
     }
@@ -510,7 +528,6 @@ Game.render = function () {
 		Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
 		}else{
 				Game.hero.xp = Game.hero.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
-				document.getElementById("xp_value").innerHTML = Game.hero.xp;
 				anim = new animation(map, monsters[key].x, monsters[key].y, 'xp');
 				
 				delete monsters[key];						

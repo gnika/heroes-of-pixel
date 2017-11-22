@@ -18,6 +18,7 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
         bois:   0, 
         argile: 0, 
         ble:    0,
+        farine: 0,
 		fer:    0,
 		cuivre: 0,
 		pain:   0
@@ -40,6 +41,8 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 				var error = 1;
 		})
 		
+		if(error!= 0) 
+			return false;
 		
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
@@ -63,8 +66,10 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 	
 	this.creuse = function (x, y, map)
 	{
-        var equip = Game.getTool();
+        var equip = Game.hero.equipement.name;
         var ecu = this.supply.ecu;
+        var bois = this.supply.bois;
+        var ble = this.supply.ble;
         pos     = map.getRow(y)*map.rows+map.getCol(x);
 		
 		var vertical = map.getCol(x);
@@ -74,15 +79,12 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 			abs1[pos] = 2;
 			abs2[pos] = 0;
 			this.supply.ecu = ecu + 10;
-			document.getElementById("argent_value").innerHTML = this.supply.ecu;
 		} else if (abs1[pos] == 2  && equip == 'pelle'){
 			this.supply.ecu = ecu + 1;
-            document.getElementById("argent_value").innerHTML = this.supply.ecu;
         } else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
-			this.supply.ecu = ecu + 1;
-            document.getElementById("argent_value").innerHTML = this.supply.ecu;
+			this.supply.bois = bois + 1;
 		} else if ((abs2[pos] == 10)  && equip == 'faux') {
 
 			if(builds[vertical+'-'+horizontal].batiment == 10){
@@ -96,7 +98,6 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 				}
 				
 				this.supply.ble=this.supply.ble+100;
-				document.getElementById("ble_value").innerHTML = this.supply.ble;
 			
 			}
 			// console.log(builds);
@@ -105,6 +106,16 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 		if(this.supply.ecu > ecu){
 			//animation gold
 			anim = new animation(map, x, y, 'coin');
+		}
+		
+		if(this.supply.bois > bois){
+			//animation gold
+			anim = new animation(map, x, y, 'bois');
+		}
+		
+		if(this.supply.ble > ble){
+			//animation gold
+			anim = new animation(map, x, y, 'culture_ble');
 		}
 	}
 	
@@ -280,7 +291,7 @@ Hero.prototype._ennemy = function (dirx, diry) {
 		
 		this.life = this.life-(lifeHero);
 		
-		var equip = Game.getTool();
+		var equip = Game.hero.equipement.name;
 		if(collision.life >0 && equip=='epee'){
 			// if(collision.life-(lifeMonster)<0){
 				// lifeMonster=collision.life;

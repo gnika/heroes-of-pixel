@@ -3,11 +3,68 @@ Game._drawMenu = function () {
 	var canvas = document.getElementById('map_canvas');
 	var width = canvas.width;
 	var height = canvas.height;	
-	var tsizePar2 = map.tsize/2;	
+	var tsizePar2 = map.tsize/2;
+	
+	//menu haut
+	this.ctx.beginPath();
+    this.ctx.rect(0, 0, width, tsizePar2);
+    this.ctx.fillStyle = 'brown';
+    this.ctx.fill();
+	
+	this.ctx.font="20px Arial";
+	this.ctx.fillStyle = 'black';
+	this.ctx.drawImage(Loader.getImage('xp'), 15, 0);
+	this.ctx.fillText(this.hero.xp, 55, 25);
+	
+	this.ctx.drawImage(Loader.getImage('ecu'), 110, 0);
+	this.ctx.fillText(this.hero.supply.ecu, 150, 25);
+	
+	this.ctx.drawImage(Loader.getImage('bois'), 205, 0);
+	this.ctx.fillText(this.hero.supply.bois, 245, 25);
+	
+	this.ctx.drawImage(Loader.getImage('culture_ble'), 300, 0);
+	this.ctx.fillText(this.hero.supply.farine, 340, 25);
+	
+	this.ctx.drawImage(Loader.getImage('farine'), 395, 0);
+	this.ctx.fillText(this.hero.supply.farine, 450, 25);
+	
+	this.ctx.drawImage(Loader.getImage('pain'), 505, 0);
+	this.ctx.fillText(this.hero.supply.pain, 545, 25);
+	
+	this.ctx.drawImage(Loader.getImage('cuivre'), 600, 0);
+	this.ctx.fillText(this.hero.supply.cuivre, 640, 25);
+	
+	this.ctx.drawImage(Loader.getImage('fer'), 695, 0);
+	this.ctx.fillText(this.hero.supply.fer, 735, 25);
+	
+	
+	//menu côté
+	this.ctx.beginPath();
+    this.ctx.rect(0, tsizePar2, map.tsize, height);
+    this.ctx.fillStyle = 'brown';
+    this.ctx.fill();
+	
+	n = 0;
+	
+	Game.ctx.drawImage(Loader.getImage('action'), 0, height/10);
+	
+	Object.keys(objets).forEach(function(key) {
+
+		if(Game.hero.equipement == objets[key])
+			Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/4+n);
+		else
+			Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/4+n);
+		n = n+100;
+	})
+	
+	
+	
+	//menu bas
 	this.ctx.beginPath();
     this.ctx.rect(0, height-tsizePar2, tsizePar2, tsizePar2);
     this.ctx.fillStyle = 'red';
     this.ctx.fill();
+	
 	
 	if(menuclick==1){
 		
@@ -62,7 +119,7 @@ Game._drawMenu = function () {
 		
 		
 	}else{
-		this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
+		// this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
 		// this.ctx.restore();
 	}
 	
@@ -109,10 +166,10 @@ Game._drawMenu = function () {
 		
 	}
 	
-	this.ctx.beginPath();
-    this.ctx.rect(width-tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
-    this.ctx.fillStyle = 'red';
-    this.ctx.fill();
+	// this.ctx.beginPath();
+    // this.ctx.rect(width-tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
+    // this.ctx.fillStyle = 'red';
+    // this.ctx.fill();
 		
 };
 
