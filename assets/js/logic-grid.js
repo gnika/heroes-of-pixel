@@ -118,7 +118,7 @@ Game.init = function () {
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	console.log(x, y);
+	
 	//resize en fonction de l'écran
 	canvas  = document.getElementById('map_canvas');
     canvas.width = x-50;
@@ -141,9 +141,9 @@ Game.init = function () {
 	objets['epee']  = {'img':'epee_bois', 'name':'epee'};
 	
 	
-    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
+    // this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(64, 64, 1, 1);
-    // this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
+    this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
 	// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
 	// generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
@@ -186,29 +186,30 @@ Game.init = function () {
 		var xClick = event.clientX - rect.left;
 		var yClick = event.clientY - rect.top;
 		
+		// console.log(xClick, yClick, rect.height);
 		
-		
-		if(xClick < 60 && yClick >78 && yClick < 145)
+		if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)
 			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
 		
 		
-		if(xClick < 60 && yClick >194 && yClick < 250)
+		
+		if(xClick < 60 && yClick >rect.height/4 && yClick < rect.height/4+64)
 			Game.hero.equipement = objets['pelle'];
 		
-		if(xClick < 60 && yClick >294 && yClick < 350)
+		if(xClick < 60 && yClick >rect.height/4+100 && yClick < rect.height/4+64+100)
 			Game.hero.equipement = objets['faux'];
 		
-		if(xClick < 60 && yClick >394 && yClick < 450)
+		if(xClick < 60 && yClick >rect.height/4+200 && yClick < rect.height/4+64+200)
 			Game.hero.equipement = objets['epee'];
 		
 		if(menussclick!=0){
-			if(xClick >249 && xClick <278 && yClick >593 &&  yClick < 615 ){
+			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){
 				console.log(paramBuild);
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, paramBuild['typeBatiment'], caracteristique, Game.supplyBuild, paramBuild['typeTile'], paramBuild['life'], paramBuild['solid']);
 				menussclick = 0;
 			}
 
-			if(xClick >289 && xClick <317 && yClick >590 &&  yClick < 617 ){
+			if(xClick >289 && xClick <317 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){
 				menussclick = 0;
 				menuclick = 0;
 			}

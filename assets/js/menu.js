@@ -119,7 +119,7 @@ Game._drawMenu = function () {
 		
 		
 	}else{
-		// this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
+		this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
 		// this.ctx.restore();
 	}
 	
