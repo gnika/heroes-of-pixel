@@ -121,7 +121,8 @@ Game.init = function () {
 	console.log(x, y);
 	//resize en fonction de l'écran
 	canvas  = document.getElementById('map_canvas');
-    canvas.width = x-200;
+    canvas.width = x-50;
+    canvas.height = y-100;
 	var rect = canvas.getBoundingClientRect();
 	// console.log(rect);
 	
@@ -148,7 +149,7 @@ Game.init = function () {
 	// generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
 	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
-    this.camera = new Camera(map, x-200, 768);
+    this.camera = new Camera(map, x-50, y-100);
     this.camera.follow(this.hero);
 
 	document.getElementById("map_canvas").addEventListener('click',
