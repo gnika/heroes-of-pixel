@@ -110,6 +110,21 @@ Game.load = function () {
 };
  
 Game.init = function () {
+	
+	
+	var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+	console.log(x, y);
+	//resize en fonction de l'écran
+	canvas  = document.getElementById('map_canvas');
+    canvas.width = x-200;
+	var rect = canvas.getBoundingClientRect();
+	// console.log(rect);
+	
     var currentTime = new Time();
     currentTime.startTime(1000);
     
@@ -126,20 +141,19 @@ Game.init = function () {
 	
 	
     this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
-	generateTroll(64, 64, 1, 1);
+	// generateTroll(64, 64, 1, 1);
     // this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
-	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
+	// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
+	// generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
 	// generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
-    this.camera = new Camera(map, 1580, 768);
+    this.camera = new Camera(map, x-200, 768);
     this.camera.follow(this.hero);
 
 	document.getElementById("map_canvas").addEventListener('click',
 		function(){
 			//gestion deplacement héros
-			this.getBoundingClientRect();
 			var rect = this.getBoundingClientRect();
 			var xClick = event.clientX - rect.left+Game.camera.x;
 			var yClick = event.clientY - rect.top+Game.camera.y;
