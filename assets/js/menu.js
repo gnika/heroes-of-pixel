@@ -120,11 +120,10 @@ Game._drawMenu = function () {
 		
 	}else{
 		this.ctx.clearRect(tsizePar2, height-tsizePar2, width, height);
-		// this.ctx.restore();
 	}
 	
 	
-	if(menussclick!=0){
+	if(menussclick != 0){
 		img = new Image();
 		
 		// img.src = 'assets/menu/Woodmenu.jpg';
@@ -136,7 +135,7 @@ Game._drawMenu = function () {
 		
 		this.ctx.font="20px Arial";
 		this.ctx.fillStyle = 'black';
-		this.ctx.fillText(menussclick, 15, height-tsizePar2*5);
+		this.ctx.fillText(menussclickTitre, 15, height-tsizePar2*5);
 		
 		this.ctx.drawImage(Loader.getImage('ok'), 250, height-tsizePar2*5.5);
 		this.ctx.drawImage(Loader.getImage('ko'), 290, height-tsizePar2*5.5);
@@ -190,6 +189,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 		Game.supplyBuild 	= [];
 		caracteristique 	= [];
 		paramBuild 			= [];
+		menussclick			= 1;
 		
 		
 		if(xClick > menuH && xClick < menuH*2){//blé
@@ -201,7 +201,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['life'] = 3;
 			paramBuild['solid'] = 0;
 			
-			menussclick = 'Champs de blé';
+			menussclickTitre = 'Champs de blé';
 			description_fr = 'Le blé mets 3 jours pour pousser\net permet de nourrir le moulin\n qui le transforme en farine';
 			description_en = 'EN blé mets 3 jours pour pousser\net permet de nourrir le moulin\n qui le transforme en farine';
 		}
@@ -218,7 +218,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
 			
-			menussclick = 'Moulin';
+			menussclickTitre = 'Moulin';
 			description_fr = 'Le moulin produit de la farine\n nécéssaire pour fabriquer du pain.';
 			description_en = 'EN moulin produit de la farine nécéssaire pour fabriquer du pain.';
 		}
@@ -237,7 +237,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
 			
-			menussclick = 'Boulangerie';
+			menussclickTitre = 'Boulangerie';
 			description_fr = 'La boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
 			description_fr = 'EN boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
 		}
@@ -255,7 +255,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
 			
-			menussclick = 'Mine de cuivre';
+			menussclickTitre = 'Mine de cuivre';
 			description_fr = 'Les mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
 			description_en = 'EN mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
 
@@ -274,7 +274,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
 			
-			menussclick = 'Mine de fer';
+			menussclickTitre = 'Mine de fer';
 			description_fr = 'Les mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
 			description_en = 'EN mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
 
@@ -296,7 +296,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
 			
-			menussclick = 'Tourelle';
+			menussclickTitre = 'Tourelle';
 			description_fr = 'Les tourelles permettent d\'attaquer\nles ennemis qui passent à proximité.';
 			description_en = 'EN tourelles permettent d\'attaquer\nles ennemis qui passent à proximité.';
 

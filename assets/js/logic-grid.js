@@ -167,6 +167,27 @@ Game.init = function () {
 			var menuH = Game.hero.map.tsize/2;
 			
 			
+			
+			
+		
+		if(menussclick == 0){	
+			// bouger avec le click de souris
+			xHeroClick = xHero;
+			yHeroClick = yHero;
+			
+			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
+				clickCanvasX = 1;
+			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
+				clickCanvasX = -1;
+			if(clickCanvasX==0){
+				if(colClick > colHero && colClick < colHero +3 && rowClick >0)
+					clickCanvasY = 1;
+				if(colClick < colHero && colClick > colHero-3 && rowClick >0)
+					clickCanvasY = -1;
+			}
+		}
+			
+			
 			/*gestion menu*/
 		
 		var xClick = event.clientX - rect.left;
@@ -189,32 +210,17 @@ Game.init = function () {
 			Game.hero.equipement = objets['epee'];
 		
 		if(menussclick!=0){
-			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){
+			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ok
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, paramBuild['typeBatiment'], caracteristique, Game.supplyBuild, paramBuild['typeTile'], paramBuild['life'], paramBuild['solid']);
-				menussclick = 0;
 			}
 
-			if(xClick >289 && xClick <317 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){
+			if(xClick >289 && xClick <317 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ko
 				menussclick = 0;
 				menuclick = 0;
 			}
 		}
-		if(menussclick!=0){	
-			// bouger avec le click de souris
-			xHeroClick = xHero;
-			yHeroClick = yHero;
-			
-			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
-				clickCanvasX = 1;
-			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
-				clickCanvasX = -1;
-			if(clickCanvasX==0){
-				if(colClick > colHero && colClick < colHero +3 && rowClick >0)
-					clickCanvasY = 1;
-				if(colClick < colHero && colClick > colHero-3 && rowClick >0)
-					clickCanvasY = -1;
-			}
-		}	
+		
+		// console.log(menussclick);
 		
 		
 		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);

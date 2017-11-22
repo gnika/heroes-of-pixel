@@ -38,11 +38,12 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 		var error = 0;
 		Object.keys(supply).forEach(function(key) {
 			if(Game.hero.supply[key] < supply[key])
-				var error = 1;
+				error = 1;
 		})
 		
-		if(error!= 0) 
+		if(error!= 0) {
 			return false;
+		}
 		
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
@@ -54,13 +55,21 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 			abs2[pos+1]= typeBatiment;
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
+			
+			
+			Object.keys(supply).forEach(function(key) { // paye le prix
+				Game.hero.supply[key] =  Game.hero.supply[key] - supply[key];
+			})
+			
+			
+			
 			// console.log(caracteristique['showLife']);
 			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, 'hourstart', typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
 			// builds.push(Game.nameBuild);
-			// console.log(builds);
 			
 			anim = new animation(map, x+32, y, 'cloud');
+			menussclick = 0; // pour que le sous menu se referme
 		}
 	}
 	
