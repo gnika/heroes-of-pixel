@@ -1,4 +1,4 @@
-function Building(map, x, y, row, col, life, name, hourstart, batiment, caracteristique, typeTile, solid) {
+function Building(map, x, y, row, col, life, name, batiment, caracteristique, typeTile, solid) {
     this.map = map;
     this.life = life;
     this.name = name;
@@ -6,7 +6,8 @@ function Building(map, x, y, row, col, life, name, hourstart, batiment, caracter
      this.y = y;
     this.col = col;
     this.row = row;
-    this.hourstart = hourstart;
+    this.hour = hour;
+    this.day = day;
     this.batiment = batiment;
     this.caracteristique=caracteristique;
     //si batiment envoit des projectiles

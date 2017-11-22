@@ -9,7 +9,8 @@ xHeroClick		= 0;
 yHeroClick		= 0;
 menuclick		= 0;
 menussclick		= 0;
-
+hour	   		= 0;
+day			    = 1;
 
 
  
@@ -130,7 +131,8 @@ Game.init = function () {
     currentTime.startTime(1000);
     
     Keyboard.listenForEvents(
-        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
+        [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]
+	);
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;

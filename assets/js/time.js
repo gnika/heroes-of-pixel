@@ -1,6 +1,4 @@
 function Time() {
-    var day     = 1;
-    var hour    = 0;
     var minute  = 0;
     
     this.timeOut = null;
@@ -23,6 +21,17 @@ function Time() {
             day++;
         }
 
+		
+		Object.keys(builds).forEach(function(key) {//barre de vie
+			if(builds[key].hour == hour && builds[key].day+1 == day && (builds[key].batiment == 10 || builds[key].batiment == 11 || builds[key].batiment == 12 )){
+				var pos = map.getRow(builds[key].y)*map.rows+map.getCol(builds[key].x);
+				abs2[pos] = builds[key].batiment+1;
+				builds[key].batiment = builds[key].batiment+1;
+				builds[key].day = day;
+			}
+		})
+	
+		
         var className = this; // A changer
         this.timeOut  = setTimeout(function () { className.startTime(speedValue) }, speedValue);
     }

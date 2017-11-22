@@ -196,6 +196,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			
 			caracteristique['showLife'] = 0;
 			Game.supplyBuild['ecu'] = 150;
+			// Game.supplyBuild['ecu'] = 0;
 			paramBuild['typeBatiment'] = 10;
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 3;

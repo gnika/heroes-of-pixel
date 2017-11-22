@@ -27,6 +27,7 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 	
 	this.addBuild = function (x, y, map, typeBatiment, caracteristique, supply, typeTile, life, solid)
 	{
+		// console.log(hour);
 		var dirx = 0;
 		var diry = 0;
 		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
@@ -64,8 +65,9 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 			
 			
 			// console.log(caracteristique['showLife']);
-			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, 'hourstart', typeBatiment, caracteristique, typeTile, solid);
+			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
+			// console.log(builds);
 			// builds.push(Game.nameBuild);
 			
 			anim = new animation(map, x+32, y, 'cloud');
@@ -75,11 +77,11 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 	
 	this.creuse = function (x, y, map)
 	{
-        var equip = Game.hero.equipement.name;
-        var ecu = this.supply.ecu;
-        var bois = this.supply.bois;
-        var ble = this.supply.ble;
-        pos     = map.getRow(y)*map.rows+map.getCol(x);
+        var equip 	= Game.hero.equipement.name;
+        var ecu 	= this.supply.ecu;
+        var bois 	= this.supply.bois;
+        var ble 	= this.supply.ble;
+        var pos     = map.getRow(y)*map.rows+map.getCol(x);
 		
 		var vertical = map.getCol(x);
 		var horizontal = map.getRow(y);
