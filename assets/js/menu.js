@@ -195,6 +195,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 		if(xClick > menuH && xClick < menuH*2){//blé
 			
 			caracteristique['showLife'] = 0;
+			caracteristique['recompense'] = {'ble': 400};
 			Game.supplyBuild['ecu'] = 150;
 			Game.supplyBuild['ecu'] = 0;
 			paramBuild['typeBatiment'] = [10, 11, 12, 13];
@@ -214,11 +215,12 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
+			caracteristique['prixUpdate'] = {'ble': 100};
+			caracteristique['recompense'] = {'farine': 100};
 			paramBuild['typeBatiment'] = [20, 21, 22, 23];
-			paramBuild['prixUpdate'] = {'ble': 100};
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
-			paramBuild['solid'] = 1;
+			paramBuild['solid'] = 0;
 			
 			menussclickTitre = 'Moulin';
 			description_fr = 'Le moulin produit de la farine\n nécéssaire pour fabriquer du pain.';
@@ -227,18 +229,20 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 		
 		if(xClick > menuH*3 && xClick < menuH*4){//boulangerie
 		
-			Game.supplyBuild['ecu'] = 150;
-			Game.supplyBuild['bois'] = 150;
-			Game.supplyBuild['cuivre'] = 150;
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =0;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =0;
-			paramBuild['typeBatiment'] = [24, 25, 26, 27];
-			paramBuild['prixUpdate'] = {'farine': 100};
+			// Game.supplyBuild['ecu'] = 150;
+			// Game.supplyBuild['bois'] = 150;
+			// Game.supplyBuild['cuivre'] = 150;
+			Game.supplyBuild['ecu'] = 0;
+			caracteristique['level'] = 1;
+			caracteristique['attaque'] = 0;
+			caracteristique['showLife'] = 1;
+			caracteristique['portee'] = 0;
+			caracteristique['prixUpdate'] = {'farine': 100};
+			caracteristique['recompense'] = {'pain': 100};
+			paramBuild['typeBatiment'] 	  = [24, 25, 26, 27];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
-			paramBuild['solid'] = 1;
+			paramBuild['solid'] = 0;
 			
 			menussclickTitre = 'Boulangerie';
 			description_fr = 'La boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
@@ -256,7 +260,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['typeBatiment'] = [32, 33, 34, 35];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
-			paramBuild['solid'] = 1;
+			paramBuild['solid'] = 0;
 			
 			menussclickTitre = 'Mine de cuivre';
 			description_fr = 'Les mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
@@ -275,7 +279,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			paramBuild['typeBatiment'] = [28, 29, 30, 31];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
-			paramBuild['solid'] = 1;
+			paramBuild['solid'] = 0;
 			
 			menussclickTitre = 'Mine de fer';
 			description_fr = 'Les mines de cuivre génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';

@@ -19,7 +19,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         bois:   0, 
         argile: 0, 
         ble:    0,
-        farine: 0,
+        farine: 2000,
 		fer:    0,
 		cuivre: 0,
 		pain:   100
@@ -81,6 +81,8 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         var equip 	= Game.hero.equipement.name;
         var ecu 	= this.supply.ecu;
         var bois 	= this.supply.bois;
+        var pain 	= this.supply.pain;
+        var farine 	= this.supply.farine;
         var ble 	= this.supply.ble;
         var pos     = map.getRow(y)*map.rows+map.getCol(x);
 		
@@ -97,9 +99,9 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
             abs1[pos] = 2;
             abs2[pos] = 0;
 			this.supply.bois = bois + 5;
-		} else if ((abs2[pos] == 13)  && equip == 'faux') {
+		} else if ((abs2[pos] == 10)  && equip == 'faux') {
 
-			if(builds[vertical+'-'+horizontal].batiment[0] == 10){
+			if(builds[vertical+'-'+horizontal].batiment[0] == 13){// si blé
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];
@@ -110,8 +112,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 					builds[vertical+'-'+horizontal].day = day;
 					builds[vertical+'-'+horizontal].hour = hour;
 				}
+				var recompense = builds[vertical+'-'+horizontal].caracteristique['recompense'];
+				Object.keys(recompense).forEach(function(keyRecompense) {
+					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
+				})
 				
-				this.supply.ble=this.supply.ble+100;
 			
 			}
 			// console.log(builds);
@@ -123,13 +128,23 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		}
 		
 		if(this.supply.bois > bois){
-			//animation gold
+			//animation bois
 			anim = new animation(map, x, y, 'bois');
 		}
 		
 		if(this.supply.ble > ble){
-			//animation gold
+			//animation ble
 			anim = new animation(map, x, y, 'culture_ble');
+		}
+		
+		if(this.supply.pain > pain){
+			//animation pain
+			anim = new animation(map, x, y, 'pain');
+		}
+		
+		if(this.supply.farine > farine){
+			//animation farine
+			anim = new animation(map, x, y, 'farine');
 		}
 	}
 	
