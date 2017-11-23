@@ -11,8 +11,22 @@ function Time() {
         if (minute == 50) {
             minute = 0;
             hour++;
+			
+			var resteFatigue = Game.hero.fatigue - 1;
+			if(resteFatigue < 0)
+				resteFatigue = 0;
+			
+			Game.hero.fatigue = resteFatigue;
+			if(resteFatigue == 0){
+				Game.hero.life = Game.hero.life - 1;
+				if(Game.hero.life < 0)
+					Game.hero.life =0;
+			}
+			
+			
+			
         } else {
-            minute += 10;
+            minute += 10;			
         }
 
         if (hour == 24) {

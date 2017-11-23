@@ -143,9 +143,9 @@ Game.init = function () {
 	objets['epee']  = {'img':'epee_bois', 'name':'epee'};
 	
 	
-    this.hero = new Hero(map, 160, 160, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
+    this.hero = new Hero(map, 160, 160, 60, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
 	generateTroll(64, 64, 1, 1);
-    // this.hero = new Hero(map, 10060, 10060, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
+    // this.hero = new Hero(map, 10060, 10060, 60, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
 	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
 	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
@@ -169,7 +169,19 @@ Game.init = function () {
 			var menuH = Game.hero.map.tsize/2;
 			
 			
-			
+			if(rowClick == rowHero && colHero == colClick){
+				if(Game.hero.supply.pain >= 5){
+					Game.hero.supply.pain-= 5;
+					
+					if(Game.hero.fatigue >= 40)
+						Game.hero.fatigue = 60;
+					else
+						Game.hero.fatigue+= 20;
+					
+					anim = new animation(Game.hero.map, xHero, yHero, 'pain');
+				}
+				return false;
+			}
 			
 		
 		if(menussclick == 0){	
@@ -188,11 +200,6 @@ Game.init = function () {
 					clickCanvasY = -1;
 			}
 		}
-			
-			console.log(colClick, colHero);
-			console.log(colClick, colHero -3);
-			console.log(rowClick, rowHero +3);
-			console.log(rowClick, rowHero -3);
 			/*gestion menu*/
 		
 		var xClick = event.clientX - rect.left;
@@ -365,28 +372,6 @@ Game._drawLayer = function (layer) {
 				monsters[key].image = Loader.getImage(monsters[key].image2);
 			})
 		}
-	
-		if(typeof(anim) != "undefined" && anim !== null) {
-			if(Game.animBref<=DUREE_ANIMATION){
-		
-					Game.ctx.drawImage(
-								anim.image, // image
-								0, // source x
-								0, // source y
-								map.tsize, // source width
-								map.tsize, // source height
-								anim.x-Game.camera.x,  // target x
-								anim.y-Game.camera.y-Game.animBref, 
-								map.tsize, // target width
-								map.tsize // target height
-							);
-				Game.animBref++;
-				Game.animBref++;
-			}else{
-				anim=null;
-				Game.animBref=0;
-			}
-		}
 
 
 		/** start tourelle */
@@ -511,6 +496,33 @@ Game._drawGridMenu = function () {
 	   this.ctx.fillText("VOUS AVEZ PERDU !",0,this.hero.screenY);
 	}
 	
+	
+	
+	
+		if(typeof(anim) != "undefined" && anim !== null) {
+			if(Game.animBref<=DUREE_ANIMATION){
+		
+					Game.ctx.drawImage(
+								anim.image, // image
+								0, // source x
+								0, // source y
+								map.tsize, // source width
+								map.tsize, // source height
+								anim.x-15-Game.camera.x,  // target x
+								anim.y-15-Game.camera.y-Game.animBref, 
+								map.tsize, // target width
+								map.tsize // target height
+							);
+				Game.animBref++;
+				Game.animBref++;
+			}else{
+				anim=null;
+				Game.animBref=0;
+			}
+		}
+	
+	
+	
 	this._drawMenu();
 	
 };
@@ -566,5 +578,7 @@ Game.render = function () {
 
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
+	this.ctx.fillStyle="blue";
+	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+52, this.hero.fatigue, 10);
     this._drawGridMenu();
 };

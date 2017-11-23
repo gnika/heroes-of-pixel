@@ -2,11 +2,12 @@
 
 
 
-function Hero(map, x, y, life, attaque, defense, xp, equipement) {
+function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.map = map;
     this.x = x;
     this.y = y;
     this.life = life;
+    this.fatigue = fatigue;
     this.xp = xp;
     this.width = map.tsize;
     this.height = map.tsize;
@@ -21,7 +22,7 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
         farine: 0,
 		fer:    0,
 		cuivre: 0,
-		pain:   0
+		pain:   100
     };
     this.image = Loader.getImage('hero');
 	
