@@ -23,7 +23,7 @@ Game._drawMenu = function () {
 	this.ctx.fillText(this.hero.supply.bois, 245, 25);
 	
 	this.ctx.drawImage(Loader.getImage('culture_ble'), 300, 0);
-	this.ctx.fillText(this.hero.supply.farine, 340, 25);
+	this.ctx.fillText(this.hero.supply.ble, 340, 25);
 	
 	this.ctx.drawImage(Loader.getImage('farine'), 395, 0);
 	this.ctx.fillText(this.hero.supply.farine, 450, 25);
@@ -153,7 +153,7 @@ Game._drawMenu = function () {
 		a = 15;
 		Object.keys(Game.supplyBuild).forEach(function(key) {
 			
-			if(Game.hero.supply[key] > Game.supplyBuild[key])
+			if(Game.hero.supply[key] >= Game.supplyBuild[key])
 				Game.ctx.fillStyle = 'green';
 			else
 				Game.ctx.fillStyle = 'red';
@@ -196,8 +196,8 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			
 			caracteristique['showLife'] = 0;
 			Game.supplyBuild['ecu'] = 150;
-			// Game.supplyBuild['ecu'] = 0;
-			paramBuild['typeBatiment'] = 10;
+			Game.supplyBuild['ecu'] = 0;
+			paramBuild['typeBatiment'] = [10, 11, 12, 13];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 3;
 			paramBuild['solid'] = 0;
@@ -214,7 +214,8 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			paramBuild['typeBatiment'] = 20;
+			paramBuild['typeBatiment'] = [20, 21, 22, 23];
+			paramBuild['prixUpdate'] = {'ble': 100};
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
@@ -233,7 +234,8 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			paramBuild['typeBatiment'] = 24;
+			paramBuild['typeBatiment'] = [24, 25, 26, 27];
+			paramBuild['prixUpdate'] = {'farine': 100};
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
@@ -251,7 +253,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			paramBuild['typeBatiment'] = 32;
+			paramBuild['typeBatiment'] = [32, 33, 34, 35];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
@@ -270,7 +272,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['attaque'] =0;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =0;
-			paramBuild['typeBatiment'] = 28;
+			paramBuild['typeBatiment'] = [28, 29, 30, 31];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;
@@ -283,16 +285,17 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 		
 		if(xClick > menuH*6 && xClick < menuH*7){//tourelle
 			
-			Game.supplyBuild['ecu'] = 350;
-			Game.supplyBuild['bois'] = 150;
-			Game.supplyBuild['cuivre'] = 150;
-			Game.supplyBuild['fer'] = 150;
+			Game.supplyBuild['ecu'] = 0;
+			// Game.supplyBuild['ecu'] = 350;
+			// Game.supplyBuild['bois'] = 150;
+			// Game.supplyBuild['cuivre'] = 150;
+			// Game.supplyBuild['fer'] = 150;
 			
 			caracteristique['level'] =1;
 			caracteristique['attaque'] =10;
 			caracteristique['showLife'] =1;
 			caracteristique['portee'] =2;
-			paramBuild['typeBatiment'] = 6;
+			paramBuild['typeBatiment'] = [6];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
 			paramBuild['solid'] = 1;

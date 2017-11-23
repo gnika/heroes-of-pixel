@@ -6,8 +6,8 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
      this.y = y;
     this.col = col;
     this.row = row;
-    this.hour = hour;
-    this.day = day;
+    this.hour = hour;//heure de construction
+    this.day = day;//jour de construction
     this.batiment = batiment;
     this.caracteristique=caracteristique;
     //si batiment envoit des projectiles

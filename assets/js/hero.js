@@ -53,7 +53,7 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
 			//pour éviter au héros de rester bloquer dans le batiment
 
 			Game.hero.x = map.tsize/2+map.tsize*map.getCol(x);
-			abs2[pos+1]= typeBatiment;
+			abs2[pos+1]= typeBatiment[0];
 			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
 			
 			
@@ -95,17 +95,19 @@ function Hero(map, x, y, life, attaque, defense, xp, equipement) {
         } else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
-			this.supply.bois = bois + 1;
-		} else if ((abs2[pos] == 10)  && equip == 'faux') {
+			this.supply.bois = bois + 5;
+		} else if ((abs2[pos] == 13)  && equip == 'faux') {
 
-			if(builds[vertical+'-'+horizontal].batiment == 10){
+			if(builds[vertical+'-'+horizontal].batiment[0] == 10){
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];
 					abs1[pos] = 2;
-					abs2[pos] = 0;					
+					abs2[pos] = 0;
 				}else{
-					abs2[pos]=10;
+					abs2[pos]=builds[vertical+'-'+horizontal].batiment[0];
+					builds[vertical+'-'+horizontal].day = day;
+					builds[vertical+'-'+horizontal].hour = hour;
 				}
 				
 				this.supply.ble=this.supply.ble+100;

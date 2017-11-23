@@ -177,19 +177,22 @@ Game.init = function () {
 			xHeroClick = xHero;
 			yHeroClick = yHero;
 			
-			if(rowClick > rowHero && rowClick < rowHero+3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
+			if(rowClick >= rowHero && rowClick <= rowHero+3 && colClick == colHero && rowClick >0)
 				clickCanvasX = 1;
-			if(rowClick < rowHero && rowClick > rowHero-3 && colClick < colHero+3 &&  colClick > colHero-3 && rowClick >0)
+			if(rowClick <= rowHero && rowClick >= rowHero-3 && colClick == colHero && rowClick >0)
 				clickCanvasX = -1;
 			if(clickCanvasX==0){
-				if(colClick > colHero && colClick < colHero +3 && rowClick >0)
+				if(colClick >= colHero && colClick <= colHero +3 && rowClick == rowHero)
 					clickCanvasY = 1;
-				if(colClick < colHero && colClick > colHero-3 && rowClick >0)
+				if(colClick <= colHero && colClick >= colHero-3 && rowClick  == rowHero)
 					clickCanvasY = -1;
 			}
 		}
 			
-			
+			console.log(colClick, colHero);
+			console.log(colClick, colHero -3);
+			console.log(rowClick, rowHero +3);
+			console.log(rowClick, rowHero -3);
 			/*gestion menu*/
 		
 		var xClick = event.clientX - rect.left;
@@ -389,7 +392,7 @@ Game._drawLayer = function (layer) {
 		/** start tourelle */
 		//tir tourelles portée : 2
 		Object.keys(builds).forEach(function(key) {
-			if(builds[key].batiment == 6 && builds[key].cible==0){
+			if(builds[key].batiment[0] == 6 && builds[key].cible==0){
 				Object.keys(monsters).forEach(function(keyMonster) {
 					
 					if(builds[key].calculPortee(
@@ -407,7 +410,7 @@ Game._drawLayer = function (layer) {
 		});
 	
 		Object.keys(builds).forEach(function(key) {
-			if(builds[key].batiment == 6 && builds[key].cible!=0){
+			if(builds[key].batiment[0] == 6 && builds[key].cible!=0){
 				yFinal =  builds[key].cible.y;
 				xFinal =  builds[key].cible.x+20;
 				

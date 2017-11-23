@@ -22,12 +22,14 @@ function Time() {
         }
 
 		
-		Object.keys(builds).forEach(function(key) {//barre de vie
-			if(builds[key].hour == hour && builds[key].day+1 == day && (builds[key].batiment == 10 || builds[key].batiment == 11 || builds[key].batiment == 12 )){
-				var pos = map.getRow(builds[key].y)*map.rows+map.getCol(builds[key].x);
-				abs2[pos] = builds[key].batiment+1;
-				builds[key].batiment = builds[key].batiment+1;
-				builds[key].day = day;
+		Object.keys(builds).forEach(function(key) {
+			if(builds[key].hour == hour && builds[key].day+1 == day && builds[key].batiment.length>1){
+				var pos = builds[key].col*map.rows+builds[key].row;
+				
+				if(abs2[pos] < builds[key].batiment[3]){
+					abs2[pos] = abs2[pos]+1;
+					builds[key].day = day;
+				}
 			}
 		})
 	
