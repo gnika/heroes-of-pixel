@@ -155,7 +155,7 @@ Game.init = function () {
     this.camera.follow(this.hero);
 
 	document.getElementById("map_canvas").addEventListener('click',
-		function(){
+		function(event){
 			//gestion deplacement héros
 			var rect = this.getBoundingClientRect();
 			var xClick = event.clientX - rect.left+Game.camera.x;
@@ -183,7 +183,6 @@ Game.init = function () {
 				return false;
 			}
 			
-		
 		if(menussclick == 0){	
 			// bouger avec le click de souris
 			xHeroClick = xHero;
@@ -193,7 +192,7 @@ Game.init = function () {
 				clickCanvasX = 1;
 			if(rowClick <= rowHero && rowClick >= rowHero-3 && colClick == colHero && rowClick >0)
 				clickCanvasX = -1;
-			if(clickCanvasX==0){
+			if(clickCanvasX==0 && yClick - Game.camera.y < rect.height-menuH){
 				if(colClick >= colHero && colClick <= colHero +3 && rowClick == rowHero)
 					clickCanvasY = 1;
 				if(colClick <= colHero && colClick >= colHero-3 && rowClick  == rowHero)
@@ -205,6 +204,7 @@ Game.init = function () {
 		var xClick = event.clientX - rect.left;
 		var yClick = event.clientY - rect.top;
 		
+		// console.log(yClick);
 		// console.log(xClick, yClick, rect.height);
 		
 		if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)

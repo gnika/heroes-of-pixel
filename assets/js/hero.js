@@ -88,20 +88,26 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		
 		var vertical = map.getCol(x);
 		var horizontal = map.getRow(y);
-		
+		//tiles
 		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
 			abs1[pos] = 2;
 			abs2[pos] = 0;
 			this.supply.ecu = ecu + 10;
 		} else if (abs1[pos] == 2  && equip == 'pelle'){
 			this.supply.ecu = ecu + 1;
-        } else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
+        }else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
 			this.supply.bois = bois + 5;
-		} else if ((abs2[pos] == 10)  && equip == 'faux') {
+		} 
 
-			if(builds[vertical+'-'+horizontal].batiment[0] == 13){// si blé
+		//buildings
+		
+		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
+			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) !== "undefined" || 
+			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
+			abs2[pos] == builds[vertical+'-'+horizontal].batiment[3]){
+					console.log(builds[vertical+'-'+horizontal].typeBatiment);
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];
@@ -116,6 +122,13 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				Object.keys(recompense).forEach(function(keyRecompense) {
 					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
 				})
+			}
+		}
+		
+		if ((abs2[pos] == 13)  && equip == 'faux') {
+
+			if(builds[vertical+'-'+horizontal].batiment[0] == 10){// si blé
+				
 				
 			
 			}

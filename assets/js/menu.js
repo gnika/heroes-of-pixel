@@ -26,16 +26,16 @@ Game._drawMenu = function () {
 	this.ctx.fillText(this.hero.supply.ble, 340, 25);
 	
 	this.ctx.drawImage(Loader.getImage('farine'), 395, 0);
-	this.ctx.fillText(this.hero.supply.farine, 450, 25);
+	this.ctx.fillText(this.hero.supply.farine, 435, 25);
 	
-	this.ctx.drawImage(Loader.getImage('pain'), 505, 0);
-	this.ctx.fillText(this.hero.supply.pain, 545, 25);
+	this.ctx.drawImage(Loader.getImage('pain'), 495, 0);
+	this.ctx.fillText(this.hero.supply.pain, 535, 25);
 	
-	this.ctx.drawImage(Loader.getImage('cuivre'), 600, 0);
-	this.ctx.fillText(this.hero.supply.cuivre, 640, 25);
+	this.ctx.drawImage(Loader.getImage('cuivre'), 590, 0);
+	this.ctx.fillText(this.hero.supply.cuivre, 630, 25);
 	
-	this.ctx.drawImage(Loader.getImage('fer'), 695, 0);
-	this.ctx.fillText(this.hero.supply.fer, 735, 25);
+	this.ctx.drawImage(Loader.getImage('fer'), 685, 0);
+	this.ctx.fillText(this.hero.supply.fer, 725, 25);
 	
 	
 	//menu côté
@@ -196,8 +196,9 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			
 			caracteristique['showLife'] = 0;
 			caracteristique['recompense'] = {'ble': 400};
+			caracteristique['outilRecompense'] = 'faux';
 			Game.supplyBuild['ecu'] = 150;
-			Game.supplyBuild['ecu'] = 0;
+			// Game.supplyBuild['ecu'] = 0;
 			paramBuild['typeBatiment'] = [10, 11, 12, 13];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 3;
@@ -217,6 +218,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['portee'] =0;
 			caracteristique['prixUpdate'] = {'ble': 100};
 			caracteristique['recompense'] = {'farine': 100};
+			caracteristique['outilRecompense'] = 'faux';
 			paramBuild['typeBatiment'] = [20, 21, 22, 23];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
@@ -239,6 +241,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['portee'] = 0;
 			caracteristique['prixUpdate'] = {'farine': 100};
 			caracteristique['recompense'] = {'pain': 100};
+			caracteristique['outilRecompense'] = 'faux';
 			paramBuild['typeBatiment'] 	  = [24, 25, 26, 27];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 60;
