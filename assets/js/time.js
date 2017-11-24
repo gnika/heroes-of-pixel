@@ -1,5 +1,6 @@
 function Time() {
     var minute  = 0;
+    var semaine  = 1;
     
     this.timeOut = null;
 
@@ -33,6 +34,7 @@ function Time() {
             hour   = 0;
             minute = 0;
             day++;
+			semaine++;
 			
 			//generate 10 monstres
 			for(var i = 0; i < 5; i++){
@@ -61,11 +63,14 @@ function Time() {
 
 			}
 			
-			//remplir tous les trous tous les jours
-			var i, n = abs1.length;
-			for (i = 0; i < n; ++i) {
-				if(abs1[i] == 2)
-					abs1[i] = 1;
+			//remplir tous les trous toutes les semaines
+			if(semaine == 7){
+				var i, n = abs1.length;
+				for (i = 0; i < n; ++i) {
+					if(abs1[i] == 2)
+						abs1[i] = 1;
+				}
+				semaine = 1;
 			}
 			
         }
