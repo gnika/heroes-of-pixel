@@ -199,8 +199,8 @@ Hero.prototype.move = function (delta, dirx, diry) {
 		clickCanvasY = 0;
 	}
 	
-	if(builds[rowX+'-'+colY]){	//si sur un batiment qui nécessite de porter un outil dont le héros n'est pas équipé
-		if(this.equipement.name != builds[rowX+'-'+colY].caracteristique['outilRecompense']) //  && abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3]
+	if(builds[rowX+'-'+colY]){	//si sur un batiment dont le statut est le dernier (par exemple, le blé a poussé) et qui nécessite de porter un outil dont le héros n'est pas équipé
+		if(this.equipement.name != builds[rowX+'-'+colY].caracteristique['outilRecompense'] && abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3])
 			animBack = new animBackground(this.map, builds[rowX+'-'+colY].x, builds[rowX+'-'+colY].y, builds[rowX+'-'+colY].caracteristique['outilRecompense']+'_bulle');
 		else
 			animBack	= null;

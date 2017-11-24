@@ -531,7 +531,6 @@ Game._drawGridMenu = function () {
 		if(Game.animBulle == 50 && Game.animBulleBas == 1){
 			animBack		  = null;
 			Game.animBulleBas = 0;
-			console.log(animBack);
 		}
 		
 		
