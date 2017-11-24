@@ -72,6 +72,13 @@ function animation(map, x, y, imageName){
     this.y = y;
 	this.image = Loader.getImage(imageName);
 }
+
+function animBackground(map, x, y, imageName){
+	this.map = map;
+	this.x = x;
+    this.y = y;
+	this.image = Loader.getImage(imageName);
+}
  
  
  
@@ -102,6 +109,8 @@ Game.load = function () {
 		
 		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),
 		Loader.loadImage('faux_bois', 'assets/objets/faux.png'),
+		Loader.loadImage('pelle_bulle', 'assets/objets/pelle_bulle.png'),
+		Loader.loadImage('faux_bulle', 'assets/objets/faux_bulle.png'),
 		Loader.loadImage('epee_bois', 'assets/objets/epee.png'),
 		Loader.loadImage('pelle_bois_use', 'assets/objets/pelle_use.png'),
 		Loader.loadImage('faux_bois_use', 'assets/objets/faux_use.png'),
@@ -137,6 +146,8 @@ Game.init = function () {
  
 	this.anim = 0;
 	this.animBref = 0;
+	this.animBulle = 50;
+	this.animBulleBas = 0;
 	
 	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle'};
 	objets['faux']  = {'img':'faux_bois', 'name':'faux'};
@@ -484,6 +495,52 @@ Game._drawGridMenu = function () {
 			// this.ctx.stroke();
 		// }
 	
+	// 
+	if(typeof(animBack) != "undefined" && animBack !== null) { // pour les bulles qui montent et qui descendent
+		
+		if(Game.animBulle < 100 && Game.animBulleBas == 0){
+			Game.animBulle++;
+				Game.ctx.drawImage(
+							animBack.image, // image
+							0, // source x
+							0, // source y
+							map.tsize, // source width
+							map.tsize, // source height
+							animBack.x-15-Game.camera.x,  // target x
+							animBack.y-15-Game.camera.y-Game.animBulle, 
+							map.tsize, // target width
+							map.tsize // target height
+						);
+		}
+		if(Game.animBulle == 100)
+			Game.animBulleBas = 1;
+		if(Game.animBulle <= 100 && Game.animBulleBas == 1){
+			Game.animBulle--;
+				Game.ctx.drawImage(
+							animBack.image, // image
+							0, // source x
+							0, // source y
+							map.tsize, // source width
+							map.tsize, // source height
+							animBack.x-15-Game.camera.x,  // target x
+							animBack.y-15-Game.camera.y-Game.animBulle, 
+							map.tsize, // target width
+							map.tsize // target height
+						);
+		}
+		if(Game.animBulle == 50 && Game.animBulleBas == 1){
+			animBack		  = null;
+			Game.animBulleBas = 0;
+			console.log(animBack);
+		}
+		
+		
+		// }else{
+			// animBack=null;
+			// Game.animBref=0;
+		// }
+	}
+	
 	// draw main character joachim nouvel emplacement
 	this.ctx.drawImage(
         this.hero.image,
@@ -498,28 +555,28 @@ Game._drawGridMenu = function () {
 	
 	
 	
+
+	if(typeof(anim) != "undefined" && anim !== null) {
+		if(Game.animBref<=DUREE_ANIMATION){
 	
-		if(typeof(anim) != "undefined" && anim !== null) {
-			if(Game.animBref<=DUREE_ANIMATION){
-		
-					Game.ctx.drawImage(
-								anim.image, // image
-								0, // source x
-								0, // source y
-								map.tsize, // source width
-								map.tsize, // source height
-								anim.x-15-Game.camera.x,  // target x
-								anim.y-15-Game.camera.y-Game.animBref, 
-								map.tsize, // target width
-								map.tsize // target height
-							);
-				Game.animBref++;
-				Game.animBref++;
-			}else{
-				anim=null;
-				Game.animBref=0;
-			}
+				Game.ctx.drawImage(
+							anim.image, // image
+							0, // source x
+							0, // source y
+							map.tsize, // source width
+							map.tsize, // source height
+							anim.x-15-Game.camera.x,  // target x
+							anim.y-15-Game.camera.y-Game.animBref, 
+							map.tsize, // target width
+							map.tsize // target height
+						);
+			Game.animBref++;
+			Game.animBref++;
+		}else{
+			anim			=	null;
+			Game.animBref	=	0;
 		}
+	}
 	
 	
 	

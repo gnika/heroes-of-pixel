@@ -99,15 +99,13 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
             abs1[pos] = 2;
             abs2[pos] = 0;
 			this.supply.bois = bois + 5;
-		} 
+		}
 
 		//buildings
-		
 		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
 			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) !== "undefined" || 
 			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
 			abs2[pos] == builds[vertical+'-'+horizontal].batiment[3]){
-					console.log(builds[vertical+'-'+horizontal].typeBatiment);
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];
@@ -123,16 +121,6 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
 				})
 			}
-		}
-		
-		if ((abs2[pos] == 13)  && equip == 'faux') {
-
-			if(builds[vertical+'-'+horizontal].batiment[0] == 10){// si blé
-				
-				
-			
-			}
-			// console.log(builds);
 		}
 		
 		if(this.supply.ecu > ecu){
@@ -197,18 +185,27 @@ Hero.prototype.move = function (delta, dirx, diry) {
     this.x = Math.max(0, Math.min(this.x, maxX));
     this.y = Math.max(0, Math.min(this.y, maxY));
 	
+	var rowX = this.map.getRow(this.x);
+	var colY = this.map.getCol(this.y);
+	
 	if(this.x >= xHeroClick+this.map.tsize || this.y >= yHeroClick+this.map.tsize || this.x <= xHeroClick-this.map.tsize || this.y <= yHeroClick-this.map.tsize ){
 
 		if(clickCanvasX!=0 || clickCanvasY!=0){
-			this.y = this.map.getCol(this.y) * this.map.tsize+this.map.tsize/2;
-			this.x = this.map.getRow(this.x) * this.map.tsize+this.map.tsize/2;
+			this.y = colY * this.map.tsize+this.map.tsize/2;
+			this.x = rowX * this.map.tsize+this.map.tsize/2;
 		}
 		
 		clickCanvasX = 0;
 		clickCanvasY = 0;
 	}
 	
-	
+	if(builds[rowX+'-'+colY]){	//si sur un batiment qui nécessite de porter un outil dont le héros n'est pas équipé
+		if(this.equipement.name != builds[rowX+'-'+colY].caracteristique['outilRecompense']) //  && abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3]
+			animBack = new animBackground(this.map, builds[rowX+'-'+colY].x, builds[rowX+'-'+colY].y, builds[rowX+'-'+colY].caracteristique['outilRecompense']+'_bulle');
+		else
+			animBack	= null;
+	}else
+		animBack	= null;
 		
 };
  

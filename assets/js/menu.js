@@ -197,8 +197,8 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			caracteristique['showLife'] = 0;
 			caracteristique['recompense'] = {'ble': 400};
 			caracteristique['outilRecompense'] = 'faux';
-			Game.supplyBuild['ecu'] = 150;
-			// Game.supplyBuild['ecu'] = 0;
+			// Game.supplyBuild['ecu'] = 150;
+			Game.supplyBuild['ecu'] = 0;
 			paramBuild['typeBatiment'] = [10, 11, 12, 13];
 			paramBuild['typeTile'] = 0;
 			paramBuild['life'] = 3;
@@ -210,19 +210,19 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 		}
 		if(xClick > menuH*2 && xClick < menuH*3){//moulin
 		
-			Game.supplyBuild['ecu'] = 150;
-			Game.supplyBuild['bois'] = 150;
-			caracteristique['level'] =1;
-			caracteristique['attaque'] =0;
-			caracteristique['showLife'] =1;
-			caracteristique['portee'] =0;
-			caracteristique['prixUpdate'] = {'ble': 100};
-			caracteristique['recompense'] = {'farine': 100};
-			caracteristique['outilRecompense'] = 'faux';
-			paramBuild['typeBatiment'] = [20, 21, 22, 23];
-			paramBuild['typeTile'] = 0;
-			paramBuild['life'] = 60;
-			paramBuild['solid'] = 0;
+			Game.supplyBuild['ecu'] = 150;						//prix
+			Game.supplyBuild['bois'] = 150;						//prix
+			caracteristique['level'] =1;						//level du batiment
+			caracteristique['attaque'] =0;						//attaque du batiment
+			caracteristique['showLife'] =1;						//montrer ou pas la barre de vie
+			caracteristique['portee'] =0;						//portée en case des batiments qui tirent
+			caracteristique['prixUpdate'] = {'ble': 100};		//prix à fournir pour passer d'un statut 
+			caracteristique['recompense'] = {'farine': 100};	//prix reçu quand le héros ramasse les ressources
+			caracteristique['outilRecompense'] = 'faux';		// outil à utiliser pour le héros pour ramasser les ressources
+			paramBuild['typeBatiment'] = [20, 21, 22, 23];		// les différents statut du batiment
+			paramBuild['typeTile'] = 0;							//type de tile sur lequel doit être construit le batiment
+			paramBuild['life'] = 60;							//vie du batiment
+			paramBuild['solid'] = 0;							//peut-on passer sur le batiment
 			
 			menussclickTitre = 'Moulin';
 			description_fr = 'Le moulin produit de la farine\n nécéssaire pour fabriquer du pain.';
