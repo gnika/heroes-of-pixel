@@ -33,6 +33,41 @@ function Time() {
             hour   = 0;
             minute = 0;
             day++;
+			
+			//generate 10 monstres
+			for(var i = 0; i < 5; i++){
+				// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0); //map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY)
+				var xRowMonster	 = Math.floor((Math.random() * Game.hero.map.rows) + 1);
+				var yColMonster	 = Math.floor((Math.random() * Game.hero.map.cols) + 1);
+				var xMonster	 = xRowMonster * Game.hero.map.tsize+32;
+				var yMonster	 = yColMonster * Game.hero.map.tsize+32;
+				var dirY 		 = 0;
+				var dirX 		 = 0;
+				
+				if(abs2[yColMonster*Game.hero.map.rows+xRowMonster] == 0){
+					dirX = Math.round((Math.random() - 0.5) * 2);
+					if(dirX == 0)
+						dirY = Math.round((Math.random() - 0.5) * 2);
+					else
+						dirX = 0;
+					if(dirX == 0 && dirY == 0)
+						var vitesse = 0;
+					else
+						var vitesse = 2;
+					
+					// console.log(vitesse, dirX, dirY);
+					generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', vitesse, dirX, dirY);
+				}
+
+			}
+			
+			//remplir tous les trous tous les jours
+			var i, n = abs1.length;
+			for (i = 0; i < n; ++i) {
+				if(abs1[i] == 2)
+					abs1[i] = 1;
+			}
+			
         }
 
 		
@@ -56,10 +91,7 @@ function Time() {
 					
 					if(error == 0){
 						Object.keys(updatePrice).forEach(function(keyPrice) {
-							if(Game.hero.supply[keyPrice] >= updatePrice[keyPrice])
-								Game.hero.supply[keyPrice]-= updatePrice[keyPrice];
-							else
-								error = 1;
+							Game.hero.supply[keyPrice]-= updatePrice[keyPrice];
 						})
 					}
 				}

@@ -5,7 +5,7 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
     this.defense = defense;
     this.regeneration = regeneration;
     this.x = x;
-    this.y = y;
+    this.y = y;	
     this.row = row;
     this.col = col;
     this.life = 60;

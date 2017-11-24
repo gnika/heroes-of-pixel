@@ -613,8 +613,6 @@ Game.render = function () {
 				0, // source y
 				map.tsize, // source width
 				map.tsize, // source height
-				// Math.round(x),  // target x
-				// Math.round(y), // target y
 				monsters[key].x-Game.camera.x,  // target x
 				monsters[key].y-Game.camera.y, // target y
 				map.tsize, // target width
