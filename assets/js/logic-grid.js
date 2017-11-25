@@ -149,12 +149,13 @@ Game.init = function () {
 	this.animBulle = 50;
 	this.animBulleBas = 0;
 	
-	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle'};
-	objets['faux']  = {'img':'faux_bois', 'name':'faux'};
-	objets['epee']  = {'img':'epee_bois', 'name':'epee'};
+	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':1};
+	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
+	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
+	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':0, 'equipe':0};
 	
 	
-    this.hero = new Hero(map, 160, 160, 60, 60, 15, 200, 0, objets['pelle']);//map - x - y - vie - attaque - defense - xp - objet
+    this.hero = new Hero(map, 160, 160, 60, 60, 15, 200, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
 	generateTroll(64, 64, 1, 1);
     // this.hero = new Hero(map, 10060, 10060, 60, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
@@ -221,16 +222,30 @@ Game.init = function () {
 		if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)
 			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
 		
+		var n = 0;
+		
+		Object.keys(objets).forEach(function(key) {// menu.js ligne 54
+			if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
+				if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
+					Game._removeEquipe();
+					Game.hero.equipement[key].equipe = 1;
+				}
+				n = n+100;
+			}
+		})
 		
 		
-		if(xClick < 60 && yClick >rect.height/4 && yClick < rect.height/4+64)
-			Game.hero.equipement = objets['pelle'];
+		// if(xClick < 60 && yClick >rect.height/4 && yClick < rect.height/4+64)
+			// Game.hero.equipement = objets['pelle'];
 		
-		if(xClick < 60 && yClick >rect.height/4+100 && yClick < rect.height/4+64+100)
-			Game.hero.equipement = objets['faux'];
+		// if(xClick < 60 && yClick >rect.height/4+100 && yClick < rect.height/4+64+100)
+			// Game.hero.equipement = objets['faux'];
 		
-		if(xClick < 60 && yClick >rect.height/4+200 && yClick < rect.height/4+64+200)
-			Game.hero.equipement = objets['epee'];
+		// if(xClick < 60 && yClick >rect.height/4+200 && yClick < rect.height/4+64+200)
+			// Game.hero.equipement = objets['epee'];
+		
+		
+		
 		
 		if(menussclick!=0){
 			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ok
@@ -270,6 +285,22 @@ Game.init = function () {
     });
 	
 };
+
+Game._removeEquipe = function () {
+	Object.keys(objets).forEach(function(key) {
+		Game.hero.equipement[key].equipe = 0;
+	})
+}
+
+Game._getToolEquipe = function () {
+	
+	var objetEquipe = '';
+	Object.keys(objets).forEach(function(key) {
+		if(Game.hero.equipement[key].equipe == 1)
+			objetEquipe = key;
+	})
+	return objetEquipe;
+}
  
 Game.update = function (delta) {
                

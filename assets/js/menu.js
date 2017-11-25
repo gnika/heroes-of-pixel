@@ -49,12 +49,13 @@ Game._drawMenu = function () {
 	Game.ctx.drawImage(Loader.getImage('action'), 0, height/10);
 	
 	Object.keys(objets).forEach(function(key) {
-
-		if(Game.hero.equipement == objets[key])
-			Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/4+n);
-		else
-			Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/4+n);
-		n = n+100;
+		if(Game.hero.equipement[key].possession == 1){
+			if(Game.hero.equipement[key].equipe == 1)
+				Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/4+n);
+			else
+				Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/4+n);
+			n = n+100;
+		}
 	})
 	
 	

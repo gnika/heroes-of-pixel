@@ -78,7 +78,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 	
 	this.creuse = function (x, y, map)
 	{
-        var equip 	= Game.hero.equipement.name;
+        var equip 	= Game._getToolEquipe();
         var ecu 	= this.supply.ecu;
         var bois 	= this.supply.bois;
         var pain 	= this.supply.pain;
@@ -103,9 +103,10 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 
 		//buildings
 		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
-			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) !== "undefined" || 
+			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) === "undefined" || 
 			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
 			abs2[pos] == builds[vertical+'-'+horizontal].batiment[3]){
+					
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];
@@ -200,7 +201,8 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	}
 	
 	if(builds[rowX+'-'+colY]){	//si sur un batiment dont le statut est le dernier (par exemple, le blé a poussé) et qui nécessite de porter un outil dont le héros n'est pas équipé
-		if(this.equipement.name != builds[rowX+'-'+colY].caracteristique['outilRecompense'] && abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3])
+		var equip 	= Game._getToolEquipe();
+		if(equip != builds[rowX+'-'+colY].caracteristique['outilRecompense'] && abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3])
 			animBack = new animBackground(this.map, builds[rowX+'-'+colY].x, builds[rowX+'-'+colY].y, builds[rowX+'-'+colY].caracteristique['outilRecompense']+'_bulle');
 		else
 			animBack	= null;
@@ -330,7 +332,7 @@ Hero.prototype._ennemy = function (dirx, diry) {
 		
 		this.life = this.life-(lifeHero);
 		
-		var equip = Game.hero.equipement.name;
+		var equip = Game._getToolEquipe();
 		if(collision.life >0 && equip=='epee'){
 			// if(collision.life-(lifeMonster)<0){
 				// lifeMonster=collision.life;
