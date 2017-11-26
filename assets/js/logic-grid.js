@@ -121,7 +121,9 @@ Game.load = function () {
  
 Game.init = function () {
 	
-	
+	var audio = new Audio('assets/sound/ambiance1.mp3');
+	audio.loop = true;
+	audio.play();
 	var w = window,
     d = document,
     e = d.documentElement,
