@@ -22,8 +22,20 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         farine: 2000,
 		fer:    0,
 		cuivre: 0,
-		pain:   100
-    };
+		pain:   100,
+		pierre: 0,
+		or:   	0,
+		viande: 0,
+		cuir: 	0,
+		brique: 0,
+		metal : 0,
+		vigne:  0,
+		vin: 	0,
+		bijou:  0,
+		planche: 0,
+		cochon: 0,
+		mais:	0
+		};
     this.image = Loader.getImage('hero');
 	
 	this.addBuild = function (x, y, map, typeBatiment, caracteristique, supply, typeTile, life, solid)
@@ -78,12 +90,12 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 	
 	this.creuse = function (x, y, map)
 	{
+		
+		Object.keys(this.supply).forEach(function(key) {
+			Game.hero[key] = Game.hero.supply[key];		
+		})
+		
         var equip 	= Game._getToolEquipe();
-        var ecu 	= this.supply.ecu;
-        var bois 	= this.supply.bois;
-        var pain 	= this.supply.pain;
-        var farine 	= this.supply.farine;
-        var ble 	= this.supply.ble;
         var pos     = map.getRow(y)*map.rows+map.getCol(x);
 		
 		var vertical = map.getCol(x);
@@ -92,13 +104,20 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
 			abs1[pos] = 2;
 			abs2[pos] = 0;
-			this.supply.ecu = ecu + 10;
-		} else if (abs1[pos] == 2  && equip == 'pelle'){
-			this.supply.ecu = ecu + 1;
+			this.supply.ecu = Game.hero.ecu + 10;
+		}
+		else if (abs2[pos] == 57 && abs1[pos] != 2 && equip == 'pelle') {
+			abs1[pos] = 58;
+			abs2[pos] = 58;
+			this.supply.argile = Game.hero.argile + 10;
+		} else if (abs1[pos] == 58  && equip == 'pelle'){
+			this.supply.argile = Game.hero.argile + 1;
+        } else if (abs1[pos] == 2  && equip == 'pelle'){
+			this.supply.ecu = Game.hero.ecu + 1;
         }else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
-			this.supply.bois = bois + 5;
+			this.supply.bois = Game.hero.bois + 5;
 		}
 
 		//buildings
@@ -124,30 +143,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			}
 		}
 		
-		if(this.supply.ecu > ecu){
-			//animation gold
-			anim = new animation(map, x, y, 'coin');
-		}
-		
-		if(this.supply.bois > bois){
-			//animation bois
-			anim = new animation(map, x, y, 'bois');
-		}
-		
-		if(this.supply.ble > ble){
-			//animation ble
-			anim = new animation(map, x, y, 'culture_ble');
-		}
-		
-		if(this.supply.pain > pain){
-			//animation pain
-			anim = new animation(map, x, y, 'pain');
-		}
-		
-		if(this.supply.farine > farine){
-			//animation farine
-			anim = new animation(map, x, y, 'farine');
-		}
+		//animation quand on gagne une ressource
+		Object.keys(this.supply).forEach(function(key) {
+			if(Game.hero.supply[key] > Game.hero[key])
+				anim = new animation(map, x, y, key);
+		})
 	}
 	
 }
@@ -202,7 +202,11 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	
 	if(builds[rowX+'-'+colY]){	//si sur un batiment dont le statut est le dernier (par exemple, le blé a poussé) et qui nécessite de porter un outil dont le héros n'est pas équipé
 		var equip 	= Game._getToolEquipe();
-		if(equip != builds[rowX+'-'+colY].caracteristique['outilRecompense'] && abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3])
+		if(
+		builds[rowX+'-'+colY].caracteristique['outilRecompense'] != null && 
+		equip != builds[rowX+'-'+colY].caracteristique['outilRecompense'] &&
+		abs2[colY*map.rows+rowX] == builds[rowX+'-'+colY].batiment[3]
+		)
 			animBack = new animBackground(this.map, builds[rowX+'-'+colY].x, builds[rowX+'-'+colY].y, builds[rowX+'-'+colY].caracteristique['outilRecompense']+'_bulle');
 		else
 			animBack	= null;

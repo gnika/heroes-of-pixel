@@ -41,8 +41,10 @@ function Time() {
 				// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0); //map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY)
 				var xRowMonster	 = Math.floor((Math.random() * Game.hero.map.rows) + 1);
 				var yColMonster	 = Math.floor((Math.random() * Game.hero.map.cols) + 1);
-				var xMonster	 = xRowMonster * Game.hero.map.tsize+32;
-				var yMonster	 = yColMonster * Game.hero.map.tsize+32;
+				// var xRowMonster	 = Math.floor((Math.random() * 8) + 1);
+				// var yColMonster	 = Math.floor((Math.random() * 8) + 1);
+				var xMonster	 = xRowMonster * Game.hero.map.tsize;
+				var yMonster	 = yColMonster * Game.hero.map.tsize;
 				var dirY 		 = 0;
 				var dirX 		 = 0;
 				
@@ -69,6 +71,8 @@ function Time() {
 				for (i = 0; i < n; ++i) {
 					if(abs1[i] == 2)
 						abs1[i] = 1;
+					if(abs1[i] == 58)
+						abs1[i] = 57;
 				}
 				semaine = 1;
 			}
@@ -103,8 +107,8 @@ function Time() {
 					
 				if(abs2[pos] < builds[key].batiment[3] && error == 0){
 					abs2[pos] = abs2[pos]+1;
-					builds[key].day = day;
 				}
+				builds[key].day = day;
 			}
 		})
 	

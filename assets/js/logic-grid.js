@@ -1,5 +1,6 @@
 DUREE_ANIMATION = 50;
 builds          = [];
+allBuilding     = [];
 monsters        = [];
 supply          = [];
 objets		    = [];
@@ -101,10 +102,30 @@ Game.load = function () {
 		Loader.loadImage('bois', 'assets/menu/wood.png'),
 		Loader.loadImage('ecu', 'assets/menu/bourse.png'),
 		Loader.loadImage('farine', 'assets/menu/flour.png'),
+		Loader.loadImage('moulin', 'assets/menu/moulin.png'),
+		Loader.loadImage('boulangerie', 'assets/menu/boulangerie.png'),
+		Loader.loadImage('mine_fer', 'assets/menu/iron_mine.png'),
+		Loader.loadImage('mine_argent', 'assets/menu/mine_silver.png'),
+		Loader.loadImage('tour', 'assets/menu/tour.png'),
+		Loader.loadImage('mine_or', 'assets/menu/gold_mine.png'),
 		Loader.loadImage('cuivre', 'assets/menu/ironpowder.png'),
-		Loader.loadImage('culture_ble', 'assets/menu/corn.png'),
+		Loader.loadImage('culture_mais', 'assets/menu/corn.png'),
 		Loader.loadImage('ok', 'assets/menu/ok.png'),
 		Loader.loadImage('ko', 'assets/menu/ko.png'),
+		Loader.loadImage('acier', 'assets/menu/acier.png'),
+		Loader.loadImage('argile', 'assets/menu/argile.png'),
+		Loader.loadImage('bijoux', 'assets/menu/bijoux.png'),
+		Loader.loadImage('culture_ble', 'assets/menu/ble.png'),
+		Loader.loadImage('brique', 'assets/menu/brique.png'),
+		Loader.loadImage('cochon', 'assets/menu/cochon.png'),
+		Loader.loadImage('jambon', 'assets/menu/jambon.png'),
+		Loader.loadImage('or', 'assets/menu/or.png'),
+		Loader.loadImage('poterie', 'assets/menu/poterie.png'),
+		Loader.loadImage('planche', 'assets/menu/planche.png'),
+		Loader.loadImage('culture_raisin', 'assets/menu/raisin.png'),
+		Loader.loadImage('scierie', 'assets/menu/scierie.png'),
+		Loader.loadImage('vin', 'assets/menu/vin.png'),
+		Loader.loadImage('pierre', 'assets/menu/pierre.png'),
 		Loader.loadImage('action', 'assets/menu/action.png'),
 		
 		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),
@@ -120,7 +141,7 @@ Game.load = function () {
 };
  
 Game.init = function () {
-	
+	setBuilding();
 	var audio = new Audio('assets/sound/ambiance1.mp3');
 	audio.loop = true;
 	audio.play();
@@ -153,8 +174,8 @@ Game.init = function () {
 	
 	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':1};
 	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
+	// objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
 	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
-	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':0, 'equipe':0};
 	
 	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 200, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
@@ -251,7 +272,9 @@ Game.init = function () {
 		
 		if(menussclick!=0){
 			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ok
-				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, paramBuild['typeBatiment'], caracteristique, Game.supplyBuild, paramBuild['typeTile'], paramBuild['life'], paramBuild['solid']);
+				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, allBuilding[keySelected].paramBuild['typeBatiment'],
+				allBuilding[keySelected].caracteristique, allBuilding[keySelected].supplyBuild, allBuilding[keySelected].paramBuild['typeTile'],
+				allBuilding[keySelected].paramBuild['life'], allBuilding[keySelected].paramBuild['solid']);
 			}
 
 			if(xClick >289 && xClick <317 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ko
@@ -529,7 +552,8 @@ Game._drawGridMenu = function () {
 		// }
 	
 	// 
-	if(typeof(animBack) != "undefined" && animBack !== null) { // pour les bulles qui montent et qui descendent
+	
+	if(typeof(animBack) != "undefined" && animBack != null) { // pour les bulles qui montent et qui descendent
 		
 		if(Game.animBulle < 100 && Game.animBulleBas == 0){
 			Game.animBulle++;
