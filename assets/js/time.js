@@ -36,7 +36,7 @@ function Time() {
             day++;
 			semaine++;
 			
-			//generate 10 monstres
+			//generate 5 monstres
 			for(var i = 0; i < 5; i++){
 				// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0); //map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY)
 				var xRowMonster	 = Math.floor((Math.random() * Game.hero.map.rows) + 1);
@@ -73,6 +73,8 @@ function Time() {
 						abs1[i] = 1;
 					if(abs1[i] == 58)
 						abs1[i] = 57;
+					if(abs1[i] == 60)
+						abs1[i] = 59;
 				}
 				semaine = 1;
 			}

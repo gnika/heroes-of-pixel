@@ -1,7 +1,4 @@
 
-
-
-
 function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.map = map;
     this.x = x;
@@ -76,13 +73,9 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			})
 			
 			
-			
-			// console.log(caracteristique['showLife']);
 			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
-			// console.log(builds);
-			// builds.push(Game.nameBuild);
-			
+
 			anim = new animation(map, x+32, y, 'cloud');
 			menussclick = 0; // pour que le sous menu se referme
 		}
@@ -107,11 +100,15 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			this.supply.ecu = Game.hero.ecu + 10;
 		}
 		else if (abs2[pos] == 57 && abs1[pos] != 2 && equip == 'pelle') {
-			abs1[pos] = 58;
 			abs2[pos] = 58;
 			this.supply.argile = Game.hero.argile + 10;
-		} else if (abs1[pos] == 58  && equip == 'pelle'){
+		} else if (abs2[pos] == 58  && equip == 'pelle'){
 			this.supply.argile = Game.hero.argile + 1;
+        }else if (abs2[pos] == 59 && abs1[pos] != 2 && equip == 'pioche') {
+			abs2[pos] = 60;
+			this.supply.pierre = Game.hero.pierre + 10;
+		} else if (abs2[pos] == 60  && equip == 'pioche'){
+			this.supply.pierre = Game.hero.pierre + 1;
         } else if (abs1[pos] == 2  && equip == 'pelle'){
 			this.supply.ecu = Game.hero.ecu + 1;
         }else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {

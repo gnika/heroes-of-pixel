@@ -129,11 +129,14 @@ Game.load = function () {
 		Loader.loadImage('action', 'assets/menu/action.png'),
 		
 		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),
-		Loader.loadImage('faux_bois', 'assets/objets/faux.png'),
+		Loader.loadImage('pelle_bois_use', 'assets/objets/pelle_use.png'),
 		Loader.loadImage('pelle_bulle', 'assets/objets/pelle_bulle.png'),
+		Loader.loadImage('pioche_bois', 'assets/objets/pioche.png'),
+		Loader.loadImage('pioche_bois_use', 'assets/objets/pioche_use.png'),
+		Loader.loadImage('pioche_bulle', 'assets/objets/pioche_bulle.png'),
+		Loader.loadImage('faux_bois', 'assets/objets/faux.png'),
 		Loader.loadImage('faux_bulle', 'assets/objets/faux_bulle.png'),
 		Loader.loadImage('epee_bois', 'assets/objets/epee.png'),
-		Loader.loadImage('pelle_bois_use', 'assets/objets/pelle_use.png'),
 		Loader.loadImage('faux_bois_use', 'assets/objets/faux_use.png'),
 		Loader.loadImage('epee_bois_use', 'assets/objets/epee_use.png')
 		
@@ -172,9 +175,9 @@ Game.init = function () {
 	this.animBulle = 50;
 	this.animBulleBas = 0;
 	
-	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':1};
+	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':0};
 	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
-	// objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
+	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
 	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
 	
 	
@@ -250,8 +253,12 @@ Game.init = function () {
 		Object.keys(objets).forEach(function(key) {// menu.js ligne 54
 			if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
 				if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
-					Game._removeEquipe();
-					Game.hero.equipement[key].equipe = 1;
+					if(Game.hero.equipement[key].equipe == 1){
+						Game._removeEquipe();
+					}else{
+						Game._removeEquipe();
+						Game.hero.equipement[key].equipe = 1;
+					}
 				}
 				n = n+100;
 			}
@@ -597,7 +604,7 @@ Game._drawGridMenu = function () {
 		// }
 	}
 	
-	// draw main character joachim nouvel emplacement
+	// draw main character nouvel emplacement
 	this.ctx.drawImage(
         this.hero.image,
         this.hero.screenX - this.hero.width / 2,
@@ -653,11 +660,6 @@ Game.render = function () {
     // draw map background layer
     this._drawLayer(0);
     // draw main character
-    //joachim change place juste après le dessin de la grille
-   // console.log(monsters);
-   
-   
-   
     // draw map top layer
     this._drawLayer(1);
    
