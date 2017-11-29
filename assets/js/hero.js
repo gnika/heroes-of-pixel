@@ -73,10 +73,10 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			})
 			
 			
-			Game.nameBuild = new Building(map, x+32, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, typeBatiment, caracteristique, typeTile, solid);
+			Game.nameBuild = new Building(map, x+map.tsize/2, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
 
-			anim = new animation(map, x+32, y, 'cloud');
+			anim = new animation(map, x+map.tsize/2, y, 'cloud');
 			menussclick = 0; // pour que le sous menu se referme
 		}
 	}
