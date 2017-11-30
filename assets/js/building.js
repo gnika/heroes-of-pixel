@@ -332,6 +332,56 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		 'description_en'	: description_en
 		};
 		
+		var supplyBuild 		= [];		//boucherie
+		var caracteristique 	= [];
+		var paramBuild 			= [];
+		
+		caracteristique['showLife'] = 1;
+		caracteristique['recompense'] = {'viande': 400};
+		supplyBuild['ecu'] = 0;
+		paramBuild['typeBatiment'] = [63, 64, 65, 66];
+		paramBuild['typeTile'] = 0;
+		caracteristique['prixUpdate'] = {'cochon': 0};
+		paramBuild['life'] = 60;
+		paramBuild['solid'] = 0;
+		
+		menussclickTitre = 'Boucherie';
+		description_fr = 'Transforme les cochons en viande';
+		description_en = 'EN Transforme les cochons en viande';
+
+		allBuilding['boucherie']  = {
+		 'caracteristique'	: caracteristique,
+		 'supplyBuild' 		: supplyBuild,
+		 'paramBuild' 		: paramBuild,
+		 'menussclickTitre' : menussclickTitre,
+		 'description_fr'	: description_fr,
+		 'description_en'	: description_en
+		};
+		
+		var supplyBuild 		= [];		//entrepot
+		var caracteristique 	= [];
+		var paramBuild 			= [];
+		
+		caracteristique['showLife'] = 1;
+		supplyBuild['ecu'] = 99900;
+		paramBuild['typeBatiment'] = [61];
+		paramBuild['typeTile'] = 0;
+		paramBuild['life'] = 60;
+		paramBuild['solid'] = 0;
+		
+		menussclickTitre = 'Entrepôt';
+		description_fr = 'Bâtiment de départ';
+		description_en = 'EN Bâtiment de départ';
+
+		allBuilding['entrepot']  = {
+		 'caracteristique'	: caracteristique,
+		 'supplyBuild' 		: supplyBuild,
+		 'paramBuild' 		: paramBuild,
+		 'menussclickTitre' : menussclickTitre,
+		 'description_fr'	: description_fr,
+		 'description_en'	: description_en
+		};
+		
 		var supplyBuild 		= [];		//scierie
 		var caracteristique 	= [];
 		var paramBuild 			= [];

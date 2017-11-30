@@ -9,6 +9,7 @@ clickCanvasY 	= 0;
 xHeroClick		= 0;
 yHeroClick		= 0;
 menuclick		= 0;
+batimentclick	= 0;
 menussclick		= 0;
 hour	   		= 0;
 day			    = 1;
@@ -98,7 +99,7 @@ Game.load = function () {
 		Loader.loadImage('ball', 'assets/ball.png'),
 		// pour le menu
 		Loader.loadImage('pain', 'assets/menu/bread.png'),
-		Loader.loadImage('fer', 'assets/menu/silver_ingot.png'),
+		Loader.loadImage('argent', 'assets/menu/silver_ingot.png'),
 		Loader.loadImage('bois', 'assets/menu/wood.png'),
 		Loader.loadImage('ecu', 'assets/menu/bourse.png'),
 		Loader.loadImage('farine', 'assets/menu/flour.png'),
@@ -108,8 +109,10 @@ Game.load = function () {
 		Loader.loadImage('mine_argent', 'assets/menu/mine_silver.png'),
 		Loader.loadImage('tour', 'assets/menu/tour.png'),
 		Loader.loadImage('mine_or', 'assets/menu/gold_mine.png'),
-		Loader.loadImage('cuivre', 'assets/menu/ironpowder.png'),
+		Loader.loadImage('fer', 'assets/menu/ironpowder.png'),
+		Loader.loadImage('cuir', 'assets/menu/cuir.png'),
 		Loader.loadImage('culture_mais', 'assets/menu/corn.png'),
+		Loader.loadImage('bijou', 'assets/menu/diamant.png'),
 		Loader.loadImage('ok', 'assets/menu/ok.png'),
 		Loader.loadImage('ko', 'assets/menu/ko.png'),
 		Loader.loadImage('acier', 'assets/menu/acier.png'),
@@ -119,6 +122,7 @@ Game.load = function () {
 		Loader.loadImage('brique', 'assets/menu/brique.png'),
 		Loader.loadImage('cochon', 'assets/menu/cochon.png'),
 		Loader.loadImage('jambon', 'assets/menu/jambon.png'),
+		Loader.loadImage('boucherie', 'assets/menu/boucherie.png'),
 		Loader.loadImage('or', 'assets/menu/or.png'),
 		Loader.loadImage('poterie', 'assets/menu/poterie.png'),
 		Loader.loadImage('planche', 'assets/menu/planche.png'),
@@ -182,6 +186,13 @@ Game.init = function () {
 	
 	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 200, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
+	var nameBuild = 'build-2-2-ing';
+	var caracteristique 	= [];
+		caracteristique['showLife'] = 1;
+	
+	Game.nameBuild = new Building(map, 160, 160, 2, 2, 60, nameBuild, 61, caracteristique, 0, 0);
+	builds['2-2']=Game.nameBuild;
+	
 	generateTroll(64, 64, 1, 1);
     // this.hero = new Hero(map, 10060, 10060, 60, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
 	// generateTroll(192, 192, 3, 3);
@@ -221,7 +232,7 @@ Game.init = function () {
 				return false;
 			}
 			
-		if(menussclick == 0){	
+		if(menussclick == 0 && batimentclick == 0){	// bouge si aucun menu n'est ouvert
 			// bouger avec le click de souris
 			xHeroClick = xHero;
 			yHeroClick = yHero;
@@ -264,19 +275,13 @@ Game.init = function () {
 			}
 		})
 		
-		
-		// if(xClick < 60 && yClick >rect.height/4 && yClick < rect.height/4+64)
-			// Game.hero.equipement = objets['pelle'];
-		
-		// if(xClick < 60 && yClick >rect.height/4+100 && yClick < rect.height/4+64+100)
-			// Game.hero.equipement = objets['faux'];
-		
-		// if(xClick < 60 && yClick >rect.height/4+200 && yClick < rect.height/4+64+200)
-			// Game.hero.equipement = objets['epee'];
-		
-		
-		
-		
+		//si fiche du batiment ouvert
+		if(batimentclick == 1){
+			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 &&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+				batimentclick = 0;
+			}
+		}
+		//si sous menu ouvert
 		if(menussclick!=0){
 			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ok
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, allBuilding[keySelected].paramBuild['typeBatiment'],
@@ -291,6 +296,7 @@ Game.init = function () {
 		}
 		
 		// console.log(menussclick);
+		
 		
 		
 		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
@@ -381,17 +387,17 @@ Game._drawLayer = function (layer) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-			// if(layer == 0){ // si non commenté, plus d'animation !
-				if(tile==6){
-					if(Game.anim>=DUREE_ANIMATION){
-						abs2[r*map.rows+c]=7;
-					}
-				}
-				else if(tile==7){
-					if(Game.anim>=DUREE_ANIMATION){
-						abs2[r*map.rows+c]=6;
-					}
-				}
+			
+				// if(tile==6){
+					// if(Game.anim>=DUREE_ANIMATION){
+						// abs2[r*map.rows+c]=7;
+					// }
+				// }
+				// else if(tile==7){
+					// if(Game.anim>=DUREE_ANIMATION){
+						// abs2[r*map.rows+c]=6;
+					// }
+				// }
 				
 				if(tile==8){
 					if(Game.anim>=DUREE_ANIMATION){
@@ -403,7 +409,7 @@ Game._drawLayer = function (layer) {
 						abs2[r*map.rows+c]=8;
 					}
 				}
-			// }
+			
 			
             var x = (c - startCol) * map.tsize + offsetX;
             var y = (r - startRow) * map.tsize + offsetY;
@@ -596,12 +602,6 @@ Game._drawGridMenu = function () {
 			animBack		  = null;
 			Game.animBulleBas = 0;
 		}
-		
-		
-		// }else{
-			// animBack=null;
-			// Game.animBref=0;
-		// }
 	}
 	
 	// draw main character nouvel emplacement
@@ -666,20 +666,23 @@ Game.render = function () {
 	Object.keys(monsters).forEach(function(key) {
 	if(monsters[key].life>0){
 			// draw main character
-			Game.ctx.drawImage(
-				monsters[key].image, // image
-				0, // source x
-				0, // source y
-				map.tsize, // source width
-				map.tsize, // source height
-				monsters[key].x-Game.camera.x,  // target x
-				monsters[key].y-Game.camera.y, // target y
-				map.tsize, // target width
-				map.tsize // target height
-			);
+			if(absobs1[monsters[key].col * map.rows + monsters[key].row] != 7){//EXPLORATION 
+				Game.ctx.drawImage(
+					monsters[key].image, // image
+					0, // source x
+					0, // source y
+					map.tsize, // source width
+					map.tsize, // source height
+					monsters[key].x-Game.camera.x,  // target x
+					monsters[key].y-Game.camera.y, // target y
+					map.tsize, // target width
+					map.tsize // target height
+				);
+			
 	
-		Game.ctx.fillStyle="#FF0000";
-		Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
+			Game.ctx.fillStyle="#FF0000";
+			Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
+		}
 		}else{
 				Game.hero.xp = Game.hero.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
 				anim = new animation(map, monsters[key].x, monsters[key].y, 'xp');
@@ -694,4 +697,5 @@ Game.render = function () {
 	this.ctx.fillStyle="blue";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+52, this.hero.fatigue, 10);
     this._drawGridMenu();
+    this._clickBatiment();
 };

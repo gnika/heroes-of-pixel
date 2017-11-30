@@ -12,26 +12,25 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.defense = defense;
     this.equipement = equipement;
     this.supply = {
-        ecu:    0, 
-        bois:   0, 
-        argile: 0, 
-        ble:    0,
-        farine: 2000,
-		fer:    0,
-		cuivre: 0,
-		pain:   100,
-		pierre: 0,
-		or:   	0,
-		viande: 0,
-		cuir: 	0,
-		brique: 0,
-		metal : 0,
-		vigne:  0,
-		vin: 	0,
-		bijou:  0,
-		planche: 0,
-		cochon: 0,
-		mais:	0
+        ecu:    	0, 
+        bois:   	0, 
+        argile: 	0, 
+        ble:    	0,
+        farine: 	2000,
+		argent: 	0,
+		pain:   	100,
+		pierre: 	0,
+		or:   		0,
+		viande: 	0,
+		cuir: 		0,
+		brique: 	0,
+		fer : 		0,
+		vigne:  	0,
+		vin: 		0,
+		bijou:  	0,
+		planche:	0,
+		cochon: 	0,
+		mais:		0
 		};
     this.image = Loader.getImage('hero');
 	
@@ -117,7 +116,13 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			this.supply.bois = Game.hero.bois + 5;
 		}
 
-		//buildings
+		// console.log(vertical, horizontal, builds, equip);
+		//actions buildings si pas équipé d'outils
+		if(equip == '' && typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
+			batimentclick = 1;
+		}
+		
+		//actions buildings si équipé d'un outils
 		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
 			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) === "undefined" || 
 			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
@@ -185,6 +190,20 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	
 	var rowX = this.map.getRow(this.x);
 	var colY = this.map.getCol(this.y);
+	
+	//EXPLORATION
+	absobs1[colY*map.rows+rowX] = abs1[colY*map.rows+rowX];
+	absobs1[colY*map.rows+rowX+1] = abs1[colY*map.rows+rowX+1];
+	absobs1[colY*map.rows+rowX-1] = abs1[colY*map.rows+rowX-1];
+	absobs1[colY*map.rows+rowX+map.rows] = abs1[colY*map.rows+rowX+map.rows];
+	absobs1[colY*map.rows+rowX-map.rows] = abs1[colY*map.rows+rowX-map.rows];
+	
+	absobs2[colY*map.rows+rowX] = abs2[colY*map.rows+rowX];
+	absobs2[colY*map.rows+rowX+1] = abs2[colY*map.rows+rowX+1];
+	absobs2[colY*map.rows+rowX-1] = abs2[colY*map.rows+rowX-1];
+	absobs2[colY*map.rows+rowX+map.rows] = abs2[colY*map.rows+rowX+map.rows];
+	absobs2[colY*map.rows+rowX-map.rows] = abs2[colY*map.rows+rowX-map.rows];
+	//FIN EXPLORATION
 	
 	if(this.x >= xHeroClick+this.map.tsize || this.y >= yHeroClick+this.map.tsize || this.x <= xHeroClick-this.map.tsize || this.y <= yHeroClick-this.map.tsize ){
 
