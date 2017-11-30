@@ -112,6 +112,7 @@ Game.load = function () {
 		Loader.loadImage('fer', 'assets/menu/ironpowder.png'),
 		Loader.loadImage('cuir', 'assets/menu/cuir.png'),
 		Loader.loadImage('culture_mais', 'assets/menu/corn.png'),
+		Loader.loadImage('entrepot', 'assets/menu/entrepot.png'),
 		Loader.loadImage('bijou', 'assets/menu/diamant.png'),
 		Loader.loadImage('ok', 'assets/menu/ok.png'),
 		Loader.loadImage('ko', 'assets/menu/ko.png'),

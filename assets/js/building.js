@@ -358,30 +358,6 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		 'description_en'	: description_en
 		};
 		
-		var supplyBuild 		= [];		//entrepot
-		var caracteristique 	= [];
-		var paramBuild 			= [];
-		
-		caracteristique['showLife'] = 1;
-		supplyBuild['ecu'] = 99900;
-		paramBuild['typeBatiment'] = [61];
-		paramBuild['typeTile'] = 0;
-		paramBuild['life'] = 60;
-		paramBuild['solid'] = 0;
-		
-		menussclickTitre = 'Entrepôt';
-		description_fr = 'Bâtiment de départ';
-		description_en = 'EN Bâtiment de départ';
-
-		allBuilding['entrepot']  = {
-		 'caracteristique'	: caracteristique,
-		 'supplyBuild' 		: supplyBuild,
-		 'paramBuild' 		: paramBuild,
-		 'menussclickTitre' : menussclickTitre,
-		 'description_fr'	: description_fr,
-		 'description_en'	: description_en
-		};
-		
 		var supplyBuild 		= [];		//scierie
 		var caracteristique 	= [];
 		var paramBuild 			= [];
@@ -400,6 +376,30 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		description_en = 'EN transforme le bois en planche';
 
 		allBuilding['scierie']  = {
+		 'caracteristique'	: caracteristique,
+		 'supplyBuild' 		: supplyBuild,
+		 'paramBuild' 		: paramBuild,
+		 'menussclickTitre' : menussclickTitre,
+		 'description_fr'	: description_fr,
+		 'description_en'	: description_en
+		};
+		
+		var supplyBuild 		= [];		//entrepot
+		var caracteristique 	= [];
+		var paramBuild 			= [];
+		
+		caracteristique['showLife'] = 1;
+		supplyBuild['ecu'] = 99900;
+		paramBuild['typeBatiment'] = [61];
+		paramBuild['typeTile'] = 0;
+		paramBuild['life'] = 60;
+		paramBuild['solid'] = 0;
+		
+		menussclickTitre = 'Entrepôt';
+		description_fr = 'Bâtiment de départ';
+		description_en = 'EN Bâtiment de départ';
+
+		allBuilding['entrepot']  = {
 		 'caracteristique'	: caracteristique,
 		 'supplyBuild' 		: supplyBuild,
 		 'paramBuild' 		: paramBuild,
