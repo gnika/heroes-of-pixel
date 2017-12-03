@@ -326,6 +326,23 @@ Game.init = function () {
         currentTime.startTime(100);
     });
 	
+	window.onresize = resize;
+
+	function resize()
+	{
+		var w = window,
+		d = document,
+		e = d.documentElement,
+		g = d.getElementsByTagName('body')[0],
+		x = w.innerWidth || e.clientWidth || g.clientWidth,
+		y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+		canvas  = document.getElementById('map_canvas');
+		canvas.width = x;
+		canvas.height = y - 100;
+		Game.camera = new Camera(Game.hero.map, x, y-100);
+		Game.camera.follow(Game.hero);
+	}
+	
 };
 
 Game._removeEquipe = function () {

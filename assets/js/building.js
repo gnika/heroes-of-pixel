@@ -61,7 +61,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['outilRecompense'] = 'faux';
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [36, 37, 38, 39];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		caracteristique['loseLife'] = 1;
 		paramBuild['life'] = 3;
 		paramBuild['solid'] = 0;
@@ -87,7 +87,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['outilRecompense'] = 'faux';
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [40, 41, 42, 43];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
 		caracteristique['loseLife'] = 1;
 		paramBuild['solid'] = 0;
@@ -118,7 +118,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['recompense'] = {'farine': 100};	//prix reçu quand le héros ramasse les ressources
 		caracteristique['outilRecompense'] = 'faux';		// outil à utiliser pour le héros pour ramasser les ressources
 		paramBuild['typeBatiment'] = [20, 21, 22, 23];		// les différents statut du batiment
-		paramBuild['typeTile'] = 0;							//type de tile sur lequel doit être construit le batiment
+		paramBuild['typeTile'] = [1, 0];							//type de tile sur lequel doit être construit le batiment
 		paramBuild['life'] = 60;							//vie du batiment
 		paramBuild['solid'] = 0;							//peut-on passer sur le batiment
 			
@@ -141,7 +141,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		supplyBuild['ecu'] = 150;
 		supplyBuild['bois'] = 150;
-		supplyBuild['cuivre'] = 150;
+		supplyBuild['fer'] = 150;
 		caracteristique['level'] = 1;
 		caracteristique['attaque'] = 0;
 		caracteristique['showLife'] = 1;
@@ -150,7 +150,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['recompense'] = {'pain': 100};
 		caracteristique['outilRecompense'] = 'faux';
 		paramBuild['typeBatiment'] 	  = [24, 25, 26, 27];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
@@ -177,7 +177,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] =1;
 		caracteristique['portee'] =0;
 		paramBuild['typeBatiment'] = [32, 33, 34, 35];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
@@ -205,7 +205,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] =1;
 		caracteristique['portee'] =0;
 		paramBuild['typeBatiment'] = [28, 29, 30, 31];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
@@ -229,7 +229,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		// supplyBuild['ecu'] = 0;
 		supplyBuild['ecu'] = 350;
 		supplyBuild['bois'] = 150;
-		supplyBuild['cuivre'] = 150;
+		supplyBuild['fer'] = 150;
 		supplyBuild['fer'] = 150;
 			
 		caracteristique['level'] =1;
@@ -237,7 +237,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] =1;
 		caracteristique['portee'] =2;
 		paramBuild['typeBatiment'] = [6];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 1;
 		
@@ -266,7 +266,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['recompense'] = {'or': 400};
 		caracteristique['portee'] =0;
 		paramBuild['typeBatiment'] = [48, 49, 50, 51];
-		paramBuild['typeTile'] = 52;
+		paramBuild['typeTile'] = [62, 52];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
@@ -292,7 +292,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['outilRecompense'] = 'faux';
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [10, 11, 12, 13];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
 		paramBuild['loseLife'] = 1;
 		paramBuild['solid'] = 0;
@@ -318,7 +318,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['recompense'] = {'cochon': 400};
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [53, 54, 55, 56];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
@@ -343,7 +343,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['recompense'] = {'viande': 400};
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [63, 64, 65, 66];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		caracteristique['prixUpdate'] = {'cochon': 0};
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
@@ -370,7 +370,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['recompense'] = {'planche': 300};
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [44, 45, 46, 47];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
@@ -394,7 +394,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] = 1;
 		supplyBuild['ecu'] = 99900;
 		paramBuild['typeBatiment'] = [61];
-		paramBuild['typeTile'] = 0;
+		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		

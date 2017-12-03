@@ -69,12 +69,18 @@ function Time() {
 			if(semaine == 7){
 				var i, n = abs1.length;
 				for (i = 0; i < n; ++i) {
-					if(abs1[i] == 2)
+					if(abs1[i] == 2){
 						abs1[i] = 1;
-					if(abs1[i] == 58)
+						absobs1[i] = 1;
+					}
+					if(abs1[i] == 58){
+						absobs1[i] = 57;
 						abs1[i] = 57;
-					if(abs1[i] == 60)
+					}
+					if(abs1[i] == 60){
+						absobs1[i] = 59;
 						abs1[i] = 59;
+					}
 				}
 				semaine = 1;
 			}

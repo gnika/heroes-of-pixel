@@ -140,6 +140,18 @@ Game._drawMenu = function () {
 			a = a+40;
 		})
 		
+		Game.ctx.drawImage(
+			Game.tileAtlas, // image
+			(allBuilding[keySelected].paramBuild['typeTile'][0] - 1) * map.tsize, // source x
+			0, // source y
+			map.tsize/2, // source width
+			map.tsize/2, // source height
+			a,  // target x
+			5+u+height-tsizePar2*4, // target y
+			map.tsize/2, // target width
+			map.tsize/2 // target height
+		);
+		
 	}
 	
 	// this.ctx.beginPath();

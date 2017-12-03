@@ -59,7 +59,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 
 
 		// if(abs2[pos+1]==typeTile && abs1[pos+1]==1){
-		if(abs2[pos+1]==typeTile){
+		if(abs1[pos+1] == typeTile[0] && abs2[pos+1] == typeTile[1]){
 			//pour éviter au héros de rester bloquer dans le batiment
 
 			Game.hero.x = map.tsize/2+map.tsize*map.getCol(x);
@@ -97,15 +97,19 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
 			abs1[pos] = 2;
 			abs2[pos] = 0;
+			absobs1[pos] = 2;
+			absobs2[pos] = 0;
 			this.supply.ecu = Game.hero.ecu + 10;
 		}
 		else if (abs2[pos] == 57 && abs1[pos] != 2 && equip == 'pelle') {
 			abs2[pos] = 58;
+			absobs2[pos] = 58;
 			this.supply.argile = Game.hero.argile + 10;
 		} else if (abs2[pos] == 58  && equip == 'pelle'){
 			this.supply.argile = Game.hero.argile + 1;
         }else if (abs2[pos] == 59 && abs1[pos] != 2 && equip == 'pioche') {
 			abs2[pos] = 60;
+			absobs2[pos] = 60;
 			this.supply.pierre = Game.hero.pierre + 10;
 		} else if (abs2[pos] == 60  && equip == 'pioche'){
 			this.supply.pierre = Game.hero.pierre + 1;
@@ -114,6 +118,8 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         }else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
+            absobs1[pos] = 2;
+            absobs2[pos] = 0;
 			this.supply.bois = Game.hero.bois + 5;
 		}
 
