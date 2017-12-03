@@ -58,7 +58,8 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		pos = map.getRow(y)*map.rows+map.getCol(x);
 
 
-		if(abs2[pos+1]==typeTile && abs1[pos+1]==1){
+		// if(abs2[pos+1]==typeTile && abs1[pos+1]==1){
+		if(abs2[pos+1]==typeTile){
 			//pour éviter au héros de rester bloquer dans le batiment
 
 			Game.hero.x = map.tsize/2+map.tsize*map.getCol(x);
@@ -128,6 +129,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
 			abs2[pos] == builds[vertical+'-'+horizontal].batiment[3]){
 					
+				if(	builds[vertical+'-'+horizontal].caracteristique['loseLife'] == 1)
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];

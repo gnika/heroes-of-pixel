@@ -197,7 +197,7 @@ Game._clickBatiment = function () {
 		var tsizePar2 = map.tsize/2;
 		
 		this.ctx.beginPath();
-		this.ctx.rect(width/4, height/4, width/2, height/2);
+		this.ctx.rect(width/4, height/4, width/4, height/2);
 		this.ctx.fillStyle = 'brown';
 		this.ctx.fill();
 		this.ctx.drawImage(Loader.getImage('ko'), width/4, height/4);
@@ -215,9 +215,6 @@ Game._clickBatiment = function () {
 			this.ctx.fillText(this.hero.supply.cochon, width/4+192, height/4+64);
 			this.ctx.drawImage(Loader.getImage('cochon'), width/4+192, height/4+68);
 			
-			this.ctx.drawImage(Loader.getImage('vin'), width/4+256, height/4+64);
-			this.ctx.fillText(this.hero.supply.vin, width/4+256, height/4+68);
-			
 			this.ctx.fillText(this.hero.supply.viande, width/4+64, height/4+128);
 			this.ctx.drawImage(Loader.getImage('jambon'), width/4+64, height/4+132);
 			
@@ -227,35 +224,14 @@ Game._clickBatiment = function () {
 			this.ctx.fillText(this.hero.supply.brique, width/4+192, height/4+128);
 			this.ctx.drawImage(Loader.getImage('brique'), width/4+192, height/4+132);
 			
-			this.ctx.drawImage(Loader.getImage('planche'), width/4+256, height/4+128);
-			this.ctx.fillText(this.hero.supply.planche, width/4+256, height/4+132);
-			
 			this.ctx.drawImage(Loader.getImage('bijou'), width/4+55, height/4+205);
 			this.ctx.fillText(this.hero.supply.bijou, width/4+64, height/4+200);
 			
-			// this.ctx.drawImage(Loader.getImage('culture_ble'), 300, 0);
-			// this.ctx.fillText(this.hero.supply.ble, 340, 25);
+			this.ctx.drawImage(Loader.getImage('vin'), width/4+128, height/4+205);
+			this.ctx.fillText(this.hero.supply.vin, width/4+128, height/4+200);
 			
-			// this.ctx.drawImage(Loader.getImage('pierre'), 395, 0);
-			// this.ctx.fillText(this.hero.supply.pierre, 435, 25);
-			
-			// this.ctx.drawImage(Loader.getImage('argile'), 495, 0);
-			// this.ctx.fillText(this.hero.supply.argile, 535, 25);
-			
-			// this.ctx.drawImage(Loader.getImage('culture_mais'), 110, 32);
-			// this.ctx.fillText(this.hero.supply.mais, 150, 57);
-			
-			// this.ctx.drawImage(Loader.getImage('cuivre'), 205, 32);
-			// this.ctx.fillText(this.hero.supply.cuivre, 245, 57);
-			
-			// this.ctx.drawImage(Loader.getImage('fer'), 300, 32);
-			// this.ctx.fillText(this.hero.supply.fer, 340, 57);
-			
-			// this.ctx.drawImage(Loader.getImage('or'), 395, 32);
-			// this.ctx.fillText(this.hero.supply.or, 435, 57);
-			
-			// this.ctx.drawImage(Loader.getImage('culture_raisin'), 495, 32);
-			// this.ctx.fillText(this.hero.supply.vigne, 535, 57);
+			this.ctx.drawImage(Loader.getImage('planche'), width/4+192, height/4+205);
+			this.ctx.fillText(this.hero.supply.planche, width/4+192, height/4+200);
 		}
 	}
 }

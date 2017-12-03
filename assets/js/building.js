@@ -62,6 +62,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [36, 37, 38, 39];
 		paramBuild['typeTile'] = 0;
+		caracteristique['loseLife'] = 1;
 		paramBuild['life'] = 3;
 		paramBuild['solid'] = 0;
 		
@@ -88,6 +89,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		paramBuild['typeBatiment'] = [40, 41, 42, 43];
 		paramBuild['typeTile'] = 0;
 		paramBuild['life'] = 3;
+		caracteristique['loseLife'] = 1;
 		paramBuild['solid'] = 0;
 		
 		menussclickTitre = 'Vigne';
@@ -269,8 +271,8 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		paramBuild['solid'] = 0;
 		
 		menussclickTitre = 'Mine d\'or';
-		description_fr = 'Les mines d\'or génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
-		description_en = 'EN mines d\'or génèrent du cuivre\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+		description_fr = 'Les mines d\'or génèrent de l\'or \nnécessaire à la création\nde plusieurs bâtiments et objets.';
+		description_en = 'EN mines d\'or génèrent de l\'or\nnécessaire à la création\nde plusieurs bâtiments et objets.';
 			
 		allBuilding['mine_or']  = {
 		 'caracteristique'	: caracteristique,
@@ -292,6 +294,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		paramBuild['typeBatiment'] = [10, 11, 12, 13];
 		paramBuild['typeTile'] = 0;
 		paramBuild['life'] = 3;
+		paramBuild['loseLife'] = 1;
 		paramBuild['solid'] = 0;
 		
 		menussclickTitre = 'Champs de maïs';

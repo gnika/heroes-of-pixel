@@ -109,6 +109,7 @@ function Time() {
 					
 				if(abs2[pos] < builds[key].batiment[3] && error == 0){
 					abs2[pos] = abs2[pos]+1;
+					absobs2[pos] = absobs2[pos]+1;
 				}
 				builds[key].day = day;
 			}

@@ -112,6 +112,9 @@ Game.load = function () {
 		Loader.loadImage('fer', 'assets/menu/ironpowder.png'),
 		Loader.loadImage('cuir', 'assets/menu/cuir.png'),
 		Loader.loadImage('culture_mais', 'assets/menu/corn.png'),
+		Loader.loadImage('vigne', 'assets/menu/raisin.png'),
+		Loader.loadImage('mais', 'assets/menu/corn.png'),
+		Loader.loadImage('ble', 'assets/menu/ble.png'),
 		Loader.loadImage('entrepot', 'assets/menu/entrepot.png'),
 		Loader.loadImage('bijou', 'assets/menu/diamant.png'),
 		Loader.loadImage('ok', 'assets/menu/ok.png'),
@@ -162,7 +165,7 @@ Game.init = function () {
 	
 	//resize en fonction de l'écran
 	canvas  = document.getElementById('map_canvas');
-    canvas.width = x-50;
+    canvas.width = x;
     canvas.height = y-100;
 	var rect = canvas.getBoundingClientRect();
 	// console.log(rect);
@@ -201,7 +204,7 @@ Game.init = function () {
 	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
 	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
 
-    this.camera = new Camera(map, x-50, y-100);
+    this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
 
 	document.getElementById("map_canvas").addEventListener('click',
@@ -403,11 +406,13 @@ Game._drawLayer = function (layer) {
 				if(tile==8){
 					if(Game.anim>=DUREE_ANIMATION){
 						abs2[r*map.rows+c]=9;
+						absobs2[r*map.rows+c]=9;
 					}
 				}
 				else if(tile==9){
 					if(Game.anim>=DUREE_ANIMATION){
 						abs2[r*map.rows+c]=8;
+						absobs2[r*map.rows+c]=8;
 					}
 				}
 			
