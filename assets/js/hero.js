@@ -128,6 +128,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) === "undefined" || 
 			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
 			abs2[pos] == builds[vertical+'-'+horizontal].batiment[3]){
+				
+				var recompense = builds[vertical+'-'+horizontal].caracteristique['recompense'];
+				Object.keys(recompense).forEach(function(keyRecompense) {
+					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
+				})
 					
 				if(	builds[vertical+'-'+horizontal].caracteristique['loseLife'] == 1)
 				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
@@ -140,10 +145,6 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 					builds[vertical+'-'+horizontal].day = day;
 					builds[vertical+'-'+horizontal].hour = hour;
 				}
-				var recompense = builds[vertical+'-'+horizontal].caracteristique['recompense'];
-				Object.keys(recompense).forEach(function(keyRecompense) {
-					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
-				})
 			}
 		}
 		
