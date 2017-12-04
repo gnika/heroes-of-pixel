@@ -125,9 +125,9 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 
 		// console.log(vertical, horizontal, builds, equip);
 		//actions buildings si pas équipé d'outils
-		if(equip == '' && typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
-			batimentclick = 1;
-		}
+		// if(equip == '' && typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
+			// batimentclick = 1;
+		// }
 		
 		//actions buildings si équipé d'un outils
 		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
@@ -190,7 +190,7 @@ Hero.prototype.move = function (delta, dirx, diry) {
     // check if he loses life
     this._loselifeTile(dirx, diry);
 	
- 
+	
     // clamp values
     var maxX = this.map.cols * this.map.tsize;
     var maxY = this.map.rows * this.map.tsize;

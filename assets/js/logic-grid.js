@@ -127,6 +127,7 @@ Game.load = function () {
 		Loader.loadImage('cochon', 'assets/menu/cochon.png'),
 		Loader.loadImage('jambon', 'assets/menu/jambon.png'),
 		Loader.loadImage('boucherie', 'assets/menu/boucherie.png'),
+		Loader.loadImage('loupe', 'assets/menu/detail.png'),
 		Loader.loadImage('or', 'assets/menu/or.png'),
 		Loader.loadImage('poterie', 'assets/menu/poterie.png'),
 		Loader.loadImage('planche', 'assets/menu/planche.png'),
@@ -222,7 +223,12 @@ Game.init = function () {
 			var menuH = Game.hero.map.tsize/2;
 			
 			
-			if(rowClick == rowHero && colHero == colClick){
+			if(rowClick == rowHero && colHero == colClick){	//nourrir
+				if(builds[rowClick+'-'+colHero]){
+					batimentclick = 1;
+					
+					return false;
+				}
 				if(Game.hero.supply.pain >= 5){
 					Game.hero.supply.pain-= 5;
 					
@@ -721,4 +727,13 @@ Game.render = function () {
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+52, this.hero.fatigue, 10);
     this._drawGridMenu();
     this._clickBatiment();
+	
+	
+	if(builds[this.hero.map.getRow(this.hero.x)+'-'+this.hero.map.getCol(this.hero.y)]){//loupe si heros sur batiment
+		Game.ctx.drawImage(
+			Loader.getImage('loupe'),
+			this.hero.x-16-this.camera.x,
+			this.hero.y-this.camera.y
+		);
+	}
 };

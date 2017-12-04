@@ -244,6 +244,47 @@ Game._clickBatiment = function () {
 			
 			this.ctx.drawImage(Loader.getImage('planche'), width/4+192, height/4+205);
 			this.ctx.fillText(this.hero.supply.planche, width/4+192, height/4+200);
+		}else{	//détail de tous les autres batiments
+			var build = builds[map.getRow(this.hero.x)+'-'+map.getCol(this.hero.y)] ;
+			this.ctx.fillStyle = 'white';
+			this.ctx.fillText('level : '+build.caracteristique.level, width/4+128, height/4+32);
+			this.ctx.fillText('vie : '+build.life, width/4+128, height/4+64);
+			if(build.caracteristique.outilRecompense)
+				this.ctx.drawImage(Loader.getImage(build.caracteristique.outilRecompense+'_bulle'), width/4+50, height/4+25);
+			
+			this.ctx.fillText('Maintenance / jour', width/4+5, height/4+100);
+			var n = 0;
+			Object.keys(build.caracteristique.maintenance).forEach(function(key) {
+				Game.ctx.fillText(build.caracteristique.maintenance[key], width/4+5, height/4+138 + n);
+				Game.ctx.drawImage(Loader.getImage(key), width/4+37, height/4+110 + n);
+				n = n+40;
+			})
+			
+			if( build.caracteristique.level < 3){
+				var error = 0;
+				this.ctx.fillText('Prochain', width/3+128, height/5+100);
+				this.ctx.fillText('niveau', width/3+128, height/5+120);
+				var n = 0;
+				Object.keys(build.caracteristique.updateNiveau).forEach(function(key) {
+					if(Game.hero.supply[key] >= build.caracteristique.updateNiveau[key] * build.caracteristique.level)
+						Game.ctx.fillStyle = 'greenyellow';
+					else{
+						Game.ctx.fillStyle = 'red';
+						error = 1;
+					}
+					
+					Game.ctx.fillText(build.caracteristique.updateNiveau[key] * build.caracteristique.level, width/3+120, height/4+138 + n);
+					Game.ctx.drawImage(Loader.getImage(key), width/3+167, height/4+110 + n);
+					n = n+40;
+				})
+				
+				if(error == 0){
+					this.ctx.drawImage(Loader.getImage('ok'), width/3+128, height/5+35);
+				}
+			}else{
+				this.ctx.fillText('Niveau', width/3+128, height/5+100);
+				this.ctx.fillText('max', width/3+128, height/5+120);
+			}
 		}
 	}
 }
