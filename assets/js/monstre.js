@@ -85,6 +85,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 			
 			posTuile = builds[keyBatiment].col*this.map.rows+builds[keyBatiment].row;
 			abs2[posTuile] = 2;
+			absobs2[posTuile] = 2;
 			anim = new animation(map, builds[keyBatiment].x, builds[keyBatiment].y, 'cloud');
 			delete builds[keyBatiment];
 		}else{

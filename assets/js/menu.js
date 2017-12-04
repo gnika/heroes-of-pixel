@@ -207,9 +207,14 @@ Game._clickBatiment = function () {
 		var width = canvas.width;
 		var height = canvas.height;	
 		var tsizePar2 = map.tsize/2;
+			
+		if(width < 1300){
+			batimentClickResponsive = 2;
+			colonneBatimentClicResponsive = 70;
+		}
 		
 		this.ctx.beginPath();
-		this.ctx.rect(width/4, height/4, width/4, height/2);
+		this.ctx.rect(width/4, height/4, width/batimentClickResponsive, height/2);
 		this.ctx.fillStyle = 'brown';
 		this.ctx.fill();
 		this.ctx.drawImage(Loader.getImage('ko'), width/4, height/4);
@@ -247,6 +252,7 @@ Game._clickBatiment = function () {
 		}else{	//détail de tous les autres batiments
 			var build = builds[map.getRow(this.hero.x)+'-'+map.getCol(this.hero.y)] ;
 			this.ctx.fillStyle = 'white';
+
 			this.ctx.fillText('level : '+build.caracteristique.level, width/4+128, height/4+32);
 			this.ctx.fillText('vie : '+build.life, width/4+128, height/4+64);
 			if(build.caracteristique.outilRecompense)
@@ -260,10 +266,10 @@ Game._clickBatiment = function () {
 				n = n+40;
 			})
 			
-			if( build.caracteristique.level < 3){
-				var error = 0;
-				this.ctx.fillText('Prochain', width/3+128, height/5+100);
-				this.ctx.fillText('niveau', width/3+128, height/5+120);
+			if( build.caracteristique.level < 3){ //monter de level
+				var error = 0; 
+				this.ctx.fillText('Prochain', width/3+128+colonneBatimentClicResponsive, height/5+100);
+				this.ctx.fillText('niveau', width/3+128+colonneBatimentClicResponsive, height/5+120);
 				var n = 0;
 				Object.keys(build.caracteristique.updateNiveau).forEach(function(key) {
 					if(Game.hero.supply[key] >= build.caracteristique.updateNiveau[key] * build.caracteristique.level)
@@ -273,13 +279,13 @@ Game._clickBatiment = function () {
 						error = 1;
 					}
 					
-					Game.ctx.fillText(build.caracteristique.updateNiveau[key] * build.caracteristique.level, width/3+120, height/4+138 + n);
-					Game.ctx.drawImage(Loader.getImage(key), width/3+167, height/4+110 + n);
+					Game.ctx.fillText(build.caracteristique.updateNiveau[key] * build.caracteristique.level, width/3+120+colonneBatimentClicResponsive, height/4+138 + n);
+					Game.ctx.drawImage(Loader.getImage(key), width/3+167+colonneBatimentClicResponsive, height/4+110 + n);
 					n = n+40;
 				})
 				
 				if(error == 0){
-					this.ctx.drawImage(Loader.getImage('ok'), width/3+128, height/5+35);
+					this.ctx.drawImage(Loader.getImage('ok'), width/3+128+colonneBatimentClicResponsive, height/5+35);
 				}
 			}else{
 				this.ctx.fillText('Niveau', width/3+128, height/5+100);

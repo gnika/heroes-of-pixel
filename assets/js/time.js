@@ -91,6 +91,9 @@ function Time() {
 		Object.keys(builds).forEach(function(key) {
 			if(builds[key].hour == hour && builds[key].day+1 == day && builds[key].batiment.length>1 && minute == 0){
 				
+				
+				var maintenance = builds[key].caracteristique['maintenance'];
+				
 				if((typeof builds[key].caracteristique['prixUpdate'] != "undefined") )
 					var updatePrice = builds[key].caracteristique['prixUpdate'];
 				else
@@ -118,6 +121,27 @@ function Time() {
 					absobs2[pos] = absobs2[pos]+1;
 				}
 				builds[key].day = day;
+				
+				var error = 1;
+				//maintenance par jour
+				Object.keys(maintenance).forEach(function(keyPrice) {
+						if(Game.hero.supply[keyPrice] < maintenance[keyPrice])
+							error = 1;
+					})
+					
+					if(error == 0){
+						Object.keys(maintenance).forEach(function(keyPrice) {
+							Game.hero.supply[keyPrice]-= maintenance[keyPrice];
+						})
+					}else{
+						builds[key].life-=10;
+						if(builds[key].life <= 0){
+							anim = new animation(map, builds[key].x, builds[key].y, 'cloud');
+							delete builds[key];
+							abs2[pos] = 2;
+							absobs2[pos] = 2;
+						}
+					}
 			}
 		})
 	

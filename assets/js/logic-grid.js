@@ -13,6 +13,9 @@ batimentclick	= 0;
 menussclick		= 0;
 hour	   		= 0;
 day			    = 1;
+batimentClickResponsive		  = 4;
+colonneBatimentClicResponsive = 0;
+
 
 
  
@@ -168,6 +171,13 @@ Game.init = function () {
 	canvas  = document.getElementById('map_canvas');
     canvas.width = x;
     canvas.height = y-100;
+	
+	var width = canvas.width;
+	if(width < 1300){//menu.js ligne 211
+		batimentClickResponsive = 2;
+		colonneBatimentClicResponsive = 70;
+	}
+	
 	var rect = canvas.getBoundingClientRect();
 	// console.log(rect);
 	
@@ -223,7 +233,7 @@ Game.init = function () {
 			var menuH = Game.hero.map.tsize/2;
 			
 			
-			if(rowClick == rowHero && colHero == colClick){	//nourrir
+			if(rowClick == rowHero && colHero == colClick && batimentclick == 0	){	//nourrir
 				if(builds[rowClick+'-'+colHero]){
 					batimentclick = 1;
 					
@@ -242,53 +252,56 @@ Game.init = function () {
 				return false;
 			}
 			
-		if(menussclick == 0 && batimentclick == 0){	// bouge si aucun menu n'est ouvert
-			// bouger avec le click de souris
-			xHeroClick = xHero;
-			yHeroClick = yHero;
-			
-			if(rowClick >= rowHero && rowClick <= rowHero+3 && colClick == colHero && rowClick >0)
-				clickCanvasX = 1;
-			if(rowClick <= rowHero && rowClick >= rowHero-3 && colClick == colHero && rowClick >0)
-				clickCanvasX = -1;
-			if(clickCanvasX==0 && yClick - Game.camera.y < rect.height-menuH){
-				if(colClick >= colHero && colClick <= colHero +3 && rowClick == rowHero)
-					clickCanvasY = 1;
-				if(colClick <= colHero && colClick >= colHero-3 && rowClick  == rowHero)
-					clickCanvasY = -1;
+			if(menussclick == 0 && batimentclick == 0){	// bouge si aucun menu n'est ouvert
+				// bouger avec le click de souris
+				xHeroClick = xHero;
+				yHeroClick = yHero;
+				
+				if(rowClick >= rowHero && rowClick <= rowHero+3 && colClick == colHero && rowClick >0)
+					clickCanvasX = 1;
+				if(rowClick <= rowHero && rowClick >= rowHero-3 && colClick == colHero && rowClick >0)
+					clickCanvasX = -1;
+				if(clickCanvasX==0 && yClick - Game.camera.y < rect.height-menuH){
+					if(colClick >= colHero && colClick <= colHero +3 && rowClick == rowHero)
+						clickCanvasY = 1;
+					if(colClick <= colHero && colClick >= colHero-3 && rowClick  == rowHero)
+						clickCanvasY = -1;
+				}
 			}
-		}
 			/*gestion menu*/
 		
-		var xClick = event.clientX - rect.left;
-		var yClick = event.clientY - rect.top;
-		
-		// console.log(yClick);
-		// console.log(xClick, yClick, rect.height);
-		
-		if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)
-			Game.hero.creuse(Game.hero.x, Game.hero.y, map);
-		
-		var n = 0;
-		
-		Object.keys(objets).forEach(function(key) {// menu.js ligne 54
-			if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
-				if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
-					if(Game.hero.equipement[key].equipe == 1){
-						Game._removeEquipe();
-					}else{
-						Game._removeEquipe();
-						Game.hero.equipement[key].equipe = 1;
+			var xClick = event.clientX - rect.left;
+			var yClick = event.clientY - rect.top;
+			
+			if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)
+				Game.hero.creuse(Game.hero.x, Game.hero.y, map);
+			
+			var n = 0;
+			
+			Object.keys(objets).forEach(function(key) {// menu.js ligne 54
+				if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
+					if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
+						if(Game.hero.equipement[key].equipe == 1){
+							Game._removeEquipe();
+						}else{
+							Game._removeEquipe();
+							Game.hero.equipement[key].equipe = 1;
+						}
 					}
+					n = n+100;
 				}
-				n = n+100;
-			}
-		})
+			})
 		
 		//si fiche du batiment ouvert
 		if(batimentclick == 1){
-			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 &&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
+			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
 				batimentclick = 0;
+			}
+
+			if( xClick > rect.width/3+128+colonneBatimentClicResponsive && xClick < 32 + rect.width/3+128+colonneBatimentClicResponsive 
+			&&  yClick > rect.height/5+35 &&  yClick <  rect.height/5+35 + 32){ //ok upgrade batiment
+				Game.hero._upgradeBuild(builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
 			}
 		}
 		//si sous menu ouvert
@@ -726,7 +739,6 @@ Game.render = function () {
 	this.ctx.fillStyle="blue";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+52, this.hero.fatigue, 10);
     this._drawGridMenu();
-    this._clickBatiment();
 	
 	
 	if(builds[this.hero.map.getRow(this.hero.x)+'-'+this.hero.map.getCol(this.hero.y)]){//loupe si heros sur batiment
@@ -736,4 +748,5 @@ Game.render = function () {
 			this.hero.y-this.camera.y
 		);
 	}
+    this._clickBatiment();
 };

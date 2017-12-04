@@ -122,12 +122,6 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
             absobs2[pos] = 0;
 			this.supply.bois = Game.hero.bois + 5;
 		}
-
-		// console.log(vertical, horizontal, builds, equip);
-		//actions buildings si pas équipé d'outils
-		// if(equip == '' && typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
-			// batimentclick = 1;
-		// }
 		
 		//actions buildings si équipé d'un outils
 		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
@@ -137,7 +131,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				
 				var recompense = builds[vertical+'-'+horizontal].caracteristique['recompense'];
 				Object.keys(recompense).forEach(function(keyRecompense) {
-					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
+					Game.hero.supply[keyRecompense]+= recompense[keyRecompense] * builds[vertical+'-'+horizontal].caracteristique['level'];
 				})
 					
 				if(	builds[vertical+'-'+horizontal].caracteristique['loseLife'] == 1)
@@ -264,6 +258,14 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 						this.life=this.life-0.1;
                 }
                                               
+};
+ 
+Hero.prototype._upgradeBuild = function (build) {	// pour augmenter de 1 le niveau d'un batiment
+	// paye le prix : je ne fais pas de vérification car le bouton upgrade n'apparait que si c'est possible
+	Object.keys(build.caracteristique.updateNiveau).forEach(function(key) { 
+		Game.hero.supply[key] =  Game.hero.supply[key] - build.caracteristique.updateNiveau[key];
+	})
+	builds[build.row+'-'+build.col].caracteristique.level = builds[build.row+'-'+build.col].caracteristique.level+1;
 };
  
 
