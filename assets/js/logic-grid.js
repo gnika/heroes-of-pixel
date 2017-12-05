@@ -5,11 +5,13 @@ allMonsters     = [];
 monsters        = [];
 supply          = [];
 objets		    = [];
+artefacts	    = [];
 clickCanvasX 	= 0;
 clickCanvasY 	= 0;
 xHeroClick		= 0;
 yHeroClick		= 0;
 menuclick		= 0;
+menuBodyClick	= 0;
 batimentclick	= 0;
 menussclick		= 0;
 hour	   		= 0;
@@ -91,6 +93,10 @@ function animBackground(map, x, y, imageName){
 Game.load = function () {
     return 	this.defineImages();
 };
+
+Game.getRandomInt = function(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
  
 Game.init = function () {
 	setBuilding();
@@ -145,10 +151,24 @@ Game.init = function () {
 	Game.nameBuild = new Building(map, 160, 160, 2, 2, 60, nameBuild, 61, caracteristique, 0, 0);
 	builds['2-2']=Game.nameBuild;
 	
-	generateTroll(64, 64, 1, 1);
-	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
-	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
+
+	generateMonstre(map, 64, 64, 1, 1, this.getRandomInt(allMonsters['troll'].attaque[0], allMonsters['troll'].attaque[1]), 
+	this.getRandomInt(allMonsters['troll'].defense[0], allMonsters['troll'].defense[1]), allMonsters['troll'].regeneration, 
+	allMonsters['troll'].level, allMonsters['troll'].image, 0, 0, 0);
+	
+	generateMonstre(map, 384, 128, 6, 2, this.getRandomInt(allMonsters['brigand'].attaque[0], allMonsters['brigand'].attaque[1]), 
+		this.getRandomInt(allMonsters['brigand'].defense[0], allMonsters['brigand'].defense[1]), allMonsters['brigand'].regeneration,
+		allMonsters['brigand'].level, allMonsters['brigand'].image, 2, -1, 0);
+		
+	generateMonstre(map, 192, 192, 3, 3, this.getRandomInt(allMonsters['scorpion'].attaque[0], allMonsters['scorpion'].attaque[1]), 
+		this.getRandomInt(allMonsters['scorpion'].defense[0], allMonsters['scorpion'].defense[1]), allMonsters['scorpion'].regeneration,
+		allMonsters['scorpion'].level, allMonsters['scorpion'].image, 1, -1, 0);
+		
+	generateMonstre(map, 576, 192, 9, 3, this.getRandomInt(allMonsters['main'].attaque[0], allMonsters['main'].attaque[1]), 
+		this.getRandomInt(allMonsters['main'].defense[0], allMonsters['main'].defense[1]), allMonsters['main'].regeneration,
+		allMonsters['main'].level, allMonsters['main'].image, 1.2, 0, 1);
+		
+	generateMonstre(map, 64, 192, 1, 3, 0, 999, 999, 9, 'ami', 0, 0, 0);
 
     this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
@@ -187,7 +207,7 @@ Game.init = function () {
 				return false;
 			}
 			
-			if(menussclick == 0 && batimentclick == 0){	// bouge si aucun menu n'est ouvert
+			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0){	// bouge si aucun menu n'est ouvert
 				// bouger avec le click de souris
 				xHeroClick = xHero;
 				yHeroClick = yHero;
@@ -237,6 +257,14 @@ Game.init = function () {
 			if( xClick > rect.width/3+128+colonneBatimentClicResponsive && xClick < 32 + rect.width/3+128+colonneBatimentClicResponsive 
 			&&  yClick > rect.height/5+35 &&  yClick <  rect.height/5+35 + 32){ //ok upgrade batiment
 				Game.hero._upgradeBuild(builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
+			}
+		}
+		
+		//si fiche du body ouvert
+		if(menuBodyClick == 1){
+			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
+			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+				menuBodyClick = 0;
 			}
 		}
 		//si sous menu ouvert
@@ -657,9 +685,9 @@ Game.render = function () {
 				);
 			
 	
-			Game.ctx.fillStyle="#FF0000";
-			Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
-		}
+				Game.ctx.fillStyle="#FF0000";
+				Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
+			}
 		}else{
 				Game.hero.xp = Game.hero.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
 				anim = new animation(map, monsters[key].x, monsters[key].y, 'xp');
@@ -684,4 +712,5 @@ Game.render = function () {
 		);
 	}
     this._clickBatiment();
+    this._clickBody();
 };

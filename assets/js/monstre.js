@@ -1,4 +1,95 @@
-function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, imageParam, imageParam2, vitesse, directionX, directionY) {
+allMonsters['troll'] = {
+	'nom' 			 : 'troll',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'troll',
+};
+allMonsters['scorpion'] = {
+	'nom' 			 : 'scorpion',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'scorpion'
+};
+allMonsters['balrog'] = {
+	'nom' 			 : 'balrog',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'balrog'
+};
+allMonsters['brigand'] = {
+	'nom' 			 : 'brigand',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'brigand'
+};
+allMonsters['cyclone'] = {
+	'nom' 			 : 'cyclone',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'cyclone'
+};
+allMonsters['gobelin'] = {
+	'nom' 			 : 'gobelin',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'gobelin'
+};
+allMonsters['brigand'] = {
+	'nom' 			 : 'brigand',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'brigand'
+};
+allMonsters['darkKnight'] = {
+	'nom' 			 : 'darkKnight',
+	'level'			 :	2,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'darkKnight'
+};
+allMonsters['main'] = {
+	'nom' 			 : 'main',
+	'level'			 :	1,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'main'
+};
+allMonsters['vampire'] = {
+	'nom' 			 : 'vampire',
+	'level'			 :	3,
+	'attaque'		 : [10, 20],
+	'defense'		 : [10, 20],
+	'regeneration'	 : 0.1,
+	'vitesse'		 : [10, 20],
+	'image'			 : 'vampire'
+};
+
+function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, imageParam, vitesse, directionX, directionY) {
     this.map = map;
     this.level = level;
     this.attaque = attaque;
@@ -13,26 +104,18 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
     this.height = map.tsize;
     this.image = imageParam;
     this.image1 = imageParam;
-    this.image2 = imageParam2;
+    this.image2 = imageParam+'2';
     this.vitesse = vitesse;
     this.directionX = directionX;
     this.directionY = directionY;
     this.collisionHero = 0;
     this.name = 'monstre'+row+'-'+col;
 }
-
-function generateTroll(x, y, row, col){
-	var nameTroll = 'monstre'+x+y;
-	this.nameTroll = new Monstre(map, x, y, row, col, 22, 18, 0.5, 2, 'troll3', 'troll2', 0, 0, 0);
-	monsters[row+'-'+col] = this.nameTroll;
-	// monsters.push(this.nameTroll);
-}
     
 function generateMonstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY){
 	var nameMonstre = 'monstre'+row+'-'+col;
 	this.nameMonstre = new Monstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY);
 	
-	// console.log(this.nameTroll);
 	monsters[row+'-'+col] = this.nameMonstre;
 }
 	
@@ -114,21 +197,46 @@ Monstre.prototype.move = function (delta, hx, hy) {
     // si rencontre autre monstre
 	if((this.directionX!=0 && (monsters[basX+'-'+this.col] || monsters[hautX+'-'+this.col]))
 		|| (this.directionY!=0 && (monsters[this.row+'-'+basY] || monsters[this.row+'-'+hautY]))
-	){	
+	){
 
 
-        if(this.directionX == -1){
-            this.directionX = 1;
-        }
-        else if(this.directionX ==1){
-            this.directionX=-1;
-        }
-        if(this.directionY==-1)
-            this.directionY=1;
-        else if(this.directionY==1)
-            this.directionY=-1;
+		if(this.directionX == -1 && monsters[basX+'-'+this.col] && this.map.getRow(this.x) > this.map.getRow(monsters[basX+'-'+this.col].x)){	//gauche
+			this.directionX = 1;	//droite
+		}
+		else if(this.directionX == 1 && monsters[hautX+'-'+this.col] && this.map.getRow(this.x) < this.map.getRow(monsters[hautX+'-'+this.col].x)){	//droite
+			this.directionX=-1;			//gauche
+		}
+		if(this.directionY==-1 && monsters[this.row+'-'+basY] && this.map.getCol(this.y) > this.map.getCol(monsters[this.row+'-'+basY].y)){		//monte
+			this.directionY=1;		//descend
+		}
+			
+		else if(this.directionY==1 && monsters[this.row+'-'+hautY] && this.map.getCol(this.y) < this.map.getCol(monsters[this.row+'-'+hautY].y)){
+			this.directionY=-1;	
+		}
 
-        return;
+
+		if(this.directionX != 0 && monsters[this.row+'-'+hautY] && monsters[this.row+'-'+hautY].directionY == -1){
+			monsters[this.row+'-'+hautY].directionY = 1;
+		}
+		else if(this.directionX != 0 && monsters[this.row+'-'+basY] && monsters[this.row+'-'+basY].directionY == 1){
+			monsters[this.row+'-'+basY].directionY = -1;
+		}
+		
+
+////////////////////////////////////////////initial
+		// if(this.directionX == -1){
+			// this.directionX = 1;
+		// }
+		// else if(this.directionX ==1){
+			// this.directionX=-1;
+		// }
+		// if(this.directionY==-1)
+			// this.directionY=1;
+		// else if(this.directionY==1)
+			// this.directionY=-1;
+		
+
+        // return;
 	}
 // rencontre héro
 	// console.log(this.directionX, this.directionY, this.vitesse);

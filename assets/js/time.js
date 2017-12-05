@@ -38,17 +38,15 @@ function Time() {
 			
 			//generate 5 monstres
 			for(var i = 0; i < 5; i++){
-				// generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0); //map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY)
 				var xRowMonster	 = Math.floor((Math.random() * Game.hero.map.rows) + 1);
 				var yColMonster	 = Math.floor((Math.random() * Game.hero.map.cols) + 1);
-				// var xRowMonster	 = Math.floor((Math.random() * 8) + 1);
-				// var yColMonster	 = Math.floor((Math.random() * 8) + 1);
+
 				var xMonster	 = xRowMonster * Game.hero.map.tsize;
 				var yMonster	 = yColMonster * Game.hero.map.tsize;
 				var dirY 		 = 0;
 				var dirX 		 = 0;
 				
-				if(abs2[yColMonster*Game.hero.map.rows+xRowMonster] == 0){
+				if(abs2[yColMonster*Game.hero.map.rows+xRowMonster] == 0 && !monsters[xRowMonster+'-'+yColMonster]){
 					dirX = Math.round((Math.random() - 0.5) * 2);
 					if(dirX == 0)
 						dirY = Math.round((Math.random() - 0.5) * 2);
@@ -59,8 +57,14 @@ function Time() {
 					else
 						var vitesse = 2;
 					
-					// console.log(vitesse, dirX, dirY);
-					generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', vitesse, dirX, dirY);
+					var generateMonsters = ['brigand', 'gobelin', 'balrog', 'scorpion', 'troll'];
+					var rand = generateMonsters[(Math.random() * generateMonsters.length) | 0];
+					
+					generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, Game.getRandomInt(allMonsters[rand].attaque[0], allMonsters[rand].attaque[1]), 
+						Game.getRandomInt(allMonsters[rand].defense[0], allMonsters[rand].defense[1]), allMonsters[rand].regeneration,
+						allMonsters[rand].level, allMonsters[rand].image, vitesse, dirX, dirY
+					);
+					
 				}
 
 			}
@@ -72,6 +76,12 @@ function Time() {
 					if(abs1[i] == 2){
 						abs1[i] = 1;
 						absobs1[i] = 1;
+						
+						if( Math.random() < 0.5){
+							abs2[i] = 8;
+							absobs2[i] = 8;
+						}
+						
 					}
 					if(abs1[i] == 58){
 						absobs1[i] = 57;

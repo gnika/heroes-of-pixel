@@ -75,6 +75,9 @@ Game._drawMenu = function () {
     this.ctx.fillStyle = 'red';
     this.ctx.fill();
 	
+	//menu bas
+	Game.ctx.drawImage(Loader.getImage('body'), tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
+	
 	
 	if(menuclick==1){
 		var incrementation = 1;
@@ -171,6 +174,16 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 			menuclick=0;
 			menussclick=0;
 		}
+	}
+	
+	if(yClick > rect.height-menuH && xClick > menuH && xClick < menuH*2 && menuclick == 0){	//fiche joueur
+		Game._clickBody();
+		if(menuBodyClick == 0){
+			menuBodyClick = 1;
+		}else{
+			menuBodyClick =0;
+		}
+		
 	}
 	
 	if(yClick > rect.height-menuH && xClick > menuH && menuclick==1){
@@ -293,4 +306,33 @@ Game._clickBatiment = function () {
 			}
 		}
 	}
+}
+
+Game._clickBody = function () {
+	
+	if(menuBodyClick == 1){
+		var canvas = document.getElementById('map_canvas');
+		var width = canvas.width;
+		var height = canvas.height;	
+		var tsizePar2 = map.tsize/2;
+			
+		if(width < 1300){
+			batimentClickResponsive = 2;
+			colonneBatimentClicResponsive = 70;
+		}
+		
+		this.ctx.beginPath();
+		this.ctx.rect(width/4, height/4, width/batimentClickResponsive, height/2);
+		this.ctx.fillStyle = 'brown';
+		this.ctx.fill();
+		this.ctx.drawImage(Loader.getImage('ko'), width/4, height/4);
+		
+		this.ctx.fillStyle = 'white';
+		this.ctx.fillText('Attaque : '+ this.hero.attaque, width/4+12, height/4+20+32);
+		this.ctx.fillText('Defense : '+ this.hero.defense, width/4+12, height/4+20+64);
+		this.ctx.fillText('Agilité : '+ this.hero.agilite, width/4+12, height/4+20+96);
+		this.ctx.fillText('Exploration : '+ this.hero.exploration, width/4+12, height/4+20+128);
+		
+	}	
+		
 }

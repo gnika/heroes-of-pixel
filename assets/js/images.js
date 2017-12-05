@@ -5,9 +5,9 @@ Game.defineImages = function(){
 		
 		Loader.loadImage('hero', 'assets/character.png'),
 		Loader.loadImage('hero2', 'assets/character2.png'),
-		Loader.loadImage('troll2', 'assets/monstres/troll2.png'),
-		Loader.loadImage('troll3', 'assets/monstres/troll3.png'),
-		Loader.loadImage('scorpion1', 'assets/monstres/scorpion1.png'),
+		Loader.loadImage('troll', 'assets/monstres/troll2.png'),
+		Loader.loadImage('troll2', 'assets/monstres/troll3.png'),
+		Loader.loadImage('scorpion', 'assets/monstres/scorpion1.png'),
 		Loader.loadImage('scorpion2', 'assets/monstres/scorpion2.png'),
 		Loader.loadImage('balrog', 'assets/monstres/Balrog.png'),
 		Loader.loadImage('balrog2', 'assets/monstres/Balrog2.png'),
@@ -19,7 +19,7 @@ Game.defineImages = function(){
 		Loader.loadImage('gobelin2', 'assets/monstres/Goblin_Crusader2.png'),
 		Loader.loadImage('darkKnight', 'assets/monstres/Knight.png'),
 		Loader.loadImage('darkKnight2', 'assets/monstres/Knight2.png'),
-		Loader.loadImage('main1', 'assets/monstres/main1.png'),
+		Loader.loadImage('main', 'assets/monstres/main1.png'),
 		Loader.loadImage('main2', 'assets/monstres/main2.png'),
 		Loader.loadImage('vampire', 'assets/monstres/Vampire.png'),
 		Loader.loadImage('vampire2', 'assets/monstres/Vampire2.png'),
@@ -36,11 +36,12 @@ Game.defineImages = function(){
 		Loader.loadImage('woman2', 'assets/monstres/pnj/woman2.png'),
 		
 		
-		Loader.loadImage('coin', 'assets/coin.png'),
+		// Loader.loadImage('coin', 'assets/coin.png'),
 		Loader.loadImage('cloud', 'assets/cloud.png'),
 		Loader.loadImage('xp', 'assets/xp.png'),
 		Loader.loadImage('ball', 'assets/ball.png'),
 		// pour le menu
+		Loader.loadImage('body', 'assets/menu/body.png'),
 		Loader.loadImage('pain', 'assets/menu/bread.png'),
 		Loader.loadImage('argent', 'assets/menu/silver_ingot.png'),
 		Loader.loadImage('bois', 'assets/menu/wood.png'),

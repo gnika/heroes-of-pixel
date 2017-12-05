@@ -10,6 +10,8 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.height = map.tsize;
     this.attaque = attaque;
     this.defense = defense;
+    this.agilite = 10;
+    this.exploration = 1;
     this.equipement = equipement;
     this.supply = {
         ecu:    	0, 
@@ -332,6 +334,8 @@ Hero.prototype._ennemy = function (dirx, diry) {
 		Object.keys(monsters).forEach(function(key) {
 			if(monsters[key].life<60)
 				monsters[key].life = monsters[key].life+monsters[key].regeneration;
+			if(monsters[key].life > 60)
+				monsters[key].life = 60;
 		})
 		return;
 	}
