@@ -1,6 +1,7 @@
 DUREE_ANIMATION = 50;
 builds          = [];
 allBuilding     = [];
+allMonsters     = [];
 monsters        = [];
 supply          = [];
 objets		    = [];
@@ -88,71 +89,7 @@ function animBackground(map, x, y, imageName){
  
  
 Game.load = function () {
-    return [
-        Loader.loadImage('tiles', 'assets/tiles_new.png'),
-		Loader.loadImage('hero', 'assets/character.png'),
-		Loader.loadImage('hero2', 'assets/character2.png'),
-		Loader.loadImage('troll2', 'assets/monstres/troll2.png'),
-		Loader.loadImage('troll3', 'assets/monstres/troll3.png'),
-		Loader.loadImage('scorpion1', 'assets/monstres/scorpion1.png'),
-		Loader.loadImage('scorpion2', 'assets/monstres/scorpion2.png'),
-		Loader.loadImage('coin', 'assets/coin.png'),
-		Loader.loadImage('cloud', 'assets/cloud.png'),
-		Loader.loadImage('xp', 'assets/xp.png'),
-		Loader.loadImage('ball', 'assets/ball.png'),
-		// pour le menu
-		Loader.loadImage('pain', 'assets/menu/bread.png'),
-		Loader.loadImage('argent', 'assets/menu/silver_ingot.png'),
-		Loader.loadImage('bois', 'assets/menu/wood.png'),
-		Loader.loadImage('ecu', 'assets/menu/bourse.png'),
-		Loader.loadImage('farine', 'assets/menu/flour.png'),
-		Loader.loadImage('moulin', 'assets/menu/moulin.png'),
-		Loader.loadImage('boulangerie', 'assets/menu/boulangerie.png'),
-		Loader.loadImage('mine_fer', 'assets/menu/iron_mine.png'),
-		Loader.loadImage('mine_argent', 'assets/menu/mine_silver.png'),
-		Loader.loadImage('tour', 'assets/menu/tour.png'),
-		Loader.loadImage('mine_or', 'assets/menu/gold_mine.png'),
-		Loader.loadImage('fer', 'assets/menu/ironpowder.png'),
-		Loader.loadImage('cuir', 'assets/menu/cuir.png'),
-		Loader.loadImage('culture_mais', 'assets/menu/corn.png'),
-		Loader.loadImage('vigne', 'assets/menu/raisin.png'),
-		Loader.loadImage('mais', 'assets/menu/corn.png'),
-		Loader.loadImage('ble', 'assets/menu/ble.png'),
-		Loader.loadImage('entrepot', 'assets/menu/entrepot.png'),
-		Loader.loadImage('bijou', 'assets/menu/diamant.png'),
-		Loader.loadImage('ok', 'assets/menu/ok.png'),
-		Loader.loadImage('ko', 'assets/menu/ko.png'),
-		Loader.loadImage('acier', 'assets/menu/acier.png'),
-		Loader.loadImage('argile', 'assets/menu/argile.png'),
-		Loader.loadImage('bijoux', 'assets/menu/bijoux.png'),
-		Loader.loadImage('culture_ble', 'assets/menu/ble.png'),
-		Loader.loadImage('brique', 'assets/menu/brique.png'),
-		Loader.loadImage('cochon', 'assets/menu/cochon.png'),
-		Loader.loadImage('jambon', 'assets/menu/jambon.png'),
-		Loader.loadImage('boucherie', 'assets/menu/boucherie.png'),
-		Loader.loadImage('loupe', 'assets/menu/detail.png'),
-		Loader.loadImage('or', 'assets/menu/or.png'),
-		Loader.loadImage('poterie', 'assets/menu/poterie.png'),
-		Loader.loadImage('planche', 'assets/menu/planche.png'),
-		Loader.loadImage('culture_raisin', 'assets/menu/raisin.png'),
-		Loader.loadImage('scierie', 'assets/menu/scierie.png'),
-		Loader.loadImage('vin', 'assets/menu/vin.png'),
-		Loader.loadImage('pierre', 'assets/menu/pierre.png'),
-		Loader.loadImage('action', 'assets/menu/action.png'),
-		
-		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),
-		Loader.loadImage('pelle_bois_use', 'assets/objets/pelle_use.png'),
-		Loader.loadImage('pelle_bulle', 'assets/objets/pelle_bulle.png'),
-		Loader.loadImage('pioche_bois', 'assets/objets/pioche.png'),
-		Loader.loadImage('pioche_bois_use', 'assets/objets/pioche_use.png'),
-		Loader.loadImage('pioche_bulle', 'assets/objets/pioche_bulle.png'),
-		Loader.loadImage('faux_bois', 'assets/objets/faux.png'),
-		Loader.loadImage('faux_bulle', 'assets/objets/faux_bulle.png'),
-		Loader.loadImage('epee_bois', 'assets/objets/epee.png'),
-		Loader.loadImage('faux_bois_use', 'assets/objets/faux_use.png'),
-		Loader.loadImage('epee_bois_use', 'assets/objets/epee_use.png')
-		
-    ];
+    return 	this.defineImages();
 };
  
 Game.init = function () {
@@ -209,8 +146,6 @@ Game.init = function () {
 	builds['2-2']=Game.nameBuild;
 	
 	generateTroll(64, 64, 1, 1);
-    // this.hero = new Hero(map, 10060, 10060, 60, 60, 15, 200, 0, 'pelle');//map - x - y - vie - attaque - defense - xp - objet
-	// generateTroll(192, 192, 3, 3);
 	generateMonstre(map, 384, 128, 6, 2, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 2, -1, 0);
 	generateMonstre(map, 384, 192, 6, 3, 10, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1, -1, 0);
 	generateMonstre(map, 576, 192, 9, 3, 3, 10, 0.2, 1, 'scorpion1', 'scorpion2', 1.2, 0, 1);
