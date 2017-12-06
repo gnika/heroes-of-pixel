@@ -336,6 +336,18 @@ Game._clickBody = function () {
 		if(outilEquipe != '')
 			this.ctx.fillText('Outil équipé : '+ Game.hero.equipement[outilEquipe].life + '/100', width/4+12, height/4+20+160);
 		
+		var incr 	= 0;
+		var nbLigne = 0;
+		for(var i =0; i< this.hero.artefact.length; i++){
+			this.ctx.drawImage(Loader.getImage(this.hero.artefact[i]), width/4 + incr, height/4+20+180 + nbLigne);
+			
+			incr+= 32;
+			if(i>4){
+				nbLigne = 55;
+				incr = 0;
+			}
+		}
+		
 	}	
 		
 }

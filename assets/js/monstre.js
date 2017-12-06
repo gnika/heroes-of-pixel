@@ -89,6 +89,72 @@ allMonsters['vampire'] = {
 	'image'			 : 'vampire'
 };
 
+///////////////AMIS
+
+allMonsters['ami'] = {
+	'nom' 			 : 'ami',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'ami'
+};
+allMonsters['ami2'] = {
+	'nom' 			 : 'ami2',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'ami2'
+};
+allMonsters['friend'] = {
+	'nom' 			 : 'friend',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'friend'
+};
+allMonsters['friend2'] = {
+	'nom' 			 : 'friend2',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'friend2'
+};
+allMonsters['jailor'] = {
+	'nom' 			 : 'jailor',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'jailor'
+};
+allMonsters['parrain'] = {
+	'nom' 			 : 'parrain',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'parrain'
+};
+allMonsters['woman'] = {
+	'nom' 			 : 'woman',
+	'level'			 :	1,
+	'attaque'		 : [0, 0],
+	'defense'		 : [999, 999],
+	'regeneration'	 : 1,
+	'vitesse'		 : [0, 0],
+	'image'			 : 'woman'
+};
+
 function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, imageParam, vitesse, directionX, directionY) {
     this.map = map;
     this.level = level;
@@ -112,9 +178,17 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
     this.name = 'monstre'+row+'-'+col;
 }
     
-function generateMonstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, vitesse, directionX, directionY){
+function generateMonstre(map, x, y, row, col, name, vitesse, directionX, directionY){
+		
 	var nameMonstre = 'monstre'+row+'-'+col;
-	this.nameMonstre = new Monstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, vitesse, directionX, directionY);
+	this.nameMonstre = new Monstre(map, x, y, row, col, Game.getRandomInt(allMonsters[name].attaque[0], allMonsters[name].attaque[1]),
+														Game.getRandomInt(allMonsters[name].defense[0], allMonsters[name].defense[1]),
+														allMonsters[name].regeneration, 
+														allMonsters[name].level, 
+														allMonsters[name].image, 
+														vitesse, 
+														directionX, 
+														directionY);
 	
 	monsters[row+'-'+col] = this.nameMonstre;
 }

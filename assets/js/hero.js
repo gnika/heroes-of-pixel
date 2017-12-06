@@ -197,18 +197,42 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	var rowX = this.map.getRow(this.x);
 	var colY = this.map.getCol(this.y);
 	
-	//EXPLORATION
-	absobs1[colY*map.rows+rowX] = abs1[colY*map.rows+rowX];
-	absobs1[colY*map.rows+rowX+1] = abs1[colY*map.rows+rowX+1];
-	absobs1[colY*map.rows+rowX-1] = abs1[colY*map.rows+rowX-1];
-	absobs1[colY*map.rows+rowX+map.rows] = abs1[colY*map.rows+rowX+map.rows];
-	absobs1[colY*map.rows+rowX-map.rows] = abs1[colY*map.rows+rowX-map.rows];
+	//EXPLORATION QUI PRENDS EN COMPTE LE POUVOIR D'EXPLORATION DU HEROS
 	
+	absobs1[colY*map.rows+rowX] = abs1[colY*map.rows+rowX];
 	absobs2[colY*map.rows+rowX] = abs2[colY*map.rows+rowX];
-	absobs2[colY*map.rows+rowX+1] = abs2[colY*map.rows+rowX+1];
-	absobs2[colY*map.rows+rowX-1] = abs2[colY*map.rows+rowX-1];
-	absobs2[colY*map.rows+rowX+map.rows] = abs2[colY*map.rows+rowX+map.rows];
-	absobs2[colY*map.rows+rowX-map.rows] = abs2[colY*map.rows+rowX-map.rows];
+	
+	for(var i=1; i<=this.exploration; i++){
+		
+		absobs1[colY*map.rows+rowX+i] = abs1[colY*map.rows+rowX+i];
+		absobs2[colY*map.rows+rowX+i] = abs2[colY*map.rows+rowX+i];
+		
+		absobs1[colY*map.rows+rowX-i] = abs1[colY*map.rows+rowX-i];
+		absobs2[colY*map.rows+rowX-i] = abs2[colY*map.rows+rowX-i];
+		
+		absobs1[colY*map.rows+rowX+map.rows * i] = abs1[colY*map.rows+rowX+map.rows * i];
+		absobs2[colY*map.rows+rowX+map.rows * i] = abs2[colY*map.rows+rowX+map.rows * i];
+		
+		for(var o=1; o<=this.exploration; o++){
+			absobs1[colY*map.rows+rowX+map.rows * i+o] = abs1[colY*map.rows+rowX+map.rows * i+o];
+			absobs2[colY*map.rows+rowX+map.rows * i+o] = abs2[colY*map.rows+rowX+map.rows * i+o];
+			absobs1[colY*map.rows+rowX+map.rows * i-o] = abs1[colY*map.rows+rowX+map.rows * i-o];
+			absobs2[colY*map.rows+rowX+map.rows * i-o] = abs2[colY*map.rows+rowX+map.rows * i-o];
+		}
+		
+		absobs1[colY*map.rows+rowX-map.rows * i] = abs1[colY*map.rows+rowX-map.rows * i]; 
+		absobs2[colY*map.rows+rowX-map.rows * i] = abs2[colY*map.rows+rowX-map.rows * i];
+		
+		for(var a=1; a<=this.exploration; a++){
+			absobs1[colY*map.rows+rowX-map.rows * i-a] = abs1[colY*map.rows+rowX-map.rows * i-a]; 
+			absobs2[colY*map.rows+rowX-map.rows * i-a] = abs2[colY*map.rows+rowX-map.rows * i-a];
+			absobs1[colY*map.rows+rowX-map.rows * i+a] = abs1[colY*map.rows+rowX-map.rows * i+a]; 
+			absobs2[colY*map.rows+rowX-map.rows * i+a] = abs2[colY*map.rows+rowX-map.rows * i+a];
+		}
+	}
+	
+	
+	
 	//FIN EXPLORATION
 	
 	if(this.x >= xHeroClick+this.map.tsize || this.y >= yHeroClick+this.map.tsize || this.x <= xHeroClick-this.map.tsize || this.y <= yHeroClick-this.map.tsize ){

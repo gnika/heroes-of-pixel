@@ -152,26 +152,21 @@ Game.init = function () {
 	Game.nameBuild = new Building(map, 160, 160, 2, 2, 60, nameBuild, 61, caracteristique, 0, 0);
 	builds['2-2'] = Game.nameBuild;
 	
-	// artefacts['3-2'] = {x: 192, y: 160, name: 'epee_bleu', image: 'epee_bleu'};
-	generateArtefact(map, 192, 160, 3, 2, 'epee_bleu');
+	generateArtefact(map, 210, 160, 3, 2, 'lunette_bleu');
+	generateArtefact(map, 210, 95, 3, 1, 'lunette_bleu');
+	generateArtefact(map, 95, 160, 1, 2, 'bombe');
+	generateArtefact(map, 160, 95, 2, 1, 'bombe');
+	generateArtefact(map, 160, 192, 2, 3, 'bombe');
+	generateArtefact(map, 150, 270, 2, 4, 'bombe');
+		generateArtefact(map, 150, 370, 2, 5, 'epee_lumiere');
+		generateArtefact(map, 150, 450, 2, 6, 'bouclier_lumiere');
+
+	generateMonstre(map, 64, 64, 1, 1, 'troll', 0, 0, 0);
+	generateMonstre(map, 384, 128, 6, 2, 'brigand', 2, -1, 0);
+	generateMonstre(map, 192, 192, 3, 3, 'scorpion', 1, -1, 0);
+	generateMonstre(map, 576, 192, 9, 3, 'main', 1.2, 0, 1);
 	
-	generateMonstre(map, 64, 64, 1, 1, this.getRandomInt(allMonsters['troll'].attaque[0], allMonsters['troll'].attaque[1]), 
-	this.getRandomInt(allMonsters['troll'].defense[0], allMonsters['troll'].defense[1]), allMonsters['troll'].regeneration, 
-	allMonsters['troll'].level, allMonsters['troll'].image, 0, 0, 0);
-	
-	generateMonstre(map, 384, 128, 6, 2, this.getRandomInt(allMonsters['brigand'].attaque[0], allMonsters['brigand'].attaque[1]), 
-		this.getRandomInt(allMonsters['brigand'].defense[0], allMonsters['brigand'].defense[1]), allMonsters['brigand'].regeneration,
-		allMonsters['brigand'].level, allMonsters['brigand'].image, 2, -1, 0);
-		
-	generateMonstre(map, 192, 192, 3, 3, this.getRandomInt(allMonsters['scorpion'].attaque[0], allMonsters['scorpion'].attaque[1]), 
-		this.getRandomInt(allMonsters['scorpion'].defense[0], allMonsters['scorpion'].defense[1]), allMonsters['scorpion'].regeneration,
-		allMonsters['scorpion'].level, allMonsters['scorpion'].image, 1, -1, 0);
-		
-	generateMonstre(map, 576, 192, 9, 3, this.getRandomInt(allMonsters['main'].attaque[0], allMonsters['main'].attaque[1]), 
-		this.getRandomInt(allMonsters['main'].defense[0], allMonsters['main'].defense[1]), allMonsters['main'].regeneration,
-		allMonsters['main'].level, allMonsters['main'].image, 1.2, 0, 1);
-		
-	generateMonstre(map, 64, 192, 1, 3, 0, 999, 999, 9, 'ami', 0, 0, 0);
+	generateMonstre(map, 64, 192, 1, 3, 'ami', 0, 0, 0);
 
     this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
@@ -673,18 +668,19 @@ Game.render = function () {
    
    
 	Object.keys(artefacts).forEach(function(key) {
-		// console.log(artefacts[key].image);
-		Game.ctx.drawImage(
-					Loader.getImage(artefacts[key].image), // image
-					0, // source x
-					0, // source y
-					map.tsize, // source width
-					map.tsize, // source height
-					artefacts[key].x-Game.camera.x,  // target x
-					artefacts[key].y-Game.camera.y, // target y
-					map.tsize, // target width
-					map.tsize // target height
-				);
+		if(absobs1[artefacts[key].col * map.rows + artefacts[key].row] != 7){//EXPLORATION 
+			Game.ctx.drawImage(
+						Loader.getImage(artefacts[key].image), // image
+						0, // source x
+						0, // source y
+						map.tsize, // source width
+						map.tsize, // source height
+						artefacts[key].x-Game.camera.x,  // target x
+						artefacts[key].y-Game.camera.y, // target y
+						map.tsize, // target width
+						map.tsize // target height
+					);
+		}
 	})
    
 	Object.keys(monsters).forEach(function(key) {
