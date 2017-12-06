@@ -60,10 +60,7 @@ function Time() {
 					var generateMonsters = ['brigand', 'gobelin', 'balrog', 'scorpion', 'troll'];
 					var rand = generateMonsters[(Math.random() * generateMonsters.length) | 0];
 					
-					generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, Game.getRandomInt(allMonsters[rand].attaque[0], allMonsters[rand].attaque[1]), 
-						Game.getRandomInt(allMonsters[rand].defense[0], allMonsters[rand].defense[1]), allMonsters[rand].regeneration,
-						allMonsters[rand].level, allMonsters[rand].image, vitesse, dirX, dirY
-					);
+					generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, rand, vitesse, dirX, dirY);
 					
 				}
 

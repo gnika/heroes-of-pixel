@@ -1,24 +1,25 @@
-DUREE_ANIMATION = 50;
-builds          = [];
-allBuilding     = [];
-allMonsters     = [];
-allArtefacts    = [];
-monsters        = [];
-supply          = [];
-objets		    = [];
-artefacts	    = [];
-clickCanvasX 	= 0;
-clickCanvasY 	= 0;
-xHeroClick		= 0;
-yHeroClick		= 0;
-menuclick		= 0;
-menuBodyClick	= 0;
-batimentclick	= 0;
-menussclick		= 0;
-hour	   		= 0;
-day			    = 1;
-batimentClickResponsive		  = 4;
-colonneBatimentClicResponsive = 0;
+DUREE_ANIMATION 				= 50;
+builds          				= [];
+allBuilding     				= [];
+allMonsters     				= [];
+allArtefacts    				= [];
+monsters        				= [];
+supply          				= [];
+objets		    				= [];
+artefacts	    				= [];
+artefactSelectionne		    	= [];
+clickCanvasX 					= 0;
+clickCanvasY 					= 0;
+xHeroClick						= 0;
+yHeroClick						= 0;
+menuclick						= 0;
+menuBodyClick					= 0;
+batimentclick					= 0;
+menussclick						= 0;
+hour	   						= 0;
+day			    				= 1;
+batimentClickResponsive		 	= 4;
+colonneBatimentClicResponsive	= 0;
 
 
 
@@ -123,7 +124,6 @@ Game.init = function () {
 	}
 	
 	var rect = canvas.getBoundingClientRect();
-	// console.log(rect);
 	
     var currentTime = new Time();
     currentTime.startTime(1000);
@@ -158,8 +158,8 @@ Game.init = function () {
 	generateArtefact(map, 160, 95, 2, 1, 'bombe');
 	generateArtefact(map, 160, 192, 2, 3, 'bombe');
 	generateArtefact(map, 150, 270, 2, 4, 'bombe');
-		generateArtefact(map, 150, 370, 2, 5, 'epee_lumiere');
-		generateArtefact(map, 150, 450, 2, 6, 'bouclier_lumiere');
+	generateArtefact(map, 150, 350, 2, 5, 'epee_lumiere');
+	generateArtefact(map, 150, 400, 2, 6, 'bouclier_lumiere');
 
 	generateMonstre(map, 64, 64, 1, 1, 'troll', 0, 0, 0);
 	generateMonstre(map, 384, 128, 6, 2, 'brigand', 2, -1, 0);
@@ -264,6 +264,34 @@ Game.init = function () {
 			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
 				menuBodyClick = 0;
 			}
+			
+			var incr 	= 0;
+			var nbLigne = 0;
+			//click des artefacts, description apparait
+			for(var i =0; i< Game.hero.artefact.length; i++){
+				if( xClick > rect.width/4+ incr && xClick < 32 + rect.width/4 + incr
+					&&  yClick > rect.height/4+20+180 + nbLigne &&  yClick <  rect.height/4 + 32+20+180 + nbLigne){ //ko
+						artefactSelectionne = allArtefacts[Game.hero.artefact[i]];
+				}
+				incr+= 32;
+				if(i>6){
+					nbLigne = 55;
+					incr = 0;
+				}
+			}
+			//click sur le bouton ok, on utilise l'artefact
+			if( xClick > rect.width/4+170 && xClick < 32 + rect.width/4+170 &&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4+20+100+32){
+				var index = Game.hero.artefact.indexOf(artefactSelectionne.name);
+				if(artefactSelectionne.duree != '')
+					Game.hero.artefactEnCours[artefactSelectionne.name+'-'+day+'-'+hour] = { 'artefact' : artefactSelectionne, 'heure' : hour, 'jour' : day};
+				else{
+					var nameArtefact = artefactSelectionne.name;
+					Game.hero[nameArtefact]();
+				}
+				Game.hero.artefact.splice(index, 1);
+				menuBodyClick = 0;
+			}
+			
 		}
 		//si sous menu ouvert
 		if(menussclick!=0){

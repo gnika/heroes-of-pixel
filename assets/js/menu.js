@@ -336,18 +336,33 @@ Game._clickBody = function () {
 		if(outilEquipe != '')
 			this.ctx.fillText('Outil équipé : '+ Game.hero.equipement[outilEquipe].life + '/100', width/4+12, height/4+20+160);
 		
+		if(artefactSelectionne != ''){	//description de l'item sélectionné
+			var lines = artefactSelectionne.description_fr.split("\n");
+			this.ctx.fillStyle = 'gray';
+			var u = 1;
+			for (i = 0; i < lines.length; i++) {
+						this.ctx.fillText(lines[i],width/4+170, u+height/4+20);
+						u = u+25;
+			}
+			
+			
+			this.ctx.drawImage(Loader.getImage('ok'), width/4+170, height/4+20+100);
+		
+		}
+		
 		var incr 	= 0;
 		var nbLigne = 0;
 		for(var i =0; i< this.hero.artefact.length; i++){
 			this.ctx.drawImage(Loader.getImage(this.hero.artefact[i]), width/4 + incr, height/4+20+180 + nbLigne);
 			
 			incr+= 32;
-			if(i>4){
+			if(i>6){
 				nbLigne = 55;
 				incr = 0;
 			}
 		}
 		
-	}	
+	}else
+		artefactSelectionne = '';
 		
 }
