@@ -112,9 +112,9 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
     this.name = 'monstre'+row+'-'+col;
 }
     
-function generateMonstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY){
+function generateMonstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, vitesse, directionX, directionY){
 	var nameMonstre = 'monstre'+row+'-'+col;
-	this.nameMonstre = new Monstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, image2, vitesse, directionX, directionY);
+	this.nameMonstre = new Monstre(map, x, y, row, col, attaque, defense, regeneration, level, image1, vitesse, directionX, directionY);
 	
 	monsters[row+'-'+col] = this.nameMonstre;
 }

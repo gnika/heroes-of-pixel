@@ -2,6 +2,7 @@ DUREE_ANIMATION = 50;
 builds          = [];
 allBuilding     = [];
 allMonsters     = [];
+allArtefacts    = [];
 monsters        = [];
 supply          = [];
 objets		    = [];
@@ -149,9 +150,11 @@ Game.init = function () {
 		caracteristique['showLife'] = 1;
 	
 	Game.nameBuild = new Building(map, 160, 160, 2, 2, 60, nameBuild, 61, caracteristique, 0, 0);
-	builds['2-2']=Game.nameBuild;
+	builds['2-2'] = Game.nameBuild;
 	
-
+	// artefacts['3-2'] = {x: 192, y: 160, name: 'epee_bleu', image: 'epee_bleu'};
+	generateArtefact(map, 192, 160, 3, 2, 'epee_bleu');
+	
 	generateMonstre(map, 64, 64, 1, 1, this.getRandomInt(allMonsters['troll'].attaque[0], allMonsters['troll'].attaque[1]), 
 	this.getRandomInt(allMonsters['troll'].defense[0], allMonsters['troll'].defense[1]), allMonsters['troll'].regeneration, 
 	allMonsters['troll'].level, allMonsters['troll'].image, 0, 0, 0);
@@ -667,6 +670,22 @@ Game.render = function () {
     // draw main character
     // draw map top layer
     this._drawLayer(1);
+   
+   
+	Object.keys(artefacts).forEach(function(key) {
+		// console.log(artefacts[key].image);
+		Game.ctx.drawImage(
+					Loader.getImage(artefacts[key].image), // image
+					0, // source x
+					0, // source y
+					map.tsize, // source width
+					map.tsize, // source height
+					artefacts[key].x-Game.camera.x,  // target x
+					artefacts[key].y-Game.camera.y, // target y
+					map.tsize, // target width
+					map.tsize // target height
+				);
+	})
    
 	Object.keys(monsters).forEach(function(key) {
 	if(monsters[key].life>0){

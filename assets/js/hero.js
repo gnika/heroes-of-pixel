@@ -13,6 +13,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.agilite = 10;
     this.exploration = 1;
     this.equipement = equipement;
+    this.artefact = [];
     this.supply = {
         ecu:    	0, 
         bois:   	0, 
@@ -220,6 +221,23 @@ Hero.prototype.move = function (delta, dirx, diry) {
 		clickCanvasX = 0;
 		clickCanvasY = 0;
 	}
+	//RECUPERER UN ARTEFACT
+	if(artefacts[rowX+'-'+colY]){
+		if(artefacts[rowX+'-'+colY].inventaire == 1)
+			this.artefact.push(artefacts[rowX+'-'+colY].name);
+		else{
+			this.attaque+= artefacts[rowX+'-'+colY].attaque;
+			this.defense+= artefacts[rowX+'-'+colY].defense;
+			this.exploration+= artefacts[rowX+'-'+colY].exploration;
+			this.agilite+= artefacts[rowX+'-'+colY].agilite;
+			this.xp+= artefacts[rowX+'-'+colY].xp;
+		}
+		
+		anim = new animation(map, artefacts[rowX+'-'+colY].x, artefacts[rowX+'-'+colY].y, artefacts[rowX+'-'+colY].image);
+		delete artefacts[rowX+'-'+colY];
+		
+	}
+	
 	
 	if(builds[rowX+'-'+colY]){	//si sur un batiment dont le statut est le dernier (par exemple, le blé a poussé) et qui nécessite de porter un outil dont le héros n'est pas équipé
 		var equip 	= Game._getToolEquipe();

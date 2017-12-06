@@ -1,6 +1,31 @@
+
+
 Game.defineImages = function(){
+	
+	
 	return [
         Loader.loadImage('tiles', 'assets/tiles_new.png'),
+		
+		//artefacts
+		Loader.loadImage('aile_bleu', 'assets/artefacts/aile_bleu.png'),
+		Loader.loadImage('aile_blanc', 'assets/artefacts/aile_blanc.png'),
+		Loader.loadImage('aile_rouge', 'assets/artefacts/aile_rouge.png'),
+		Loader.loadImage('botte_sable', 'assets/artefacts/botte_sable.png'),
+		Loader.loadImage('bombe', 'assets/artefacts/bombe.png'),
+		Loader.loadImage('epee_bleu', 'assets/artefacts/epee_bleu.png'),
+		Loader.loadImage('epee_blanc', 'assets/artefacts/epee_blanc.png'),
+		Loader.loadImage('epee_rouge', 'assets/artefacts/epee_rouge.png'),
+		Loader.loadImage('bouclier_bleu', 'assets/artefacts/bouclier_bleu.png'),
+		Loader.loadImage('bouclier_blanc', 'assets/artefacts/bouclier_blanc.png'),
+		Loader.loadImage('bouclier_rouge', 'assets/artefacts/bouclier_rouge.png'),
+		Loader.loadImage('epee_lumiere', 'assets/artefacts/epee_lumiere.png'),
+		Loader.loadImage('bouclier_lumiere', 'assets/artefacts/bouclier_lumiere.png'),
+		Loader.loadImage('xp_bleu', 'assets/artefacts/xp_bleu.png'),
+		Loader.loadImage('xp_blanc', 'assets/artefacts/xp_blanc.png'),
+		Loader.loadImage('xp_rouge', 'assets/artefacts/xp_rouge.png'),
+		Loader.loadImage('lunette_bleu', 'assets/artefacts/lunette_bleu.png'),
+		Loader.loadImage('lunette_blanc', 'assets/artefacts/lunette_blanc.png'),
+		Loader.loadImage('lunette_rouge', 'assets/artefacts/lunette_rouge.png'),
 		
 		
 		Loader.loadImage('hero', 'assets/character.png'),

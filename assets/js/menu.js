@@ -332,6 +332,9 @@ Game._clickBody = function () {
 		this.ctx.fillText('Defense : '+ this.hero.defense, width/4+12, height/4+20+64);
 		this.ctx.fillText('Agilité : '+ this.hero.agilite, width/4+12, height/4+20+96);
 		this.ctx.fillText('Exploration : '+ this.hero.exploration, width/4+12, height/4+20+128);
+		var outilEquipe = this._getToolEquipe();
+		if(outilEquipe != '')
+			this.ctx.fillText('Outil équipé : '+ Game.hero.equipement[outilEquipe].life + '/100', width/4+12, height/4+20+160);
 		
 	}	
 		
