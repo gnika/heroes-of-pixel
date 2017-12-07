@@ -94,6 +94,7 @@ Game.defineImages = function(){
 		Loader.loadImage('culture_ble', 'assets/menu/ble.png'),
 		Loader.loadImage('brique', 'assets/menu/brique.png'),
 		Loader.loadImage('cochon', 'assets/menu/cochon.png'),
+		Loader.loadImage('viande', 'assets/menu/jambon.png'),
 		Loader.loadImage('jambon', 'assets/menu/jambon.png'),
 		Loader.loadImage('boucherie', 'assets/menu/boucherie.png'),
 		Loader.loadImage('loupe', 'assets/menu/detail.png'),

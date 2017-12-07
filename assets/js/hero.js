@@ -189,6 +189,21 @@ Hero.prototype.move = function (delta, dirx, diry) {
     this._loselifeTile(dirx, diry);
 	
 	
+	if(Object.keys(this.artefactEnCours).length){	//SI ARTEFACT EN COURS DOIT SE TERMINER
+		Object.keys(this.artefactEnCours).forEach(function(key) {
+			if(Game.hero.artefactEnCours[key].heure == hour && Game.hero.artefactEnCours[key].jour == day){
+				
+				Game.hero.attaque-=		 Game.hero.artefactEnCours[key].artefact.attaque;
+				Game.hero.defense-=		 Game.hero.artefactEnCours[key].artefact.defense;
+				Game.hero.agilite-=		 Game.hero.artefactEnCours[key].artefact.agilite;
+				Game.hero.exploration-=  Game.hero.artefactEnCours[key].artefact.exploration;
+				
+				delete(Game.hero.artefactEnCours[key]);
+			}
+		})
+	}
+	
+	
     // clamp values
     var maxX = this.map.cols * this.map.tsize;
     var maxY = this.map.rows * this.map.tsize;
@@ -256,6 +271,10 @@ Hero.prototype.move = function (delta, dirx, diry) {
 			this.exploration+= artefacts[rowX+'-'+colY].exploration;
 			this.agilite+= artefacts[rowX+'-'+colY].agilite;
 			this.xp+= artefacts[rowX+'-'+colY].xp;
+			
+			for (var key in artefacts[rowX+'-'+colY].supply) {
+				Game.hero.supply[key]+= artefacts[rowX+'-'+colY].supply[key];
+			}
 		}
 		
 		anim = new animation(map, artefacts[rowX+'-'+colY].x, artefacts[rowX+'-'+colY].y, artefacts[rowX+'-'+colY].image);

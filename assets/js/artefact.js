@@ -171,7 +171,7 @@ allArtefacts['epee_lumiere'] = {
 	'xp'	 		 : 0,
 	'exploration'	 : 0,
 	'supply'		 : '',
-	'duree'			 : {'heure': 1},
+	'duree'			 : {'heure': 2, 'jour': 0},
 	'inventaire'	 : 1,
 	'description_fr' : "Donne un bonus\n offensif important\n pour une durée\n très limitée",
 	'description_en' : "EN Donne un bonus\n offensif important\n pour une durée\n très limitée",
@@ -184,7 +184,7 @@ allArtefacts['bouclier_lumiere'] = {
 	'xp'	 		 : 0,
 	'exploration'	 : 0,
 	'supply'		 : '',
-	'duree'			 : {'heure': 1},
+	'duree'			 : {'heure': 2, 'jour': 0},
 	'inventaire'	 : 1,
 	'description_fr' : "Donne un bonus\n défensif important\n pour une durée\n très limitée",
 	'description_en' : "EN Donne un bonus\n défensif important\n pour une durée\n très limitée",
@@ -215,6 +215,50 @@ allArtefacts['botte_sable'] = {
 	'description_fr' : "Bottes pour marcher dans le sable",
 	'description_en' : "EN Bottes pour marcher dans le sable"
 }
+allArtefacts['bois'] = {
+	'name'		 	 : 'bois',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : {'bois': 5},
+	'duree'			 : '',
+	'inventaire'	 : 0
+}
+allArtefacts['culture_ble'] = {
+	'name'		 	 : 'culture_ble',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : {'ble': 5},
+	'duree'			 : '',
+	'inventaire'	 : 0
+}
+allArtefacts['culture_raisin'] = {
+	'name'		 	 : 'culture_raisin',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : {'vigne': 5},
+	'duree'			 : '',
+	'inventaire'	 : 0
+}
+allArtefacts['viande'] = {
+	'name'		 	 : 'viande',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : {'viande': 5},
+	'duree'			 : '',
+	'inventaire'	 : 0
+}
 
 function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploration, supply, duree, inventaire, image1) {
 	this.map = map;
@@ -237,6 +281,7 @@ function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploratio
 }
 
 function generateArtefact(map, x, y, row, col, name){
+	
 	var nameArtefact = 'artefacts'+row+'-'+col;
 	this.nameArtefact = new Artefact(map, x, y, row, col, allArtefacts[name].attaque, 
 														allArtefacts[name].defense, 
@@ -261,13 +306,68 @@ Hero.prototype.bombe = function () {	// utiliser la bombe
 	
 	var rowX = this.map.getRow(this.x);
 	var colY = this.map.getCol(this.y);
-	abs1[colY*map.rows+rowX+1] = 0;	//faire une tuile destruction
-	// abs2[colY*map.rows+rowX+1] = 0;
-	abs1[colY*map.rows+rowX-1] = 0;
-	// abs2[colY*map.rows+rowX-1] = 0;
-	abs1[colY*map.rows+rowX+map.rows] = 0;
-	// abs2[colY*map.rows+rowX+map.rows] = 0;
-	abs1[colY*map.rows+rowX-map.rows] = 0;
-	// abs2[colY*map.rows+rowX-map.rows] = 0;
+	abs1[colY*map.rows+rowX+1] = 67;	//tuile lunaire
+	abs1[colY*map.rows+rowX-1] = 67;	//tuile lunaire
+	abs1[colY*map.rows+rowX+map.rows] = 67;	//tuile lunaire
+	abs1[colY*map.rows+rowX-map.rows] = 67;	//tuile lunaire
 	//retirer 50 points de vie à tous les monstres et batiments qui se trouvent sur ces cases
+	if(builds[rowX+'-'+(colY+1)]){
+		builds[rowX+'-'+(colY+1)].life-=50;
+		if(builds[rowX+'-'+(colY+1)].life <= 0){
+			delete builds[rowX+'-'+(colY+1)];
+			abs2[colY*map.rows+rowX+map.rows] = 0;
+		}
+	}
+	if(builds[rowX+'-'+(colY-1)]){
+		builds[rowX+'-'+(colY-1)].life-=50;
+		if(builds[rowX+'-'+(colY-1)].life <= 0){
+			delete builds[rowX+'-'+(colY-1)];
+			abs2[colY*map.rows+rowX-map.rows] = 0;
+		}
+	}
+	if(builds[(rowX+1)+'-'+colY]){
+		builds[(rowX+1)+'-'+colY].life-=50;
+		if(builds[(rowX+1)+'-'+colY].life <= 0){
+			delete builds[(rowX+1)+'-'+colY];
+			abs2[colY*map.rows+rowX+1] = 0;
+		}
+	}
+	if(builds[(rowX-1)+'-'+colY]){
+		builds[(rowX-1)+'-'+colY].life-=50;
+		if(builds[(rowX-1)+'-'+colY].life <= 0){
+			delete builds[(rowX-1)+'-'+colY];
+			abs2[colY*map.rows+rowX-1] = 0;
+		}
+	}
+	
+	if(monsters[rowX+'-'+(colY+1)]){
+		monsters[rowX+'-'+(colY+1)].life-=50;
+		if(monsters[rowX+'-'+(colY+1)].life <= 0){
+			delete monsters[rowX+'-'+(colY+1)];
+		}
+	}
+	if(monsters[rowX+'-'+(colY-1)]){
+		monsters[rowX+'-'+(colY-1)].life-=50;
+		if(monsters[rowX+'-'+(colY-1)].life <= 0){
+			delete monsters[rowX+'-'+(colY-1)];
+		}
+	}
+	if(monsters[(rowX+1)+'-'+colY]){
+		monsters[(rowX+1)+'-'+colY].life-=50;
+		if(monsters[(rowX+1)+'-'+colY].life <= 0){
+			delete monsters[(rowX+1)+'-'+colY];
+		}
+	}
+	if(monsters[(rowX-1)+'-'+colY]){
+		monsters[(rowX-1)+'-'+colY].life-=50;
+		if(monsters[(rowX-1)+'-'+colY].life <= 0){
+			delete monsters[(rowX-1)+'-'+colY];
+		}
+	}
+}
+Hero.prototype.artEnCours = function (artefact) {	// utiliser les artefacts du répertoire
+	Game.hero.attaque+=		 artefact.attaque;
+	Game.hero.defense+=		 artefact.defense;
+	Game.hero.agilite+=		 artefact.agilite;
+	Game.hero.exploration+=  artefact.exploration;
 }

@@ -287,6 +287,7 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		else if(this.directionY==1 && monsters[this.row+'-'+hautY] && this.map.getCol(this.y) < this.map.getCol(monsters[this.row+'-'+hautY].y)){
 			this.directionY=-1;	
 		}
+		
 
 
 		if(this.directionX != 0 && monsters[this.row+'-'+hautY] && monsters[this.row+'-'+hautY].directionY == -1){
@@ -313,7 +314,6 @@ Monstre.prototype.move = function (delta, hx, hy) {
         // return;
 	}
 // rencontre héro
-	// console.log(this.directionX, this.directionY, this.vitesse);
 	if(this.directionX == 0 && this.directionY == 0 && this.vitesse > 0){
 		
 		//monstre attaque le héros

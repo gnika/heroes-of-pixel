@@ -154,12 +154,12 @@ Game.init = function () {
 	
 	generateArtefact(map, 210, 160, 3, 2, 'lunette_bleu');
 	generateArtefact(map, 210, 95, 3, 1, 'lunette_bleu');
-	generateArtefact(map, 95, 160, 1, 2, 'bombe');
+	generateArtefact(map, 95, 160, 1, 2, 'culture_raisin');
 	generateArtefact(map, 160, 95, 2, 1, 'bombe');
-	generateArtefact(map, 160, 192, 2, 3, 'bombe');
+	generateArtefact(map, 160, 192, 2, 3, 'bois');
 	generateArtefact(map, 150, 270, 2, 4, 'bombe');
 	generateArtefact(map, 150, 350, 2, 5, 'epee_lumiere');
-	generateArtefact(map, 150, 400, 2, 6, 'bouclier_lumiere');
+	generateArtefact(map, 150, 400, 2, 6, 'viande');
 
 	generateMonstre(map, 64, 64, 1, 1, 'troll', 0, 0, 0);
 	generateMonstre(map, 384, 128, 6, 2, 'brigand', 2, -1, 0);
@@ -282,9 +282,15 @@ Game.init = function () {
 			//click sur le bouton ok, on utilise l'artefact
 			if( xClick > rect.width/4+170 && xClick < 32 + rect.width/4+170 &&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4+20+100+32){
 				var index = Game.hero.artefact.indexOf(artefactSelectionne.name);
-				if(artefactSelectionne.duree != '')
-					Game.hero.artefactEnCours[artefactSelectionne.name+'-'+day+'-'+hour] = { 'artefact' : artefactSelectionne, 'heure' : hour, 'jour' : day};
-				else{
+				if(artefactSelectionne.duree != ''){
+					Game.hero.artefactEnCours[artefactSelectionne.name+'-'+day+'-'+hour] = 
+						{
+							'artefact' : artefactSelectionne,
+							'heure' : hour + artefactSelectionne.duree.heure,
+							'jour' : day + artefactSelectionne.duree.jour
+						};
+					Game.hero.artEnCours(artefactSelectionne);
+				}else{
 					var nameArtefact = artefactSelectionne.name;
 					Game.hero[nameArtefact]();
 				}

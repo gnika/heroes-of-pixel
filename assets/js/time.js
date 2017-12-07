@@ -66,8 +66,32 @@ function Time() {
 
 			}
 			
-			//remplir tous les trous toutes les semaines
+			//remplir tous les trous toutes les semaines et apparition d'artefacts
 			if(semaine == 7){
+				
+				
+				for(var i = 0; i < 10; i++){
+					var xRowMonster	 = Math.floor((Math.random() * Game.hero.map.rows) + 1);
+					var yColMonster	 = Math.floor((Math.random() * Game.hero.map.cols) + 1);
+
+					var xMonster	 = xRowMonster * Game.hero.map.tsize;
+					var yMonster	 = yColMonster * Game.hero.map.tsize;
+					var dirY 		 = 0;
+					var dirX 		 = 0;
+					
+					if(abs2[yColMonster*Game.hero.map.rows+xRowMonster] == 0){
+						
+						var keys = Object.keys(allArtefacts);
+						keys = keys[Math.floor(keys.length * Math.random())];
+						if(allArtefacts[keys] != null)
+							generateArtefact(map, xMonster, yMonster, xRowMonster, yColMonster, allArtefacts[keys].name);
+						
+					}
+
+				}
+				
+				
+				
 				var i, n = abs1.length;
 				for (i = 0; i < n; ++i) {
 					if(abs1[i] == 2){
@@ -94,6 +118,10 @@ function Time() {
 			
         }
 
+		// if(Game.hero){
+			// console.log(Game.hero.artefactEnCours.keys(Game.hero.artefactEnCours).length);
+			 // if(Game.hero.artefactEnCours
+		// }
 		
 		Object.keys(builds).forEach(function(key) {
 			if(builds[key].hour == hour && builds[key].day+1 == day && builds[key].batiment.length>1 && minute == 0){
