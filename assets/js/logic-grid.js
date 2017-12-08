@@ -204,14 +204,14 @@ Game.init = function () {
 				xHeroClick = xHero;
 				yHeroClick = yHero;
 				
-				if(rowClick >= rowHero && rowClick <= rowHero+3 && colClick == colHero && rowClick >0)
+				if(rowClick >= rowHero && rowClick <= rowHero+10 && (colClick == colHero) && rowClick >0)
 					clickCanvasX = 1;
-				if(rowClick <= rowHero && rowClick >= rowHero-3 && colClick == colHero && rowClick >0)
+				if(rowClick <= rowHero && rowClick >= rowHero-10 && colClick == colHero && rowClick >0)
 					clickCanvasX = -1;
 				if(clickCanvasX==0 && yClick - Game.camera.y < rect.height-menuH){
-					if(colClick >= colHero && colClick <= colHero +3 && rowClick == rowHero)
+					if(colClick >= colHero && colClick <= colHero +10 && rowClick == rowHero)
 						clickCanvasY = 1;
-					if(colClick <= colHero && colClick >= colHero-3 && rowClick  == rowHero)
+					if(colClick <= colHero && colClick >= colHero-10 && rowClick  == rowHero)
 						clickCanvasY = -1;
 				}
 			}

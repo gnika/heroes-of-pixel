@@ -79,13 +79,21 @@ Game._drawMenu = function () {
 	Game.ctx.drawImage(Loader.getImage('body'), tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
 	
 	
-	if(menuclick==1){
+	if(menuclick == 1){
 		var incrementation = 1;
 		Object.keys(allBuilding).forEach(function(key) {// building.js setBuilding
+			Game.ctx.beginPath();
+			Game.ctx.lineWidth = "2";
+			Game.ctx.fillStyle = 'black';
+			Game.ctx.rect(incrementation * tsizePar2 - 1, height-tsizePar2 - 1, tsizePar2 + 2, height);
+			Game.ctx.stroke();
+			
+			Game.ctx.lineWidth="1";
 			Game.ctx.beginPath();
 			Game.ctx.rect(incrementation * tsizePar2, height-tsizePar2, tsizePar2, height);
 			Game.ctx.fillStyle = 'yellow';
 			Game.ctx.fill();
+			
 			Game.ctx.drawImage(Loader.getImage(key), incrementation * tsizePar2, height-tsizePar2);
 			
 			incrementation ++;
@@ -226,6 +234,11 @@ Game._clickBatiment = function () {
 			colonneBatimentClicResponsive = 70;
 		}
 		
+		this.ctx.fillStyle = 'black';
+		this.ctx.beginPath();
+		this.ctx.rect(width/4-5, height/4-5, width/batimentClickResponsive+10, height/2+10);
+		this.ctx.fill();	
+			
 		this.ctx.beginPath();
 		this.ctx.rect(width/4, height/4, width/batimentClickResponsive, height/2);
 		this.ctx.fillStyle = 'brown';
@@ -308,7 +321,7 @@ Game._clickBatiment = function () {
 	}
 }
 
-Game._clickBody = function () {
+Game._clickBody = function () {	//MENU DES EQUIPEMENTS
 	
 	if(menuBodyClick == 1){
 		var canvas = document.getElementById('map_canvas');
@@ -321,10 +334,18 @@ Game._clickBody = function () {
 			colonneBatimentClicResponsive = 70;
 		}
 		
+		this.ctx.fillStyle = 'black';
+		this.ctx.beginPath();
+		this.ctx.rect(width/4-5, height/4-5, width/batimentClickResponsive+10, height/2+10);
+		
+		this.ctx.fill();
+		
 		this.ctx.beginPath();
 		this.ctx.rect(width/4, height/4, width/batimentClickResponsive, height/2);
 		this.ctx.fillStyle = 'brown';
 		this.ctx.fill();
+		
+		
 		this.ctx.drawImage(Loader.getImage('ko'), width/4, height/4);
 		
 		this.ctx.fillStyle = 'white';
