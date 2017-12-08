@@ -91,7 +91,6 @@ Game._questClickPay = function() {
 		if(Game.hero.supply[key] < supplyText[key])
 			error = 1;
 	})
-	
 	if(error == 0){
 		Object.keys(supplyText).forEach(function(key) {	//PAYE LES RESSOURCES
 			Game.hero.supply[key]-= supplyText[key];
@@ -99,13 +98,19 @@ Game._questClickPay = function() {
 		
 		Object.keys(artefactText).forEach(function(key) { //PAYE LES ARTEFACTS
 			var artefactsVoulus = 0;
-			for(var i =0; i< Game.hero.artefact.length; i++){
+			for(var i =0; i< Game.hero.artefact.length; i++){		
 				if(Game.hero.artefact[i] == key){
 					artefactsVoulus++;
-					if(artefactsVoulus <= artefactText[key])
-						Game.hero.artefact.splice(key, 1);
+					if(artefactsVoulus <= artefactText[key]){
+						Game.hero.artefact.splice(i, 1);
+					}
 				}
 			}
 		})
+		
+		for(var i =0; i< recompenses.length; i++){		
+			eval(recompenses[i]);
+		}
+		
 	}
 }
