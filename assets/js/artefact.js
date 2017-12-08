@@ -212,8 +212,50 @@ allArtefacts['botte_sable'] = {
 	'supply'		 : '',
 	'duree'			 : '',
 	'inventaire'	 : 1,
-	'description_fr' : "Bottes pour marcher dans le sable",
+	'description_fr' : "Bottes pour\n marcher dans le sable",
 	'description_en' : "EN Bottes pour marcher dans le sable"
+}
+allArtefacts['corde'] = {
+	'name'		 	 : 'corde',	
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',
+	'inventaire'	 : 1,
+	'quete'			 : 1,
+	'description_fr' : "Corde pour\n fabriquer des outils",
+	'description_en' : "EN Corde pour fabriquer des outils"
+}
+allArtefacts['manche'] = {
+	'name'		 	 : 'manche',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',
+	'inventaire'	 : 1,
+	'quete'			 : 1,
+	'description_fr' : "Manche pour\n fabriquer des outils",
+	'description_en' : "EN Manche pour fabriquer des outils",
+}
+allArtefacts['silex'] = {
+	'name'		 	 : 'silex',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',	//pour la durée des artefacts utilisés
+	'inventaire'	 : 1,	//Pour les artefacts qu'on garde dans l'inventaire
+	'quete'			 : 1,	//Pour les artefacts qui ne sont pas utilisables
+	'description_fr' : "Silex pour\n fabriquer des outils",
+	'description_en' : "EN Silex pour fabriquer des outils",
 }
 allArtefacts['bois'] = {
 	'name'		 	 : 'bois',
@@ -260,7 +302,7 @@ allArtefacts['viande'] = {
 	'inventaire'	 : 0
 }
 
-function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploration, supply, duree, inventaire, image1) {
+function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploration, supply, duree, inventaire, image1, quete) {
 	this.map = map;
     this.xp = xp;
     this.attaque = attaque;
@@ -278,6 +320,7 @@ function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploratio
     this.name = image1;
     this.heure = 0;
     this.jour = 0;
+    this.quete = 1;
 }
 
 function generateArtefact(map, x, y, row, col, name){
@@ -291,7 +334,8 @@ function generateArtefact(map, x, y, row, col, name){
 														allArtefacts[name].supply, 
 														allArtefacts[name].duree, 
 														allArtefacts[name].inventaire, 
-														name);
+														name,
+														allArtefacts[name].quete);
 	
 	artefacts[row+'-'+col] = this.nameArtefact;
 }

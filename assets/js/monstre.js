@@ -146,7 +146,7 @@ allMonsters['woman'] = {
 	'image'			 : 'woman'
 };
 
-function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, imageParam, vitesse, directionX, directionY) {
+function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, imageParam, vitesse, directionX, directionY, idQuete) {
     this.map = map;
     this.level = level;
     this.attaque = attaque;
@@ -167,9 +167,10 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
     this.directionY = directionY;
     this.collisionHero = 0;
     this.name = 'monstre'+row+'-'+col;
+    this.idQuete = idQuete;
 }
     
-function generateMonstre(map, x, y, row, col, name, vitesse, directionX, directionY){
+function generateMonstre(map, x, y, row, col, name, vitesse, directionX, directionY, idQuete){
 		
 	var nameMonstre = 'monstre'+row+'-'+col;
 	this.nameMonstre = new Monstre(map, x, y, row, col, Game.getRandomInt(allMonsters[name].attaque[0], allMonsters[name].attaque[1]),
@@ -179,7 +180,8 @@ function generateMonstre(map, x, y, row, col, name, vitesse, directionX, directi
 														allMonsters[name].image, 
 														vitesse, 
 														directionX, 
-														directionY);
+														directionY,
+														idQuete);
 	
 	monsters[row+'-'+col] = this.nameMonstre;
 }

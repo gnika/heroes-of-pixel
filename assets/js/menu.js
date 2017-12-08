@@ -368,8 +368,8 @@ Game._clickBody = function () {	//MENU DES EQUIPEMENTS
 						u = u+25;
 			}
 			
-			
-			this.ctx.drawImage(Loader.getImage('ok'), width/4+170, height/4+20+100);
+			if(!artefactSelectionne.quete)// si l'objet peut être utilisé
+				this.ctx.drawImage(Loader.getImage('ok'), width/4+170, height/4+20+100);
 		
 		}
 		

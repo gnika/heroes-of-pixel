@@ -26,6 +26,9 @@ Game.defineImages = function(){
 		Loader.loadImage('lunette_bleu', 'assets/artefacts/lunette_bleu.png'),
 		Loader.loadImage('lunette_blanc', 'assets/artefacts/lunette_blanc.png'),
 		Loader.loadImage('lunette_rouge', 'assets/artefacts/lunette_rouge.png'),
+		Loader.loadImage('manche', 'assets/artefacts/manche.png'),
+		Loader.loadImage('silex', 'assets/artefacts/silex.png'),
+		Loader.loadImage('corde', 'assets/artefacts/corde.png'),
 		
 		
 		Loader.loadImage('hero', 'assets/character.png'),

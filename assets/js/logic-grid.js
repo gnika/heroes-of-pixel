@@ -11,6 +11,7 @@ artefactSelectionne		    	= [];
 clickCanvasX 					= 0;
 clickCanvasY 					= 0;
 xHeroClick						= 0;
+dialogue						= 0;
 yHeroClick						= 0;
 menuclick						= 0;
 menuBodyClick					= 0;
@@ -136,7 +137,7 @@ Game.init = function () {
 	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':0};
 	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
 	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
-	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
+	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':0, 'equipe':0};
 	
 	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
@@ -150,18 +151,18 @@ Game.init = function () {
 	generateArtefact(map, 210, 160, 3, 2, 'lunette_bleu');
 	generateArtefact(map, 210, 95, 3, 1, 'lunette_bleu');
 	generateArtefact(map, 95, 160, 1, 2, 'culture_raisin');
-	generateArtefact(map, 160, 95, 2, 1, 'bombe');
-	generateArtefact(map, 160, 192, 2, 3, 'bois');
+	generateArtefact(map, 160, 95, 2, 1, 'corde');
+	generateArtefact(map, 160, 192, 2, 3, 'manche');
 	generateArtefact(map, 150, 270, 2, 4, 'bombe');
 	generateArtefact(map, 150, 350, 2, 5, 'epee_lumiere');
-	generateArtefact(map, 150, 400, 2, 6, 'viande');
+	generateArtefact(map, 150, 400, 2, 6, 'silex');
 
 	generateMonstre(map, 64, 64, 1, 1, 'troll', 0, 0, 0);
 	generateMonstre(map, 384, 128, 6, 2, 'brigand', 2, -1, 0);
 	generateMonstre(map, 192, 192, 3, 3, 'scorpion', 1, -1, 0);
 	generateMonstre(map, 576, 192, 9, 3, 'main', 1.2, 0, 1);
 	
-	generateMonstre(map, 64, 192, 1, 3, 'ami', 0, 0, 0);
+	generateMonstre(map, 64, 192, 1, 3, 'ami', 0, 0, 0, '1');
 
     this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
@@ -199,7 +200,14 @@ Game.init = function () {
 				return false;
 			}
 			
-			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0){	// bouge si aucun menu n'est ouvert
+			if(monsters[rowClick+'-'+colClick] && (( rowHero == rowClick || rowHero == rowClick+1 || rowHero == rowClick-1)
+				&&(colHero == colClick+1 || colHero == colClick-1 || colHero == colClick)) && monsters[rowClick+'-'+colClick].attaque == 0){
+					dialogue = 1;
+					Game.dialogue(monsters[rowClick+'-'+colClick]);
+				}
+				
+			
+			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){	// bouge si aucun menu n'est ouvert
 				// bouger avec le click de souris
 				xHeroClick = xHero;
 				yHeroClick = yHero;
@@ -252,6 +260,19 @@ Game.init = function () {
 			}
 		}
 		
+		//si dialogue ouvert
+		if(dialogue == 1){
+			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
+			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+				dialogue = 0;
+			}
+
+			if( xClick > rect.width/4 +190 && xClick < 32 + rect.width/4 +190
+			&&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4 + 32+20+100){ //acceptQuete
+				Game._questClickPay();
+			}
+		}
+		
 		//si fiche du body ouvert
 		if(menuBodyClick == 1){
 			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
@@ -286,7 +307,7 @@ Game.init = function () {
 					Game.hero.artEnCours(artefactSelectionne);
 				}else{
 					var nameArtefact = artefactSelectionne.name;
-					Game.hero[nameArtefact]();
+					Game.hero[nameArtefact]();	//nom de l'artefact en dynamique
 				}
 				Game.hero.artefact.splice(index, 1);
 				menuBodyClick = 0;
@@ -340,7 +361,7 @@ Game.init = function () {
 		canvas  = document.getElementById('map_canvas');
 		canvas.width = x;
 		canvas.height = y - 50;
-		Game.camera = new Camera(Game.hero.map, x, y-100);
+		Game.camera = new Camera(Game.hero.map, x, y-50);
 		Game.camera.follow(Game.hero);
 	}
 	
@@ -405,18 +426,6 @@ Game._drawLayer = function (layer) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-			
-				// if(tile==6){
-					// if(Game.anim>=DUREE_ANIMATION){
-						// abs2[r*map.rows+c]=7;
-					// }
-				// }
-				// else if(tile==7){
-					// if(Game.anim>=DUREE_ANIMATION){
-						// abs2[r*map.rows+c]=6;
-					// }
-				// }
-				
 				if(tile==8){
 					if(Game.anim>=DUREE_ANIMATION){
 						abs2[r*map.rows+c]=9;
@@ -742,4 +751,5 @@ Game.render = function () {
 	
     this._clickBatiment();
     this._clickBody();
+    this._clickMonstre();
 };
