@@ -20,9 +20,6 @@ hour	   						= 0;
 day			    				= 1;
 batimentClickResponsive		 	= 4;
 colonneBatimentClicResponsive	= 0;
-
-
-
  
 function Camera(map, width, height) {
     this.x = 0;
@@ -90,8 +87,6 @@ function animBackground(map, x, y, imageName){
 	this.image = Loader.getImage(imageName);
 }
  
- 
- 
 Game.load = function () {
     return 	this.defineImages();
 };
@@ -115,7 +110,7 @@ Game.init = function () {
 	//resize en fonction de l'écran
 	canvas  = document.getElementById('map_canvas');
     canvas.width = x;
-    canvas.height = y-100;
+    canvas.height = y - 50;
 	
 	var width = canvas.width;
 	if(width < 1300){//menu.js ligne 211
@@ -144,7 +139,7 @@ Game.init = function () {
 	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
 	
 	
-    this.hero = new Hero(map, 160, 160, 60, 60, 15, 200, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
+    this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
 	var nameBuild = 'build-2-2-ing';
 	var caracteristique 	= [];
 		caracteristique['showLife'] = 1;
@@ -184,7 +179,6 @@ Game.init = function () {
 			var xHero = Game.hero.x;
 			var yHero = Game.hero.y;
 			var menuH = Game.hero.map.tsize/2;
-			
 			
 			if(rowClick == rowHero && colHero == colClick && batimentclick == 0	){	//nourrir
 				if(builds[rowClick+'-'+colHero]){
@@ -312,14 +306,7 @@ Game.init = function () {
 				menuclick = 0;
 			}
 		}
-		
-		// console.log(menussclick);
-		
-		
-		
 		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
-			
-			
 			
 		},
 	false);
@@ -352,7 +339,7 @@ Game.init = function () {
 		y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 		canvas  = document.getElementById('map_canvas');
 		canvas.width = x;
-		canvas.height = y - 100;
+		canvas.height = y - 50;
 		Game.camera = new Camera(Game.hero.map, x, y-100);
 		Game.camera.follow(Game.hero);
 	}
@@ -377,8 +364,6 @@ Game._getToolEquipe = function () {
  
 Game.update = function (delta) {
                
- 
-                
     // handle hero movement with arrow keys
     var dirx = 0;
     var diry = 0;
@@ -392,8 +377,6 @@ Game.update = function (delta) {
 		dirx = clickCanvasX;
 		diry = clickCanvasY;
 	}
-	
-	// console.log(dirx, diry);
 	
     this.hero.move(delta, dirx, diry);
 	
@@ -473,9 +456,6 @@ Game._drawLayer = function (layer) {
 			if(builds[key].caracteristique['showLife']==1)
 				Game._drawRectangle('#FFFFFF', builds[key].row*map.tsize-Math.round(Game.camera.x), builds[key].col*map.tsize-Math.round(Game.camera.y)+map.tsize+5, builds[key].life);
 		})
-	
-	
-
 		//sprite personnages
 		if(Game.anim>=DUREE_ANIMATION/2){
 				Game.hero.image = Loader.getImage('hero2');
@@ -489,8 +469,7 @@ Game._drawLayer = function (layer) {
 				monsters[key].image = Loader.getImage(monsters[key].image2);
 			})
 		}
-
-
+		
 		/** start tourelle */
 		//tir tourelles portée : 2
 		Object.keys(builds).forEach(function(key) {
@@ -572,12 +551,8 @@ Game._drawLayer = function (layer) {
 		/** end tourelle */
 	}
 	
-	
 	if(Game.anim>=DUREE_ANIMATION)
 		 Game.anim=0;
-	 
-	 
-	 
 };
  
 Game._drawGridMenu = function () {
@@ -600,8 +575,6 @@ Game._drawGridMenu = function () {
 		   // this.ctx.lineTo(x, height);
 			// this.ctx.stroke();
 		// }
-	
-	// 
 	
 	if(typeof(animBack) != "undefined" && animBack != null) { // pour les bulles qui montent et qui descendent
 		
@@ -750,6 +723,12 @@ Game.render = function () {
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
 	this.ctx.fillStyle="blue";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+52, this.hero.fatigue, 10);
+	if(this._getToolEquipe() == 'epee'){
+		this.ctx.fillStyle="green";
+		this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+64, this.hero.attaqueEnCours, 10);
+	}
+	
+	
     this._drawGridMenu();
 	
 	
@@ -760,6 +739,7 @@ Game.render = function () {
 			this.hero.y-this.camera.y
 		);
 	}
+	
     this._clickBatiment();
     this._clickBody();
 };

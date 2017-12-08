@@ -1,18 +1,18 @@
 allMonsters['troll'] = {
 	'nom' 			 : 'troll',
 	'level'			 :	1,
-	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
-	'regeneration'	 : 0.1,
+	'attaque'		 : [7, 10],
+	'defense'		 : [2, 7],
+	'regeneration'	 : 0.07,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'troll',
 };
 allMonsters['scorpion'] = {
 	'nom' 			 : 'scorpion',
 	'level'			 :	1,
-	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
-	'regeneration'	 : 0.1,
+	'attaque'		 : [7, 9],
+	'defense'		 : [1, 5],
+	'regeneration'	 : 0.05,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'scorpion'
 };
@@ -20,19 +20,10 @@ allMonsters['balrog'] = {
 	'nom' 			 : 'balrog',
 	'level'			 :	1,
 	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
+	'defense'		 : [3, 8],
 	'regeneration'	 : 0.1,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'balrog'
-};
-allMonsters['brigand'] = {
-	'nom' 			 : 'brigand',
-	'level'			 :	1,
-	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
-	'regeneration'	 : 0.1,
-	'vitesse'		 : [10, 20],
-	'image'			 : 'brigand'
 };
 allMonsters['cyclone'] = {
 	'nom' 			 : 'cyclone',
@@ -47,7 +38,7 @@ allMonsters['gobelin'] = {
 	'nom' 			 : 'gobelin',
 	'level'			 :	1,
 	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
+	'defense'		 : [6, 11],
 	'regeneration'	 : 0.1,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'gobelin'
@@ -74,7 +65,7 @@ allMonsters['main'] = {
 	'nom' 			 : 'main',
 	'level'			 :	1,
 	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
+	'defense'		 : [8, 12],
 	'regeneration'	 : 0.1,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'main'
@@ -83,7 +74,7 @@ allMonsters['vampire'] = {
 	'nom' 			 : 'vampire',
 	'level'			 :	3,
 	'attaque'		 : [10, 20],
-	'defense'		 : [10, 20],
+	'defense'		 : [20, 25],
 	'regeneration'	 : 0.1,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'vampire'
@@ -318,8 +309,8 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		
 		//monstre attaque le héros
 		var attaque = this.attaque - Game.hero.defense;
-		if (attaque < 0)attaque = 0.1;
-			Game.hero.life = Game.hero.life - attaque;
+		if (attaque < 0)attaque = 0.4;	
+			Game.hero.life = Game.hero.life - attaque*0.05;
 	}
 	
 	//si le monstre bouge de haut en bas, si le héro est dessus ou dessous lui, le monstre s'arrête

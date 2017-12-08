@@ -328,9 +328,11 @@ Game._clickBody = function () {
 		this.ctx.drawImage(Loader.getImage('ko'), width/4, height/4);
 		
 		this.ctx.fillStyle = 'white';
-		this.ctx.fillText('Attaque : '+ this.hero.attaque, width/4+12, height/4+20+32);
+		if(this.hero.equipement.epee.possession == 1)
+			this.ctx.fillText('Attaque : '+ this.hero.attaque, width/4+12, height/4+20+32);
 		this.ctx.fillText('Defense : '+ this.hero.defense, width/4+12, height/4+20+64);
-		this.ctx.fillText('Agilité : '+ this.hero.agilite, width/4+12, height/4+20+96);
+		if(this.hero.equipement.epee.possession == 1)
+			this.ctx.fillText('Agilité : '+ this.hero.agilite, width/4+12, height/4+20+96);
 		this.ctx.fillText('Exploration : '+ this.hero.exploration, width/4+12, height/4+20+128);
 		var outilEquipe = this._getToolEquipe();
 		if(outilEquipe != '')

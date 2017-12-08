@@ -11,6 +11,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.attaque = attaque;
     this.defense = defense;
     this.agilite = 10;
+    this.attaqueEnCours = 60;
     this.exploration = 1;
     this.equipement = equipement;
     this.artefact = [];
@@ -85,7 +86,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		}
 	}
 	
-	this.creuse = function (x, y, map)
+	this.creuse = function (x, y, map)	//quand on clique sur le bouton action
 	{
 		
 		Object.keys(this.supply).forEach(function(key) {
@@ -157,6 +158,29 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			if(Game.hero.supply[key] > Game.hero[key])
 				anim = new animation(map, x, y, key);
 		})
+		
+		//attaque d'un ennemi 
+		if(Game._getToolEquipe() == 'epee' && this.attaqueEnCours == 60){
+			if(monsters[(1+vertical)+'-'+horizontal]){
+				var attaque = this.attaque - monsters[(1+vertical)+'-'+horizontal].defense;
+				monsters[(1+vertical)+'-'+horizontal].life-= attaque; 
+			}
+			if(monsters[(vertical-1)+'-'+horizontal]){
+				var attaque = this.attaque - monsters[(vertical-1)+'-'+horizontal].defense;
+				monsters[(vertical-1)+'-'+horizontal].life-= attaque; 
+			}
+			if(monsters[vertical+'-'+(horizontal+1)]){
+				var attaque = this.attaque - monsters[vertical+'-'+(horizontal+1)].defense;
+				monsters[vertical+'-'+(horizontal+1)].life-= attaque; 
+			}
+			if(monsters[vertical+'-'+(horizontal-1)]){
+				var attaque = this.attaque - monsters[vertical+'-'+(horizontal-1)].defense;
+				monsters[vertical+'-'+(horizontal-1)].life-= attaque; 
+			}
+			
+			this.attaqueEnCours = 0;
+		}
+		
 	}
 	
 }
@@ -261,6 +285,36 @@ Hero.prototype.move = function (delta, dirx, diry) {
 		clickCanvasX = 0;
 		clickCanvasY = 0;
 	}
+	//SE FAIRE ATTAQUER PAR UN ENNEMI QUI NE BOUGE PAS
+	var ennemiStable = 0;
+	var attaqueEnnemi = 0;
+	if(monsters[(1+rowX)+'-'+colY] && monsters[(1+rowX)+'-'+colY].vitesse == 0){
+				var attaque = monsters[(1+rowX)+'-'+colY].attaque - Game.hero.defense;
+				attaqueEnnemi = monsters[(1+rowX)+'-'+colY].attaque;
+				ennemiStable = 1;
+			}
+			if(monsters[(rowX-1)+'-'+colY] && monsters[(rowX-1)+'-'+colY].vitesse == 0){
+				var attaque = monsters[(rowX-1)+'-'+colY].attaque - Game.hero.defense;
+				attaqueEnnemi = monsters[(rowX-1)+'-'+colY].attaque;
+				ennemiStable = 1;
+			}
+			if(monsters[rowX+'-'+(colY+1)] && monsters[rowX+'-'+(colY+1)].vitesse == 0){
+				var attaque = monsters[rowX+'-'+(colY+1)].attaque - Game.hero.defense;
+				attaqueEnnemi = monsters[rowX+'-'+(colY+1)].attaque;
+				ennemiStable = 1;
+			}
+			if(monsters[rowX+'-'+(colY-1)] && monsters[rowX+'-'+(colY-1)].vitesse == 0){
+				var attaque = monsters[rowX+'-'+(colY-1)].attaque - Game.hero.defense;
+				attaqueEnnemi = monsters[rowX+'-'+(colY-1)].attaque;
+				ennemiStable = 1;
+			}
+			
+			if(ennemiStable == 1 && attaqueEnnemi > 0){//pour ne pas cibler les amis
+				if (attaque <= 0)attaque = 0.4;	
+					Game.hero.life = Game.hero.life - attaque*0.05;//liaison avec monstre.js commentaire : //monstre attaque le héros
+			}
+	
+	
 	//RECUPERER UN ARTEFACT
 	if(artefacts[rowX+'-'+colY]){
 		if(artefacts[rowX+'-'+colY].inventaire == 1)
@@ -295,6 +349,10 @@ Hero.prototype.move = function (delta, dirx, diry) {
 			animBack	= null;
 	}else
 		animBack	= null;
+	
+	//regenerer la barre d'agilite
+	if(this.attaqueEnCours < 60)
+		this.attaqueEnCours+= this.agilite * 0.05;
 		
 };
  
@@ -420,22 +478,19 @@ Hero.prototype._ennemy = function (dirx, diry) {
     }
 
 	//ATTAQUER UN ENNEMI : A REVOIR POUR PLUS TARD : ENNEMI NE PERD DES POINTS DE VIE QUE QUAND ON ATTAQUE 
-    if(this.life >0){
+    // if(this.life >0){
 		 
-		var lifeHero = collision.attaque-this.defense;
-		if(lifeHero < 0) lifeHero =0.1;
-		var lifeMonster = this.attaque-collision.defense;
-		if(lifeMonster < 0) lifeMonster =0.1;
+		// var lifeHero = collision.attaque-this.defense;
+		// if(lifeHero < 0) lifeHero =0.1;
+		// var lifeMonster = this.attaque-collision.defense;
+		// if(lifeMonster < 0) lifeMonster =0.1;
 		
-		this.life = this.life-(lifeHero);
+		// this.life = this.life-(lifeHero);
 		
-		var equip = Game._getToolEquipe();
-		if(collision.life >0 && equip=='epee'){
-			// if(collision.life-(lifeMonster)<0){
-				// lifeMonster=collision.life;
-			// }
-			collision.life = collision.life-(lifeMonster);
-		}
+		// var equip = Game._getToolEquipe();
+		// if(collision.life >0 && equip=='epee'){
+			// collision.life = collision.life-(lifeMonster);
+		// }
 			
-    }         
+    // }         
 };
