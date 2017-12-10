@@ -144,6 +144,7 @@ Game.init = function () {
 	var nameBuild = 'build-2-2-ing';
 	var caracteristique 	= [];
 		caracteristique['showLife'] = 1;
+		caracteristique['level'] = 1;
 	
 	Game.nameBuild = new Building(map, 160, 160, 2, 2, 60, nameBuild, 61, caracteristique, 0, 0);
 	builds['2-2'] = Game.nameBuild;

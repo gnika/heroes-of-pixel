@@ -77,7 +77,6 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				Game.hero.supply[key] =  Game.hero.supply[key] - supply[key];
 			})
 			
-			
 			Game.nameBuild = new Building(map, x+map.tsize/2, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, typeBatiment, caracteristique, typeTile, solid);
 			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
 

@@ -422,11 +422,12 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var caracteristique 	= [];
 		var paramBuild 			= [];
 		
-		caracteristique['showLife'] = 1;
 		supplyBuild['ecu'] = 99900;
 		paramBuild['typeBatiment'] = [61];
 		paramBuild['typeTile'] = [1, 0];
+		caracteristique['showLife'] = 1;
 		caracteristique['maintenance'] = {'ecu': 0};
+		caracteristique['level'] =1;
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		

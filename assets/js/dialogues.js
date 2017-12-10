@@ -4,9 +4,11 @@ Game.dialogue = function(monstre) {
 }
 
 Game._quest1 = function(monstre){
-	dialogueText = 'Bonjour étranger.\n Je peux vous fournir une épée\n pour seulement\n';
-	supplyText = {'farine': 500, 'ecu' : 5};
-	artefactText = {'corde': 1, 'manche': 1, 'silex': 1};
+	dialogueText = 'Bonjour étranger.\n Je peux vous fournir une épée\n pour seulement\n';	
+	supplyText = {'farine': 500, 'ecu' : 5};																	//conditions de quete
+	artefactText = {'corde': 1, 'manche': 1, 'silex': 1};														//conditions de quete
+	// buildText = [{name: 'culture_ble', nombre:2, level:2}, {name: 'culture_raisin', nombre:2, level:2}];		//conditions de quete
+	buildText = [{name: 'culture_ble', nombre:1, level:2}];		//conditions de quete
 	recompenses = ["Game.hero.equipement['epee'].possession = 1;", "Game.hero.equipement['epee'].life = 100;"];
 	updateFermetureDialogue = ["monstre.idQuete = 2"];
 	texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
@@ -79,7 +81,43 @@ Game._clickMonstre = function() {
 			n = n+40;
 		})
 		
-		if(error == 0)
+		
+		Game.ctx.fillStyle = 'white';
+		var n = 0;
+		
+		for(var i =0; i< buildText.length; i++){//CONDITIONS DES BATIMENTS DU PERSONNAGE
+			var buildVoulus = allBuilding[buildText[i].name].paramBuild['typeBatiment'];
+			var nbVoulus = buildText[i].nombre;
+			var levelVoulus = buildText[i].level;
+			
+			var nbBatimentPossedes = 0;
+			var nbBatimentLevelPossedes = 0;
+			
+			Object.keys(builds).forEach(function(key) {
+					if(JSON.stringify(builds[key].batiment)==JSON.stringify(buildVoulus)){
+						nbBatimentPossedes++;
+						if(builds[key].caracteristique.level == levelVoulus)
+							nbBatimentLevelPossedes++;
+					}				
+				
+			})
+			
+			
+			if(nbBatimentPossedes != nbVoulus || nbBatimentLevelPossedes != nbBatimentPossedes){
+				error = 1;
+				Game.ctx.fillStyle = 'gray';
+			}else
+				Game.ctx.fillStyle = 'white';
+			
+			
+			Game.ctx.fillText(buildText[i].nombre, width/4+215, height/4+138 + n);
+			Game.ctx.drawImage(Loader.getImage(buildText[i].name), width/4+245, height/4+110 + n);
+			Game.ctx.fillText('lvl '+buildText[i].level, width/4+280, height/4+135 + n);
+			n = n+40;
+			
+		}
+		
+		if(error == 0 && (supplyText!='' || artefactText!='' || buildText!='' ))
 			this.ctx.drawImage(Loader.getImage('ok'), width/4+190, height/4+20+100);
 
 	}
@@ -111,6 +149,9 @@ Game._questClickPay = function() {
 		for(var i =0; i< recompenses.length; i++){		
 			eval(recompenses[i]);
 		}
-		
+		dialogueText = texteRecompense;
+		supplyText = '';
+		artefactText = '';
+		buildText = '';
 	}
 }
