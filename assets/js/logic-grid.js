@@ -258,6 +258,7 @@ Game.init = function () {
 			if( xClick > rect.width/3+128+colonneBatimentClicResponsive && xClick < 32 + rect.width/3+128+colonneBatimentClicResponsive 
 			&&  yClick > rect.height/5+35 &&  yClick <  rect.height/5+35 + 32){ //ok upgrade batiment
 				Game.hero._upgradeBuild(builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
+				// console.log(builds, map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y), builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
 			}
 		}
 		
@@ -318,6 +319,7 @@ Game.init = function () {
 		//si sous menu ouvert
 		if(menussclick!=0){
 			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ok
+			
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, allBuilding[keySelected].paramBuild['typeBatiment'],
 				allBuilding[keySelected].caracteristique, allBuilding[keySelected].supplyBuild, allBuilding[keySelected].paramBuild['typeTile'],
 				allBuilding[keySelected].paramBuild['life'], allBuilding[keySelected].paramBuild['solid']);

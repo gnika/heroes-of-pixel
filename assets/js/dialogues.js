@@ -96,7 +96,7 @@ Game._clickMonstre = function() {
 			Object.keys(builds).forEach(function(key) {
 					if(JSON.stringify(builds[key].batiment)==JSON.stringify(buildVoulus)){
 						nbBatimentPossedes++;
-						if(builds[key].caracteristique.level == levelVoulus)
+						if(builds[key].level == levelVoulus)
 							nbBatimentLevelPossedes++;
 					}				
 				

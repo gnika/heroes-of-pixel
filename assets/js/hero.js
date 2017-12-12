@@ -135,7 +135,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				
 				var recompense = builds[vertical+'-'+horizontal].caracteristique['recompense'];
 				Object.keys(recompense).forEach(function(keyRecompense) {
-					Game.hero.supply[keyRecompense]+= recompense[keyRecompense] * builds[vertical+'-'+horizontal].caracteristique['level'];
+					Game.hero.supply[keyRecompense]+= recompense[keyRecompense] * builds[vertical+'-'+horizontal].level;
 				})
 					
 				if(	builds[vertical+'-'+horizontal].caracteristique['loseLife'] == 1)
@@ -187,9 +187,11 @@ Hero.SPEED = 256; // pixels per second
  
 Hero.prototype.move = function (delta, dirx, diry) {
     // move hero
-    this.x += dirx * Hero.SPEED * delta;
-    this.y += diry * Hero.SPEED * delta;
-    // move lifehero	
+	
+	if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){
+		this.x += dirx * Hero.SPEED * delta;
+		this.y += diry * Hero.SPEED * delta;
+	}    // move lifehero	
 	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1)//si mouvement
    
    
@@ -382,11 +384,13 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 };
  
 Hero.prototype._upgradeBuild = function (build) {	// pour augmenter de 1 le niveau d'un batiment
+
 	// paye le prix : je ne fais pas de vérification car le bouton upgrade n'apparait que si c'est possible
 	Object.keys(build.caracteristique.updateNiveau).forEach(function(key) { 
 		Game.hero.supply[key] =  Game.hero.supply[key] - build.caracteristique.updateNiveau[key];
 	})
-	builds[build.row+'-'+build.col].caracteristique.level = builds[build.row+'-'+build.col].caracteristique.level+1;
+	console.log(build);
+	build.level = build.level + 1;
 };
  
 

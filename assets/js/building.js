@@ -4,8 +4,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
     this.name = name;
      this.x = x;
      this.y = y;
-    this.col = col;
-    this.row = row;
+    this.level = 1;
     this.hour = hour;//heure de construction
     this.day = day;//jour de construction
     this.batiment = batiment;
@@ -13,6 +12,8 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
     //si batiment envoit des projectiles
     this.xDelta=0;
     this.yDelta=0;
+    this.row=row;
+    this.col=col;
     this.cible=0;
     this.cibleMouvante=0;
     this.typeTile=typeTile;
@@ -57,7 +58,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var paramBuild 			= [];
 		
 		caracteristique['showLife'] = 0;
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['recompense'] = {'ble': 50};
 		// caracteristique['updateNiveau'] = {'ecu': 40, 'argile': 100, 'fer': 100, 'vin': 1000};
 		caracteristique['updateNiveau'] = {'ecu': 10};
@@ -87,7 +88,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var paramBuild 			= [];
 		
 		caracteristique['showLife'] = 0;
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['recompense'] = {'vigne': 400};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['outilRecompense'] = 'faux';
@@ -119,7 +120,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		supplyBuild['bois'] = 150;		
 		caracteristique['maintenance'] = {'ecu': 25};		//prix à payer par jour pour maintenance
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100}; //prix à payer pour augmenter un niveau
-		caracteristique['level'] =1;						//level du batiment
+		// caracteristique['level'] =1;						//level du batiment
 		caracteristique['attaque'] =0;						//attaque du batiment
 		caracteristique['showLife'] =1;						//montrer ou pas la barre de vie
 		caracteristique['portee'] =0;						//portée en case des batiments qui tirent
@@ -151,7 +152,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		supplyBuild['ecu'] = 150;
 		supplyBuild['bois'] = 150;
 		supplyBuild['fer'] = 150;
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['attaque'] = 0;
@@ -183,7 +184,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		supplyBuild['ecu'] = 350;
 		supplyBuild['bois'] = 150;
-		caracteristique['level'] =1;
+		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['attaque'] =0;
@@ -213,7 +214,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		supplyBuild['ecu'] = 350;
 		supplyBuild['bois'] = 150;
-		caracteristique['level'] =1;
+		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['attaque'] =0;
@@ -247,7 +248,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		supplyBuild['fer'] = 150;
 		supplyBuild['fer'] = 150;
 			
-		caracteristique['level'] =1;
+		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['attaque'] =10;
@@ -277,7 +278,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		supplyBuild['ecu'] = 0;
 		// supplyBuild['bois'] = 150;
-		caracteristique['level'] =1;
+		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['attaque'] =0;
@@ -307,7 +308,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var paramBuild 			= [];
 		
 		caracteristique['showLife'] = 0;
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['recompense'] = {'mais': 400};
@@ -337,7 +338,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var paramBuild 			= [];
 		
 		caracteristique['showLife'] = 1;
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['recompense'] = {'cochon': 400};
@@ -366,7 +367,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		caracteristique['showLife'] = 1;
 		caracteristique['recompense'] = {'viande': 400};
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		supplyBuild['ecu'] = 0;
@@ -394,7 +395,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var paramBuild 			= [];
 		
 		caracteristique['showLife'] = 1;
-		caracteristique['level'] = 1;
+		// caracteristique['level'] = 1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['prixUpdate'] = {'bois': 1};
 		caracteristique['recompense'] = {'planche': 300};
@@ -427,7 +428,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		paramBuild['typeTile'] = [1, 0];
 		caracteristique['showLife'] = 1;
 		caracteristique['maintenance'] = {'ecu': 0};
-		caracteristique['level'] =1;
+		// caracteristique['level'] =1;
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
