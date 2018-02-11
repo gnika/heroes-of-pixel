@@ -4,13 +4,59 @@ Game.dialogue = function(monstre) {
 }
 
 Game._quest1 = function(monstre){
+	dialogueText = "Bonjour étranger.\n Pour vaincre la sorcière Scotia, il vous faudra\n survivre dans ce monde étrange et dangereux.\n\n Pour voir le détail d\'un batiment,\n déplacez-vous dessus et cliquer sur le bâtiment\n\n Pensez à vous nourrir en cliquant\n sur vous-même pour faire remonter votre fatigue\n\n Votre objectif, dans chaque région que vous\n explorerez, est de trouver\n l\'orbe qui vous fera quitter ces lieux.";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';		//conditions de quete
+	// buildText = [{name: 'culture_ble', nombre:1, level:2}];		//conditions de quete
+	// recompenses = ["Game.hero.equipement['epee'].possession = 1;", "Game.hero.equipement['epee'].life = 100;"];
+	// updateFermetureDialogue = ["monstre.idQuete = 2"];
+	// texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
+}
+Game._quest2 = function(monstre){
+	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Pour connaître votre condition physique, \n cliquez sur le menu accessible\n en bas à gauche de l\'écran\n\n Pour construire un bâtiment,\n cliquez sur le menu juste à côté\n\n Votre défense indique votre résistance\n face aux monstres que vous cotoierez. \n\n Votre exploration indique\n votre capacité à voir loin\n lorsque vous explorez\n\n Certains objets que vous ramassez\n modifient ces statistiques.";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+Game._quest3 = function(monstre){
+	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \n\n Vos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+Game._quest4 = function(monstre){
+	dialogueText = "Pour récolter de l\'argent, creusez des trous :\n cliquez sur la pelle pour être équipé, \n allez sur l\'herbe, et cliquez\n sur le bouton action.\n\nPour récolter du bois, fauchez les ronces :\n cliquez sur la faux pour être équipé, \n allez sur les ronces, et cliquez\n sur le bouton action.\n Attention toutefois : les ronces vous font perdre\n des points de vie !";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+
+Game._quest5 = function(monstre){
+	dialogueText = 'Bonjour étranger.\n Trouvez la clé pour ouvrir cette barrière,\n et vous pourrez passer';	
+	supplyText = '';																		//conditions de quete
+	artefactText = {'cle': 1};														//conditions de quete
+	buildText = '';		//conditions de quete
+	recompenses = ["abs2[445] = 0;abs2[397] = 0;"];
+	updateFermetureDialogue = [monstre.name+"=6"];
+	texteRecompense = 'Merci.\n changez vite de région, à présent !';
+}
+
+Game._quest6 = function(monstre){
+	dialogueText = "Bonjour étranger \n ";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+
+Game._quest7 = function(monstre){
 	dialogueText = 'Bonjour étranger.\n Je peux vous fournir une épée\n pour seulement\n';	
 	supplyText = {'farine': 500, 'ecu' : 5};																	//conditions de quete
 	artefactText = {'corde': 1, 'manche': 1, 'silex': 1};														//conditions de quete
 	// buildText = [{name: 'culture_ble', nombre:2, level:2}, {name: 'culture_raisin', nombre:2, level:2}];		//conditions de quete
 	buildText = [{name: 'culture_ble', nombre:1, level:2}];		//conditions de quete
 	recompenses = ["Game.hero.equipement['epee'].possession = 1;", "Game.hero.equipement['epee'].life = 100;"];
-	updateFermetureDialogue = ["monstre.idQuete = 2"];
+	// updateFermetureDialogue = ["monstre.idQuete = 2"];
 	texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
 }
  
@@ -38,7 +84,7 @@ Game._clickMonstre = function() {
 		this.ctx.fill();
 		
 		this.ctx.drawImage(Loader.getImage('ko'), width/4, height/4);
-		
+		// console.log(dialogueText);
 		var lines = dialogueText.split("\n");
 		this.ctx.fillStyle = 'white';
 		var u = 1;
@@ -148,6 +194,17 @@ Game._questClickPay = function() {
 		
 		for(var i =0; i< recompenses.length; i++){		
 			eval(recompenses[i]);
+		}
+		
+		for(var i =0; i< updateFermetureDialogue.length; i++){	
+			var res = updateFermetureDialogue[i].split("=");		
+			var monstreName = res[0];
+			var questUp 	= res[1];
+			Object.keys(monsters).forEach(function(key) {
+				if(monsters[key].name == monstreName){
+					monsters[key].idQuete = questUp;
+				}
+			})
 		}
 		dialogueText = texteRecompense;
 		supplyText = '';

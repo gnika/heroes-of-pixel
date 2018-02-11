@@ -229,6 +229,20 @@ allArtefacts['corde'] = {
 	'description_fr' : "Corde pour\n fabriquer des outils",
 	'description_en' : "EN Corde pour fabriquer des outils"
 }
+allArtefacts['cle'] = {
+	'name'		 	 : 'cle',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',
+	'inventaire'	 : 1,
+	'quete'			 : 1,
+	'description_fr' : "Clef",
+	'description_en' : "Key",
+}
 allArtefacts['manche'] = {
 	'name'		 	 : 'manche',
 	'attaque'		 : 0,

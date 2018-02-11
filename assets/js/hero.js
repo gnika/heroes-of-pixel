@@ -332,6 +332,7 @@ Hero.prototype.move = function (delta, dirx, diry) {
 			}
 		}
 		
+		// console.log(Game.hero.artefact);
 		anim = new animation(map, artefacts[rowX+'-'+colY].x, artefacts[rowX+'-'+colY].y, artefacts[rowX+'-'+colY].image);
 		delete artefacts[rowX+'-'+colY];
 		
@@ -380,6 +381,51 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 				   if(this.life>0)
 						this.life=this.life-0.1;
                 }
+	var change = this.map.isChangeLevel(this.x, this.y);		
+	
+	if(change == 'next'){	// on a passé de niveau
+		if(niveauMapSelect == 0){
+			builds		= [];
+			monsters 	= [];
+			artefacts 	= [];
+			niveauMap ++;
+			this.map.mapNext(0);
+		}
+		niveauMapSelect =1;
+	}else if(change == 'room'){	//on rentre dans une maison : il faut conserver toutes les données de la carte
+		if(niveauMapSelect == 0){
+			if(layer1Tmp.length == 0){
+				buildsTmp				= builds;
+				layer1Tmp 				= abs1;
+				layer2Tmp 				= abs2;
+				layer1ExplTmp 			= absobs1;
+				layer2ExplTmp 			= absobs2;
+				artefactsTmp 			= artefacts;
+				monstersTmp 			= monsters;
+				xyHeroTmp['x']			= Game.hero.x;
+				xyHeroTmp['y']			= Game.hero.y;
+				builds			= [];
+				monsters 		= [];
+				artefacts 		= [];
+				this.map.mapNext(niveauMap);
+			}else{
+				builds 		= buildsTmp;
+				abs1		= layer1Tmp;
+				abs2 		= layer2Tmp;
+				absobs1 	= layer1ExplTmp;
+				absobs2 	= layer2ExplTmp;
+				artefacts	= artefactsTmp;
+				monsters 	= monstersTmp;
+				map.layers  = [absobs1, absobs2];
+				Game.hero.x		= xyHeroTmp['x'];
+				Game.hero.y		= xyHeroTmp['y'];
+				
+				layer1Tmp 	= [];
+			}
+		}
+		niveauMapSelect =1;
+	}else
+		niveauMapSelect = 0;
                                               
 };
  
@@ -389,7 +435,6 @@ Hero.prototype._upgradeBuild = function (build) {	// pour augmenter de 1 le nive
 	Object.keys(build.caracteristique.updateNiveau).forEach(function(key) { 
 		Game.hero.supply[key] =  Game.hero.supply[key] - build.caracteristique.updateNiveau[key];
 	})
-	console.log(build);
 	build.level = build.level + 1;
 };
  

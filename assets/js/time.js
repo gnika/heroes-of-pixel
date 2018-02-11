@@ -30,7 +30,7 @@ function Time() {
             minute += 10;			
         }
 
-        if (hour == 24) {
+        if (hour == 24 && layer1Tmp.length == 0) {
             hour   = 0;
             minute = 0;
             day++;
@@ -60,7 +60,8 @@ function Time() {
 					var generateMonsters = ['brigand', 'gobelin', 'balrog', 'scorpion', 'troll'];
 					var rand = generateMonsters[(Math.random() * generateMonsters.length) | 0];
 					
-					generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, rand, vitesse, dirX, dirY);
+					if(yMonster != Game.hero.y && xMonster != Game.hero.x)
+						generateMonstre(map, xMonster, yMonster, xRowMonster, yColMonster, rand, vitesse, dirX, dirY);
 					
 				}
 
@@ -157,7 +158,7 @@ function Time() {
 				}
 				builds[key].day = day;
 				
-				var error = 1;
+				var error = 0;
 				//maintenance par jour
 				Object.keys(maintenance).forEach(function(keyPrice) {
 						if(Game.hero.supply[keyPrice] < maintenance[keyPrice])

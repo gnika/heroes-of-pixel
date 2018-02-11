@@ -29,6 +29,7 @@ Game.defineImages = function(){
 		Loader.loadImage('manche', 'assets/artefacts/manche.png'),
 		Loader.loadImage('silex', 'assets/artefacts/silex.png'),
 		Loader.loadImage('corde', 'assets/artefacts/corde.png'),
+		Loader.loadImage('cle', 'assets/artefacts/key.png'),
 		
 		
 		Loader.loadImage('hero', 'assets/character.png'),

@@ -1,5 +1,15 @@
 DUREE_ANIMATION 				= 50;
+niveauMap						= 1;
+niveauMapSelect					= 0;//pour ne passer qu'une fois au niveau suivant
 builds          				= [];
+buildsTmp          				= [];//pour garder les batiments construits quand on va dans une piece
+layer1Tmp						= [];//pour garder les tuiles explorées quand on va dans une piece
+layer2Tmp						= [];//pour garder les tuiles exploréess quand on va dans une piece
+layer1ExplTmp					= [];//pour garder les tuiles explorées quand on va dans une piece
+layer2ExplTmp					= [];//pour garder les tuiles explorées quand on va dans une piece
+artefactsTmp					= [];//pour garder les artefacts quand on va dans une piece
+monstersTmp						= [];//pour garder les monstres quand on va dans une piece
+xyHeroTmp						= [];//pour garder les coordonnées quand on va dans une piece
 allBuilding     				= [];
 allMonsters     				= [];
 allArtefacts    				= [];
@@ -139,31 +149,8 @@ Game.init = function () {
 	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
 	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':0, 'equipe':0};
 	
-	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
-	var nameBuild = 'build-2-2-ing';
-	var caracteristique 	= [];
-		caracteristique['showLife'] = 1;
-		caracteristique['level'] = 1;
 	
-	Game.nameBuild = new Building(map, 160, 160, 2, 2, 60, nameBuild, 61, caracteristique, 0, 0);
-	builds['2-2'] = Game.nameBuild;
-	
-	generateArtefact(map, 210, 160, 3, 2, 'lunette_bleu');
-	generateArtefact(map, 210, 95, 3, 1, 'lunette_bleu');
-	generateArtefact(map, 95, 160, 1, 2, 'culture_raisin');
-	generateArtefact(map, 160, 95, 2, 1, 'corde');
-	generateArtefact(map, 160, 192, 2, 3, 'manche');
-	generateArtefact(map, 150, 270, 2, 4, 'bombe');
-	generateArtefact(map, 150, 350, 2, 5, 'epee_lumiere');
-	generateArtefact(map, 150, 400, 2, 6, 'silex');
-
-	generateMonstre(map, 64, 64, 1, 1, 'troll', 0, 0, 0);
-	generateMonstre(map, 384, 128, 6, 2, 'brigand', 2, -1, 0);
-	generateMonstre(map, 192, 192, 3, 3, 'scorpion', 1, -1, 0);
-	generateMonstre(map, 576, 192, 9, 3, 'main', 1.2, 0, 1);
-	
-	generateMonstre(map, 64, 192, 1, 3, 'ami', 0, 0, 0, '1');
 
     this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
