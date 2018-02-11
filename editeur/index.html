@@ -6,8 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/min/styles.css" type="text/css"> -->
     <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
 
 	
@@ -37,20 +35,27 @@
      <script src="assets/js/map2.js"></script>
      <script src="assets/js/maproom1.js"></script>
      <script src="assets/js/dialogues.js"></script>
+	 
 </head>
 
 <body>
-    <div class="container">
+    <div id="container" class="container">
+	<div id="menuEdit" style="width:100%; overflow-x:scroll;"><img src="assets/tiles_new.png"/></div>
 		<div class=" text-center" id="gameTime"></div>
 		<div class="text-center">
 			<div class="text-center btn-group" role="group">
-				 level : <input type="text" id="editAbs" value="">
+				 level : <input type="text" id="editAbs" value="1">
 				 tile : <input type="text" id="edit" value="">
+				 row : <input type="text" id="row" />
+				 col : <input type="text" id="col" />
+				 x : <input type="text" id="x" />
+				 y : <input type="text" id="y" />
 			</div>
 		</div>
 					<canvas id="map_canvas" width="1580" height="768"></canvas>
 				
 		<div id="div1"></div>	
+		<hr/>
 		<div id="div2"></div>	
 
 		<!-- <footer class="main-footer"> -->
@@ -61,4 +66,21 @@
 </body>
 
      <script src="assets/js/menu.js"></script>
+	 <script>		
+		
+		var menuEdit = document.getElementById('menuEdit');
+
+			menuEdit.addEventListener('click', function(e) {
+		   
+			var rect = e.target.getBoundingClientRect();
+			var x = e.pageX - rect.left; //x position within the element
+			var y = e.pageY - rect.top; 
+			
+			document.getElementById("edit").value = (Math.floor(x/64)+1);
+		   
+		});
+		
+		
+		
+	 </script>
 </html>

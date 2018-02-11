@@ -11,10 +11,6 @@ Game._drawMenu = function () {
     this.ctx.fillStyle = 'brown';
     this.ctx.fill();
 	
-	this.ctx.font="20px Arial";
-	this.ctx.fillStyle = 'black';
-	this.ctx.drawImage(Loader.getImage('tiles'), 110, 0);
-	
 	
 	//menu côté
 	this.ctx.beginPath();

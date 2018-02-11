@@ -161,7 +161,8 @@ Game.init = function () {
 			var rowClick = Game.hero.map.getRow(xClick);
 			var colClick = Game.hero.map.getCol(yClick);
 			var menuH = Game.hero.map.tsize/2;	
-			
+		document.getElementById("div1").innerHTML = '';
+		document.getElementById("div2").innerHTML = '';
 		var tile = document.getElementById("edit").value;
 		if(document.getElementById("editAbs").value == 1)
 			abs1[colClick * map.rows + rowClick] = tile;
@@ -176,7 +177,19 @@ Game.init = function () {
 				inner+=', '+abs1[i];
 				document.getElementById("div1").innerHTML = inner;
 			}
-			// console.log(abs1);
+		
+			for(var i = 0; i < abs2.length; i++){
+				var inner = document.getElementById("div2").innerHTML;
+				if(i==0)
+					inner+=abs2[i];
+				else
+				inner+=', '+abs2[i];
+				document.getElementById("div2").innerHTML = inner;
+			}
+			document.getElementById("row").value = rowClick;
+			document.getElementById("col").value = colClick;
+			document.getElementById("x").value = rowClick*64;
+			document.getElementById("y").value = colClick*64;
 		},
 	false);
 	
