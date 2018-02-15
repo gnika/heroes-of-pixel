@@ -85,6 +85,22 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		}
 	}
 	
+	this.food = function ()	//quand on clique sur le bouton action
+	{
+		
+		if(Game.hero.supply.pain >= 5){
+			Game.hero.supply.pain-= 5;
+			
+			if(Game.hero.fatigue >= 40)
+				Game.hero.fatigue = 60;
+			else
+				Game.hero.fatigue+= 20;
+			
+			anim = new animation(Game.hero.map, Game.hero.x, Game.hero.y, 'pain');
+		}
+		
+	}
+	
 	this.creuse = function (x, y, map)	//quand on clique sur le bouton action
 	{
 		
@@ -94,6 +110,8 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		
         var equip 	= Game._getToolEquipe();
         var pos     = map.getRow(y)*map.rows+map.getCol(x);
+		// console.log(pos, abs1[pos], abs2[pos]);
+		
 		
 		var vertical = map.getCol(x);
 		var horizontal = map.getRow(y);
@@ -149,7 +167,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 					builds[vertical+'-'+horizontal].day = day;
 					builds[vertical+'-'+horizontal].hour = hour;
 				}
+			}else{
+				batimentclick = 1;
+				return false;
 			}
+				
 		}
 		
 		//animation quand on gagne une ressource
@@ -432,10 +454,12 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 Hero.prototype._upgradeBuild = function (build) {	// pour augmenter de 1 le niveau d'un batiment
 
 	// paye le prix : je ne fais pas de vérification car le bouton upgrade n'apparait que si c'est possible
-	Object.keys(build.caracteristique.updateNiveau).forEach(function(key) { 
-		Game.hero.supply[key] =  Game.hero.supply[key] - build.caracteristique.updateNiveau[key];
-	})
-	build.level = build.level + 1;
+	if(build.level < 3){
+		Object.keys(build.caracteristique.updateNiveau).forEach(function(key) { 
+			Game.hero.supply[key] =  Game.hero.supply[key] - build.caracteristique.updateNiveau[key];
+		})
+		build.level = build.level + 1;
+	}
 };
  
 

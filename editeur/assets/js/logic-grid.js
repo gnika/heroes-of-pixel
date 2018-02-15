@@ -164,7 +164,10 @@ Game.init = function () {
 		document.getElementById("div1").innerHTML = '';
 		document.getElementById("div2").innerHTML = '';
 		var tile = document.getElementById("edit").value;
-		if(document.getElementById("editAbs").value == 1)
+		
+		var editAbs = document.querySelector('input[name = "editAbs"]:checked').value;
+		
+		if(editAbs == 1)
 			abs1[colClick * map.rows + rowClick] = tile;
 		else
 			abs2[colClick * map.rows + rowClick] = tile;
@@ -178,6 +181,8 @@ Game.init = function () {
 				document.getElementById("div1").innerHTML = inner;
 			}
 		
+			document.getElementById("div1").innerHTML = 'abs1 = ['+document.getElementById("div1").innerHTML +'];';
+			
 			for(var i = 0; i < abs2.length; i++){
 				var inner = document.getElementById("div2").innerHTML;
 				if(i==0)
@@ -186,10 +191,14 @@ Game.init = function () {
 				inner+=', '+abs2[i];
 				document.getElementById("div2").innerHTML = inner;
 			}
+			document.getElementById("div2").innerHTML = 'abs2 = ['+document.getElementById("div2").innerHTML +'];';
+
+			
 			document.getElementById("row").value = rowClick;
 			document.getElementById("col").value = colClick;
 			document.getElementById("x").value = rowClick*64;
 			document.getElementById("y").value = colClick*64;
+			document.getElementById("place").value = colClick*48+rowClick;
 		},
 	false);
 	
@@ -487,7 +496,6 @@ Game.render = function () {
 	
 	
     this._drawGridMenu();
-	
 	
 	if(builds[this.hero.map.getRow(this.hero.x)+'-'+this.hero.map.getCol(this.hero.y)]){//loupe si heros sur batiment
 		Game.ctx.drawImage(

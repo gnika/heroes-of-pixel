@@ -397,8 +397,8 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] = 1;
 		// caracteristique['level'] = 1;
 		caracteristique['maintenance'] = {'ecu': 25};
-		caracteristique['prixUpdate'] = {'bois': 1};
-		caracteristique['recompense'] = {'planche': 300};
+		caracteristique['prixUpdate'] = {'bois': 5};
+		caracteristique['recompense'] = {'planche': 10};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100, 'fer': 100, 'vin': 100};
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [44, 45, 46, 47];

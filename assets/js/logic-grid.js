@@ -108,9 +108,9 @@ Game.getRandomInt = function(min, max) {
  
 Game.init = function () {
 	setBuilding();
-	var audio = new Audio('assets/sound/ambiance1.mp3');
-	audio.loop = true;
-	audio.play();
+	// var audio = new Audio('assets/sound/ambiance1.mp3');
+	// audio.loop = true;
+	// audio.play();
 	var w = window,
     d = document,
     e = d.documentElement,
@@ -121,7 +121,7 @@ Game.init = function () {
 	//resize en fonction de l'écran
 	canvas  = document.getElementById('map_canvas');
     canvas.width = x;
-    canvas.height = y - 50;
+    canvas.height = y - 60;
 	
 	var width = canvas.width;
 	if(width < 1300){//menu.js ligne 211
@@ -168,23 +168,11 @@ Game.init = function () {
 			var xHero = Game.hero.x;
 			var yHero = Game.hero.y;
 			var menuH = Game.hero.map.tsize/2;
+			var equip 	= Game._getToolEquipe();
+			var pos     = map.getRow(yClick)*map.rows+map.getCol(xClick);
 			
-			if(rowClick == rowHero && colHero == colClick && batimentclick == 0	){	//nourrir
-				if(builds[rowClick+'-'+colHero]){
-					batimentclick = 1;
-					
-					return false;
-				}
-				if(Game.hero.supply.pain >= 5){
-					Game.hero.supply.pain-= 5;
-					
-					if(Game.hero.fatigue >= 40)
-						Game.hero.fatigue = 60;
-					else
-						Game.hero.fatigue+= 20;
-					
-					anim = new animation(Game.hero.map, xHero, yHero, 'pain');
-				}
+			if(rowClick == rowHero && colHero == colClick && batimentclick == 0	){
+				Game.hero.creuse(xClick, yClick, Game.hero.map);
 				return false;
 			}
 			
@@ -217,7 +205,7 @@ Game.init = function () {
 			var yClick = event.clientY - rect.top;
 			
 			if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)
-				Game.hero.creuse(Game.hero.x, Game.hero.y, map);
+				Game.hero.food();
 			
 			var n = 0;
 			
@@ -621,11 +609,11 @@ Game._drawGridMenu = function () {
     );
 	
 	if(this.hero.life<=0){
-	   this.ctx.font = "50px Arial";
-	   this.ctx.fillText("VOUS AVEZ PERDU !",0,this.hero.screenY);
+	   this.ctx.font = "60px bold cursive";
+	   this.ctx.fillStyle = "black";
+	   this.ctx.fillText("VOUS AVEZ PERDU !",this.hero.screenX - this.hero.width / 2,this.hero.screenY - this.hero.height / 2);
+
 	}
-	
-	
 	
 
 	if(typeof(anim) != "undefined" && anim !== null) {

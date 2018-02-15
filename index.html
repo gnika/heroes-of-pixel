@@ -41,15 +41,22 @@
 
 <body>
     <div class="container">
-		<div class=" text-center" id="gameTime"></div>
-		<div class="text-center">
-			<div class="text-center btn-group" role="group">
-				<button type="button" class="btn btn-danger btn-xs" id="speed0">||</button>
-				<button type="button" class="btn btn-success btn-xs" id="speed1">></button>
-				<button type="button" class="btn btn-success btn-xs" id="speed2">>></button>
-				<button type="button" class="btn btn-success btn-xs" id="speed3">>>></button>
-			</div>
+		<div style="display: inline; float: left; padding-right: 2%; padding-left: 5px;">
+			<div id="passNiveau"> Passer le niveau</div> <div id="inv" style="visibility: hidden;"><input type="text" id="code"/> <button id="pass">Ok</button></div>
 		</div>
+		<div class=" " id="gameTime"></div><!--text-center-->
+		<div class=""> <!--text-center-->
+			<div class=" btn-group" role="group"><!--text-center-->
+				<div>
+					<button type="button" class="btn btn-danger btn-xs" id="speed0">||</button>
+					<button type="button" class="btn btn-success btn-xs" id="speed1">></button>
+					<button type="button" class="btn btn-success btn-xs" id="speed2">>></button>
+					<button type="button" class="btn btn-success btn-xs" id="speed3">>>></button>
+				</div>
+			</div>
+			
+		</div>
+		
 					<canvas id="map_canvas" width="1580" height="768"></canvas>
 				
 			
@@ -62,4 +69,24 @@
 </body>
 
      <script src="assets/js/menu.js"></script>
+     <script>
+		document.getElementById("passNiveau").addEventListener('click',
+		function(event){
+		if(document.getElementById("inv").style.visibility == 'hidden')
+			document.getElementById("inv").style.visibility = 'visible';
+		else
+			document.getElementById("inv").style.visibility = 'hidden';
+		})
+		document.getElementById("pass").addEventListener('click',
+		function(event){
+			if(document.getElementById("code").value == '2'){
+				builds		= [];
+				monsters 	= [];
+				artefacts 	= [];
+				niveauMap ++;
+				generateMap2();
+			}
+			document.getElementById("code").value = '';	
+		})
+	 </script>
 </html>

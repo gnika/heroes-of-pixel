@@ -59,6 +59,30 @@ Game._quest7 = function(monstre){
 	// updateFermetureDialogue = ["monstre.idQuete = 2"];
 	texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
 }
+
+Game._quest8 = function(monstre){
+	dialogueText = 'Le pont est cassé !\n Trouvez les planches nécessaires à la \n fabrication du pont !';	
+	supplyText = {'planche': 50};																	
+	artefactText = '';	
+	buildText = '';
+	recompenses = ["abs2[778] = 84;"];
+	updateFermetureDialogue = [monstre.name+"=9"];
+	texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
+}
+
+Game._quest9 = function(monstre){
+	dialogueText = "Le pont est réparé, merci pour votre aide \n ";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+
+Game._quest10 = function(monstre){
+	dialogueText = "Pour accéder directement à cette \n région, tapez le mot 'atreides'\n dans l'espace prévue à cet effet ";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
  
 Game._clickMonstre = function() {
 	if(dialogue == 1){
