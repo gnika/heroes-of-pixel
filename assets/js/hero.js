@@ -116,7 +116,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		var vertical = map.getCol(x);
 		var horizontal = map.getRow(y);
 		//tiles
-		if (abs2[pos] == 0 && abs1[pos] !=2 && equip == 'pelle') {
+		if (abs2[pos] == 0 && abs1[pos] ==1 && equip == 'pelle') {
 			abs1[pos] = 2;
 			abs2[pos] = 0;
 			absobs1[pos] = 2;
@@ -133,9 +133,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			abs2[pos] = 60;
 			absobs2[pos] = 60;
 			this.supply.pierre = Game.hero.pierre + 10;
-		} else if (abs2[pos] == 60  && equip == 'pioche'){
-			this.supply.pierre = Game.hero.pierre + 1;
-        } else if (abs1[pos] == 2  && equip == 'pelle'){
+		} 
+		// else if (abs2[pos] == 60  && equip == 'pioche'){
+			// this.supply.pierre = Game.hero.pierre + 1;
+        // }
+		else if (abs1[pos] == 2  && equip == 'pelle'){
 			this.supply.ecu = Game.hero.ecu + 1;
         }else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;

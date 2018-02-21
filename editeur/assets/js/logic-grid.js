@@ -152,26 +152,10 @@ Game.init = function () {
     this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
 
-	document.getElementById("map_canvas").addEventListener('click',
+	document.getElementById("generate").addEventListener('click',
 		function(event){
-			//gestion deplacement héros
-			var rect = this.getBoundingClientRect();
-			var xClick = event.clientX - rect.left+Game.camera.x;
-			var yClick = event.clientY - rect.top+Game.camera.y;
-			var rowClick = Game.hero.map.getRow(xClick);
-			var colClick = Game.hero.map.getCol(yClick);
-			var menuH = Game.hero.map.tsize/2;	
-		document.getElementById("div1").innerHTML = '';
-		document.getElementById("div2").innerHTML = '';
-		var tile = document.getElementById("edit").value;
-		
-		var editAbs = document.querySelector('input[name = "editAbs"]:checked').value;
-		
-		if(editAbs == 1)
-			abs1[colClick * map.rows + rowClick] = tile;
-		else
-			abs2[colClick * map.rows + rowClick] = tile;
-		
+			document.getElementById("div1").innerHTML = '';
+			document.getElementById("div2").innerHTML = '';
 			for(var i = 0; i < abs1.length; i++){
 				var inner = document.getElementById("div1").innerHTML;
 				if(i==0)
@@ -192,6 +176,29 @@ Game.init = function () {
 				document.getElementById("div2").innerHTML = inner;
 			}
 			document.getElementById("div2").innerHTML = 'abs2 = ['+document.getElementById("div2").innerHTML +'];';
+		});
+		
+	document.getElementById("map_canvas").addEventListener('click',
+		function(event){
+			//gestion deplacement héros
+			var rect = this.getBoundingClientRect();
+			var xClick = event.clientX - rect.left+Game.camera.x;
+			var yClick = event.clientY - rect.top+Game.camera.y;
+			var rowClick = Game.hero.map.getRow(xClick);
+			var colClick = Game.hero.map.getCol(yClick);
+			var menuH = Game.hero.map.tsize/2;	
+		document.getElementById("div1").innerHTML = '';
+		document.getElementById("div2").innerHTML = '';
+		var tile = document.getElementById("edit").value;
+		
+		var editAbs = document.querySelector('input[name = "editAbs"]:checked').value;
+		
+		if(editAbs == 1)
+			abs1[colClick * map.rows + rowClick] = tile;
+		else
+			abs2[colClick * map.rows + rowClick] = tile;
+		
+			
 
 			
 			document.getElementById("row").value = rowClick;

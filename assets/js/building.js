@@ -53,6 +53,67 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
  
  function setBuilding()
  {
+	 
+	 
+		var supplyBuild 		= [];		//scierie
+		var caracteristique 	= [];
+		var paramBuild 			= [];
+		
+		caracteristique['showLife'] = 1;
+		// caracteristique['level'] = 1;
+		caracteristique['maintenance'] = {'ecu': 25};
+		caracteristique['prixUpdate'] = {'bois': 5};
+		caracteristique['recompense'] = {'planche': 10};
+		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100, 'fer': 100, 'vin': 100};
+		supplyBuild['ecu'] = 150;
+		supplyBuild['pierre'] = 50;
+		paramBuild['typeBatiment'] = [44, 45, 46, 47];
+		paramBuild['typeTile'] = [1, 0];
+		paramBuild['life'] = 60;
+		paramBuild['solid'] = 0;
+		
+		menussclickTitre = 'Scierie';
+		description_fr = 'transforme le bois en planche';
+		description_en = 'EN transforme le bois en planche';
+
+		allBuilding['scierie']  = {
+		 'caracteristique'	: caracteristique,
+		 'supplyBuild' 		: supplyBuild,
+		 'paramBuild' 		: paramBuild,
+		 'menussclickTitre' : menussclickTitre,
+		 'description_fr'	: description_fr,
+		 'description_en'	: description_en
+		};
+		
+		var supplyBuild 		= [];	//mine de fer
+		var caracteristique 	= [];
+		var paramBuild 			= [];
+		
+		supplyBuild['ecu'] = 350;
+		supplyBuild['bois'] = 150;
+		// caracteristique['level'] =1;
+		caracteristique['maintenance'] = {'ecu': 25};
+		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
+		caracteristique['attaque'] =0;
+		caracteristique['showLife'] =1;
+		caracteristique['portee'] =0;
+		paramBuild['typeBatiment'] = [32, 33, 34, 35];
+		paramBuild['typeTile'] = [1, 88];
+		paramBuild['life'] = 60;
+		paramBuild['solid'] = 0;
+		
+		menussclickTitre = 'Mine de fer';
+		description_fr = 'Les mines de fer génèrent du fer\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+		description_en = 'EN mines de fer génèrent du fer\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+			
+		allBuilding['mine_fer']  = {
+		 'caracteristique'	: caracteristique,
+		 'supplyBuild' 		: supplyBuild,
+		 'paramBuild' 		: paramBuild,
+		 'menussclickTitre' : menussclickTitre,
+		 'description_fr'	: description_fr,
+		 'description_en'	: description_en
+		};
 		var supplyBuild 		= [];	//blé
 		var caracteristique 	= [];
 		var paramBuild 			= [];
@@ -61,11 +122,12 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		// caracteristique['level'] = 1;
 		caracteristique['recompense'] = {'ble': 50};
 		// caracteristique['updateNiveau'] = {'ecu': 40, 'argile': 100, 'fer': 100, 'vin': 1000};
-		caracteristique['updateNiveau'] = {'ecu': 10};
+		caracteristique['updateNiveau'] = {'ecu': 10, 'argile': 100};
 		caracteristique['outilRecompense'] = 'faux';
-		caracteristique['maintenance'] = {'ecu': 25, 'bois': 10};
+		caracteristique['maintenance'] = {'ecu': 20, 'bois': 10};
 		caracteristique['loseLife'] = 1;
-		supplyBuild['ecu'] = 0;
+		supplyBuild['ecu'] = 50;
+		supplyBuild['planche'] = 50;
 		paramBuild['typeBatiment'] = [36, 37, 38, 39];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
@@ -178,35 +240,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		 'description_fr'	: description_fr,
 		 'description_en'	: description_en
 		};
-		var supplyBuild 		= [];	//mine de fer
-		var caracteristique 	= [];
-		var paramBuild 			= [];
 		
-		supplyBuild['ecu'] = 350;
-		supplyBuild['bois'] = 150;
-		// caracteristique['level'] =1;
-		caracteristique['maintenance'] = {'ecu': 25};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
-		caracteristique['attaque'] =0;
-		caracteristique['showLife'] =1;
-		caracteristique['portee'] =0;
-		paramBuild['typeBatiment'] = [32, 33, 34, 35];
-		paramBuild['typeTile'] = [1, 0];
-		paramBuild['life'] = 60;
-		paramBuild['solid'] = 0;
-		
-		menussclickTitre = 'Mine de fer';
-		description_fr = 'Les mines de fer génèrent du fer\nnécessaire à la création\nde plusieurs bâtiments et objets.';
-		description_en = 'EN mines de fer génèrent du fer\nnécessaire à la création\nde plusieurs bâtiments et objets.';
-			
-		allBuilding['mine_fer']  = {
-		 'caracteristique'	: caracteristique,
-		 'supplyBuild' 		: supplyBuild,
-		 'paramBuild' 		: paramBuild,
-		 'menussclickTitre' : menussclickTitre,
-		 'description_fr'	: description_fr,
-		 'description_en'	: description_en
-		};
 		
 		var supplyBuild 		= [];	//mine d'argent
 		var caracteristique 	= [];
@@ -390,34 +424,6 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		 'description_en'	: description_en
 		};
 		
-		var supplyBuild 		= [];		//scierie
-		var caracteristique 	= [];
-		var paramBuild 			= [];
-		
-		caracteristique['showLife'] = 1;
-		// caracteristique['level'] = 1;
-		caracteristique['maintenance'] = {'ecu': 25};
-		caracteristique['prixUpdate'] = {'bois': 5};
-		caracteristique['recompense'] = {'planche': 10};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100, 'fer': 100, 'vin': 100};
-		supplyBuild['ecu'] = 0;
-		paramBuild['typeBatiment'] = [44, 45, 46, 47];
-		paramBuild['typeTile'] = [1, 0];
-		paramBuild['life'] = 60;
-		paramBuild['solid'] = 0;
-		
-		menussclickTitre = 'Scierie';
-		description_fr = 'transforme le bois en planche';
-		description_en = 'EN transforme le bois en planche';
-
-		allBuilding['scierie']  = {
-		 'caracteristique'	: caracteristique,
-		 'supplyBuild' 		: supplyBuild,
-		 'paramBuild' 		: paramBuild,
-		 'menussclickTitre' : menussclickTitre,
-		 'description_fr'	: description_fr,
-		 'description_en'	: description_en
-		};
 		
 		var supplyBuild 		= [];		//entrepot
 		var caracteristique 	= [];

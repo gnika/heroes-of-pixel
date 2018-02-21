@@ -35,7 +35,9 @@
      <script src="assets/js/images.js"></script>
      <script src="assets/js/map.js"></script>
      <script src="assets/js/map2.js"></script>
+     <script src="assets/js/map3.js"></script>
      <script src="assets/js/maproom1.js"></script>
+     <script src="assets/js/maproom3.js"></script>
      <script src="assets/js/dialogues.js"></script>
 </head>
 
@@ -79,12 +81,19 @@
 		})
 		document.getElementById("pass").addEventListener('click',
 		function(event){
-			if(document.getElementById("code").value == '2'){
+			if(document.getElementById("code").value == '2'){//atreides
 				builds		= [];
 				monsters 	= [];
 				artefacts 	= [];
-				niveauMap ++;
+				niveauMap = 2;
 				generateMap2();
+			}
+			if(document.getElementById("code").value == '3'){//ordos
+				builds		= [];
+				monsters 	= [];
+				artefacts 	= [];
+				niveauMap = 3;
+				generateMap3();
 			}
 			document.getElementById("code").value = '';	
 		})

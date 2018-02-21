@@ -4,7 +4,7 @@ Game.dialogue = function(monstre) {
 }
 
 Game._quest1 = function(monstre){
-	dialogueText = "Bonjour étranger.\n Pour vaincre la sorcière Scotia, il vous faudra\n survivre dans ce monde étrange et dangereux.\n\n Pour voir le détail d\'un batiment,\n déplacez-vous dessus et cliquer sur le bâtiment\n\n Pensez à vous nourrir en cliquant\n sur vous-même pour faire remonter votre fatigue\n\n Votre objectif, dans chaque région que vous\n explorerez, est de trouver\n l\'orbe qui vous fera quitter ces lieux.";
+	dialogueText = "Bonjour étranger.\n Pour vaincre la sorcière Scotia, il vous faudra\n survivre dans ce monde étrange et dangereux.\n\n Pensez à vous nourrir régulièrement\n Vous aurez besoin de toutes vos forces\n pour trouver les orbes\n\n Votre objectif, dans chaque région que vous\n explorerez, est de trouver\n l\'orbe qui vous fera quitter ces lieux.";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';		//conditions de quete
@@ -20,13 +20,13 @@ Game._quest2 = function(monstre){
 	buildText = '';	
 }
 Game._quest3 = function(monstre){
-	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \n\n Vos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources";
+	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \n\n Vos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Attention toutefois : chaque bâtiment doit être entretenu tous les jours !";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
 }
 Game._quest4 = function(monstre){
-	dialogueText = "Pour récolter de l\'argent, creusez des trous :\n cliquez sur la pelle pour être équipé, \n allez sur l\'herbe, et cliquez\n sur le bouton action.\n\nPour récolter du bois, fauchez les ronces :\n cliquez sur la faux pour être équipé, \n allez sur les ronces, et cliquez\n sur le bouton action.\n Attention toutefois : les ronces vous font perdre\n des points de vie !";
+	dialogueText = "Pour récolter de l\'argent, creusez des trous :\n cliquez sur la pelle pour être équipé, \n allez sur l\'herbe, et commencez à creuser !\n\nPour récolter du bois, fauchez les ronces :\n cliquez sur la faux pour être équipé, \n allez sur les ronces, et fauchez !\n Attention toutefois : les ronces vous font perdre\n des points de vie !";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
@@ -37,7 +37,7 @@ Game._quest5 = function(monstre){
 	supplyText = '';																		//conditions de quete
 	artefactText = {'cle': 1};														//conditions de quete
 	buildText = '';		//conditions de quete
-	recompenses = ["abs2[445] = 0;abs2[397] = 0;"];
+	recompenses = ["abs2[445] = 0;"];
 	updateFermetureDialogue = [monstre.name+"=6"];
 	texteRecompense = 'Merci.\n changez vite de région, à présent !';
 }
@@ -61,11 +61,11 @@ Game._quest7 = function(monstre){
 }
 
 Game._quest8 = function(monstre){
-	dialogueText = 'Le pont est cassé !\n Trouvez les planches nécessaires à la \n fabrication du pont !';	
+	dialogueText = 'Le pont est cassé !\n Créez des scieries pour fabriquer les planches\n nécessaires à la fabrication du pont !\n Fauchez les ronces pour\n fournir le bois à vos scieries';	
 	supplyText = {'planche': 50};																	
 	artefactText = '';	
 	buildText = '';
-	recompenses = ["abs2[778] = 84;"];
+	recompenses = ["abs2[777] = 84;"];
 	updateFermetureDialogue = [monstre.name+"=9"];
 	texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
 }
@@ -78,10 +78,47 @@ Game._quest9 = function(monstre){
 }
 
 Game._quest10 = function(monstre){
-	dialogueText = "Pour accéder directement à cette \n région, tapez le mot 'atreides'\n dans l'espace prévue à cet effet ";
+	dialogueText = "Pour accéder directement à cette \n région, tapez le mot 'atreides'\n dans l'espace prévu à cet effet ";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
+}
+
+Game._quest11 = function(monstre){
+	dialogueText = "Vous avez remarqué?\n Toutes les semaines, les trous se rebouchent...\n et les créatures étranges apparaissent... ";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+Game._quest12 = function(monstre){
+	dialogueText = "Bienvenue dans cette région fleurie !\n Pour y accéder directement,\n  tapez le mot 'ordos' dans l'espace\n  prévu à cet effet";
+	supplyText = '';																	//conditions de quete
+	artefactText = '';														//conditions de quete
+	buildText = '';	
+}
+Game._quest13 = function(monstre){
+	dialogueText = "Mon jardin ne peut pas fleurir!\n J'ai besoin de deux bombes \npour faire sauter le barrage \n";
+	supplyText = '';																	//conditions de quete
+	artefactText = {'bombe': 2};															//conditions de quete
+	buildText = '';	
+}
+Game._quest14 = function(monstre){
+	dialogueText = "Bienvenue chez les frères O'Tools \n Ici, vous aurez tout ce que vous\n ne pourrez pas avoir ailleurs !\n Pour un prix modique, je vous vends des bombes\n de premières qualités !";
+	supplyText = {'ecu': 120, 'fer' : 50};		
+	recompenses = ["Game.hero.artefact.push('bombe'); "];												//conditions de quete
+	artefactText = '';															//conditions de quete
+	buildText = '';
+	updateFermetureDialogue = '';
+	texteRecompense = '';
+}
+Game._quest15 = function(monstre){
+	dialogueText = "Bienvenue chez les frères O'Tools \n Ici, vous aurez tout ce que vous\n ne pourrez pas avoir ailleurs !\n Pour un prix modique, je vous vends des bombes\n de premières qualités !";
+	supplyText = {'ecu': 120, 'fer' : 50};		
+	recompenses = ["Game.hero.artefact.push('bombe'); "];												//conditions de quete
+	artefactText = '';										//conditions de quete
+	buildText = [{name: 'mine_fer', nombre:1, level:3}];
+	updateFermetureDialogue = '';
+	texteRecompense = '';
 }
  
 Game._clickMonstre = function() {
@@ -230,9 +267,11 @@ Game._questClickPay = function() {
 				}
 			})
 		}
-		dialogueText = texteRecompense;
-		supplyText = '';
-		artefactText = '';
-		buildText = '';
+		if(texteRecompense != ''){
+			dialogueText = texteRecompense;
+			supplyText = '';
+			artefactText = '';
+			buildText = '';
+		}
 	}
 }
