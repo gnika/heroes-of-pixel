@@ -90,7 +90,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var paramBuild 			= [];
 		
 		supplyBuild['ecu'] = 350;
-		supplyBuild['bois'] = 150;
+		supplyBuild['planche'] = 25;
 		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
@@ -114,6 +114,39 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		 'description_fr'	: description_fr,
 		 'description_en'	: description_en
 		};
+		
+		var supplyBuild 		= [];	//mine d'or
+		var caracteristique 	= [];
+		var paramBuild 			= [];
+		
+		supplyBuild['pierre'] = 25;
+		supplyBuild['planche'] = 30;
+		// supplyBuild['bois'] = 150;
+		// caracteristique['level'] =1;
+		caracteristique['maintenance'] = {'ecu': 25};
+		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
+		caracteristique['attaque'] =0;
+		caracteristique['showLife'] =1;
+		caracteristique['recompense'] = {'or': 400};
+		caracteristique['portee'] =0;
+		paramBuild['typeBatiment'] = [48, 49, 50, 51];
+		paramBuild['typeTile'] = [62, 52];
+		paramBuild['life'] = 60;
+		paramBuild['solid'] = 0;
+		
+		menussclickTitre = 'Mine d\'or';
+		description_fr = 'Les mines d\'or génèrent de l\'or \nnécessaire à la création\nde plusieurs bâtiments et objets.';
+		description_en = 'EN mines d\'or génèrent de l\'or\nnécessaire à la création\nde plusieurs bâtiments et objets.';
+			
+		allBuilding['mine_or']  = {
+		 'caracteristique'	: caracteristique,
+		 'supplyBuild' 		: supplyBuild,
+		 'paramBuild' 		: paramBuild,
+		 'menussclickTitre' : menussclickTitre,
+		 'description_fr'	: description_fr,
+		 'description_en'	: description_en
+		};
+		
 		var supplyBuild 		= [];	//blé
 		var caracteristique 	= [];
 		var paramBuild 			= [];
@@ -126,8 +159,8 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['outilRecompense'] = 'faux';
 		caracteristique['maintenance'] = {'ecu': 20, 'bois': 10};
 		caracteristique['loseLife'] = 1;
-		supplyBuild['ecu'] = 50;
-		supplyBuild['planche'] = 50;
+		supplyBuild['bois'] = 30;
+		supplyBuild['argile'] = 25;
 		paramBuild['typeBatiment'] = [36, 37, 38, 39];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
@@ -298,37 +331,6 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		description_en = 'EN tourelles permettent d\'attaquer\nles ennemis qui passent à proximité.';
 			
 		allBuilding['tour']  = {
-		 'caracteristique'	: caracteristique,
-		 'supplyBuild' 		: supplyBuild,
-		 'paramBuild' 		: paramBuild,
-		 'menussclickTitre' : menussclickTitre,
-		 'description_fr'	: description_fr,
-		 'description_en'	: description_en
-		};
-		
-		var supplyBuild 		= [];	//mine d'or
-		var caracteristique 	= [];
-		var paramBuild 			= [];
-		
-		supplyBuild['ecu'] = 0;
-		// supplyBuild['bois'] = 150;
-		// caracteristique['level'] =1;
-		caracteristique['maintenance'] = {'ecu': 25};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
-		caracteristique['attaque'] =0;
-		caracteristique['showLife'] =1;
-		caracteristique['recompense'] = {'or': 400};
-		caracteristique['portee'] =0;
-		paramBuild['typeBatiment'] = [48, 49, 50, 51];
-		paramBuild['typeTile'] = [62, 52];
-		paramBuild['life'] = 60;
-		paramBuild['solid'] = 0;
-		
-		menussclickTitre = 'Mine d\'or';
-		description_fr = 'Les mines d\'or génèrent de l\'or \nnécessaire à la création\nde plusieurs bâtiments et objets.';
-		description_en = 'EN mines d\'or génèrent de l\'or\nnécessaire à la création\nde plusieurs bâtiments et objets.';
-			
-		allBuilding['mine_or']  = {
 		 'caracteristique'	: caracteristique,
 		 'supplyBuild' 		: supplyBuild,
 		 'paramBuild' 		: paramBuild,
