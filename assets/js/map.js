@@ -227,6 +227,7 @@ var map = {
 	//// generateMonstre(map, 576, 192, 9, 3, 'main', 1.2, 0, 1);
 	
 	generateMonstre(map, 64, 192, 1, 3, 'ami', 0, 0, 0, '1');
+	// generateMonstre(map, 64, 192, 1, 3, 'ami', 0, 0, 0, '14');
 	generateMonstre(map, 384, 448, 6, 7, 'friend', 0, 0, 0, '2');
 	generateMonstre(map, 256, 640, 4, 10, 'jailor', 0, 0, 0, '3');
 	generateMonstre(map, 384, 192, 6, 3, 'woman', 0, 0, 0, '4');

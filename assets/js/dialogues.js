@@ -136,11 +136,12 @@ Game._clickMonstre = function() {
 		
 		if(width < 1400){
 			this.ctx.font = '14px Georgia';//marche sur les petits pc
-			var sousTexte = 160;
-			var sousRessource = 140;
+			var sousTexte = 170;
+			var sousRessource = 150;
 		}else{
-			var sousTexte = 138;
-			var sousRessource = 110;
+			this.ctx.font = '18px Georgia';//marche sur les petits pc
+			var sousTexte = 170;
+			var sousRessource = 140;
 			
 		}
 		
