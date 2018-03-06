@@ -159,6 +159,7 @@ Game.init = function () {
 		function(event){
 			//gestion deplacement héros
 			var rect = this.getBoundingClientRect();
+
 			var xClick = event.clientX - rect.left+Game.camera.x;
 			var yClick = event.clientY - rect.top+Game.camera.y;
 			var rowClick = Game.hero.map.getRow(xClick);
@@ -239,6 +240,12 @@ Game.init = function () {
 		
 		//si dialogue ouvert
 		if(dialogue == 1){
+			// alert(xClick);
+			// alert(rect.width);
+			// alert(screen.width);
+			// xClick = event.pageX;
+			// yClick = event.pageY;
+			
 			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
 			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
 				dialogue = 0;

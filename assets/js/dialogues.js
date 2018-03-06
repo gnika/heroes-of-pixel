@@ -14,7 +14,7 @@ Game._quest1 = function(monstre){
 	// texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
 }
 Game._quest2 = function(monstre){
-	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Pour connaître votre condition physique, \n cliquez sur le menu accessible\n en bas à gauche de l\'écran\n\n Pour construire un bâtiment,\n cliquez sur le menu juste à côté\n\n Votre défense indique votre résistance\n face aux monstres que vous cotoierez. \n\n Votre exploration indique\n votre capacité à voir loin\n lorsque vous explorez\n\n Certains objets que vous ramassez\n modifient ces statistiques.";
+	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Pour connaître votre condition physique, \n cliquez sur le menu accessible\n en bas à gauche de l\'écran\n\n Votre défense indique votre résistance\n face aux monstres que vous cotoierez. \n\n Votre exploration indique votre capacité\n à voir loin lorsque vous explorez.";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
@@ -124,18 +124,23 @@ Game._quest15 = function(monstre){
 Game._clickMonstre = function() {
 	if(dialogue == 1){
 		var canvas = document.getElementById('map_canvas');
+
 		var width = canvas.width;
 		var height = canvas.height;	
-		var tsizePar2 = map.tsize/2;
+		// var height = screen.height;	
+		// var tsizePar2 = map.tsize/2;
 			
 		if(width < 1300){
 			batimentClickResponsive = 2;
 			colonneBatimentClicResponsive = 70;
 		}
-		
-		
-		if(width < 1400){
+
+		if(screen.width < 1400 && screen.width > 641){
 			this.ctx.font = '14px Georgia';//marche sur les petits pc
+			var sousTexte = 170;
+			var sousRessource = 150;
+		}else if(screen.width < 641){
+			this.ctx.font = '11px Georgia';//marche sur les samsung
 			var sousTexte = 170;
 			var sousRessource = 150;
 		}else{
