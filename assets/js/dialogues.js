@@ -20,7 +20,7 @@ Game._quest2 = function(monstre){
 	buildText = '';	
 }
 Game._quest3 = function(monstre){
-	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \n\n Vos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Attention toutefois : chaque bâtiment doit être entretenu tous les jours !";
+	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \nVos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Attention toutefois : chaque bâtiment \n doit être entretenu tous les jours !";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
@@ -133,6 +133,17 @@ Game._clickMonstre = function() {
 			colonneBatimentClicResponsive = 70;
 		}
 		
+		
+		if(width < 1400){
+			this.ctx.font = '14px Georgia';//marche sur les petits pc
+			var sousTexte = 160;
+			var sousRessource = 140;
+		}else{
+			var sousTexte = 138;
+			var sousRessource = 110;
+			
+		}
+		
 		this.ctx.fillStyle = 'black';
 		this.ctx.beginPath();
 		this.ctx.rect(width/4-5, height/4-5, width/batimentClickResponsive+10, height/2+10);
@@ -162,8 +173,10 @@ Game._clickMonstre = function() {
 				Game.ctx.fillStyle = 'gray';
 			}else
 				Game.ctx.fillStyle = 'white';
-				Game.ctx.fillText(supplyText[key], width/4+5, height/4+138 + n);
-				Game.ctx.drawImage(Loader.getImage(key), width/4+45, height/4+110 + n);
+			
+			
+				Game.ctx.fillText(supplyText[key], width/4+5, height/4+sousTexte + n);
+				Game.ctx.drawImage(Loader.getImage(key), width/4+45, height/4+sousRessource + n);
 				n = n+40;
 		})
 		
@@ -183,8 +196,8 @@ Game._clickMonstre = function() {
 			}else
 				Game.ctx.fillStyle = 'white';
 			
-			Game.ctx.fillText(artefactText[key], width/4+100, height/4+138 + n);
-			Game.ctx.drawImage(Loader.getImage(key), width/4+130, height/4+110 + n);
+			Game.ctx.fillText(artefactText[key], width/4+100, height/4+sousTexte + n);
+			Game.ctx.drawImage(Loader.getImage(key), width/4+130, height/4+sousRessource + n);
 			n = n+40;
 		})
 		
@@ -217,9 +230,9 @@ Game._clickMonstre = function() {
 				Game.ctx.fillStyle = 'white';
 			
 			
-			Game.ctx.fillText(buildText[i].nombre, width/4+215, height/4+138 + n);
-			Game.ctx.drawImage(Loader.getImage(buildText[i].name), width/4+245, height/4+110 + n);
-			Game.ctx.fillText('lvl '+buildText[i].level, width/4+280, height/4+135 + n);
+			Game.ctx.fillText(buildText[i].nombre, width/4+215, height/4+sousTexte + n);
+			Game.ctx.drawImage(Loader.getImage(buildText[i].name), width/4+245, height/4+sousRessource + n);
+			Game.ctx.fillText('lvl '+buildText[i].level, width/4+280, height/4+sousRessource+25 + n);
 			n = n+40;
 			
 		}
