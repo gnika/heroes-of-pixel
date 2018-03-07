@@ -429,10 +429,16 @@ Game._drawLayer = function (layer) {
             var y = (r - startRow) * map.tsize + offsetY;
 			
 			if (tile !== 0) { // 0 => empty tile
+
+				if(Game.anim>=DUREE_ANIMATION)
+					heigtImage = 64;
+				else
+					heigtImage = 0;
+				
                 this.ctx.drawImage(
                     this.tileAtlas, // image
                     (tile - 1) * map.tsize, // source x
-                    0, // source y
+                    heigtImage, // source y
                     map.tsize, // source width
                     map.tsize, // source height
                     Math.round(x),  // target x

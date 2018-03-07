@@ -145,6 +145,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
             absobs1[pos] = 2;
             absobs2[pos] = 0;
 			this.supply.bois = Game.hero.bois + 5;
+			// console.log(Math.random());
+			if(((abs2[pos+1] == 0 || abs2[pos+1] == 8) && abs1[pos+1] == 1) && Math.random() > 0.93)	//scorpion apparait quand on défriche la forêt
+				generateMonstre(map, x+map.tsize, y, horizontal+1, vertical, 'scorpion', 2, 0, 1);
+			
+			
 		}
 		
 		//actions buildings si équipé d'un outils
