@@ -1,4 +1,5 @@
 DUREE_ANIMATION 				= 50;
+DUREE_ANIMATION_MAP				= 150;
 niveauMap						= 1;
 niveauMapSelect					= 0;//pour ne passer qu'une fois au niveau suivant
 builds          				= [];
@@ -137,6 +138,7 @@ Game.init = function () {
     this.tileAtlas = Loader.getImage('tiles');
  
 	this.anim = 0;
+	this.animMap = 0;
 	this.animBref = 0;
 	this.animBulle = 50;
 	this.animBulleBas = 0;
@@ -282,23 +284,28 @@ Game._drawLayer = function (layer) {
     var offsetY = -this.camera.y + startRow * map.tsize;
 	
 	Game.anim++;
+	Game.animMap++;
 	
     for (var c = startCol; c <= endCol; c++) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-				if(tile==8){
-					if(Game.anim>=DUREE_ANIMATION){
-						abs2[r*map.rows+c]=9;
-					}
-				}
-				else if(tile==9){
-					if(Game.anim>=DUREE_ANIMATION){
-						abs2[r*map.rows+c]=8;
-					}
-				}
+				// if(tile==8){
+					// if(Game.anim>=DUREE_ANIMATION){
+						// abs2[r*map.rows+c]=9;
+					// }
+				// }
+				// else if(tile==9){
+					// if(Game.anim>=DUREE_ANIMATION){
+						// abs2[r*map.rows+c]=8;
+					// }
+				// }
 			
-			
+			if(Game.animMap>=DUREE_ANIMATION_MAP/2)
+					heigtImage = 64;
+				else
+					heigtImage = 0;
+				
             var x = (c - startCol) * map.tsize + offsetX;
             var y = (r - startRow) * map.tsize + offsetY;
 			
@@ -306,7 +313,7 @@ Game._drawLayer = function (layer) {
                 this.ctx.drawImage(
                     this.tileAtlas, // image
                     (tile - 1) * map.tsize, // source x
-                    0, // source y
+                    heigtImage, // source y
                     map.tsize, // source width
                     map.tsize, // source height
                     Math.round(x),  // target x
@@ -343,6 +350,8 @@ Game._drawLayer = function (layer) {
 	
 	if(Game.anim>=DUREE_ANIMATION)
 		 Game.anim=0;
+	 if(Game.animMap>=DUREE_ANIMATION_MAP)
+		 Game.animMap=0;
 };
  
 Game._drawGridMenu = function () {
