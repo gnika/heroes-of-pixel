@@ -6,6 +6,10 @@ Game.defineImages = function(){
 	return [
         // Loader.loadImage('tiles', 'assets/tiles_new.png'),
         Loader.loadImage('tiles', 'assets/tiles.png'),
+        Loader.loadImage('tiles2', 'assets/tiles2.png'),
+        Loader.loadImage('tiles3', 'assets/tiles3.png'),
+        Loader.loadImage('tiles4', 'assets/tiles4.png'),
+        Loader.loadImage('tiles5', 'assets/tiles5.png'),
 		
 		//artefacts
 		Loader.loadImage('aile_bleu', 'assets/artefacts/aile_bleu.png'),

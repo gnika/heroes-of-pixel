@@ -28,7 +28,7 @@ menuclick						= 0;
 menuBodyClick					= 0;
 batimentclick					= 0;
 menussclick						= 0;
-hour	   						= 0;
+hour	   						= 10;
 day			    				= 1;
 batimentClickResponsive		 	= 4;
 colonneBatimentClicResponsive	= 0;
@@ -139,6 +139,11 @@ Game.init = function () {
         [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]
 	);
     this.tileAtlas = Loader.getImage('tiles');
+    this.tileAtlas2 = Loader.getImage('tiles2');
+    this.tileAtlas3 = Loader.getImage('tiles3');
+    this.tileAtlas4 = Loader.getImage('tiles4');
+    this.tileAtlas5 = Loader.getImage('tiles5');
+	
  
 	this.anim = 0;
 	this.animMap = 0;
@@ -319,9 +324,9 @@ Game.init = function () {
 		},
 	false);
 	
-    document.getElementById("speed0").addEventListener('click', function () {
-        clearTimeout(currentTime.timeOut);
-    });
+    // document.getElementById("speed0").addEventListener('click', function () {
+        // clearTimeout(currentTime.timeOut);
+    // });
     document.getElementById("speed1").addEventListener('click', function () {
         clearTimeout(currentTime.timeOut);
         currentTime.startTime(1000);
@@ -434,12 +439,31 @@ Game._drawLayer = function (layer) {
             var x = (c - startCol) * map.tsize + offsetX;
             var y = (r - startRow) * map.tsize + offsetY;
 			
+			var tileA = this.tileAtlas;	//cycle jour / nuit
+			// console.log(hour);
+			if(hour >=23 || (hour>=0 && hour < 5))
+				tileA = this.tileAtlas5;
+			if(hour >=5 && hour < 6)
+				tileA = this.tileAtlas4;
+			if(hour >=6 && hour < 8)
+				tileA = this.tileAtlas3;
+			if(hour >=8 && hour < 10)
+				tileA = this.tileAtlas2;
+			if(hour >=10 && hour < 18)
+				tileA = this.tileAtlas;
+			if(hour >=18 && hour < 20)
+				tileA = this.tileAtlas2;
+			if(hour >=20 && hour < 22)
+				tileA = this.tileAtlas3;
+			if(hour >=22 && hour < 23)
+				tileA = this.tileAtlas4;
+			
 			if (tile !== 0) { // 0 => empty tile
 
 				
 				
                 this.ctx.drawImage(
-                    this.tileAtlas, // image
+                    tileA, // image
                     (tile - 1) * map.tsize, // source x
                     heigtImage, // source y
                     map.tsize, // source width
