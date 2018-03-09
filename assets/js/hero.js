@@ -139,7 +139,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         // }
 		else if (abs1[pos] == 2  && equip == 'pelle'){
 			this.supply.ecu = Game.hero.ecu + 1;
-        }else if ((abs2[pos] == 8 || abs2[pos]== 9) && abs1[pos] == 1  && equip == 'faux') {
+        }else if ((abs2[pos] == 8) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
             absobs1[pos] = 2;

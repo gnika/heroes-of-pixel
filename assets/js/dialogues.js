@@ -98,10 +98,40 @@ Game._quest12 = function(monstre){
 }
 Game._quest13 = function(monstre){
 	dialogueText = "Mon jardin ne peut pas fleurir!\n J'ai besoin de deux bombes \npour faire sauter le barrage \n";
+	// supplyText = '';																	//conditions de quete
+	// artefactText = {'bombe': 2};		
+	artefactText = '';										
+	buildText = '';	
+	supplyText = {'ecu': 5};					
+	recompenses = [
+	"abs2[496] = 16;", "abs2[497] = 16;", "abs2[498] = 16;", "abs2[544] = 16;", "abs2[545] = 16;", "abs2[546] = 16;", "abs2[548] = 16;", "abs2[549] = 16;", "abs2[550] = 16;", "abs2[551] = 16;", "abs2[552] = 16;", "abs2[596] = 16;",
+	"abs2[597] = 16;", "abs2[598] = 16;", "abs2[599] = 16;", "abs2[600] = 16;", "abs2[640] = 16;", "abs2[641] = 16;", "abs2[642] = 16;", "abs2[643] = 16;", "abs2[644] = 16;", "abs2[645] = 16;", "abs2[646] = 16;", "abs2[647] = 16;",, "abs2[648] = 16;",
+	"abs2[688] = 16;", "abs2[689] = 16;", "abs2[690] = 16;", "abs2[691] = 16;", "abs2[692] = 16;", "abs2[693] = 16;", "abs2[694] = 16;", "abs2[695] = 16;", "abs2[696] = 16;", "abs2[736] = 16;", "abs2[737] = 16;", "abs2[743] = 16;",, "abs2[744] = 16;",
+	"abs2[784] = 16;", "abs2[785] = 16;", "abs2[791] = 16;", "abs2[792] = 16;", "abs2[832] = 16;", "abs2[833] = 16;", "abs2[834] = 16;", "abs2[835] = 16;", "abs2[836] = 16;", "abs2[837] = 16;", "abs2[838] = 16;", "abs2[839] = 16;",, "abs2[840] = 16;",
+	"abs2[738] = 82;", "abs2[739] = 82;", "abs2[740] = 82;", "abs2[741] = 82;", "abs2[742] = 82;", "abs2[786] = 82;", "abs2[787] = 82;", "abs2[788] = 82;", "abs2[789] = 82;", "abs2[790] = 82;",	
+	"absobs2[496] = 16;", "absobs2[497] = 16;", "absobs2[498] = 16;", "absobs2[544] = 16;", "absobs2[545] = 16;", "absobs2[546] = 16;", "absobs2[548] = 16;", "absobs2[549] = 16;", "absobs2[550] = 16;", "absobs2[551] = 16;",
+	"absobs2[552] = 16;", "absobs2[596] = 16;",
+	"absobs2[597] = 16;", "absobs2[598] = 16;", "absobs2[599] = 16;", "absobs2[600] = 16;", "absobs2[640] = 16;", "absobs2[641] = 16;", "absobs2[642] = 16;", "absobs2[643] = 16;", "absobs2[644] = 16;", "absobs2[645] = 16;",
+	"absobs2[646] = 16;", "absobs2[647] = 16;",, "absobs2[648] = 16;",
+	"absobs2[688] = 16;", "absobs2[689] = 16;", "absobs2[690] = 16;", "absobs2[691] = 16;", "absobs2[692] = 16;", "absobs2[693] = 16;", "absobs2[694] = 16;", "absobs2[695] = 16;", "absobs2[696] = 16;", "absobs2[736] = 16;",
+	"absobs2[737] = 16;", "absobs2[743] = 16;",, "absobs2[744] = 16;",
+	"absobs2[784] = 16;", "absobs2[785] = 16;", "absobs2[791] = 16;", "absobs2[792] = 16;", "absobs2[832] = 16;", "absobs2[833] = 16;", "absobs2[834] = 16;", "absobs2[835] = 16;", "absobs2[836] = 16;", "absobs2[837] = 16;",
+	"absobs2[838] = 16;", "absobs2[839] = 16;",, "absobs2[840] = 16;",
+	"absobs2[738] = 82;", "absobs2[739] = 82;", "absobs2[740] = 82;", "absobs2[741] = 82;", "absobs2[742] = 82;", "absobs2[786] = 82;", "absobs2[787] = 82;", "absobs2[788] = 82;", "absobs2[789] = 82;", "absobs2[790] = 82;",
+
+	"Game.hero.equipement['epee'].possession = 1;", "Game.hero.equipement['epee'].life = 100;"
+	];				
+	updateFermetureDialogue = [monstre.name+"=16"];
+	texteRecompense = 'Merci beaucoup ! Je vais pouvoir\n arroser mes pétunias !\nPrenez cette épée en récompense\n de vos efforts !';
+}
+
+Game._quest16 = function(monstre){
+	dialogueText = "Ces fleurs sont magnifiques, n'est-ce pas ? \n Vous avez remarqué que votre barre d'agilité\n apparaissait quand vous vous équipez de votre épée ?\n\n Pour vous servir de votre épée, placez-vous\n à côté du monstre que vous voulez combattre\n et utilisez l'épée. Plus votre agilité est\n haute, plus vous pouvez frapper vite ! ";
 	supplyText = '';																	//conditions de quete
-	artefactText = {'bombe': 2};															//conditions de quete
+	artefactText = '';														//conditions de quete
 	buildText = '';	
 }
+
 Game._quest14 = function(monstre){
 	dialogueText = "Bienvenue chez les frères O'Tools \n Ici, vous aurez tout ce que vous\n ne pourrez pas avoir ailleurs !\n Pour un prix modique, je vous vends des bombes\n de premières qualités !";
 	supplyText = {'ecu': 120, 'fer' : 50};		
@@ -112,9 +142,9 @@ Game._quest14 = function(monstre){
 	texteRecompense = '';
 }
 Game._quest15 = function(monstre){
-	dialogueText = "Bienvenue chez les frères O'Tools \n Ici, vous aurez tout ce que vous\n ne pourrez pas avoir ailleurs !\n Pour un prix modique, je vous vends des bombes\n de premières qualités !";
-	supplyText = {'ecu': 120, 'fer' : 50};		
-	recompenses = ["Game.hero.artefact.push('bombe'); "];												//conditions de quete
+	dialogueText = "Bienvenue chez les frères O'Tools \n Ici, vous aurez tout ce que vous\n ne pourrez pas avoir ailleurs !\n Pour un prix modique, je booste votre agilité !\n (utile lors des combats)";
+	supplyText = {'ecu': 50, 'vigne' : 30};		
+	recompenses = ["Game.hero.agilite+=	10; "];												//conditions de quete
 	artefactText = '';										//conditions de quete
 	buildText = [{name: 'mine_fer', nombre:1, level:3}];
 	updateFermetureDialogue = '';

@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color:lavender;
+	overflow: hidden;
 }
 .container{
 	padding: 0;

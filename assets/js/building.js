@@ -64,7 +64,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['prixUpdate'] = {'bois': 5};
 		caracteristique['recompense'] = {'planche': 10};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100, 'fer': 100, 'vin': 100};
+		caracteristique['updateNiveau'] = {'ecu': 100, 'bois': 25};
 		supplyBuild['ecu'] = 150;
 		supplyBuild['pierre'] = 50;
 		paramBuild['typeBatiment'] = [44, 45, 46, 47];
@@ -89,14 +89,15 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var caracteristique 	= [];
 		var paramBuild 			= [];
 		
-		supplyBuild['ecu'] = 350;
+		supplyBuild['ecu'] = 250;
 		supplyBuild['planche'] = 25;
 		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
+		caracteristique['updateNiveau'] = {'ble': 25, 'or': 25};
 		caracteristique['attaque'] =0;
 		caracteristique['showLife'] =1;
 		caracteristique['portee'] =0;
+		caracteristique['recompense'] = {'fer': 10};
 		paramBuild['typeBatiment'] = [32, 33, 34, 35];
 		paramBuild['typeTile'] = [1, 88];
 		paramBuild['life'] = 60;
@@ -119,16 +120,18 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var caracteristique 	= [];
 		var paramBuild 			= [];
 		
-		supplyBuild['pierre'] = 25;
+		supplyBuild['pierre'] = 20;
 		supplyBuild['planche'] = 30;
+		supplyBuild['ecu'] = 30;
 		// supplyBuild['bois'] = 150;
 		// caracteristique['level'] =1;
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['attaque'] =0;
 		caracteristique['showLife'] =1;
-		caracteristique['recompense'] = {'or': 400};
+		caracteristique['recompense'] = {'or': 10};
 		caracteristique['portee'] =0;
+		caracteristique['updateNiveau'] = {'ble': 20, 'or': 30};
 		paramBuild['typeBatiment'] = [48, 49, 50, 51];
 		paramBuild['typeTile'] = [62, 52];
 		paramBuild['life'] = 60;
@@ -155,9 +158,9 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		// caracteristique['level'] = 1;
 		caracteristique['recompense'] = {'ble': 50};
 		// caracteristique['updateNiveau'] = {'ecu': 40, 'argile': 100, 'fer': 100, 'vin': 1000};
-		caracteristique['updateNiveau'] = {'ecu': 10, 'argile': 100};
+		caracteristique['updateNiveau'] = {'ecu': 100};
 		caracteristique['outilRecompense'] = 'faux';
-		caracteristique['maintenance'] = {'ecu': 20, 'bois': 10};
+		caracteristique['maintenance'] = {'ecu': 10};
 		caracteristique['loseLife'] = 1;
 		supplyBuild['bois'] = 30;
 		supplyBuild['argile'] = 25;
@@ -184,12 +187,13 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		caracteristique['showLife'] = 0;
 		// caracteristique['level'] = 1;
-		caracteristique['recompense'] = {'vigne': 400};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
+		caracteristique['recompense'] = {'vigne': 10};
+		caracteristique['updateNiveau'] = {'or': 10, 'argile': 10};
 		caracteristique['outilRecompense'] = 'faux';
-		caracteristique['maintenance'] = {'ecu': 25};
+		caracteristique['maintenance'] = {'ecu': 15};
 		caracteristique['loseLife'] = 1;
-		supplyBuild['ecu'] = 0;
+		supplyBuild['planche'] = 20;
+		supplyBuild['ecu'] = 25;
 		paramBuild['typeBatiment'] = [40, 41, 42, 43];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
