@@ -97,12 +97,12 @@ Game._quest12 = function(monstre){
 	buildText = '';	
 }
 Game._quest13 = function(monstre){
-	dialogueText = "Mon jardin ne peut pas fleurir!\n J'ai besoin de deux bombes \npour faire sauter le barrage \n";
-	// supplyText = '';																	//conditions de quete
-	// artefactText = {'bombe': 2};		
-	artefactText = '';										
+	dialogueText = "Mon jardin ne peut pas fleurir!\n J'ai besoin de deux bombes \npour faire sauter le barrage \n";					
 	buildText = '';	
-	supplyText = {'ecu': 5};					
+	supplyText = '';																	//conditions de quete
+	artefactText = {'bombe': 2};		
+	// artefactText = '';					
+	// supplyText = {'ecu': 5};					
 	recompenses = [
 	"abs2[496] = 16;", "abs2[497] = 16;", "abs2[498] = 16;", "abs2[544] = 16;", "abs2[545] = 16;", "abs2[546] = 16;", "abs2[548] = 16;", "abs2[549] = 16;", "abs2[550] = 16;", "abs2[551] = 16;", "abs2[552] = 16;", "abs2[596] = 16;",
 	"abs2[597] = 16;", "abs2[598] = 16;", "abs2[599] = 16;", "abs2[600] = 16;", "abs2[640] = 16;", "abs2[641] = 16;", "abs2[642] = 16;", "abs2[643] = 16;", "abs2[644] = 16;", "abs2[645] = 16;", "abs2[646] = 16;", "abs2[647] = 16;",, "abs2[648] = 16;",
@@ -144,11 +144,19 @@ Game._quest14 = function(monstre){
 Game._quest15 = function(monstre){
 	dialogueText = "Bienvenue chez les frères O'Tools \n Ici, vous aurez tout ce que vous\n ne pourrez pas avoir ailleurs !\n Pour un prix modique, je booste votre agilité !\n (utile lors des combats)";
 	supplyText = {'ecu': 50, 'vigne' : 30};		
+	// supplyText = {'ecu': 10};		
 	recompenses = ["Game.hero.agilite+=	10; "];												//conditions de quete
 	artefactText = '';										//conditions de quete
-	buildText = [{name: 'mine_fer', nombre:1, level:3}];
+	buildText = '';
 	updateFermetureDialogue = '';
-	texteRecompense = '';
+	texteRecompense = 'Merci ! Votre agilité a augmenté de 10 points\n Vous pourrez frapper plus vite avec l\'épée';
+}
+
+Game._quest17 = function(monstre){
+	dialogueText = "Merci !!! Merci pour votre dévouement !\n Pour le moment, il n'existe que trois régions !\n la quatrième arrive dans peu de temps !\nPour y accéder directement,\n  tapez le mot 'harkonnen' dans l'espace\n  prévu à cet effet  ";
+	supplyText = '';
+	artefactText = '';
+	buildText = '';	
 }
  
 Game._clickMonstre = function() {

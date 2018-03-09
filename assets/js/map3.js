@@ -134,7 +134,7 @@ absobs1 = [
 		
 		generateMonstre(map, 896, 640, 14, 10, 'parrain', 0, 0, 0, '13');
 		generateMonstre(map, 64, 640, 1, 10, 'ami', 0, 0, 0, '12');
-		// generateMonstre(map, 448, 960, 7, 15, 'woman', 0, 0, 0, '8');
+		generateMonstre(map, 512, 1088, 8, 17, 'woman', 0, 0, 0, '17');
 		
 		var w = window,
 		d = document,

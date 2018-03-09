@@ -12,7 +12,7 @@ function Time() {
 			
 			document.getElementById("gameTime").innerHTML = "Jour " + day + " - " + checkNumber(hour) + "h" + checkNumber(minute);
 			
-			if (minute == 50) {
+			if (minute == 55) {
 				minute = 0;
 				hour++;
 				
@@ -30,7 +30,7 @@ function Time() {
 				
 				
 			} else {
-				minute += 10;			
+				minute += 5;			
 			}
 
 			if (hour == 24) {
