@@ -130,7 +130,7 @@ var map = {
 				Hero.SPEED = 256;
 			
             var isSolid = tile === 8;
-			if(dialogue != 1 && batimentclick !=1 && menuBodyClick != 1) return false;
+			if(dialogue == 1 || batimentclick == 1 || menuBodyClick == 1) return false;
             return res || isSolid;
         }.bind(this), false);
     },
