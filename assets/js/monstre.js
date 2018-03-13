@@ -230,7 +230,8 @@ Monstre.prototype.move = function (delta, hx, hy) {
 
 		
 	if(builds[keyBatiment]) {
-		builds[keyBatiment].life = builds[keyBatiment].life - this.attaque;
+		if(dialogue != 1 && batimentclick !=1 && menuBodyClick != 1)
+			builds[keyBatiment].life = builds[keyBatiment].life - this.attaque;
 		if (builds[keyBatiment].life <= 0) {
 			
 			posTuile = builds[keyBatiment].col*this.map.rows+builds[keyBatiment].row;

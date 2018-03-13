@@ -431,10 +431,17 @@ Game._drawLayer = function (layer) {
 						// absobs2[r*map.rows+c]=8;
 					// }
 				// }
-			if(Game.animMap>=DUREE_ANIMATION_MAP/2)
-					heigtImage = 64;
-				else
-					heigtImage = 0;
+			if(c%2 == 0){
+				if(Game.animMap>=DUREE_ANIMATION_MAP/2)
+						heigtImage = 64;
+					else
+						heigtImage = 0;
+			}else{
+				if(Game.animMap>=DUREE_ANIMATION_MAP/2)
+						heigtImage = 0;
+					else
+						heigtImage = 64;
+			}
 			
             var x = (c - startCol) * map.tsize + offsetX;
             var y = (r - startRow) * map.tsize + offsetY;

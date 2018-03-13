@@ -124,12 +124,13 @@ var map = {
             var tile = this.getTile(index, col, row);
 			if (tile==14)//fontaine
 				return 'life';
-			// if(tile==15)//sable									//DECOMMENTER
-				// Hero.SPEED = 80;									//DECOMMENTER
+			if(tile==15)//sable									//DECOMMENTER
+				Hero.SPEED = 80;									//DECOMMENTER
 			else
 				Hero.SPEED = 256;
 			
             var isSolid = tile === 8;
+			if(dialogue != 1 && batimentclick !=1 && menuBodyClick != 1) return false;
             return res || isSolid;
         }.bind(this), false);
     },
@@ -152,8 +153,8 @@ var map = {
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
 			// console.log(builds, row, 1+col);
-            // var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17 || tile === 69 || tile === 70 || tile === 18 || tile === 102 || tile === 103 || tile === 104 || tile === 105 || tile === 107					//DECOMMENTER
-			// || tile === 71 || tile === 72 || tile === 74 || tile === 75 || tile === 73 || tile === 77 || tile === 78 || tile === 79 || tile === 80 || tile === 89 || tile === 90 || tile === 19;									//DECOMMENTER
+            var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17 || tile === 69 || tile === 70 || tile === 18 || tile === 102 || tile === 103 || tile === 104 || tile === 105 || tile === 107					//DECOMMENTER
+			|| tile === 71 || tile === 72 || tile === 74 || tile === 75 || tile === 73 || tile === 77 || tile === 78 || tile === 79 || tile === 80 || tile === 89 || tile === 90 || tile === 19;									//DECOMMENTER
 			if(builds[col+'-'+row] && builds[col+'-'+row].solid==1)
 				var isSolid=1;
 			if(isSolid){

@@ -6,8 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/min/styles.css" type="text/css"> -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
 
 	
@@ -81,14 +82,14 @@
 		})
 		document.getElementById("pass").addEventListener('click',
 		function(event){
-			if(document.getElementById("code").value == '2'){//atreides
+			if(document.getElementById("code").value == 'atreides'){//atreides
 				builds		= [];
 				monsters 	= [];
 				artefacts 	= [];
 				niveauMap = 2;
 				generateMap2();
 			}
-			if(document.getElementById("code").value == '3'){//ordos
+			if(document.getElementById("code").value == 'ordos'){//ordos
 				builds		= [];
 				monsters 	= [];
 				artefacts 	= [];

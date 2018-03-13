@@ -340,7 +340,7 @@ Hero.prototype.move = function (delta, dirx, diry) {
 			}
 			
 			if(ennemiStable == 1 && attaqueEnnemi > 0){//pour ne pas cibler les amis
-				if (attaque <= 0)attaque = 0.4;	
+				if (attaque <= 0)attaque = 0.4;
 					Game.hero.life = Game.hero.life - attaque*0.05;//liaison avec monstre.js commentaire : //monstre attaque le héros
 			}
 	
