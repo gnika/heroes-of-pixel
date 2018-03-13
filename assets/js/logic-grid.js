@@ -178,7 +178,8 @@ Game.init = function () {
 			var menuH = Game.hero.map.tsize/2;
 			var equip 	= Game._getToolEquipe();
 			var pos     = map.getRow(yClick)*map.rows+map.getCol(xClick);
-			
+			// var posHero = rowHero * map.cols + colHero;
+			// console.log(rowHero);
 			if(rowClick == rowHero && colHero == colClick && batimentclick == 0	){
 				Game.hero.creuse(xClick, yClick, Game.hero.map);
 				return false;
@@ -192,6 +193,9 @@ Game.init = function () {
 				
 			
 			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){	// bouge si aucun menu n'est ouvert
+			
+				// addMap(posHero, pos);
+			
 				// bouger avec le click de souris
 				xHeroClick = xHero;
 				yHeroClick = yHero;
