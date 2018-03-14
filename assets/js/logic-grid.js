@@ -32,6 +32,9 @@ hour	   						= 8;
 day			    				= 1;
 batimentClickResponsive		 	= 4;
 colonneBatimentClicResponsive	= 0;
+dirx 							= 0;
+diry							= 0;
+path							= [];
  
 function Camera(map, width, height) {
     this.x = 0;
@@ -194,22 +197,45 @@ Game.init = function () {
 			
 			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){	// bouge si aucun menu n'est ouvert
 			
-				var path = findPath(posHero, pos);
+				path = findPath(posHero, pos);
 				console.log(path);
 				// bouger avec le click de souris
 				xHeroClick = xHero;
 				yHeroClick = yHero;
 				
-				if(rowClick >= rowHero && rowClick <= rowHero+10 && (colClick == colHero) && rowClick >0)
-					clickCanvasX = 1;
-				if(rowClick <= rowHero && rowClick >= rowHero-10 && colClick == colHero && rowClick >0)
-					clickCanvasX = -1;
-				if(clickCanvasX==0 && yClick - Game.camera.y < rect.height-menuH){
-					if(colClick >= colHero && colClick <= colHero +10 && rowClick == rowHero)
-						clickCanvasY = 1;
-					if(colClick <= colHero && colClick >= colHero-10 && rowClick  == rowHero)
-						clickCanvasY = -1;
-				}
+				
+				
+				// while( path.length != 0 ) {
+			
+			// if(path[0] == posHero + 1 )
+				// clickCanvasX = 1;
+			// if( path[0] == posHero - 1 )
+				// clickCanvasX = -1;
+			// if( path[0] == posHero + map.rows )
+				// clickCanvasY = 1;
+			// if( path[0] == posHero - map.rows )
+				// clickCanvasY = -1;
+			// this.hero.move(delta, clickCanvasX, clickCanvasY);
+
+			// path.shift();
+			
+			// var rowHero = Game.hero.map.getRow(Game.hero.x);
+			// var colHero = Game.hero.map.getCol(Game.hero.y);
+			// posHero  = colHero * map.cols + rowHero;console.log(posHero);
+		// }
+				
+				
+				
+				// if(rowClick >= rowHero && rowClick <= rowHero+10 && (colClick == colHero) && rowClick >0)
+					// clickCanvasX = 1;
+				// if(rowClick <= rowHero && rowClick >= rowHero-10 && colClick == colHero && rowClick >0)
+					// clickCanvasX = -1;
+				// if(clickCanvasX==0 && yClick - Game.camera.y < rect.height-menuH){
+					// if(colClick >= colHero && colClick <= colHero +10 && rowClick == rowHero)
+						// clickCanvasY = 1;
+					// if(colClick <= colHero && colClick >= colHero-10 && rowClick  == rowHero)
+						// clickCanvasY = -1;
+				// }
 				// console.log(clickCanvas);
 			}
 			/*gestion menu*/
@@ -383,21 +409,77 @@ Game._getToolEquipe = function () {
 Game.update = function (delta) {
                
     // handle hero movement with arrow keys
-    var dirx = 0;
-    var diry = 0;
-    if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
-    else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
-    else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
-    else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
-
+    // var dirx = 0;
+    // var diry = 0;
+    // if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
+    // else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
+    // else if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
+    // else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
+	
+	var rowHero = Game.hero.map.getRow(Game.hero.x);
+	var colHero = Game.hero.map.getCol(Game.hero.y);
+	
+	var rowX = map.getRow(this.hero.x);
+	var colY = map.getCol(this.hero.y);
+	
+	posHero = colHero * map.cols + rowHero;
+	
+	// console.log(this.hero.y / map.tsize, this.hero.x / map.tsize);
+	if( path.length > 0 ){
+		if(path[0] == posHero + 1 )
+			clickCanvasX = 1;
+		if( path[0] == posHero - 1 )
+			clickCanvasX = -1;
+		if( path[0] == posHero + map.rows )
+			clickCanvasY = 1;
+		if( path[0] == posHero - map.rows )
+			clickCanvasY = -1;
+	}else{
+		posHeroInitial = posHero;
+	}
+	
 	if(this.hero.life<=0) return false;
+	
+	if(dirx != clickCanvasX || diry != clickCanvasY && (clickCanvasX != 0 && clickCanvasY != 0)){
+		this.hero.y = colY * map.tsize+ map.tsize/2;
+		this.hero.x = rowX * map.tsize+ map.tsize/2;
+	}
+		
+	
 	if(clickCanvasX!=0 || clickCanvasY!=0){
 		dirx = clickCanvasX;
 		diry = clickCanvasY;
 	}
-	
+	// console.log(diry);
     this.hero.move(delta, dirx, diry);
-	
+	if( path.length > 0){
+		// console.log(posHeroInitial, posHero, path, clickCanvasY);
+		if( clickCanvasX == 1 || clickCanvasX == -1 ||  clickCanvasY == 1 || clickCanvasY == -1 ){
+			
+			
+			
+			// if(this.hero.y == colY * map.tsize+ map.tsize/2 && this.hero.x == rowX * map.tsize+ map.tsize/2){
+		console.log(path);
+				if( posHero == posHeroInitial+1 || posHero == posHeroInitial-1 || posHero == posHeroInitial + map.rows || posHero == posHeroInitial - map.rows ){
+					
+					// if(this.hero.y == colY * map.tsize+ map.tsize/2 && this.hero.x == rowX * map.tsize+ map.tsize/2){
+						path.shift();
+						posHeroInitial = posHero;
+						
+					// }
+					
+				}
+			}
+		// }
+	}else{
+		clickCanvasX = 0;
+		clickCanvasY = 0;
+		dirx = 0;
+		diry = 0;
+		
+		this.hero.y = colY * map.tsize+ map.tsize/2;
+		this.hero.x = rowX * map.tsize+ map.tsize/2;
+	}
 	//mouvement monstres
 	Object.keys(monsters).forEach(function(key) {
 		if(monsters[key].vitesse >0){

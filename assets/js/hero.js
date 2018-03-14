@@ -308,12 +308,12 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	if(this.x >= xHeroClick+this.map.tsize || this.y >= yHeroClick+this.map.tsize || this.x <= xHeroClick-this.map.tsize || this.y <= yHeroClick-this.map.tsize ){
 
 		if(clickCanvasX!=0 || clickCanvasY!=0){
-			this.y = colY * this.map.tsize+this.map.tsize/2;
-			this.x = rowX * this.map.tsize+this.map.tsize/2;
+			// this.y = colY * this.map.tsize+this.map.tsize/2;
+			// this.x = rowX * this.map.tsize+this.map.tsize/2;
 		}
 		
-		clickCanvasX = 0;
-		clickCanvasY = 0;
+		// clickCanvasX = 0;
+		// clickCanvasY = 0;
 	}
 	//SE FAIRE ATTAQUER PAR UN ENNEMI QUI NE BOUGE PAS
 	var ennemiStable = 0;
