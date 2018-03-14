@@ -313,6 +313,8 @@ Monstre.prototype.move = function (delta, hx, hy) {
 		//monstre attaque le héros
 		var attaque = this.attaque - Game.hero.defense;
 		if (attaque < 0)attaque = 0.4;	
+		
+		if(dialogue != 1 && batimentclick !=1 && menuBodyClick != 1)
 			Game.hero.life = Game.hero.life - attaque*0.05;
 	}
 	

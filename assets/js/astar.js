@@ -7,23 +7,62 @@
 		
 	Example Usage:
 		var graph = new Graph([
-			[0,0,0,0],
-			[1,0,0,1],
-			[1,1,0,0]
+			[0,0,0,0,0,0,0],
+			[1,0,0,0,0,0,1],
+			[1,1,0,0,0,0,0],
+			[1,1,0,0,0,0,0],
+			[1,1,1,1,1,1,0],
+			[1,1,0,0,0,0,0],
+			[1,1,0,0,0,0,0]
 		]);
 		var start = graph.nodes[0][0];
-		var end = graph.nodes[1][2];
+		var end = graph.nodes[5][4];
 		astar.search(graph.nodes, start, end);
 		
 	See graph.js for a more advanced example
 */
- function addMap(posStart, posEnd){
+ function findPath(posStart, posEnd){
+	 
+	 
+	 
+	 
+	// var graph = new Graph([
+			// [0,0,0,0,0,0,0],
+			// [0,0,0,1,0,0,1],
+			// [1,1,0,0,0,0,0],
+			// [1,1,0,0,0,0,0],
+			// [1,1,1,1,1,1,0],
+			// [1,1,0,0,0,0,0],
+			// [1,1,0,0,0,0,0]
+		// ]);
+		// var start = graph.nodes[1][2];
+		// var end = graph.nodes[0][2];
+		// console.log(astar.search(graph.nodes, start, end));
+	 
+	 
+	 
+	 // console.log(posStart);
+	 
+	 
+	 
 	 var absobs1Ar = [];
 	 var arrTemp = [];
 	 var a = 0;
+	 if(map.tileSolid.includes(absobs1[posEnd]) && map.tileSolid.includes(absobs2[posEnd]))
+		 return false;
+	 
 	for (i = 0; i < absobs1.length; i++) { 
 		if(a < map.rows){
-			arrTemp.push(absobs1[i]);
+			
+			var isSolid = 0;
+			var tile = absobs1[i];
+			var tile2 = absobs2[i];
+			
+			if(map.tileSolid.includes(tile) || map.tileSolid.includes(tile2))
+				isSolid = 1;
+			
+			arrTemp.push(isSolid);
+			arrTemp.push(0);
 			a++;
 		}
 		else{
@@ -32,31 +71,26 @@
 			a = 0;
 		}
 	}
-	 var absobs2Ar = [];
-	 var arrTemp = [];
-	 var a = 0;
-	for (i = 0; i < absobs2.length; i++) { 
-		if(a < map.rows){
-			arrTemp.push(absobs2[i]);
-			a++;
-		}
-		else{
-			absobs2Ar.push(arrTemp);
-			arrTemp = [];
-			a = 0;
-		}
-	}
 	
 	var graph = new Graph(absobs1Ar);
-	posStart1 = Math.trunc(posStart/map.rows);
-	posStart2 = posStart%map.rows;
-	console.log(posStart, posStart1, posStart2);
 	
-	// var start = graph.nodes[0][0];
-	// var end = graph.nodes[1][2];
-	// astar.search(graph.nodes, start, end);
+	posStartCol = Math.trunc(posStart/map.rows);
+	posStartRow = posStart%map.rows;
 	
+	posEndCol = Math.trunc(posEnd/map.rows);
+	posposEndRow = posEnd%map.rows;
 	
+	// console.log(posStartRow, posStartCol);
+	var start = graph.nodes[posStartCol][posStartRow];
+	var end = graph.nodes[posEndCol][posposEndRow]; 
+	var path = astar.search(graph.nodes, start, end);
+	var pathReturn = [];
+	for (i = 0; i < path.length; i++) { 
+		pathReturn.push(map.rows*path[i].x+path[i].y);
+	}
+	// console.log(path);
+	// console.log(pathReturn);
+	return pathReturn;
 	
  }
 var astar = {

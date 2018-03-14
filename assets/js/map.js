@@ -110,6 +110,7 @@ var map = {
     cols: 48,
     rows: 48,
     tsize: 64,
+	tileSolid: [3, 5, 16, 17, 69, 70, 18, 102, 103, 104, 105, 107, 71, 72, 73, 74, 75, 77, 78, 79, 80, 89, 90, 19],
     // layers: [abs1, abs2],
     layers: [absobs1, absobs2],
     getTile: function (layer, col, row) {
@@ -153,8 +154,9 @@ var map = {
         return this.layers.reduce(function (res, layer, index) {
             var tile = this.getTile(index, col, row);
 			// console.log(builds, row, 1+col);
-            var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17 || tile === 69 || tile === 70 || tile === 18 || tile === 102 || tile === 103 || tile === 104 || tile === 105 || tile === 107					//DECOMMENTER
-			|| tile === 71 || tile === 72 || tile === 74 || tile === 75 || tile === 73 || tile === 77 || tile === 78 || tile === 79 || tile === 80 || tile === 89 || tile === 90 || tile === 19;									//DECOMMENTER
+			
+			if(this.tileSolid.includes(tile))
+				var isSolid = 1;
 			if(builds[col+'-'+row] && builds[col+'-'+row].solid==1)
 				var isSolid=1;
 			if(isSolid){
