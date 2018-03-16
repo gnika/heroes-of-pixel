@@ -12,7 +12,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.defense = defense;
     this.agilite = 10;
     this.attaqueEnCours = 60;
-    this.exploration = 1;
+    this.exploration = 10;
     this.equipement = equipement;
     this.artefact = [];
     this.artefactEnCours = [];
@@ -214,31 +214,66 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 }
 Hero.SPEED = 256; // pixels per second
  
-Hero.prototype.move = function (delta, dirx, diry) {
+Hero.prototype.move = function (delta, dirx, diry, positionX, positionY, dirx2, diry2) {
     // move hero
-	
+	// console.log(positionX, positionY, diry);
 	if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){
-		this.x += dirx * Hero.SPEED * delta;
-		this.y += diry * Hero.SPEED * delta;
-	}    // move lifehero	
+		// if(positionX > 0 && positionY > 0 && (dirx2 != dirx || diry2 != diry )){
+		if(positionX > 0 && positionY > 0 ){
+			
+					// console.log(this.x, positionX, this.y, positionY, diry);
+			if(dirx == 1){//vers la droite
+				if(this.x > positionX)
+					this.x = positionX;
+				else
+					this.x += dirx * Hero.SPEED * delta;
+			}
+			if(dirx == -1){//vers la gauche
+				if(this.x < positionX)
+					this.x = positionX;
+				else
+					this.x += dirx * Hero.SPEED * delta;
+			}
+			if(dirx == 0){
+				this.x = positionX;
+			}
+			if(diry == 1){//descend
+				if(this.y > positionY)
+					this.y = positionY;
+				else
+					this.y += diry * Hero.SPEED * delta;
+			}
+			if(diry == -1){//monte
+				if(this.y < positionY)
+					this.y = positionY;
+				else
+					this.y += diry * Hero.SPEED * delta;
+			}
+			if(diry == 0)
+				this.y = positionY;
+		}else{
+			this.x += dirx * Hero.SPEED * delta;
+			this.y += diry * Hero.SPEED * delta;
+		}
+	}    
+	
+	
+	
+	
 	// if(dirx == 1|| diry == 1 || dirx == -1|| diry == -1)//si mouvement
-   
    
    //SI ON VEUT UNE IMAGE SPECIALE SI LE HEROS MARCHE
    // if(Game.anim>=DUREE_ANIMATION/2){
 		// this.image = Loader.getImage('hero2');
-		
    // }
 	// else{
 		// this.image = Loader.getImage('hero');
-		
 	// }
+	// console.log(this.y, positionY);
  
     // check if we walked into a non-walkable tile
     this._collide(dirx, diry);
     this._ennemy(dirx, diry);
-   
- 
     // check if he loses life
     this._loselifeTile(dirx, diry);
 	
@@ -305,16 +340,6 @@ Hero.prototype.move = function (delta, dirx, diry) {
 	
 	//FIN EXPLORATION
 	
-	if(this.x >= xHeroClick+this.map.tsize || this.y >= yHeroClick+this.map.tsize || this.x <= xHeroClick-this.map.tsize || this.y <= yHeroClick-this.map.tsize ){
-
-		if(clickCanvasX!=0 || clickCanvasY!=0){
-			// this.y = colY * this.map.tsize+this.map.tsize/2;
-			// this.x = rowX * this.map.tsize+this.map.tsize/2;
-		}
-		
-		// clickCanvasX = 0;
-		// clickCanvasY = 0;
-	}
 	//SE FAIRE ATTAQUER PAR UN ENNEMI QUI NE BOUGE PAS
 	var ennemiStable = 0;
 	var attaqueEnnemi = 0;
@@ -391,13 +416,15 @@ Hero.prototype.move = function (delta, dirx, diry) {
  
 Hero.prototype._loselifeTile = function (dirx, diry) {
     var row, col;
-    // -1 in right and bottom is because image ranges from 0..63
+    // -1 in right and bottom is because image ranges from 0.63
     // and not up to 64
     var left = this.x - this.width / 2;
     var right = this.x + this.width / 2 - 1;
     var top = this.y - this.height / 2;
     var bottom = this.y + this.height / 2 - 1;
                
+	// console.log(left, right, top, bottom);
+	
                 var collision =
         this.map.isLoseWinLife(left, top) ||
         this.map.isLoseWinLife(right, top) ||
@@ -491,7 +518,7 @@ Hero.prototype._collide = function (dirx, diry) {
         this.map.isSolidTileAtXY(right, bottom) ||
         this.map.isSolidTileAtXY(left, bottom);
     if (!collision) { return; }
-
+	// path		 = [];
     if (diry > 0) {
         row = this.map.getRow(bottom);
         this.y = -this.height / 2 + this.map.getY(row);
@@ -509,6 +536,7 @@ Hero.prototype._collide = function (dirx, diry) {
         this.x = this.width / 2 + this.map.getX(col + 1);
     }
                
+	
                
                
 }; 
@@ -540,7 +568,6 @@ Hero.prototype._ennemy = function (dirx, diry) {
 		})
 		return;
 	}
-	
     if (diry > 0) {
         row = this.map.getRow(bottom);
         this.y = -this.height / 2 + this.map.getY(row);

@@ -5,32 +5,32 @@ Game._drawMenu = function () {
 	var height = canvas.height;	
 	var tsizePar2 = map.tsize/2;
 	
-	//menu haut
-	this.ctx.beginPath();
-    this.ctx.rect(0, 0, width, map.tsize);
-    this.ctx.fillStyle = 'brown';
-    this.ctx.fill();
+	// menu haut
+	// this.ctx.beginPath();
+    // this.ctx.rect(0, 0, width, map.tsize);
+    // this.ctx.fillStyle = 'brown';
+    // this.ctx.fill();
 	
 	
-	//menu côté
-	this.ctx.beginPath();
-    this.ctx.rect(0, tsizePar2, map.tsize, height);
-    this.ctx.fillStyle = 'brown';
-    this.ctx.fill();
+	// menu côté
+	// this.ctx.beginPath();
+    // this.ctx.rect(0, tsizePar2, map.tsize, height);
+    // this.ctx.fillStyle = 'brown';
+    // this.ctx.fill();
 	
 	n = 0;
 	
-	Game.ctx.drawImage(Loader.getImage('action'), 0, height/10);
+	// Game.ctx.drawImage(Loader.getImage('action'), 0, height/10);
 	
-	Object.keys(objets).forEach(function(key) {
-		if(Game.hero.equipement[key].possession == 1){
-			if(Game.hero.equipement[key].equipe == 1)
-				Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/4+n);
-			else
-				Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/4+n);
-			n = n+100;
-		}
-	})
+	// Object.keys(objets).forEach(function(key) {
+		// if(Game.hero.equipement[key].possession == 1){
+			// if(Game.hero.equipement[key].equipe == 1)
+				// Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/4+n);
+			// else
+				// Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/4+n);
+			// n = n+100;
+		// }
+	// })
 	
 	
 	

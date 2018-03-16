@@ -25,7 +25,6 @@
 	 
 	 
 	 
-	 
 	// var graph = new Graph([
 			// [0,0,0,0,0,0,0],
 			// [0,0,0,1,0,0,1],
@@ -37,41 +36,50 @@
 		// ]);
 		// var start = graph.nodes[1][2];
 		// var end = graph.nodes[0][2];
-		// console.log(astar.search(graph.nodes, start, end));
+		// console.log(builds);
 	 
 	 
 	 
-	 // console.log(posStart);
 	 
 	 
 	 
-	 var absobs1Ar = [];
-	 var arrTemp = [];
-	 var a = 0;
+	 var absobs1Ar	 = [];
+	 var arrTemp	 = [];
+	 var a = 1;
 	 if(map.tileSolid.includes(absobs1[posEnd]) && map.tileSolid.includes(absobs2[posEnd]))
 		 return false;
-	 
-	for (i = 0; i < absobs1.length; i++) { 
+	 	
+	
+	for (i = 0; i < abs1.length; i++) {
 		if(a < map.rows){
 			
 			var isSolid = 0;
-			var tile = absobs1[i];
-			var tile2 = absobs2[i];
-			
+			var tile = abs1[i];
+			var tile2 = abs2[i];
+						
 			if(map.tileSolid.includes(tile) || map.tileSolid.includes(tile2))
 				isSolid = 1;
 			
 			arrTemp.push(isSolid);
-			arrTemp.push(0);
 			a++;
 		}
 		else{
 			absobs1Ar.push(arrTemp);
+			Object.keys(monsters).forEach(function(key) {
+				if(absobs1Ar.length == monsters[key].col+1)
+					absobs1Ar[monsters[key].col][monsters[key].row] = 1;
+			})
+			
+			Object.keys(builds).forEach(function(key) {//barre de vie
+			if(absobs1Ar.length == builds[key].col+1 && builds[key].solid == 1)
+					absobs1Ar[builds[key].col][builds[key].row] = 1;
+		})
+			
 			arrTemp = [];
-			a = 0;
+			a = 1;
 		}
 	}
-	
+	// console.log(absobs1Ar);
 	var graph = new Graph(absobs1Ar);
 	
 	posStartCol = Math.trunc(posStart/map.rows);
@@ -85,7 +93,7 @@
 	var end = graph.nodes[posEndCol][posposEndRow]; 
 	var path = astar.search(graph.nodes, start, end);
 	var pathReturn = [];
-	for (i = 0; i < path.length; i++) { 
+	for (i = 0; i < path.length; i++) {
 		pathReturn.push(map.rows*path[i].x+path[i].y);
 	}
 	// console.log(path);
