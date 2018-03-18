@@ -406,55 +406,9 @@ Game.update = function (delta) {
 	
 	posHero = colY * map.cols + rowX;
 	
-	if( path.length > 0 ){
-		if(path[0] != posHero){
-			
-			if(path[0] == posHeroInitial + 1 )
-				clickCanvasX = 1;
-			if( path[0] == posHeroInitial - 1 )
-				clickCanvasX = -1;
-			if( path[0] == posHeroInitial + map.rows )
-				clickCanvasY = 1;
-			if( path[0] == posHeroInitial - map.rows )
-				clickCanvasY = -1;			
-			
-		}else {
-				var rowX = map.getRow(this.hero.x);
-				var colY = map.getCol(this.hero.y);
-				paramX = rowX * map.tsize+ map.tsize/2;
-				paramY = colY * map.tsize+ map.tsize/2;
-				
-				// if((paramX == this.hero.x || (dirx == dirx2 && dirx2 != 0)) && (this.hero.y == paramY || (diry == diry2 && diry2 != 0)) ){
-				if((paramX == this.hero.x ) && (this.hero.y == paramY) ){
-					path.shift();
-					posHeroInitial = posHero;
-					paramX		 = 0;
-					paramY		 = 0;
-					
-					// if(dirx2 != dirx)
-						clickCanvasX = 0;
-					// if(diry2 != diry)
-						clickCanvasY = 0;
-				}
-		}
-	}else{
-		posHeroInitial = posHero;
-	}
-	
-	if(this.hero.life<=0) return false;
-	
-	
-	
-	if(clickCanvasX!=0 || clickCanvasY!=0 ){//|| (dirx == dirx2 || diry == diry2)
-		dirx = clickCanvasX;
-		diry = clickCanvasY;
-	}else{
-		dirx = 0;
-		diry = 0;
-	}
 	
 		
-	if(path.length > 1){
+	if(path.length > 1){	//si les deux prochains mouvements sont en ligne droite
 		if(path[1] == path[0] + 1 && posHero == path[0] ){
 			dirx2 = 1;
 			diry2 = 0;
@@ -476,7 +430,53 @@ Game.update = function (delta) {
 		diry2 = 0;
 	}
 	
-	// console.log(diry);
+	if( path.length > 0 ){
+		if(path[0] != posHero){
+			
+			if(path[0] == posHeroInitial + 1 )
+				clickCanvasX = 1;
+			if( path[0] == posHeroInitial - 1 )
+				clickCanvasX = -1;
+			if( path[0] == posHeroInitial + map.rows )
+				clickCanvasY = 1;
+			if( path[0] == posHeroInitial - map.rows )
+				clickCanvasY = -1;			
+			
+		}else {
+				var rowX = map.getRow(this.hero.x);
+				var colY = map.getCol(this.hero.y);
+				paramX = rowX * map.tsize+ map.tsize/2;
+				paramY = colY * map.tsize+ map.tsize/2;
+				
+				if((paramX == this.hero.x ) && (this.hero.y == paramY) || (dirx == dirx2 && diry == diry2)){
+					
+					path.shift();
+					posHeroInitial = posHero;
+					paramX		 = 0;
+					paramY		 = 0;
+					clickCanvasX = 0;
+					clickCanvasY = 0;
+				}
+				
+		}
+	}else{
+		posHeroInitial = posHero;
+	}
+	
+	if(this.hero.life<=0) return false;
+	
+	
+	
+	if(clickCanvasX!=0 || clickCanvasY!=0 ){//|| (dirx == dirx2 || diry == diry2)
+		dirx = clickCanvasX;
+		diry = clickCanvasY;
+	}else{
+		dirx = 0;
+		diry = 0;
+	}
+	
+	// console.log(dirx, diry, '::::::', dirx2, diry2, 'path length: '+path.length);
+	// console.log(path.length);
 	
     this.hero.move(delta, dirx, diry, paramX, paramY, dirx2, diry2);
 	

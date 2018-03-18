@@ -218,10 +218,8 @@ Hero.prototype.move = function (delta, dirx, diry, positionX, positionY, dirx2, 
     // move hero
 	// console.log(positionX, positionY, diry);
 	if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){
-		// if(positionX > 0 && positionY > 0 && (dirx2 != dirx || diry2 != diry )){
-		if(positionX > 0 && positionY > 0 ){
+		if(positionX > 0 && positionY > 0){
 			
-					// console.log(this.x, positionX, this.y, positionY, diry);
 			if(dirx == 1){//vers la droite
 				if(this.x > positionX)
 					this.x = positionX;
