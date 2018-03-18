@@ -187,7 +187,8 @@ Game.init = function () {
 			var pos     = map.getRow(yClick)*map.rows+map.getCol(xClick);
 			var posHero = colHero * map.cols + rowHero;
 			// console.log(posHero);
-			if(rowClick == rowHero && colHero == colClick && batimentclick == 0	){
+
+			if(rowClick == rowHero && colHero == colClick && batimentclick == 0 && dialogue == 0	){
 				Game.hero.creuse(xClick, yClick, Game.hero.map);
 				return false;
 			}
@@ -217,7 +218,7 @@ Game.init = function () {
 					posHeroInitial = posHero;
 					
 					path = findPath(posHero, pos);
-					console.log(path);
+					// console.log(path);
 					// bouger avec le click de souris
 					xHeroClick = xHero;
 					yHeroClick = yHero;
