@@ -12,7 +12,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.defense = defense;
     this.agilite = 10;
     this.attaqueEnCours = 60;
-    this.exploration = 10;
+    this.exploration = 1;
     this.equipement = equipement;
     this.artefact = [];
     this.artefactEnCours = [];
