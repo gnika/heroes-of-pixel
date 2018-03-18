@@ -334,8 +334,6 @@ Hero.prototype.move = function (delta, dirx, diry, positionX, positionY, dirx2, 
 		}
 	}
 	
-	
-	
 	//FIN EXPLORATION
 	
 	//SE FAIRE ATTAQUER PAR UN ENNEMI QUI NE BOUGE PAS
@@ -444,6 +442,7 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 			builds		= [];
 			monsters 	= [];
 			artefacts 	= [];
+			path		= [];
 			niveauMap ++;
 			this.map.mapNext(0);
 		}
@@ -463,6 +462,7 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 				builds			= [];
 				monsters 		= [];
 				artefacts 		= [];
+				path		 	= [];
 				this.map.mapNext(niveauMap);
 			}else{
 				builds 		= buildsTmp;
@@ -475,6 +475,7 @@ Hero.prototype._loselifeTile = function (dirx, diry) {
 				map.layers  = [absobs1, absobs2];
 				Game.hero.x		= xyHeroTmp['x'];
 				Game.hero.y		= xyHeroTmp['y'];
+				path		 	= [];
 				
 				layer1Tmp 	= [];
 			}
