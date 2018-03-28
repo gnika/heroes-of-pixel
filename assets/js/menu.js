@@ -102,7 +102,7 @@ Game._drawMenu = function () {
 
 		// this.ctx.globalAlpha = 0.5;
 		this.ctx.fillStyle = 'black';
-		this.ctx.fillRect(map.tsize*3-2, map.tsize*2-2, 332, 164);
+		this.ctx.fillRect(map.tsize*3-2, map.tsize*2-2, 334, 164);
 		this.ctx.fillStyle = '#ffcd88';
 		this.ctx.fillRect(map.tsize*3, map.tsize*2, 330, 160);
 		

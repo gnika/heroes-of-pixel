@@ -869,7 +869,7 @@ Game._drawGridMenu = function () {
  
 Game._drawRectangle = function (color, xpos, ypos, life) {
         this.ctx.fillStyle=color;
-		this.ctx.fillRect(xpos, ypos, life, 10);
+		this.ctx.fillRect(xpos, ypos, life, 5);
 		
 };
  
@@ -915,7 +915,7 @@ Game.render = function () {
 			
 	
 				Game.ctx.fillStyle="#FF0000";
-				Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 10);
+				Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 5);
 			}
 		}else{
 				Game.hero.xp = Game.hero.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
@@ -927,12 +927,12 @@ Game.render = function () {
 		})
 
 	this.ctx.fillStyle="#FF0000";
-	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 10);
+	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 5);
 	this.ctx.fillStyle="blue";
-	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+52, this.hero.fatigue, 10);
+	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+47, this.hero.fatigue, 5);
 	if(this._getToolEquipe() == 'epee'){
 		this.ctx.fillStyle="green";
-		this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+64, this.hero.attaqueEnCours, 10);
+		this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+54, this.hero.attaqueEnCours, 5);
 	}
 	
 	

@@ -14,7 +14,7 @@ Game._quest1 = function(monstre){
 	// texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
 }
 Game._quest2 = function(monstre){
-	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Pour connaître votre condition physique, \n cliquez sur le menu accessible\n en bas à gauche de l\'écran\n\n Votre défense indique votre résistance\n face aux monstres que vous cotoierez. \n\n Votre exploration indique votre capacité\n à voir loin lorsque vous explorez.";
+	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Pour connaître votre condition physique, \n cliquez sur le menu\n accessible à gauche de l\'écran\n\n Votre défense indique votre résistance\n face aux monstres que vous cotoierez. \n\n Votre exploration indique votre capacité\n à voir loin lorsque vous explorez.";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
