@@ -188,12 +188,16 @@ Game.init = function () {
 			var posHero = colHero * map.cols + rowHero;
 			// console.log(posHero);
 
-			if(rowClick == rowHero && colHero == colClick && batimentclick == 0 && dialogue == 0	){
+			if(menuclick == 1 && menussclick == 0 && xClick > map.tsize*3){
+				menuclick = 0;
+				return false;
+			}
+			if(rowClick == rowHero && colHero == colClick && batimentclick == 0 && dialogue == 0 && menuclick == 0	){
 				Game.hero.creuse(xClick, yClick, Game.hero.map);
 				return false;
 			}
 			
-			if(monsters[rowClick+'-'+colClick] && (( rowHero == rowClick || rowHero == rowClick+1 || rowHero == rowClick-1)
+			if( menuclick== 0 && monsters[rowClick+'-'+colClick] && (( rowHero == rowClick || rowHero == rowClick+1 || rowHero == rowClick-1)
 				&&(colHero == colClick+1 || colHero == colClick-1 || colHero == colClick)) && monsters[rowClick+'-'+colClick].attaque == 0){
 					dialogue = 1;
 					Game.dialogue(monsters[rowClick+'-'+colClick]);
@@ -227,7 +231,15 @@ Game.init = function () {
 					n = n+100;
 				}
 			})
-
+			// n = n+100;
+			
+			if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n && menuclick == 0 && menuBodyClick == 0){
+				menuclick = 1;
+			}
+			else if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n && menuclick == 1 && menuBodyClick == 0){
+				menuclick = 0;
+				menussclick=0;
+			}
 			Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
 			
 			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0 && equip == 0){	// bouge si aucun menu n'est ouvert
@@ -329,14 +341,15 @@ Game.init = function () {
 		}
 		//si sous menu ouvert
 		if(menussclick!=0){
-			if(xClick >249 && xClick <278 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ok
+			//map.tsize*7, map.tsize*2+10
+			if(xClick >map.tsize*7 && xClick <map.tsize*7+32 && yClick >map.tsize*2+10 &&  yClick < map.tsize*2+10+32 ){ //ok
 			
 				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, allBuilding[keySelected].paramBuild['typeBatiment'],
 				allBuilding[keySelected].caracteristique, allBuilding[keySelected].supplyBuild, allBuilding[keySelected].paramBuild['typeTile'],
 				allBuilding[keySelected].paramBuild['life'], allBuilding[keySelected].paramBuild['solid']);
 			}
 
-			if(xClick >289 && xClick <317 && yClick >rect.height-menuH*5.5 &&  yClick < rect.height-menuH*5.5+22 ){ //ko
+			if(xClick >map.tsize*7+32 && xClick <map.tsize*7+64 && yClick >map.tsize*2+10 &&  yClick < map.tsize*2+10+32 ){ //ko
 				menussclick = 0;
 				menuclick = 0;
 			}
@@ -758,7 +771,7 @@ Game._drawGridMenu = function () {
 			Game.animBulleBas = 0;
 		}
 	}
-// console.log(builds);
+
 	Object.keys(builds).forEach(function(key) {// pour les bulles decompte de batiment
 
 		
@@ -926,7 +939,7 @@ Game.render = function () {
     this._drawGridMenu();
 	
 	
-	if(builds[this.hero.map.getRow(this.hero.x)+'-'+this.hero.map.getCol(this.hero.y)]){//loupe si heros sur batiment
+	if(builds[this.hero.map.getRow(this.hero.x)+'-'+this.hero.map.getCol(this.hero.y)] && menuclick == 0){//loupe si heros sur batiment
 		Game.ctx.drawImage(
 			Loader.getImage('loupe'),
 			this.hero.x-16-this.camera.x,

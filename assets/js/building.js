@@ -65,8 +65,8 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['prixUpdate'] = {'bois': 5};
 		caracteristique['recompense'] = {'planche': 10};
 		caracteristique['updateNiveau'] = {'ecu': 100, 'bois': 25};
-		supplyBuild['ecu'] = 150;
-		supplyBuild['pierre'] = 50;
+		supplyBuild['ecu'] = 100;
+		supplyBuild['pierre'] = 25;
 		paramBuild['typeBatiment'] = [44, 45, 46, 47];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
@@ -267,7 +267,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		menussclickTitre = 'Boulangerie';
 		description_fr = 'La boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
-		description_fr = 'EN boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
+		description_en = 'EN boulangerie produit du pain\nIndispensable pour ne pas mourir de faim';
 			
 		allBuilding['boulangerie']  = {
 		 'caracteristique'	: caracteristique,
@@ -392,7 +392,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		description_fr = 'L\'élevage génère des cochons';
 		description_en = 'EN L\'élevage génère des cochons';
 
-		allBuilding['cochon']  = {
+		allBuilding['culture_cochon']  = {
 		 'caracteristique'	: caracteristique,
 		 'supplyBuild' 		: supplyBuild,
 		 'paramBuild' 		: paramBuild,

@@ -22,7 +22,7 @@ Game._drawMenu = function () {
 	this.ctx.drawImage(Loader.getImage('bois'), 205, 0);
 	this.ctx.fillText(this.hero.supply.bois, 245, 25);
 	
-	this.ctx.drawImage(Loader.getImage('culture_ble'), 300, 0);
+	this.ctx.drawImage(Loader.getImage('ble'), 300, 0);
 	this.ctx.fillText(this.hero.supply.ble, 340, 25);
 	
 	this.ctx.drawImage(Loader.getImage('pierre'), 395, 0);
@@ -31,7 +31,7 @@ Game._drawMenu = function () {
 	this.ctx.drawImage(Loader.getImage('argile'), 495, 0);
 	this.ctx.fillText(this.hero.supply.argile, 535, 25);
 	
-	this.ctx.drawImage(Loader.getImage('culture_mais'), 110, 32);
+	this.ctx.drawImage(Loader.getImage('mais'), 110, 32);
 	this.ctx.fillText(this.hero.supply.mais, 150, 57);
 	
 	this.ctx.drawImage(Loader.getImage('fer'), 205, 32);
@@ -43,7 +43,7 @@ Game._drawMenu = function () {
 	this.ctx.drawImage(Loader.getImage('or'), 395, 32);
 	this.ctx.fillText(this.hero.supply.or, 435, 57);
 	
-	this.ctx.drawImage(Loader.getImage('culture_raisin'), 495, 32);
+	this.ctx.drawImage(Loader.getImage('vigne'), 495, 32);
 	this.ctx.fillText(this.hero.supply.vigne, 535, 57);
 	
 	
@@ -67,78 +67,63 @@ Game._drawMenu = function () {
 		}
 	})
 	
-	
-	
-	//menu bas
-	this.ctx.beginPath();
-    this.ctx.rect(0, height-tsizePar2, tsizePar2, tsizePar2);
-    this.ctx.fillStyle = 'red';
-    this.ctx.fill();
-	
-	//menu bas
-	Game.ctx.drawImage(Loader.getImage('body'), tsizePar2, height-tsizePar2, tsizePar2, tsizePar2);
+	Game.ctx.drawImage(Loader.getImage('construire'),  0, height/4+n);
+	n = n+100;
+	Game.ctx.drawImage(Loader.getImage('body'),  0, height/4+n);
 	
 	
 	if(menuclick == 1){
+		
+		this.ctx.beginPath();
+		this.ctx.rect(map.tsize-2, map.tsize-2, map.tsize*2+4, height);
+		this.ctx.fillStyle = 'black';
+		this.ctx.fill();
+		this.ctx.beginPath();
+		this.ctx.rect(map.tsize, map.tsize, map.tsize*2, height);
+		this.ctx.fillStyle = 'brown';
+		this.ctx.fill();
+		
 		var incrementation = 1;
+		var ligne = 1;
 		Object.keys(allBuilding).forEach(function(key) {// building.js setBuilding
-			Game.ctx.beginPath();
-			Game.ctx.lineWidth = "2";
-			Game.ctx.fillStyle = 'black';
-			Game.ctx.rect(incrementation * tsizePar2 - 1, height-tsizePar2 - 1, tsizePar2 + 2, height);
-			Game.ctx.stroke();
+			Game.ctx.drawImage(Loader.getImage(key), incrementation * map.tsize, map.tsize*ligne);
 			
-			Game.ctx.lineWidth="1";
-			Game.ctx.beginPath();
-			Game.ctx.rect(incrementation * tsizePar2, height-tsizePar2, tsizePar2, height);
-			Game.ctx.fillStyle = 'yellow';
-			Game.ctx.fill();
-			
-			Game.ctx.drawImage(Loader.getImage(key), incrementation * tsizePar2, height-tsizePar2);
-			
+			if(incrementation == 2){
+				incrementation = 0;
+				ligne ++;
+			}
 			incrementation ++;
 		})
 		
-		
-		// this.ctx.beginPath();
-		// this.ctx.rect(tsizePar2, height-tsizePar2, tsizePar2, height);
-		// this.ctx.fillStyle = 'yellow';
-		// this.ctx.fill();
-		// this.ctx.beginPath();
-		// this.ctx.rect(2*tsizePar2, height-tsizePar2, tsizePar2, height);
-		// this.ctx.fillStyle = 'blue';
-		// this.ctx.fill();
-		
-		
-	}else{
-		this.ctx.clearRect(tsizePar2*2, height-tsizePar2, width, height);
 	}
 	
 	
 	if(menussclick != 0){
 
-		this.ctx.globalAlpha = 0.5;
-		this.ctx.fillRect(0, height-tsizePar2*6, 330, 160);
-		this.ctx.globalAlpha = 1.0;
+		// this.ctx.globalAlpha = 0.5;
+		this.ctx.fillStyle = 'black';
+		this.ctx.fillRect(map.tsize*3-2, map.tsize*2-2, 332, 164);
+		this.ctx.fillStyle = '#ffcd88';
+		this.ctx.fillRect(map.tsize*3, map.tsize*2, 330, 160);
 		
 		this.ctx.font="20px Arial";
 		this.ctx.fillStyle = 'black';
-		this.ctx.fillText(allBuilding[keySelected].menussclickTitre, 15, height-tsizePar2*5);
+		this.ctx.fillText(allBuilding[keySelected].menussclickTitre, map.tsize*3+tsizePar2/2, map.tsize*3-tsizePar2);	//titre du batiment
 		
-		this.ctx.drawImage(Loader.getImage('ok'), 250, height-tsizePar2*5.5);
-		this.ctx.drawImage(Loader.getImage('ko'), 290, height-tsizePar2*5.5);
+		this.ctx.drawImage(Loader.getImage('ok'), map.tsize*7, map.tsize*2+10);
+		this.ctx.drawImage(Loader.getImage('ko'), map.tsize*7+32, map.tsize*2+10);
 		
 		this.ctx.font="15px Arial";
 		var lines = allBuilding[keySelected].description_fr.split("\n");
-		this.ctx.fillStyle = 'blue';
+		this.ctx.fillStyle = 'black';
 		var u = 1;
 		for (i = 0; i < lines.length; i++) {
-			 		this.ctx.fillText(lines[i],15, u+height-tsizePar2*4);
+			 		this.ctx.fillText(lines[i],map.tsize*3+10, u + map.tsize*3);
 					u = u+15;
 		}
-		
 		u = u+10;
 		a = 15;
+		
 		Object.keys(allBuilding[keySelected].supplyBuild).forEach(function(key) {
 			
 			if(Game.hero.supply[key] >= allBuilding[keySelected].supplyBuild[key])
@@ -146,8 +131,8 @@ Game._drawMenu = function () {
 			else
 				Game.ctx.fillStyle = 'red';
 			
-			Game.ctx.fillText(allBuilding[keySelected].supplyBuild[key],a, u+height-tsizePar2*4);
-			Game.ctx.drawImage(Loader.getImage(key), a, 5+u+height-tsizePar2*4);
+			Game.ctx.fillText(allBuilding[keySelected].supplyBuild[key],map.tsize*3 + a, u+map.tsize*3);
+			Game.ctx.drawImage(Loader.getImage(key),map.tsize*3 + a, 5+u+map.tsize*3);
 			a = a+40;
 		})
 		
@@ -155,10 +140,10 @@ Game._drawMenu = function () {
 			Game.tileAtlas, // image
 			(allBuilding[keySelected].paramBuild['typeTile'][0] - 1) * map.tsize, // source x
 			0, // source y
-			map.tsize/2, // source width
-			map.tsize/2, // source height
-			a,  // target x
-			5+u+height-tsizePar2*4, // target y
+			map.tsize, // source width
+			map.tsize, // source height
+			a + map.tsize*3,  // target x
+			5+u+map.tsize*3, // target y
 			map.tsize/2, // target width
 			map.tsize/2 // target height
 		);
@@ -167,10 +152,10 @@ Game._drawMenu = function () {
 			Game.tileAtlas, // image
 			(allBuilding[keySelected].paramBuild['typeTile'][1] - 1) * map.tsize, // source x
 			0, // source y
-			map.tsize/2, // source width
-			map.tsize/2, // source height
-			a,  // target x
-			5+u+height-tsizePar2*4, // target y
+			map.tsize, // source width
+			map.tsize, // source height
+			a + map.tsize*3,  // target x
+			5+u+map.tsize*3, // target y
 			map.tsize/2, // target width
 			map.tsize/2 // target height
 		);
@@ -187,16 +172,8 @@ Game._drawMenu = function () {
 Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 	
 	var tsizePar2 = tsizePar/2;
-	if(yClick > rect.height-menuH && xClick < menuH){
-		if(menuclick==0){
-			menuclick=1;
-		}else{
-			menuclick=0;
-			menussclick=0;
-		}
-	}
-	
-	if(yClick > rect.height-menuH && xClick > menuH && xClick < menuH*2 && menuclick == 0){	//fiche joueur
+
+	if(xClick < map.tsize && yClick > rect.height/4+n && yClick < rect.height/4+n+64 &&  menuclick == 0){	//fiche joueur
 		Game._clickBody();
 		if(menuBodyClick == 0){
 			menuBodyClick = 1;
@@ -205,27 +182,23 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 		}
 		
 	}
-	
-	if(yClick > rect.height-menuH && xClick > menuH && menuclick==1){
-							
-		
+	if(yClick > map.tsize && xClick > map.tsize && xClick < map.tsize*3 && menuclick==1){
+
 		menussclick			= 1;
 		keySelected 		= '';
 		
+		var xFois = 0;
+		if(xClick < map.tsize * 2)
+			xFois = 1;
+		var yFois = Math.trunc(yClick / map.tsize);
+		var incr2 = yFois * 2 - xFois;
+		
 		var incr1 = 1;
-		var incr2 = 2;
-		
 		Object.keys(allBuilding).forEach(function(key) {// building.js setBuilding
-			if(xClick > menuH * incr1 && xClick < menuH * incr2){
+			if(incr1 == incr2)
 				keySelected = key;
-			}
-			
 			incr1++;
-			incr2++;
 		})
-		
-		
-		
 	}
 }
 
@@ -388,7 +361,7 @@ Game._clickBody = function () {	//MENU DES EQUIPEMENTS
 			var lines = artefactSelectionne.description_fr.split("\n");
 			this.ctx.fillStyle = 'gray';
 			var u = 1;
-			for (i = 0; i < lines.length; i++) {
+			for (var i = 0; i < lines.length; i++) {
 						this.ctx.fillText(lines[i],width/4+170, u+height/4+20);
 						u = u+25;
 			}

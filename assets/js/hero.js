@@ -153,7 +153,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		}
 		
 		//actions buildings si équipé d'un outils
-		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null){
+		if(typeof(builds[vertical+'-'+horizontal]) != "undefined" && builds[vertical+'-'+horizontal] !== null && menuclick== 0){
 			if((typeof(builds[vertical+'-'+horizontal].caracteristique['outilRecompense']) === "undefined" || 
 			builds[vertical+'-'+horizontal].caracteristique['outilRecompense'] == equip) && 
 			abs2[pos] == builds[vertical+'-'+horizontal].batiment[3]){
