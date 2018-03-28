@@ -230,11 +230,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 }
 
 Game._clickBatiment = function () {
-	Object.keys(builds).forEach(function(key) {
-		// if(rowClick+'-'+colClick == key && Game.he)
-			// console.log(builds);
-
-	})
+	
 	if(batimentclick == 1){ //detail batiment
 		var canvas = document.getElementById('map_canvas');
 		var width = canvas.width;
@@ -289,6 +285,15 @@ Game._clickBatiment = function () {
 			this.ctx.fillText(this.hero.supply.planche, width/4+192, height/4+200);
 		}else{	//détail de tous les autres batiments
 			var build = builds[map.getRow(this.hero.x)+'-'+map.getCol(this.hero.y)] ;
+			var posB = map.getRow(build.y)*map.rows+map.getCol(build.x);
+			var position = build.batiment.indexOf(abs2[posB]);
+			if(position == 0)
+				position = 3;
+			else if(position == 1)
+				position = 2;
+			else if(position == 2)
+				position = 1;
+			
 			this.ctx.fillStyle = 'white';
 
 			this.ctx.fillText('level : '+build.level, width/4+128, height/4+32);
@@ -303,7 +308,15 @@ Game._clickBatiment = function () {
 				Game.ctx.drawImage(Loader.getImage(key), width/4+37, height/4+110 + n);
 				n = n+40;
 			})
-			
+			n = n+40;
+			this.ctx.fillText('dans '+position+' jours, bénéfice : ', width/4+5, height/4+100 + n);
+			n = n+40;
+			Object.keys(build.caracteristique['recompense']).forEach(function(keyRecompense) {
+					Game.ctx.fillText(build.caracteristique['recompense'][keyRecompense] * build.level , width/4+5, height/4+100 + n);
+					Game.ctx.drawImage(Loader.getImage(keyRecompense), width/4+50, height/4+75 + n);
+					
+				})
+
 			if( build.level < 3){ //monter de level
 				var error = 0; 
 				this.ctx.fillText('Prochain', width/3+128+colonneBatimentClicResponsive, height/5+100);

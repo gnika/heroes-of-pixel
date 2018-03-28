@@ -116,6 +116,11 @@ Game.defineImages = function(){
 		Loader.loadImage('pierre', 'assets/menu/pierre.png'),
 		Loader.loadImage('action', 'assets/menu/action.png'),
 		
+		Loader.loadImage('3', 'assets/0.png'),
+		Loader.loadImage('2', 'assets/1.png'),
+		Loader.loadImage('1', 'assets/2.png'),
+		Loader.loadImage('0', 'assets/3.png'),
+		
 		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),
 		Loader.loadImage('pelle_bois_use', 'assets/objets/pelle_use.png'),
 		Loader.loadImage('pelle_bulle', 'assets/objets/pelle_bulle.png'),

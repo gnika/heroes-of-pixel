@@ -200,8 +200,37 @@ Game.init = function () {
 				}
 				
 			
-			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0){	// bouge si aucun menu n'est ouvert
+			/*gestion menu*/
+		
+			var xClick = event.clientX - rect.left;
+			var yClick = event.clientY - rect.top;
 			
+			if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64){
+				Game.hero.food();
+				return false;
+			}
+			
+			var n = 0;
+			var equip = 0;
+			Object.keys(objets).forEach(function(key) {// menu.js ligne 54
+				if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
+					if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
+						if(Game.hero.equipement[key].equipe == 1){
+							Game._removeEquipe();
+							equip = 1;
+						}else{
+							Game._removeEquipe();
+							Game.hero.equipement[key].equipe = 1;
+							equip = 1;
+						}
+					}
+					n = n+100;
+				}
+			})
+
+			Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
+			
+			if(menussclick == 0 && batimentclick == 0 && menuBodyClick == 0 && dialogue == 0 && equip == 0){	// bouge si aucun menu n'est ouvert
 					path		 = [];
 					
 					var rowX = map.getRow(Game.hero.x);
@@ -224,30 +253,6 @@ Game.init = function () {
 					yHeroClick = yHero;
 					
 			}
-			/*gestion menu*/
-		
-			var xClick = event.clientX - rect.left;
-			var yClick = event.clientY - rect.top;
-			
-			if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64)
-				Game.hero.food();
-			
-			var n = 0;
-			
-			Object.keys(objets).forEach(function(key) {// menu.js ligne 54
-				if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
-					if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
-						if(Game.hero.equipement[key].equipe == 1){
-							Game._removeEquipe();
-						}else{
-							Game._removeEquipe();
-							Game.hero.equipement[key].equipe = 1;
-						}
-					}
-					n = n+100;
-				}
-			})
-		
 		//si fiche du batiment ouvert
 		if(batimentclick == 1){
 			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
@@ -336,7 +341,6 @@ Game.init = function () {
 				menuclick = 0;
 			}
 		}
-		Game._clickMenu(xClick, yClick, menuH, rect, Game.hero.map.tsize);
 			
 		},
 	false);
@@ -754,6 +758,55 @@ Game._drawGridMenu = function () {
 			Game.animBulleBas = 0;
 		}
 	}
+// console.log(builds);
+	Object.keys(builds).forEach(function(key) {// pour les bulles decompte de batiment
+
+		
+		if(builds[key].batiment.length >1){
+			var posB = map.getRow(builds[key].y)*map.rows+map.getCol(builds[key].x);
+
+			if(builds[key].animBulle == null){
+				builds[key].animBulle	 = 50;
+				builds[key].animBulleBas = 0;
+			}
+			var position = builds[key].batiment.indexOf(abs2[posB]);
+			
+			if(builds[key].animBulle < 100 && builds[key].animBulleBas == 0){
+				builds[key].animBulle++;
+					Game.ctx.drawImage(
+								Loader.getImage(position), // image
+								0, // source x
+								0, // source y
+								map.tsize, // source width
+								map.tsize, // source height
+								builds[key].x+15-Game.camera.x,  // target x
+								builds[key].y-5-Game.camera.y-builds[key].animBulle, 
+								map.tsize, // target width
+								map.tsize // target height
+							);
+			}
+			if(builds[key].animBulle == 100)
+				builds[key].animBulleBas = 1;
+			if(builds[key].animBulle <= 100 && builds[key].animBulleBas == 1){
+				builds[key].animBulle--;
+					Game.ctx.drawImage(
+								Loader.getImage(position), // image
+								0, // source x
+								0, // source y
+								map.tsize, // source width
+								map.tsize, // source height
+								builds[key].x+15-Game.camera.x,  // target x
+								builds[key].y-5-Game.camera.y-builds[key].animBulle, 
+								map.tsize, // target width
+								map.tsize // target height
+							);
+			}
+			if(builds[key].animBulle == 50 && builds[key].animBulleBas == 1){
+					builds[key].animBulleBas = 0;
+			}
+		}
+	})
+		
 	
 	// draw main character nouvel emplacement
 	this.ctx.drawImage(
