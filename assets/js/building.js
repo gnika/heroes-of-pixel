@@ -18,7 +18,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
     this.cibleMouvante=0;
     this.typeTile=typeTile;
     this.solid=solid;
-    this.road= '';
+    this.road= '';//ne change jamais au mouvement du paysan.
     this.paysan_position = 0;
     this.paysan_retour = 0;
 	

@@ -118,11 +118,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		
 		//tiles
 		if( equip == 'road' && builds[vertical+'-'+horizontal] == null){
-			if(this.supply.ecu >= 2 && abs1[pos] == 2 && abs2[pos] == 0){
-				this.supply.ecu = Game.hero.ecu - 2;
+			// if(this.supply.ecu >= 2 && abs1[pos] == 2 && abs2[pos] == 0){ 		//A DECOMMENTER !!!!!
+				// this.supply.ecu = Game.hero.ecu - 2; 		//A DECOMMENTER !!!!!
 				abs2[pos] = 129;
 				absobs2[pos] = 129;
-			}
+			// }
 		}
 		else if (abs2[pos] == 0 && abs1[pos] ==1 && equip == 'pelle') {
 			abs1[pos] = 2;
