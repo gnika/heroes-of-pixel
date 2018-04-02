@@ -170,7 +170,7 @@ function Monstre(map, x, y, row, col, attaque, defense, regeneration, level, ima
     this.idQuete = idQuete;
 }
     
-function generateMonstre(map, x, y, row, col, name, vitesse, directionX, directionY, idQuete){
+function generateMonstre(map, x, y, row, col, name, vitesse, directionX, directionY, idQuete, paysan){
 		
 	var nameMonstre = 'monstre'+row+'-'+col;
 	this.nameMonstre = new Monstre(map, x, y, row, col, Game.getRandomInt(allMonsters[name].attaque[0], allMonsters[name].attaque[1]),

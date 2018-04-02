@@ -21,6 +21,59 @@
 		
 	See graph.js for a more advanced example
 */
+ function findRoute(posStart, posEnd){
+	 
+	 var absobs1Ar	 = [];
+	 var arrTemp	 = [];
+	 var a = 1;
+	
+	for (i = 0; i < abs1.length; i++) {
+		if(a < map.rows){
+			
+			var isSolid = 0;
+			var tile2 = abs2[i];
+						
+			if(tile2 != 129 && tile2 != 61 && tile2 != 84 && tile2 != 85)	//tuile de pont ou de route ou d'entrepot
+				isSolid = 1;
+			
+			arrTemp.push(isSolid);
+			a++;
+		}else{
+			absobs1Ar.push(arrTemp);
+			Object.keys(monsters).forEach(function(key) {
+				if(absobs1Ar.length == monsters[key].col+1)
+					absobs1Ar[monsters[key].col][monsters[key].row] = 1;
+			})
+			
+			Object.keys(builds).forEach(function(key) {//barre de vie
+			if(absobs1Ar.length == builds[key].col+1 && builds[key].solid == 1)
+					absobs1Ar[builds[key].col][builds[key].row] = 1;
+		})
+			
+			arrTemp = [];
+			a = 1;
+		}
+	}
+	// console.log(absobs1Ar);
+	var graph = new Graph(absobs1Ar);
+	
+	posStartCol = Math.trunc(posStart/map.rows);
+	posStartRow = posStart%map.rows;
+	posEndCol = Math.trunc(posEnd/map.rows);
+	posposEndRow = posEnd%map.rows;
+	
+	// console.log(posStartRow, posStartCol);
+	var start = graph.nodes[posStartCol][posStartRow];
+	var end = graph.nodes[posEndCol][posposEndRow]; 
+	var path = astar.search(graph.nodes, start, end);
+	var pathReturn = [];
+	for (i = 0; i < path.length; i++) {
+		pathReturn.push(map.rows*path[i].x+path[i].y);
+	}
+
+	return pathReturn;
+ }
+ 
  function findPath(posStart, posEnd){
 	 
 	 

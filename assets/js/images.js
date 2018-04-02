@@ -68,6 +68,8 @@ Game.defineImages = function(){
 		Loader.loadImage('parrain2', 'assets/monstres/pnj/parrain2.png'),
 		Loader.loadImage('woman', 'assets/monstres/pnj/woman.png'),
 		Loader.loadImage('woman2', 'assets/monstres/pnj/woman2.png'),
+		Loader.loadImage('paysan', 'assets/monstres/pnj/paysan.png'),
+		Loader.loadImage('paysan2', 'assets/monstres/pnj/paysan2.png'),
 		
 		
 		// Loader.loadImage('coin', 'assets/coin.png'),
@@ -132,8 +134,10 @@ Game.defineImages = function(){
 		Loader.loadImage('faux_bois', 'assets/objets/faux.png'),
 		Loader.loadImage('faux_bulle', 'assets/objets/faux_bulle.png'),
 		Loader.loadImage('epee_bois', 'assets/objets/epee.png'),
+		Loader.loadImage('road_bois', 'assets/objets/road.png'),
 		Loader.loadImage('faux_bois_use', 'assets/objets/faux_use.png'),
-		Loader.loadImage('epee_bois_use', 'assets/objets/epee_use.png')
+		Loader.loadImage('epee_bois_use', 'assets/objets/epee_use.png'),
+		Loader.loadImage('road_bois_use', 'assets/objets/road_use.png')
 		
     ];
 }

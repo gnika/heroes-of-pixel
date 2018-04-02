@@ -162,6 +162,7 @@ Game.init = function () {
 	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
 	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
 	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':0, 'equipe':0};
+	objets['road']  = {'img':'road_bois', 'name':'road', 'life':100, 'possession':1, 'equipe':0};
 	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
 	
@@ -186,7 +187,7 @@ Game.init = function () {
 			var equip 	= Game._getToolEquipe();
 			var pos     = map.getRow(yClick)*map.rows+map.getCol(xClick);
 			var posHero = colHero * map.cols + rowHero;
-			// console.log(posHero);
+			// console.log(pos);
 
 			if(menuclick == 1 && menussclick == 0 && xClick > map.tsize*3){
 				menuclick = 0;
@@ -483,8 +484,6 @@ Game.update = function (delta) {
 	
 	if(this.hero.life<=0) return false;
 	
-	
-	
 	if(clickCanvasX!=0 || clickCanvasY!=0 ){//|| (dirx == dirx2 || diry == diry2)
 		dirx = clickCanvasX;
 		diry = clickCanvasY;
@@ -493,13 +492,8 @@ Game.update = function (delta) {
 		diry = 0;
 	}
 	
-	// console.log(dirx, diry, '::::::', dirx2, diry2, 'path length: '+path.length);
-	// console.log(path.length);
-	
     this.hero.move(delta, dirx, diry, paramX, paramY, dirx2, diry2);
 	
-	
-		
 	if( path.length == 0){
 		
 		clickCanvasX = 0;
@@ -510,9 +504,6 @@ Game.update = function (delta) {
 		paramY		 = 0;
 
 	}
-	
-	
-	
 	
 	//mouvement monstres
 	Object.keys(monsters).forEach(function(key) {
@@ -771,12 +762,40 @@ Game._drawGridMenu = function () {
 			Game.animBulleBas = 0;
 		}
 	}
+	
+	var entrepots = [];
+	
+	Object.keys(builds).forEach(function(key) {//entrepot
+		if(builds[key].batiment == 61)
+			entrepots.push(map.getRow(builds[key].y)*map.rows+map.getCol(builds[key].x));
+	})
+	
+	Object.keys(builds).forEach(function(key) {// pour les bulles decompte de batiment / routes de liaison
+	
+		var posB = map.getRow(builds[key].y)*map.rows+map.getCol(builds[key].x);
+		
+		if(builds[key].batiment != 61 && builds[key].road == ''){ //ne le fait qu'une fois. Il faudrait un bouton dans la fiche du batiment pour trouver le chemin le plus rapide si deuxieme entrepot construit
+			var pathBat = [];
+			for (var i = 0; i < entrepots.length; i++){
+				pathBat.push(findRoute(posB, entrepots[i]));
+			}
 
-	Object.keys(builds).forEach(function(key) {// pour les bulles decompte de batiment
-
+			if(pathBat.length > 0){
+				var plusPetitChemin = '';
+				for (var i = 0; i < pathBat.length; i++) {
+					if(plusPetitChemin == '')
+						plusPetitChemin = pathBat[i];
+					else if(pathBat[i].length < plusPetitChemin.length)
+						plusPetitChemin = pathBat[i];
+				}
+				
+				builds[key].road = plusPetitChemin;
+				builds[key].paysan_position = posB;
+			}
+		}
+			
 		
 		if(builds[key].batiment.length >1){
-			var posB = map.getRow(builds[key].y)*map.rows+map.getCol(builds[key].x);
 
 			if(builds[key].animBulle == null){
 				builds[key].animBulle	 = 50;
@@ -863,9 +882,6 @@ Game._drawGridMenu = function () {
 	this._drawMenu();
 	
 };
-
-
-
  
 Game._drawRectangle = function (color, xpos, ypos, life) {
         this.ctx.fillStyle=color;
@@ -894,6 +910,21 @@ Game.render = function () {
 						map.tsize, // target width
 						map.tsize // target height
 					);
+		}
+	})
+	
+	//mouvement paysans										//////////////////////J EN SUIS LA !!!!!!!
+	Object.keys(builds).forEach(function(key) {
+		if(builds[key].road.length >0){
+			var firstTile = builds[key].paysan_position;
+			var road = builds[key].road;
+			// console.log(firstTile);
+			
+			Game.ctx.drawImage(
+				Loader.getImage('paysan'),
+				192 - Game.camera.x,
+				128 - Game.camera.y
+			);
 		}
 	})
    

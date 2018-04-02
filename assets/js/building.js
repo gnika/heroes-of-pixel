@@ -18,6 +18,10 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
     this.cibleMouvante=0;
     this.typeTile=typeTile;
     this.solid=solid;
+    this.road= '';
+    this.paysan_position = 0;
+    this.paysan_retour = 0;
+	
     
     this.calculPortee = function(x, y, portee, rowMonstre, colMonstre)
     { 
@@ -382,6 +386,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['maintenance'] = {'ecu': 25};
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['recompense'] = {'cochon': 400};
+		caracteristique['prixUpdate'] = {'mais': 30};
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [53, 54, 55, 56];
 		paramBuild['typeTile'] = [1, 0];
@@ -435,7 +440,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		var caracteristique 	= [];
 		var paramBuild 			= [];
 		
-		supplyBuild['ecu'] = 99900;
+		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [61];
 		paramBuild['typeTile'] = [1, 0];
 		caracteristique['showLife'] = 1;
