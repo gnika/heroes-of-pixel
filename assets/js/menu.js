@@ -282,7 +282,7 @@ Game._clickBatiment = function () {
 				n = n+40;
 			})
 			n = n+40;
-			this.ctx.fillText('dans '+position+' jours, bénéfice : ', width/4+5, height/4+100 + n);
+			this.ctx.fillText('dans '+position+' voyages, bénéfice : ', width/4+5, height/4+100 + n);
 			n = n+40;
 			Object.keys(build.caracteristique['recompense']).forEach(function(keyRecompense) {
 					Game.ctx.fillText(build.caracteristique['recompense'][keyRecompense] * build.level , width/4+5, height/4+100 + n);

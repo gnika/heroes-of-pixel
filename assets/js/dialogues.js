@@ -20,7 +20,7 @@ Game._quest2 = function(monstre){
 	buildText = '';	
 }
 Game._quest3 = function(monstre){
-	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \nVos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Attention toutefois : chaque bâtiment \n doit être entretenu tous les jours !";
+	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \nVos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Reliez tous vos bâtiments de production \n à l'entrepôt à l'aide de routes\n Les routes ne sont constructibles que\n sur les endroits ou vous avez déjà creusé !";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	

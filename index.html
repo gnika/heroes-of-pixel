@@ -42,10 +42,12 @@
      <script src="assets/js/dialogues.js"></script>
      <script src="assets/js/graph.js"></script>
      <script src="assets/js/astar.js"></script>
+     <script src="assets/js/paysan.js"></script>
 </head>
 
 <body>
     <div class="container">
+	 <!-- <a href="javascript:return false;" onclick="AjouterFavoris();return false;" title="">Sauvegarder le site</a> -->
 		<div style="display: inline; float: left; padding-right: 2%; padding-left: 5px;">
 			<div id="passNiveau"> Passer le niveau</div> <div id="inv" style="visibility: hidden;"><input type="text" id="code"/> <button id="pass">Ok</button></div>
 		</div>
@@ -100,5 +102,26 @@
 			}
 			document.getElementById("code").value = '';	
 		})
+		
+		
+		
+		
+		
+		function AjouterFavoris(){
+			console.log(monsters);
+			console.log(builds);
+			console.log(artefacts);
+			console.log(Game.hero);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	 </script>
+	 
 </html>

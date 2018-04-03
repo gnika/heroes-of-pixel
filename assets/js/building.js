@@ -18,9 +18,14 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
     this.cibleMouvante=0;
     this.typeTile=typeTile;
     this.solid=solid;
-    this.road= '';//ne change jamais au mouvement du paysan.
+    this.road = '';//ne change jamais au mouvement du paysan.
+    this.roady = '';//change au cours du mouvement du paysan.
     this.paysan_position = 0;
+    this.posPaysanInitial = 0;
     this.paysan_retour = 0;
+    this.paysan_fois = 3;
+    this.paysan_vitesse = 30;
+    this.paysan_manque = '';
 	
     
     this.calculPortee = function(x, y, portee, rowMonstre, colMonstre)
@@ -357,11 +362,11 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
 		caracteristique['recompense'] = {'mais': 400};
 		caracteristique['outilRecompense'] = 'faux';
+		caracteristique['loseLife'] = 1;
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [10, 11, 12, 13];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
-		paramBuild['loseLife'] = 1;
 		paramBuild['solid'] = 0;
 		
 		menussclickTitre = 'Champs de maïs';
@@ -394,7 +399,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		paramBuild['solid'] = 0;
 		
 		menussclickTitre = 'Elevage';
-		description_fr = 'L\'élevage génère des cochons';
+		description_fr = 'L\'élevage génère des cochons\n et consomme du maïs';
 		description_en = 'EN L\'élevage génère des cochons';
 
 		allBuilding['culture_cochon']  = {

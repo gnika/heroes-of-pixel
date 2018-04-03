@@ -133,32 +133,32 @@ function Time() {
 					
 					var maintenance = builds[key].caracteristique['maintenance'];
 					
-					if((typeof builds[key].caracteristique['prixUpdate'] != "undefined") )
-						var updatePrice = builds[key].caracteristique['prixUpdate'];
-					else
-						updatePrice = 0;
+					// if((typeof builds[key].caracteristique['prixUpdate'] != "undefined") )
+						// var updatePrice = builds[key].caracteristique['prixUpdate'];
+					// else
+						// updatePrice = 0;
 					
-					var error = 0;
+					// var error = 0;
 					var pos = builds[key].col*map.rows+builds[key].row;
 					
-					if(updatePrice != 0){	//si on doit payer des ressources pour passer d'un niveau à l'autre - exemple : moulin doit payer 100 blé pour faire de la farine
+					// if(updatePrice != 0){	//si on doit payer des ressources pour passer d'un niveau à l'autre - exemple : moulin doit payer 100 blé pour faire de la farine
 						
-						Object.keys(updatePrice).forEach(function(keyPrice) {
-							if(Game.hero.supply[keyPrice] < updatePrice[keyPrice])
-								error = 1;
-						})
+						// Object.keys(updatePrice).forEach(function(keyPrice) {
+							// if(Game.hero.supply[keyPrice] < updatePrice[keyPrice])
+								// error = 1;
+						// })
 						
-						if(error == 0){
-							Object.keys(updatePrice).forEach(function(keyPrice) {
-								Game.hero.supply[keyPrice]-= updatePrice[keyPrice];
-							})
-						}
-					}
+						// if(error == 0){
+							// Object.keys(updatePrice).forEach(function(keyPrice) {
+								// Game.hero.supply[keyPrice]-= updatePrice[keyPrice];
+							// })
+						// }
+					// }
 						
-					if(abs2[pos] < builds[key].batiment[3] && error == 0){
-						abs2[pos] = abs2[pos]+1;
-						absobs2[pos] = absobs2[pos]+1;
-					}
+					// if(abs2[pos] < builds[key].batiment[3] && error == 0){
+						// abs2[pos] = abs2[pos]+1;
+						// absobs2[pos] = absobs2[pos]+1;
+					// }
 					builds[key].day = day;
 					
 					var error = 0;

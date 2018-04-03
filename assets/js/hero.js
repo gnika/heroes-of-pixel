@@ -118,11 +118,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		
 		//tiles
 		if( equip == 'road' && builds[vertical+'-'+horizontal] == null){
-			// if(this.supply.ecu >= 2 && abs1[pos] == 2 && abs2[pos] == 0){ 		//A DECOMMENTER !!!!!
-				// this.supply.ecu = Game.hero.ecu - 2; 		//A DECOMMENTER !!!!!
+			if(this.supply.ecu >= 2 && abs1[pos] == 2 && abs2[pos] == 0){ 		//A DECOMMENTER !!!!!
+				this.supply.ecu = Game.hero.ecu - 2; 		//A DECOMMENTER !!!!!
 				abs2[pos] = 129;
 				absobs2[pos] = 129;
-			// }
+			}
 		}
 		else if (abs2[pos] == 0 && abs1[pos] ==1 && equip == 'pelle') {
 			abs1[pos] = 2;
@@ -170,17 +170,18 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				Object.keys(recompense).forEach(function(keyRecompense) {
 					Game.hero.supply[keyRecompense]+= recompense[keyRecompense] * builds[vertical+'-'+horizontal].level;
 				})
-					
+
 				if(	builds[vertical+'-'+horizontal].caracteristique['loseLife'] == 1)
-				builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
+					builds[vertical+'-'+horizontal].life = builds[vertical+'-'+horizontal].life-1;
 				if(builds[vertical+'-'+horizontal].life==0){
 					delete builds[vertical+'-'+horizontal];
 					abs1[pos] = 2;
 					abs2[pos] = 0;
 				}else{
-					abs2[pos]=builds[vertical+'-'+horizontal].batiment[0];
+					abs2[pos]	=	builds[vertical+'-'+horizontal].batiment[0];
 					builds[vertical+'-'+horizontal].day = day;
 					builds[vertical+'-'+horizontal].hour = hour;
+					builds[vertical+'-'+horizontal].paysan_fois = 3;
 				}
 			}else{
 				batimentclick = 1;

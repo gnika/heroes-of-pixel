@@ -39,7 +39,6 @@ diry2							= 0;
 path							= [];
 paramX							= 0;
 paramY							= 0;
-posPaysanInitial				= 0;
 
 
 
@@ -162,6 +161,8 @@ Game.init = function () {
  
 	this.anim = 0;
 	this.animMap = 0;
+	this.animSprite = 0;
+	this.animSpriteRetour = 0;
 	this.animBref = 0;
 	this.animBulle = 50;
 	this.animBulleBas = 0;
@@ -197,7 +198,7 @@ Game.init = function () {
 			var posHero = colHero * map.cols + rowHero;
 			// console.log(pos);
 
-			if(menuclick == 1 && menussclick == 0 && xClick > map.tsize*3){
+			if(menuclick == 1 && menussclick == 0 && xClick > map.tsize*3 + Game.camera.x){
 				menuclick = 0;
 				return false;
 			}
@@ -519,213 +520,8 @@ Game.update = function (delta) {
 			monsters[key].move(delta, Game.hero.x, Game.hero.y);
 		}
 	})
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//mouvement paysans										//////////////////////J EN SUIS LA !!!!!!!
-	Object.keys(builds).forEach(function(key) {
-		if(builds[key].road.length >0 && builds[key].paysan_retour == 0){
-			
-			var rowX = map.getRow(builds[key].paysan_position.x);
-			var colY = map.getCol(builds[key].paysan_position.y);
-			
-			posPaysan = colY * map.cols + rowX;
-			
-			if(posPaysanInitial == 0){
-				posPaysanInitial	 = posPaysan;
-				roady = builds[key].paysan_position.road_en_cours;
-				clickCanvasXPaysan	 = 0;
-				clickCanvasYPaysan	 = 0;
-				dirxPaysan			 = 0;
-				diryPaysan			 = 0;
-				dirx2Paysan			 = 0;
-				diry2Paysan			 = 0;
-				positionXPaysan		 = 0;
-				positionYPaysan		 = 0;
-				
-				
-			}
-			
-			
-				console.log(roady, builds[key].road);
-				
-			if(roady.length > 1){	//si les deux prochains mouvements sont en ligne droite
-				if(roady[1] == roady[0] + 1 && posPaysan == roady[0] ){
-					dirxPaysan2 = 1;
-					diryPaysan2 = 0;
-				}
-				if( roady[1] == roady[0] - 1 && posPaysan == roady[0] ){
-					dirxPaysan2 = -1;
-					diryPaysan2 = 0;
-				}
-				if( roady[1] == roady[0] + map.rows && posPaysan == roady[0] ){
-					diryPaysan2 = 1;
-					dirxPaysan2 = 0;
-				}
-				if( roady[1] == roady[0] - map.rows && posPaysan == roady[0] ){
-					diryPaysan2 = -1;
-					dirxPaysan2 = 0;
-				}
-			}else{
-				dirxPaysan2 = 0;
-				diryPaysan2 = 0;
-			}
-			
-			if( roady.length > 0 ){
-				if(roady[0] != posPaysan){
-					
-					if(roady[0] == posPaysanInitial + 1 )
-						clickCanvasXPaysan = 1;
-					if( roady[0] == posPaysanInitial - 1 )
-						clickCanvasXPaysan = -1;
-					if( roady[0] == posPaysanInitial + map.rows )
-						clickCanvasYPaysan = 1;
-					if( roady[0] == posPaysanInitial - map.rows )
-						clickCanvasYPaysan = -1;			
-					
-				}else {
-						var rowX = map.getRow(builds[key].paysan_position.x);
-						var colY = map.getCol(builds[key].paysan_position.y);
-						positionXPaysan = rowX * map.tsize+ map.tsize/2;
-						positionYPaysan = colY * map.tsize+ map.tsize/2;
-						
-						if((positionXPaysan == builds[key].paysan_position.x ) && (builds[key].paysan_position.y == positionYPaysan) || (dirxPaysan == dirxPaysan2 && diryPaysan == diryPaysan2)){
-							
-							roady.shift();
-							posPaysanInitial	 = posPaysan;
-							positionXPaysan		 = 0;
-							positionYPaysan		 = 0;
-							clickCanvasXPaysan	 = 0;
-							clickCanvasYPaysan	 = 0;
-						}
-						
-				}
-			}else{
-				posPaysanInitial = posPaysan;
-			}
-						
-			if(clickCanvasXPaysan!=0 || clickCanvasYPaysan!=0 ){
-				dirxPaysan = clickCanvasXPaysan;
-				diryPaysan = clickCanvasYPaysan;
-			}else{
-				dirxPaysan = 0;
-				diryPaysan = 0;
-			}
-			
-			// ACTION MOVE
-			if(positionXPaysan > 0 && positionYPaysan > 0){
-			
-			if(dirxPaysan == 1){//vers la droite
-				if(builds[key].paysan_position.x > positionXPaysan)
-					builds[key].paysan_position.x = positionXPaysan;
-				else
-					builds[key].paysan_position.x += dirxPaysan * Hero.SPEED * delta;
-			}
-			if(dirxPaysan == -1){//vers la gauche
-				if(builds[key].paysan_position.x < positionXPaysan)
-					builds[key].paysan_position.x = positionXPaysan;
-				else
-					builds[key].paysan_position.x += dirxPaysan * Hero.SPEED * delta;
-			}
-			if(dirxPaysan == 0){
-				builds[key].paysan_position.x = positionXPaysan;
-			}
-			if(diryPaysan == 1){//descend
-				if(builds[key].paysan_position.y > positionYPaysan)
-					builds[key].paysan_position.y = positionYPaysan;
-				else
-					builds[key].paysan_position.y += diryPaysan * Hero.SPEED * delta;
-			}
-			if(diryPaysan == -1){//monte
-				if(builds[key].paysan_position.y < positionYPaysan)
-					builds[key].paysan_position.y = positionYPaysan;
-				else
-					builds[key].paysan_position.y += diryPaysan * Hero.SPEED * delta;
-			}
-			if(diryPaysan == 0)
-				builds[key].paysan_position.y = positionYPaysan;
-			}else{
-				builds[key].paysan_position.x += dirxPaysan * Hero.SPEED * delta*0.3;
-				builds[key].paysan_position.y += diryPaysan * Hero.SPEED * delta*0.3;
-			}
-				
-			if( roady.length == 0){
-				builds[key].paysan_retour	  = 1;	//atteint son but				
-				
-				posPaysanInitial	 = 0;
-				clickCanvasXPaysan	 = 0;
-				clickCanvasYPaysan	 = 0;
-				dirxPaysan			 = 0;
-				diryPaysan			 = 0;
-				dirx2Paysan			 = 0;
-				diry2Paysan			 = 0;
-				positionXPaysan		 = 0;
-				positionYPaysan		 = 0;
-
-			}			
-			
-		}
-	})
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//mouvement paysans
+	paysanMove(delta);
 	
     this.camera.update();
 };
@@ -746,18 +542,6 @@ Game._drawLayer = function (layer) {
         for (var r = startRow; r <= endRow; r++) {
             var tile = map.getTile(layer, c, r);
 			
-				// if(tile==8){
-					// if(Game.anim>=DUREE_ANIMATION){
-						// abs2[r*map.rows+c]=9;
-						// absobs2[r*map.rows+c]=9;
-					// }
-				// }
-				// else if(tile==9){
-					// if(Game.anim>=DUREE_ANIMATION){
-						// abs2[r*map.rows+c]=8;
-						// absobs2[r*map.rows+c]=8;
-					// }
-				// }
 			if(c%2 == 0){
 				if(Game.animMap>=DUREE_ANIMATION_MAP/2)
 						heigtImage = 64;
@@ -997,20 +781,20 @@ Game._drawGridMenu = function () {
 
 			if(pathBat.length > 0){
 				var plusPetitChemin = '';
-				var plusPetitCheminB = '';
 				for (var i = 0; i < pathBat.length; i++) {
 					if(plusPetitChemin == ''){
 						plusPetitChemin = pathBat[i];
-						plusPetitCheminB = pathBat[i];
 					}
 					else if(pathBat[i].length < plusPetitChemin.length){
 						plusPetitChemin = pathBat[i];
-						plusPetitCheminB = pathBat[i];
 					}
 				}
 				
+				if(plusPetitChemin.length > 0)
+					plusPetitChemin.unshift(posB);
+				
 				builds[key].road = plusPetitChemin;	//doit toujours rester tel quel
-				builds[key].paysan_position = {x: builds[key].x, y: builds[key].y, road_en_cours: plusPetitCheminB};
+				builds[key].paysan_position = {x: builds[key].x, y: builds[key].y};
 			}
 		}
 			
@@ -1021,38 +805,61 @@ Game._drawGridMenu = function () {
 				builds[key].animBulle	 = 50;
 				builds[key].animBulleBas = 0;
 			}
-			var position = builds[key].batiment.indexOf(abs2[posB]);
 			
-			if(builds[key].animBulle < 100 && builds[key].animBulleBas == 0){
+			var position = builds[key].paysan_fois;
+			
+			if(builds[key].animBulle < 100 && builds[key].animBulleBas == 0)
 				builds[key].animBulle++;
-					Game.ctx.drawImage(
-								Loader.getImage(position), // image
-								0, // source x
-								0, // source y
-								map.tsize, // source width
-								map.tsize, // source height
-								builds[key].x+15-Game.camera.x,  // target x
-								builds[key].y-5-Game.camera.y-builds[key].animBulle, 
-								map.tsize, // target width
-								map.tsize // target height
-							);
-			}
 			if(builds[key].animBulle == 100)
 				builds[key].animBulleBas = 1;
-			if(builds[key].animBulle <= 100 && builds[key].animBulleBas == 1){
+			if(builds[key].animBulle <= 100 && builds[key].animBulleBas == 1)
 				builds[key].animBulle--;
-					Game.ctx.drawImage(
-								Loader.getImage(position), // image
-								0, // source x
-								0, // source y
-								map.tsize, // source width
-								map.tsize, // source height
-								builds[key].x+15-Game.camera.x,  // target x
-								builds[key].y-5-Game.camera.y-builds[key].animBulle, 
-								map.tsize, // target width
-								map.tsize // target height
-							);
+			if(builds[key].road == '')
+				position = 'no_road';
+					
+			Game.ctx.drawImage(
+				Loader.getImage(position), // image
+				0, // source x
+				0, // source y
+				map.tsize, // source width
+				map.tsize, // source height
+				builds[key].x+15-Game.camera.x,  // target x
+				builds[key].y-5-Game.camera.y-builds[key].animBulle, 
+				map.tsize, // target width
+				map.tsize // target height
+			);
+			
+
+			if(typeof(builds[key].caracteristique['prixUpdate']) != 'undefined' && builds[key].paysan_retour == 1 && builds[key].paysan_manque == ''){
+				Game.ctx.drawImage(
+					// Loader.getImage(Object.keys(builds[key].paysan_manque)[0]), // image
+					Loader.getImage(Object.keys(builds[key].caracteristique['prixUpdate'])[0]), // image
+					0, // source x
+					0, // source y
+					map.tsize, // source width
+					map.tsize, // source height
+					builds[key].paysan_position.x - Game.camera.x,  // target x
+					builds[key].paysan_position.y-5 - Game.camera.y-builds[key].animBulle, 
+					map.tsize, // target width
+					map.tsize // target height
+				);
+				
+				
 			}
+			if(typeof(builds[key].caracteristique['prixUpdate']) != 'undefined' && builds[key].paysan_retour == 1 && builds[key].paysan_manque != ''){
+				Game.ctx.drawImage(
+					Loader.getImage('no_'+Object.keys(builds[key].paysan_manque)[0]), // image
+					0, // source x
+					0, // source y
+					map.tsize, // source width
+					map.tsize, // source height
+					builds[key].paysan_position.x - Game.camera.x,  // target x
+					builds[key].paysan_position.y-15 - Game.camera.y-builds[key].animBulle, 
+					map.tsize, // target width
+					map.tsize // target height
+				);
+			}
+			
 			if(builds[key].animBulle == 50 && builds[key].animBulleBas == 1){
 					builds[key].animBulleBas = 0;
 			}
@@ -1164,18 +971,19 @@ Game.render = function () {
 		
 		
 		Object.keys(builds).forEach(function(key) {
-			if(builds[key].road.length >0){
-				
-				Game.ctx.drawImage(
-					Loader.getImage('paysan'),
-					builds[key].paysan_position.x - Game.camera.x,
-					builds[key].paysan_position.y - Game.camera.y
-				);
-			
-				// console.log(builds[key].paysan_position, builds[key].road);
+			if(builds[key].road.length >0  && builds[key].paysan_fois > 0){
+				animPaysan(builds[key]);				
 			}
 		})
-
+		if(Game.animSpriteRetour == 0)
+			Game.animSprite ++;
+		else
+			Game.animSprite --;
+	if(Game.animSprite >= DUREE_ANIMATION)
+		Game.animSpriteRetour = 1;
+	if(Game.animSprite <= 0)
+		Game.animSpriteRetour = 0;
+	
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 5);
 	this.ctx.fillStyle="blue";
