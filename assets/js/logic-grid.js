@@ -99,11 +99,12 @@ function objet(name, media, life, attaque){
 	this.image=Loader.getImage(media);
 }
 
-function animation(map, x, y, imageName){
+function animation(map, x, y, imageName, etat){
 	this.map = map;
 	this.x = x;
     this.y = y;
 	this.image = Loader.getImage(imageName);
+	this.etat = Loader.getImage(etat);
 }
 
 function animBackground(map, x, y, imageName){
@@ -175,7 +176,8 @@ Game.init = function () {
 	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
 	
-
+	save();//RECUPERATION DE LA SAUVEGARDE
+	
     this.camera = new Camera(map, x, y-100);
     this.camera.follow(this.hero);
 
@@ -884,7 +886,20 @@ Game._drawGridMenu = function () {
 
 	if(typeof(anim) != "undefined" && anim !== null) {
 		if(Game.animBref<=DUREE_ANIMATION){
-	
+				if(anim.etat !== null)
+					Game.ctx.drawImage(
+							anim.etat, // image
+							0, // source x
+							0, // source y
+							map.tsize, // source width
+							map.tsize, // source height
+							anim.x-30-Game.camera.x,  // target x
+							anim.y-15-Game.camera.y-Game.animBref, 
+							map.tsize, // target width
+							map.tsize // target height
+						);
+						
+						
 				Game.ctx.drawImage(
 							anim.image, // image
 							0, // source x

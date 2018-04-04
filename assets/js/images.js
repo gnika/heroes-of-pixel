@@ -134,6 +134,8 @@ Game.defineImages = function(){
 		Loader.loadImage('2', 'assets/2.png'),
 		Loader.loadImage('1', 'assets/1.png'),
 		Loader.loadImage('0', 'assets/0.png'),
+		Loader.loadImage('plus', 'assets/menu/plus.png'),
+		Loader.loadImage('minus', 'assets/menu/minus.png'),
 		
 		Loader.loadImage('no_road', 'assets/menu/no_road.png'),
 		Loader.loadImage('pelle_bois', 'assets/objets/pelle.png'),

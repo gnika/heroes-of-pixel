@@ -192,8 +192,10 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		
 		//animation quand on gagne une ressource
 		Object.keys(this.supply).forEach(function(key) {
-			if(Game.hero.supply[key] > Game.hero[key] || Game.hero.supply[key] < Game.hero[key])
-				anim = new animation(map, x, y, key);
+			if(Game.hero.supply[key] > Game.hero[key])
+				anim = new animation(map, x, y, key, 'plus');
+			if(Game.hero.supply[key] < Game.hero[key])
+				anim = new animation(map, x, y, key, 'minus');
 		})
 		
 		//attaque d'un ennemi 

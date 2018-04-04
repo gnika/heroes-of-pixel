@@ -43,27 +43,30 @@
      <script src="assets/js/graph.js"></script>
      <script src="assets/js/astar.js"></script>
      <script src="assets/js/paysan.js"></script>
+     <script src="assets/js/save.js"></script>
 </head>
 
 <body>
     <div class="container">
-	 <!-- <a href="javascript:return false;" onclick="AjouterFavoris();return false;" title="">Sauvegarder le site</a> -->
-		<div style="display: inline; float: left; padding-right: 2%; padding-left: 5px;">
+	<div style="width: 100%;">
+	 <a href="javascript:return false;" style="float: left;padding-right: 10px;" onclick="AjouterFavoris();return false;" id="save">Sauvegarder le site</a>
+	 <a href="return false;" style="display: none;" id="saveClick">Enregistrer ce lien dans vos favoris pour sauvegarder votre partie</a>
+		<!--<div style="display: inline; float: left; padding-right: 2%; padding-left: 5px;">
 			<div id="passNiveau"> Passer le niveau</div> <div id="inv" style="visibility: hidden;"><input type="text" id="code"/> <button id="pass">Ok</button></div>
-		</div>
-		<div class=" " id="gameTime"></div><!--text-center-->
-		<div class=""> <!--text-center-->
+		</div>-->
+		<div style="text-align: center;" id="gameTime"></div><!--text-center-->
+		<div  style="text-align: center;> <!--text-center-->
 			<div class=" btn-group" role="group"><!--text-center-->
 				<div>
 					<!-- <button type="button" class="btn btn-danger btn-xs" id="speed0">||</button> -->
-					<button type="button" class="btn btn-success btn-xs" id="speed1">></button>
-					<button type="button" class="btn btn-success btn-xs" id="speed2">>></button>
-					<button type="button" class="btn btn-success btn-xs" id="speed3">>>></button>
+					<button type="button" class="btn btn-success btn-xs hidden" id="speed1">></button>
+					<button type="button" class="btn btn-success btn-xs hidden" id="speed2">>></button>
+					<button type="button" class="btn btn-success btn-xs hidden" id="speed3">>>></button>
 				</div>
 			</div>
 			
 		</div>
-		
+	</div>
 					<canvas id="map_canvas" width="1580" height="768"></canvas>
 				
 			
@@ -77,41 +80,133 @@
 
      <script src="assets/js/menu.js"></script>
      <script>
-		document.getElementById("passNiveau").addEventListener('click',
-		function(event){
-		if(document.getElementById("inv").style.visibility == 'hidden')
-			document.getElementById("inv").style.visibility = 'visible';
-		else
-			document.getElementById("inv").style.visibility = 'hidden';
-		})
-		document.getElementById("pass").addEventListener('click',
-		function(event){
-			if(document.getElementById("code").value == 'atreides'){//atreides
-				builds		= [];
-				monsters 	= [];
-				artefacts 	= [];
-				niveauMap = 2;
-				generateMap2();
-			}
-			if(document.getElementById("code").value == 'ordos'){//ordos
-				builds		= [];
-				monsters 	= [];
-				artefacts 	= [];
-				niveauMap = 3;
-				generateMap3();
-			}
-			document.getElementById("code").value = '';	
-		})
+		<!-- document.getElementById("passNiveau").addEventListener('click', -->
+		<!-- function(event){ -->
+		<!-- if(document.getElementById("inv").style.visibility == 'hidden') -->
+			<!-- document.getElementById("inv").style.visibility = 'visible'; -->
+		<!-- else -->
+			<!-- document.getElementById("inv").style.visibility = 'hidden'; -->
+		<!-- }) -->
+		<!-- document.getElementById("pass").addEventListener('click', -->
+		<!-- function(event){ -->
+			<!-- if(document.getElementById("code").value == 'atreides'){//atreides -->
+				<!-- builds		= []; -->
+				<!-- monsters 	= []; -->
+				<!-- artefacts 	= []; -->
+				<!-- niveauMap = 2; -->
+				<!-- generateMap2(); -->
+			<!-- } -->
+			<!-- if(document.getElementById("code").value == 'ordos'){//ordos -->
+				<!-- builds		= []; -->
+				<!-- monsters 	= []; -->
+				<!-- artefacts 	= []; -->
+				<!-- niveauMap = 3; -->
+				<!-- generateMap3(); -->
+			<!-- } -->
+			<!-- document.getElementById("code").value = '';	 -->
+		<!-- }) -->
 		
 		
 		
 		
 		
 		function AjouterFavoris(){
-			console.log(monsters);
-			console.log(builds);
-			console.log(artefacts);
-			console.log(Game.hero);
+			
+			var save = [];
+			var monstres = [];
+			Object.keys(monsters).forEach(function(key) {
+				var ms = [];
+				ms.push(monsters[key].directionX);
+				ms.push(monsters[key].directionY);
+				ms.push(monsters[key].vitesse);
+				ms.push(monsters[key].col);
+				ms.push(monsters[key].row);
+				ms.push(monsters[key].x);
+				ms.push(monsters[key].y);
+				ms.push(monsters[key].idQuete);
+				ms.push(monsters[key].image1);
+				monstres.push(ms);
+			})
+			var batiments = [];
+			Object.keys(builds).forEach(function(key) {
+				var ms = [];
+				var caractEntrees = [];
+				var caractValues = [];
+				caract = builds[key].caracteristique;
+				Object.keys(caract).forEach(function(key) {
+					caractEntrees.push(key);
+					caractValues.push(caract[key]);
+				})
+				ms.push(builds[key].x);
+				ms.push(builds[key].y);
+				ms.push(builds[key].row);
+				ms.push(builds[key].col);
+				ms.push(builds[key].name);
+				ms.push(builds[key].life);
+				ms.push(caractEntrees);
+				ms.push(builds[key].typeTile);
+				ms.push(builds[key].solid);
+				ms.push(builds[key].batiment);
+				ms.push(caractValues);
+				batiments.push(ms);
+			})
+			var artefactMap = [];
+			<!-- console.log(artefacts); -->
+			Object.keys(artefacts).forEach(function(key) {
+				var ms = [];
+				ms.push(artefacts[key].x);
+				ms.push(artefacts[key].y);
+				ms.push(artefacts[key].col);
+				ms.push(artefacts[key].row);
+				ms.push(artefacts[key].image);
+				artefactMap.push(ms);
+			})
+			var hero  = [];
+			var equipEntrees = [];
+			var equipValues = [];
+			<!-- caract = builds[key].caracteristique; -->
+			Object.keys(Game.hero.equipement).forEach(function(key) {
+				
+				equipEntrees.push(key);
+				equipValues.push(Game.hero.equipement[key]);
+			})
+			
+			hero.push(Game.hero.agilite);
+			hero.push(Game.hero.attaque);
+			hero.push(Game.hero.attaqueEnCours);
+			hero.push(Game.hero.defense);
+			hero.push(Game.hero.x);
+			hero.push(Game.hero.y);
+			hero.push(Game.hero.life);
+			hero.push(Game.hero.fatigue);
+			hero.push(Game.hero.exploration);
+			hero.push(Game.hero.artefact);
+			hero.push(Game.hero.artefactEnCours);
+			hero.push(Game.hero.supply);
+			hero.push(equipEntrees);
+			hero.push(equipValues);
+			
+			
+			var mapa = [];
+			mapa.push(abs1);
+			mapa.push(abs2);
+			mapa.push(absobs1);
+			mapa.push(absobs2);
+			mapa.push(niveauMap);
+			
+			save.push(monstres);
+			save.push(batiments);
+			save.push(artefactMap);
+			save.push(hero);
+			save.push(mapa);
+			<!-- console.log(JSON.stringify(save)); -->
+
+			var json = JSON.stringify(save);
+			
+			var a = document.getElementById('saveClick'); //or grab it by tagname etc
+			a.href = '?save='+json;
+			a.style = 'display: inline; float: left;';
+			
 		}
 		
 		
