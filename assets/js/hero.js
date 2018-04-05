@@ -168,7 +168,8 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				
 				var recompense = builds[vertical+'-'+horizontal].caracteristique['recompense'];
 				Object.keys(recompense).forEach(function(keyRecompense) {
-					Game.hero.supply[keyRecompense]+= recompense[keyRecompense] * builds[vertical+'-'+horizontal].level;
+					// Game.hero.supply[keyRecompense]+= recompense[keyRecompense] * builds[vertical+'-'+horizontal].level;
+					Game.hero.supply[keyRecompense]+= recompense[keyRecompense];
 				})
 
 				if(	builds[vertical+'-'+horizontal].caracteristique['loseLife'] == 1)

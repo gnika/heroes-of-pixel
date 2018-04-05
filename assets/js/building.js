@@ -423,7 +423,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		supplyBuild['ecu'] = 0;
 		paramBuild['typeBatiment'] = [63, 64, 65, 66];
 		paramBuild['typeTile'] = [1, 0];
-		caracteristique['prixUpdate'] = {'cochon': 0};
+		caracteristique['prixUpdate'] = {'cochon': 10};
 		paramBuild['life'] = 60;
 		paramBuild['solid'] = 0;
 		
