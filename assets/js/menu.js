@@ -55,21 +55,21 @@ Game._drawMenu = function () {
 	
 	n = 0;
 	
-	Game.ctx.drawImage(Loader.getImage('action'), 0, height/10);
+	Game.ctx.drawImage(Loader.getImage('action'), 0, height/14);
 	
 	Object.keys(objets).forEach(function(key) {
 		if(Game.hero.equipement[key].possession == 1){
 			if(Game.hero.equipement[key].equipe == 1)
-				Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/4+n);
+				Game.ctx.drawImage(Loader.getImage(objets[key].img+'_use'), 0, height/6+n);
 			else
-				Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/4+n);
+				Game.ctx.drawImage(Loader.getImage(objets[key].img), 0, height/6+n);
 			n = n+100;
 		}
 	})
 	
-	Game.ctx.drawImage(Loader.getImage('construire'),  0, height/4+n);
+	Game.ctx.drawImage(Loader.getImage('construire'),  0, height/6+n);
 	n = n+100;
-	Game.ctx.drawImage(Loader.getImage('body'),  0, height/4+n);
+	Game.ctx.drawImage(Loader.getImage('body'),  0, height/6+n);
 	
 	
 	if(menuclick == 1){
@@ -173,7 +173,7 @@ Game._clickMenu = function (xClick, yClick, menuH, rect, tsizePar) {
 	
 	var tsizePar2 = tsizePar/2;
 
-	if(xClick < map.tsize && yClick > rect.height/4+n && yClick < rect.height/4+n+64 &&  menuclick == 0){	//fiche joueur
+	if(xClick < map.tsize && yClick > rect.height/6+n && yClick < rect.height/6+n+64 &&  menuclick == 0){	//fiche joueur
 		Game._clickBody();
 		if(menuBodyClick == 0){
 			menuBodyClick = 1;

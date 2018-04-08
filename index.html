@@ -49,12 +49,13 @@
 <body>
     <div class="container">
 	<div style="width: 100%;">
+	<div style="float: left; padding-right: 50px;" id="gameTime"></div>
 	 <a href="javascript:return false;" style="float: left;padding-right: 10px;" onclick="AjouterFavoris();return false;" id="save">Sauvegarder le site</a>
 	 <a href="return false;" style="display: none;" id="saveClick">Enregistrer ce lien dans vos favoris pour sauvegarder votre partie</a>
 		<!--<div style="display: inline; float: left; padding-right: 2%; padding-left: 5px;">
 			<div id="passNiveau"> Passer le niveau</div> <div id="inv" style="visibility: hidden;"><input type="text" id="code"/> <button id="pass">Ok</button></div>
 		</div>-->
-		<div style="text-align: center;" id="gameTime"></div><!--text-center-->
+		<!--text-center-->
 		<div  style="text-align: center;> <!--text-center-->
 			<div class=" btn-group" role="group"><!--text-center-->
 				<div>
@@ -65,16 +66,15 @@
 				</div>
 			</div>
 			
-		</div>
-	</div>
+		
 					<canvas id="map_canvas" width="1580" height="768"></canvas>
-				
+		</div>		
 			
+	</div>
 
 		<!-- <footer class="main-footer"> -->
 			<!-- Heroes of pixel : 3 mad devs on it ! -->
 		<!-- </footer> -->
-    </div>
 
 </body>
 
@@ -164,7 +164,7 @@
 			var hero  = [];
 			var equipEntrees = [];
 			var equipValues = [];
-			<!-- caract = builds[key].caracteristique; -->
+
 			Object.keys(Game.hero.equipement).forEach(function(key) {
 				
 				equipEntrees.push(key);
@@ -188,10 +188,34 @@
 			
 			
 			var mapa = [];
-			mapa.push(abs1);
-			mapa.push(abs2);
-			mapa.push(absobs1);
-			mapa.push(absobs2);
+			
+			
+			var abs1S =[];
+			var abs2S =[];
+			var absobs1S =[];
+			var absobs2S =[];
+			for(var i=0; i<abs1Save.length; i++){
+				if(abs1Save[i] != abs1[i])
+					abs1S.push(i+':'+ abs1[i]);
+			}
+			for(var i=0; i<abs2Save.length; i++){
+				if(abs2Save[i] != abs2[i])
+					abs2S.push(i+':'+ abs2[i]);
+			}
+			for(var i=0; i<absobs1.length; i++){
+				if(absobs1[i] != 7 && i > 48)			// 7 = tuile inexplorée
+					absobs1S.push(i+':'+ absobs1[i]);
+			}
+			for(var i=0; i<absobs2.length; i++){
+				if(absobs2[i] != 7 && i > 48)			// 7 = tuile inexplorée
+					absobs2S.push(i+':'+ absobs2[i]);
+			}
+			
+
+			mapa.push(abs1S);
+			mapa.push(abs2S);
+			mapa.push(absobs1S);
+			mapa.push(absobs2S);
 			mapa.push(niveauMap);
 			
 			save.push(monstres);
@@ -199,7 +223,6 @@
 			save.push(artefactMap);
 			save.push(hero);
 			save.push(mapa);
-			<!-- console.log(JSON.stringify(save)); -->
 
 			var json = JSON.stringify(save);
 			

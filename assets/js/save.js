@@ -59,13 +59,31 @@ function save(){
 		})
 		Game.hero.equipement		 = equipSave;
 		
-		abs1 			= mapSave[0];
-		abs2		 	= mapSave[1];
+		abs1Map 		= mapSave[0];
+		abs2Map		 	= mapSave[1];
+		absobs1Map		= mapSave[2];				
+		absobs2Map		= mapSave[3];
 		
-		Game.hero.map.layers[0] = mapSave[2];
-		Game.hero.map.layers[1] = mapSave[3];
+		for(var i=0; i < abs1Map.length; i++){
+				var expl = abs1Map[i].split(":");
+				abs1[expl[0]] = parseInt(expl[1], 10);
+		}
+		for(var i=0; i < abs2Map.length; i++){
+				var expl = abs2Map[i].split(":");
+				abs2[expl[0]] = parseInt(expl[1], 10);
+		}
 		
-		absobs1		 	= mapSave[2];				//BUG JE COMPRENDS PAS POURQUOI
-		absobs2			= mapSave[3];
+		for(var i=0; i < absobs1Map.length; i++){
+				var expl = absobs1Map[i].split(":");
+				absobs1[expl[0]] = parseInt(expl[1], 10);
+		}
+		for(var i=0; i < absobs2Map.length; i++){
+				var expl = absobs2Map[i].split(":");
+				absobs2[expl[0]] = parseInt(expl[1], 10);
+		}
+
+		Game.hero.map.layers[0] = absobs1;
+		Game.hero.map.layers[1] = absobs2;
+		
 	}
 }

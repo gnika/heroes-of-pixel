@@ -37,8 +37,9 @@ Game.defineImages = function(){
 		Loader.loadImage('cle', 'assets/artefacts/key.png'),
 		
 		
-		Loader.loadImage('hero', 'assets/character.png'),
-		Loader.loadImage('hero2', 'assets/character2.png'),
+		// Loader.loadImage('hero', 'assets/character.png'),
+		// Loader.loadImage('hero2', 'assets/character2.png'),
+		Loader.loadImage('hero', 'assets/knight.png'),
 		Loader.loadImage('troll', 'assets/monstres/troll2.png'),
 		Loader.loadImage('troll2', 'assets/monstres/troll3.png'),
 		Loader.loadImage('scorpion', 'assets/monstres/scorpion1.png'),
@@ -69,7 +70,7 @@ Game.defineImages = function(){
 		Loader.loadImage('woman', 'assets/monstres/pnj/woman.png'),
 		Loader.loadImage('woman2', 'assets/monstres/pnj/woman2.png'),
 		Loader.loadImage('paysan', 'assets/monstres/pnj/peasant.png'),
-		Loader.loadImage('paysan2', 'assets/monstres/pnj/paysan2.png'),
+		// Loader.loadImage('paysan2', 'assets/monstres/pnj/paysan2.png'),
 		
 		
 		// Loader.loadImage('coin', 'assets/coin.png'),

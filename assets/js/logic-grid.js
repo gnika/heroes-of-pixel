@@ -39,6 +39,7 @@ diry2							= 0;
 path							= [];
 paramX							= 0;
 paramY							= 0;
+directionAttaque				= '';
 
 
 
@@ -163,6 +164,7 @@ Game.init = function () {
 	this.anim = 0;
 	this.animMap = 0;
 	this.animSprite = 0;
+	this.animAttaque = 0;
 	this.animSpriteRetour = 0;
 	this.animBref = 0;
 	this.animBulle = 50;
@@ -171,7 +173,7 @@ Game.init = function () {
 	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':0};
 	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
 	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
-	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':0, 'equipe':0};
+	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
 	objets['road']  = {'img':'road_bois', 'name':'road', 'life':100, 'possession':1, 'equipe':0};
 	
     this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
@@ -221,7 +223,7 @@ Game.init = function () {
 			var xClick = event.clientX - rect.left;
 			var yClick = event.clientY - rect.top;
 			
-			if(xClick < 60 && yClick >rect.height/10 && yClick < rect.height/10+64){
+			if(xClick < 60 && yClick >rect.height/14 && yClick < rect.height/14+64){
 				Game.hero.food();
 				return false;
 			}
@@ -230,7 +232,7 @@ Game.init = function () {
 			var equip = 0;
 			Object.keys(objets).forEach(function(key) {// menu.js ligne 54
 				if(Game.hero.equipement[key].possession == 1 && Game.hero.equipement[key].life > 0){
-					if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n){
+					if(xClick < 60 && yClick >rect.height/6+n && yClick < rect.height/6+64+n){
 						if(Game.hero.equipement[key].equipe == 1){
 							Game._removeEquipe();
 							equip = 1;
@@ -245,10 +247,10 @@ Game.init = function () {
 			})
 			// n = n+100;
 			
-			if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n && menuclick == 0 && menuBodyClick == 0){
+			if(xClick < 60 && yClick >rect.height/6+n && yClick < rect.height/6+64+n && menuclick == 0 && menuBodyClick == 0){
 				menuclick = 1;
 			}
-			else if(xClick < 60 && yClick >rect.height/4+n && yClick < rect.height/4+64+n && menuclick == 1 && menuBodyClick == 0){
+			else if(xClick < 60 && yClick >rect.height/6+n && yClick < rect.height/6+64+n && menuclick == 1 && menuBodyClick == 0){
 				menuclick = 0;
 				menussclick=0;
 			}
@@ -605,7 +607,7 @@ Game._drawLayer = function (layer) {
 		})
 		//sprite personnages
 		if(Game.anim>=DUREE_ANIMATION/2){
-				Game.hero.image = Loader.getImage('hero2');
+				// Game.hero.image = Loader.getImage('hero2');
 				Object.keys(monsters).forEach(function(key) {
 					monsters[key].image = Loader.getImage(monsters[key].image1);
 				})
@@ -870,11 +872,8 @@ Game._drawGridMenu = function () {
 		
 	
 	// draw main character nouvel emplacement
-	this.ctx.drawImage(
-        this.hero.image,
-        this.hero.screenX - this.hero.width / 2,
-        this.hero.screenY - this.hero.height / 2
-    );
+	renderHero();
+	
 	
 	if(this.hero.life<=0){
 	   this.ctx.font = "60px bold cursive";
@@ -990,14 +989,29 @@ Game.render = function () {
 				animPaysan(builds[key]);				
 			}
 		})
-		if(Game.animSpriteRetour == 0)
+		// if(Game.animSpriteRetour == 0)
 			Game.animSprite ++;
+		// else
+			// Game.animSprite --;
+	// if(Game.animSprite >= DUREE_ANIMATION)
+		// Game.animSpriteRetour = 1;
+	// if(Game.animSprite <= 0)
+		// Game.animSpriteRetour = 0;
+	if(Game.animSprite >= DUREE_ANIMATION){
+		Game.animSprite = 0;
+		if(Game.animSpriteRetour == 0)
+			Game.animSpriteRetour = 1;
 		else
-			Game.animSprite --;
-	if(Game.animSprite >= DUREE_ANIMATION)
-		Game.animSpriteRetour = 1;
-	if(Game.animSprite <= 0)
-		Game.animSpriteRetour = 0;
+			Game.animSpriteRetour = 0;
+	}
+	if(directionAttaque != ''){
+		Game.animAttaque ++;
+		if(Game.animAttaque >= DUREE_ANIMATION){
+			Game.animAttaque = 0;
+			directionAttaque = '';
+		}
+	}
+	
 	
 	this.ctx.fillStyle="#FF0000";
 	this.ctx.fillRect(this.hero.screenX-30, this.hero.screenY+40, this.hero.life, 5);

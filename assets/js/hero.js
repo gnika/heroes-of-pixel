@@ -147,7 +147,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         // }
 		else if (abs1[pos] == 2  && equip == 'pelle'){
 			this.supply.ecu = Game.hero.ecu + 1;
-        }else if ((abs2[pos] == 8) && abs1[pos] == 1  && equip == 'faux') {
+        }else if ((abs2[pos] == 8 || abs2[pos] == 81 || abs2[pos] == 82 || abs2[pos] == 83) && abs1[pos] == 1  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
             absobs1[pos] = 2;
@@ -199,23 +199,29 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 				anim = new animation(map, x, y, key, 'minus');
 		})
 		
+		if(this.attaqueEnCours  == 60 && Game._getToolEquipe() == 'epee')
+			directionAttaque = 'bas';
 		//attaque d'un ennemi 
 		if(Game._getToolEquipe() == 'epee' && this.attaqueEnCours == 60){
-			if(monsters[(1+vertical)+'-'+horizontal]){
+			if(monsters[(1+vertical)+'-'+horizontal]){	//droite du heros
 				var attaque = this.attaque - monsters[(1+vertical)+'-'+horizontal].defense;
 				monsters[(1+vertical)+'-'+horizontal].life-= attaque; 
+				directionAttaque = 'droite';
 			}
-			if(monsters[(vertical-1)+'-'+horizontal]){
+			if(monsters[(vertical-1)+'-'+horizontal]){	//gauche du heros
 				var attaque = this.attaque - monsters[(vertical-1)+'-'+horizontal].defense;
 				monsters[(vertical-1)+'-'+horizontal].life-= attaque; 
+				directionAttaque = 'gauche';
 			}
-			if(monsters[vertical+'-'+(horizontal+1)]){
+			if(monsters[vertical+'-'+(horizontal+1)]){	//bas du heros
 				var attaque = this.attaque - monsters[vertical+'-'+(horizontal+1)].defense;
 				monsters[vertical+'-'+(horizontal+1)].life-= attaque; 
+				directionAttaque = 'bas';
 			}
-			if(monsters[vertical+'-'+(horizontal-1)]){
+			if(monsters[vertical+'-'+(horizontal-1)]){	//haut du heros
 				var attaque = this.attaque - monsters[vertical+'-'+(horizontal-1)].defense;
 				monsters[vertical+'-'+(horizontal-1)].life-= attaque; 
+				directionAttaque = 'haut';
 			}
 			
 			this.attaqueEnCours = 0;
@@ -613,3 +619,224 @@ Hero.prototype._ennemy = function (dirx, diry) {
 			
     // }         
 };
+
+
+function renderHero(){
+	// console.log(dirx, diry);//y = -1 == haut y = 1 == bas 	x = 1 == droit x = -1 == gauche
+	
+	var x1  = 14;
+	var y1  = 9;
+	var x2 = 62;
+	var y2 = 8;
+	var x3 = 110;
+	var y3 = 9;
+	var x4 = 158;
+	var y4 = 8;
+	xForm1 = 20;
+	yForm1  = 30;
+	xForm2 = 20;
+	yForm2  = 30;
+	xForm3 = 20;
+	yForm3  = 30;
+	xForm4 = 20;
+	yForm4 = 30;
+	
+	if(dirx == -1){
+		x1 = 16;
+		y1 = 102;
+		x2 = 64;
+		y2 = 102;
+		x3 = 112;
+		y3 = 102;
+		x4 = 160;
+		y4 = 102;
+		xForm1 = 18;
+		yForm1  = 31;
+		xForm2 = 18;
+		yForm2  = 32;
+		xForm3 = 18;
+		yForm3  = 31;
+		xForm4 = 18;
+		yForm4  = 32;
+	}else if(dirx == 1){
+		x1 = 14;
+		y1 = 150;
+		x2 = 62;
+		y2 = 150;
+		x3 = 110;
+		y3 = 150;
+		x4 = 158;
+		y4 = 150;
+		xForm1 = 18;
+		yForm1  = 31;
+		xForm2 = 18;
+		yForm2  = 32;
+		xForm3 = 18;
+		yForm3  = 31;
+		xForm4 = 18;
+		yForm4  = 32;
+	}
+	if(diry == -1){
+		x1 = 14;
+		y1 = 57;
+		x2 = 62;
+		y2 = 56;
+		x3 = 110;
+		y3 = 57;
+		x4 = 158;
+		y4 = 56;
+		xForm1 = 20;
+		yForm1  = 30;
+		xForm2 = 20;
+		yForm2  = 30;
+		xForm3 = 20;
+		yForm3  = 30;
+		xForm4 = 20;
+		yForm4 = 30;
+	}
+	
+	//directionAttaque
+	if(directionAttaque == 'droite'){
+		x1 = 206;
+		y1 = 150;
+		x2 = 254;
+		y2 = 150;
+		x3 = 303;
+		y3 = 150;
+		x4 = 350;
+		y4 = 145;
+		xForm1 = 23;
+		yForm1  = 37;
+		xForm2 = 34;
+		yForm2  = 32;
+		xForm3 = 28;
+		yForm3  = 32;
+		xForm4 = 28;
+		yForm4  = 37;
+	}
+	if(directionAttaque == 'gauche'){
+		x1 = 203;
+		y1 = 102;
+		x2 = 240;
+		y2 = 102;
+		x3 = 293;
+		y3 = 102;
+		x4 = 346;
+		y4 = 97;
+		xForm1 = 23;
+		yForm1  = 37;
+		xForm2 = 34;
+		yForm2  = 32;
+		xForm3 = 28;
+		yForm3  = 32;
+		xForm4 = 24;
+		yForm4  = 37;
+	}
+	
+	if(directionAttaque == 'bas'){
+		x1 = 205;
+		y1 = 5;
+		x2 = 253;
+		y2 = 5;
+		x3 = 288;
+		y3 = 5;
+		x4 = 337;
+		y4 = 0;
+		xForm1 = 31;
+		yForm1  = 34;
+		xForm2 = 26;
+		yForm2  = 42;
+		xForm3 = 35;
+		yForm3  = 43;
+		xForm4 = 34;
+		yForm4  = 40;
+	}
+	
+	if(directionAttaque == 'haut'){
+		x1 = 196;
+		y1 = 56;
+		x2 = 249;
+		y2 = 49;
+		x3 = 303;
+		y3 = 48;
+		x4 = 350;
+		y4 = 56;
+		xForm1 = 31;
+		yForm1  = 30;
+		xForm2 = 25;
+		yForm2  = 37;
+		xForm3 = 26;
+		yForm3  = 38;
+		xForm4 = 28;
+		yForm4  = 36;
+	}
+	
+				
+	if(Game.animSprite <= DUREE_ANIMATION / 4 ){
+		Game.ctx.drawImage(
+			Game.hero.image,
+			x1,
+			y1,
+			xForm1,
+			yForm1,
+			Game.hero.screenX - Game.hero.width / 4,
+			Game.hero.screenY - Game.hero.height / 4,
+			xForm1,
+			yForm1
+		);
+	}
+	
+	if(Game.animSprite > DUREE_ANIMATION / 4 && Game.animSprite <= DUREE_ANIMATION / 3 ){
+		Game.ctx.drawImage(
+			Game.hero.image,
+			x2,
+			y2,
+			xForm2,
+			yForm2,
+			Game.hero.screenX - Game.hero.width / 4,
+			Game.hero.screenY - Game.hero.height / 4,
+			xForm2,
+			yForm2
+		);
+	}
+	
+	if(Game.animSprite > DUREE_ANIMATION / 3 && Game.animSprite <= DUREE_ANIMATION/2 ){
+		Game.ctx.drawImage(
+			Game.hero.image,
+			x3,
+			y3,
+			xForm3,
+			yForm3,
+			Game.hero.screenX - Game.hero.width / 4,
+			Game.hero.screenY - Game.hero.height / 4,
+			xForm3,
+			yForm3
+		);
+	}
+	
+	if(Game.animSprite > DUREE_ANIMATION / 2 && Game.animSprite <= DUREE_ANIMATION ){
+		Game.ctx.drawImage(
+			Game.hero.image,
+			x4,
+			y4,
+			xForm4,
+			yForm4,
+			Game.hero.screenX - Game.hero.width / 4,
+			Game.hero.screenY - Game.hero.height / 4,
+			xForm4,
+			yForm4
+		);
+	}
+	
+
+	
+	
+	
+	
+	
+	// Game.ctx.drawImage(
+        // Game.hero.image,
+        // Game.hero.screenX - Game.hero.width / 4,
+        // Game.hero.screenY - Game.hero.height / 2
+    // );
+}
