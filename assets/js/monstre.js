@@ -348,7 +348,10 @@ Monstre.prototype.move = function (delta, hx, hy) {
 			this.directionY = olddirectionY;
 			this.collisionHero = 0;
 		}
-		var isSolid = tile === 3 || tile === 5 || tile === 16 || tile === 17 || (tile === 4 && tile1 === 3);
+		
+		if(this.map.tileSolid.includes(tile))
+			var isSolid =1;
+		
 		if(isSolid){
 			
 				if(this.directionX == -1){

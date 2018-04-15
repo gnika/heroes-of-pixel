@@ -42,7 +42,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 	
 	this.addBuild = function (x, y, map, typeBatiment, caracteristique, supply, typeTile, life, solid)
 	{
-		// console.log(hour);
+		
 		var dirx = 0;
 		var diry = 0;
 		if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }//pour ne pas pouvoir construire quand il se déplace
@@ -62,28 +62,96 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		}
 		
 		pos = map.getRow(y)*map.rows+map.getCol(x);
-
-
-		// if(abs2[pos+1]==typeTile && abs1[pos+1]==1){
-		if(abs1[pos+1] == typeTile[0] && abs2[pos+1] == typeTile[1]){
-			//pour éviter au héros de rester bloquer dans le batiment
-
-			Game.hero.x = map.tsize/2+map.tsize*map.getCol(x);
-			abs2[pos+1]= typeBatiment[0];
-			var nameBuild = 'build-'+map.getRow(y)+'-'+parseInt(map.getCol(x)+1, 10)+'-ing';
-			
-			
-			
-			Object.keys(supply).forEach(function(key) { // paye le prix
-				Game.hero.supply[key] =  Game.hero.supply[key] - supply[key];
-			})
-			
-			Game.nameBuild = new Building(map, x+map.tsize/2, y, map.getCol(x)+1, map.getRow(y), life, nameBuild, typeBatiment, caracteristique, typeTile, solid);
-			builds[map.getCol(x)+1+'-'+map.getRow(y)]=Game.nameBuild;
-
-			anim = new animation(map, x+map.tsize/2, y, 'cloud');
-			menussclick = 0; // pour que le sous menu se referme
-		}
+		
+		if(abs1[pos+1] == typeTile[0] && abs2[pos + 1] == typeTile[1])
+			PlaceBatiment['droite'] = {img: 'buildOn', pos: pos + 1};
+		else
+			PlaceBatiment['droite'] = {img: 'buildOff', pos: pos + 1};
+		
+		if(abs1[pos-1] == typeTile[0] && abs2[pos - 1] == typeTile[1])
+			PlaceBatiment['gauche'] = {img: 'buildOn', pos: pos - 1};
+		else
+			PlaceBatiment['gauche'] = {img: 'buildOff', pos: pos - 1};
+		
+		if(abs1[pos + map.rows] == typeTile[0] && abs2[pos + map.rows] == typeTile[1])
+			PlaceBatiment['bas'] = {img: 'buildOn', pos: pos + map.rows};
+		else
+			PlaceBatiment['bas'] = {img: 'buildOff', pos: pos + map.rows};
+		
+		if(abs1[pos - map.rows] == typeTile[0] && abs2[pos - map.rows] == typeTile[1])
+			PlaceBatiment['haut'] = {img: 'buildOn', pos: pos - map.rows};
+		else
+			PlaceBatiment['haut'] = {img: 'buildOff', pos: pos - map.rows};
+		
+		PlaceBatiment['batiment'] = {typeBatiment: typeBatiment, supply: supply, life: life, caracteristique: caracteristique, typeTile: typeTile, solid: solid};
+		
+		menussclickPlaceBatiment = 1;	//check emplacement disponible
+		
+		menuclick = 0;		
+		menussclick = 0;	
+	}
+	
+	this.checkBuildPlace = function(){
+				posXBuildGauche = Game.hero.x - map.tsize - map.tsize/2;
+		posYBuildGauche = Game.hero.y - map.tsize/2;
+		
+		posXBuildDroite = Game.hero.x + map.tsize - map.tsize/2;
+		posYBuildDroite = Game.hero.y - map.tsize/2;
+		
+		posXBuildHaut = Game.hero.x - map.tsize/2;
+		posYBuildHaut = Game.hero.y - map.tsize - map.tsize/2;
+		
+		posXBuildBas = Game.hero.x - map.tsize/2;
+		posYBuildBas = Game.hero.y + map.tsize/2;
+		
+		
+		Game.ctx.drawImage(
+			Loader.getImage(PlaceBatiment['gauche'].img), // image
+			0, // source x
+			0, // source y
+			map.tsize, // source width
+			map.tsize, // source height
+			posXBuildGauche - Game.camera.x,  // target x
+			posYBuildGauche - Game.camera.y, // target y
+			map.tsize, // target width
+			map.tsize // target height
+		);
+		
+		Game.ctx.drawImage(
+			Loader.getImage(PlaceBatiment['droite'].img), // image
+			0, // source x
+			0, // source y
+			map.tsize, // source width
+			map.tsize, // source height
+			posXBuildDroite - Game.camera.x,  // target x
+			posYBuildDroite - Game.camera.y, // target y
+			map.tsize, // target width
+			map.tsize // target height
+		);
+		Game.ctx.drawImage(
+			Loader.getImage(PlaceBatiment['haut'].img), // image
+			0, // source x
+			0, // source y
+			map.tsize, // source width
+			map.tsize, // source height
+			posXBuildHaut - Game.camera.x,  // target x
+			posYBuildHaut - Game.camera.y, // target y
+			map.tsize, // target width
+			map.tsize // target height
+		);
+		Game.ctx.drawImage(
+			Loader.getImage(PlaceBatiment['bas'].img), // image
+			0, // source x
+			0, // source y
+			map.tsize, // source width
+			map.tsize, // source height
+			posXBuildBas - Game.camera.x,  // target x
+			posYBuildBas - Game.camera.y, // target y
+			map.tsize, // target width
+			map.tsize // target height
+		);
+		
+		
 	}
 	
 	this.food = function ()	//quand on clique sur le bouton action
@@ -112,10 +180,12 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
         var equip 	= Game._getToolEquipe();
         var pos     = map.getRow(y)*map.rows+map.getCol(x);
 		
-		objets[equip].life = objets[equip].life - 1;
-		if(objets[equip].life == 0 ){
-			objets[equip].possession = 0;
-			return false;
+		if(equip != ''){
+			objets[equip].life = objets[equip].life - 1;
+			if(objets[equip].life == 0 ){
+				objets[equip].possession = 0;
+				return false;
+			}
 		}
 		
 		if(abs2[pos] == 144){//mange pomme

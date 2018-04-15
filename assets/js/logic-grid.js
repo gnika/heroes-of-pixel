@@ -28,6 +28,8 @@ menuclick						= 0;
 menuBodyClick					= 0;
 batimentclick					= 0;
 menussclick						= 0;
+menussclickPlaceBatiment		= 0;
+PlaceBatiment					= [];
 hour	   						= 8;
 day			    				= 1;
 batimentClickResponsive		 	= 4;
@@ -207,8 +209,55 @@ Game.init = function () {
 			var equip 	= Game._getToolEquipe();
 			var pos     = map.getRow(yClick)*map.rows+map.getCol(xClick);
 			var posHero = colHero * map.cols + rowHero;
-			// console.log(pos);
 
+			if(menussclickPlaceBatiment == 1){ 		//placement de batiment
+				
+				Object.keys(PlaceBatiment).forEach(function(key) {
+					if(	pos == PlaceBatiment[key].pos && PlaceBatiment[key].img == 'buildOn' ){
+						
+						var xBat = 0;
+						var yBat = 0;
+						
+						if(key == 'droite'){
+							xBat = Game.hero.x + (map.tsize/2);
+							yBat = Game.hero.y - map.tsize/2;
+						}
+						if(key == 'gauche'){
+							xBat = Game.hero.x - (map.tsize + map.tsize/2);
+							yBat = Game.hero.y - map.tsize/2;
+						}
+						if(key == 'haut'){
+							xBat = Game.hero.x - map.tsize/2;
+							yBat = Game.hero.y - (map.tsize + map.tsize/2);
+						}
+						if(key == 'bas'){
+							xBat = Game.hero.x - map.tsize/2;
+							yBat = Game.hero.y + map.tsize/2;
+						}
+						
+						
+						abs2[pos]= PlaceBatiment['batiment'].typeBatiment[0];
+						var nameBuild = 'build-'+rowClick+'-'+colClick+'-ing';
+						
+						Object.keys(PlaceBatiment['batiment'].supply).forEach(function(key) { // paye le prix
+							Game.hero.supply[key] =  Game.hero.supply[key] - PlaceBatiment['batiment'].supply[key];
+						})
+						
+						Game.nameBuild = new Building(map, xBat, yBat, rowClick,
+						colClick, PlaceBatiment['batiment'].life, PlaceBatiment['batiment'].nameBuild, PlaceBatiment['batiment'].typeBatiment,
+						PlaceBatiment['batiment'].caracteristique, PlaceBatiment['batiment'].typeTile, PlaceBatiment['batiment'].solid);
+						builds[rowClick+'-'+colClick]=Game.nameBuild;
+
+						anim = new animation(map, xBat + map.tsize/2, yBat, 'cloud');
+						
+					}
+				})
+				
+				menussclickPlaceBatiment = 0;
+				PlaceBatiment = [];
+				return false;
+			}
+			
 			if(menuclick == 1 && menussclick == 0 && xClick > map.tsize*3 + Game.camera.x){
 				menuclick = 0;
 				return false;
@@ -286,95 +335,94 @@ Game.init = function () {
 					yHeroClick = yHero;
 					
 			}
-		//si fiche du batiment ouvert
-		if(batimentclick == 1){
-			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
-			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
-				batimentclick = 0;
-			}
-
-			if( xClick > rect.width/3+128+colonneBatimentClicResponsive && xClick < 32 + rect.width/3+128+colonneBatimentClicResponsive 
-			&&  yClick > rect.height/5+35 &&  yClick <  rect.height/5+35 + 32){ //ok upgrade batiment
-				Game.hero._upgradeBuild(builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
-				// console.log(builds, map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y), builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
-			}
-		}
-		
-		//si dialogue ouvert
-		if(dialogue == 1){
-			// alert(xClick);
-			// alert(rect.width);
-			// alert(screen.width);
-			// xClick = event.pageX;
-			// yClick = event.pageY;
-			
-			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
-			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
-				dialogue = 0;
-			}
-
-			if( xClick > rect.width/4 +290 && xClick < 32 + rect.width/4 +290
-			&&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4 + 32+20+200){ //acceptQuete
-				Game._questClickPay();
-			}
-		}
-		
-		//si fiche du body ouvert
-		if(menuBodyClick == 1){
-			if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
-			&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
-				menuBodyClick = 0;
-			}
-			
-			var incr 	= 0;
-			var nbLigne = 0;
-			//click des artefacts, description apparait
-			for(var i =0; i< Game.hero.artefact.length; i++){
-				if( xClick > rect.width/4+ incr && xClick < 32 + rect.width/4 + incr
-					&&  yClick > rect.height/4+20+180 + nbLigne &&  yClick <  rect.height/4 + 32+20+180 + nbLigne){ //ko
-						artefactSelectionne = allArtefacts[Game.hero.artefact[i]];
+			//si fiche du batiment ouvert
+			if(batimentclick == 1){
+				if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
+				&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+					batimentclick = 0;
 				}
-				incr+= 32;
-				if(i>6){
-					nbLigne = 55;
-					incr = 0;
+
+				if( xClick > rect.width/3+128+colonneBatimentClicResponsive && xClick < 32 + rect.width/3+128+colonneBatimentClicResponsive 
+				&&  yClick > rect.height/5+35 &&  yClick <  rect.height/5+35 + 32){ //ok upgrade batiment
+					Game.hero._upgradeBuild(builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
+					// console.log(builds, map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y), builds[map.getRow(Game.hero.x)+'-'+map.getCol(Game.hero.y)]);
 				}
 			}
-			//click sur le bouton ok, on utilise l'artefact
-			if( xClick > rect.width/4+170 && xClick < 32 + rect.width/4+170 &&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4+20+100+32){
-				var index = Game.hero.artefact.indexOf(artefactSelectionne.name);
-				if(artefactSelectionne.duree != ''){
-					Game.hero.artefactEnCours[artefactSelectionne.name+'-'+day+'-'+hour] = 
-						{
-							'artefact' : artefactSelectionne,
-							'heure' : hour + artefactSelectionne.duree.heure,
-							'jour' : day + artefactSelectionne.duree.jour
-						};
-					Game.hero.artEnCours(artefactSelectionne);
-				}else{
-					var nameArtefact = artefactSelectionne.name;
-					Game.hero[nameArtefact]();	//nom de l'artefact en dynamique
+			
+			//si dialogue ouvert
+			if(dialogue == 1){
+				// alert(xClick);
+				// alert(rect.width);
+				// alert(screen.width);
+				// xClick = event.pageX;
+				// yClick = event.pageY;
+				
+				if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
+				&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+					dialogue = 0;
 				}
-				Game.hero.artefact.splice(index, 1);
-				menuBodyClick = 0;
-			}
-			
-		}
-		//si sous menu ouvert
-		if(menussclick!=0){
-			//map.tsize*7, map.tsize*2+10
-			if(xClick >map.tsize*7 && xClick <map.tsize*7+32 && yClick >map.tsize*2+10 &&  yClick < map.tsize*2+10+32 ){ //ok
-			
-				Game.hero.addBuild(Game.hero.x, Game.hero.y, map, allBuilding[keySelected].paramBuild['typeBatiment'],
-				allBuilding[keySelected].caracteristique, allBuilding[keySelected].supplyBuild, allBuilding[keySelected].paramBuild['typeTile'],
-				allBuilding[keySelected].paramBuild['life'], allBuilding[keySelected].paramBuild['solid']);
-			}
 
-			if(xClick >map.tsize*7+32 && xClick <map.tsize*7+64 && yClick >map.tsize*2+10 &&  yClick < map.tsize*2+10+32 ){ //ko
-				menussclick = 0;
-				menuclick = 0;
+				if( xClick > rect.width/4 +290 && xClick < 32 + rect.width/4 +290
+				&&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4 + 32+20+200){ //acceptQuete
+					Game._questClickPay();
+				}
 			}
-		}
+			
+			//si fiche du body ouvert
+			if(menuBodyClick == 1){
+				if( xClick > rect.width/4 && xClick < 32 + rect.width/4 
+				&&  yClick > rect.height/4 &&  yClick <  rect.height/4 + 32){ //ko
+					menuBodyClick = 0;
+				}
+				
+				var incr 	= 0;
+				var nbLigne = 0;
+				//click des artefacts, description apparait
+				for(var i =0; i< Game.hero.artefact.length; i++){
+					if( xClick > rect.width/4+ incr && xClick < 32 + rect.width/4 + incr
+						&&  yClick > rect.height/4+20+180 + nbLigne &&  yClick <  rect.height/4 + 32+20+180 + nbLigne){ //ko
+							artefactSelectionne = allArtefacts[Game.hero.artefact[i]];
+					}
+					incr+= 32;
+					if(i>6){
+						nbLigne = 55;
+						incr = 0;
+					}
+				}
+				//click sur le bouton ok, on utilise l'artefact
+				if( xClick > rect.width/4+170 && xClick < 32 + rect.width/4+170 &&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4+20+100+32){
+					var index = Game.hero.artefact.indexOf(artefactSelectionne.name);
+					if(artefactSelectionne.duree != ''){
+						Game.hero.artefactEnCours[artefactSelectionne.name+'-'+day+'-'+hour] = 
+							{
+								'artefact' : artefactSelectionne,
+								'heure' : hour + artefactSelectionne.duree.heure,
+								'jour' : day + artefactSelectionne.duree.jour
+							};
+						Game.hero.artEnCours(artefactSelectionne);
+					}else{
+						var nameArtefact = artefactSelectionne.name;
+						Game.hero[nameArtefact]();	//nom de l'artefact en dynamique
+					}
+					Game.hero.artefact.splice(index, 1);
+					menuBodyClick = 0;
+				}
+				
+			}
+			//si sous menu ouvert
+			if(menussclick!=0){
+				//map.tsize*7, map.tsize*2+10
+				if(xClick >map.tsize*7 && xClick <map.tsize*7+32 && yClick >map.tsize*2+10 &&  yClick < map.tsize*2+10+32 ){ //ok
+					Game.hero.addBuild(Game.hero.x, Game.hero.y, map, allBuilding[keySelected].paramBuild['typeBatiment'],
+					allBuilding[keySelected].caracteristique, allBuilding[keySelected].supplyBuild, allBuilding[keySelected].paramBuild['typeTile'],
+					allBuilding[keySelected].paramBuild['life'], allBuilding[keySelected].paramBuild['solid']);
+				}
+				if(xClick >map.tsize*7+32 && xClick <map.tsize*7+64 && yClick >map.tsize*2+10 &&  yClick < map.tsize*2+10+32 ){ //ko
+					menussclick = 0;
+				}
+			}
+			
+			
 			
 		},
 	false);
@@ -877,6 +925,12 @@ Game._drawGridMenu = function () {
 		}
 	})
 		
+	
+	//emplacement batiment consuctible
+	if(menussclickPlaceBatiment == 1){
+		this.hero.checkBuildPlace();		
+	}
+	
 	
 	// draw main character nouvel emplacement
 	renderHero();

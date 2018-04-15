@@ -41,6 +41,9 @@ Game.defineImages = function(){
 		Loader.loadImage('faux_artefact', 'assets/artefacts/faux.png'),
 		Loader.loadImage('epee_artefact', 'assets/artefacts/epee.png'),
 		
+		Loader.loadImage('buildOff', 'assets/buildOff.png'),
+		Loader.loadImage('buildOn', 'assets/buildOn.png'),
+		
 		
 		// Loader.loadImage('hero', 'assets/character.png'),
 		// Loader.loadImage('hero2', 'assets/character2.png'),
