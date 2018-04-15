@@ -14,32 +14,34 @@ Game._quest1 = function(monstre){
 	// texteRecompense = 'Merci.\n Revenez me voir \n quand vous voulez';
 }
 Game._quest2 = function(monstre){
-	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Pour connaître votre condition physique, \n cliquez sur le menu\n accessible à gauche de l\'écran\n\n Votre défense indique votre résistance\n face aux monstres que vous cotoierez. \n\n Votre exploration indique votre capacité\n à voir loin lorsque vous explorez.";
+	dialogueText = "Je me nomme Baccata. Pour vous servir\n\n Equipez-vous de votre épée pour \nfendre des objets et tuer des ennemis. \nLes xp rapportés sont très utiles pour la suite. \n\nDéfendez votre entrepôt coûte que coûte !\n";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
 }
 Game._quest3 = function(monstre){
-	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \nVos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Reliez tous vos bâtiments de production \n à l'entrepôt à l'aide de routes\n Les routes ne sont constructibles que\n sur les endroits ou vous avez déjà creusé !";
+	dialogueText = "Bonjour, chevalier\n\n Vos ressources primaires s'affichent\n en haut de n'écran. \nVos ressources finies s'affichent dans\n l'entrepôt, qui est votre bâtiment principal.\n\n Construisez des bâtiments pour\n produire des ressources\n Reliez tous vos bâtiments de production \n à l'entrepôt à l'aide de routes\n\n Les routes ne sont constructibles que\n sur les endroits ou vous avez déjà creusé !";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
 }
 Game._quest4 = function(monstre){
-	dialogueText = "Pour récolter de l\'argent, creusez des trous :\n cliquez sur la pelle pour être équipé, \n allez sur l\'herbe, et commencez à creuser !\n\nPour récolter du bois, fauchez les ronces :\n cliquez sur la faux pour être équipé, \n allez sur les ronces, et fauchez !\n Attention toutefois : les ronces vous font perdre\n des points de vie !";
+	dialogueText = "Fauchez l'herbe et les fleurs,\n creusez la terre, piochez les roches\n pour trouver des ressources !\n\n Le pays est un immense terrain de jeu ! \n\n Attention toutefois ! vos outils s'abiment en les utilisant !";
 	supplyText = '';																	//conditions de quete
 	artefactText = '';														//conditions de quete
 	buildText = '';	
 }
 
 Game._quest5 = function(monstre){
-	dialogueText = 'Bonjour étranger.\n Trouvez la clé pour ouvrir cette barrière,\n et vous pourrez passer';	
-	supplyText = '';																		//conditions de quete
-	artefactText = {'cle': 1};														//conditions de quete
+	dialogueText = 'Bonjour étranger.\n Plantez du Maïs pour nourrir mes\n petits poussins trop mignons \n et je vous laisserai passer...\nBien sur, auparavant, vous devrez \n trouver la clé pour ouvrir cette barrière...\n  ';	
+	
+	supplyText = {'mais': 10};										
+	// supplyText = '';										
+	artefactText = {'cle': 1};	
 	buildText = '';		//conditions de quete
-	recompenses = ["abs2[445] = 0;"];
+	recompenses = ["abs2[445] = 0;var index = Game.hero.artefact.indexOf(allArtefacts['cle'].name);Game.hero.artefact.splice(index, 1);"];//retirer la clé
 	updateFermetureDialogue = [monstre.name+"=6"];
-	texteRecompense = 'Merci.\n changez vite de région, à présent !';
+	texteRecompense = 'Merci.\n Bon voyage, et soyez prudent ! Servez-vous de la pioche\n pour casser des cailloux !';
 }
 
 Game._quest6 = function(monstre){
@@ -158,6 +160,16 @@ Game._quest17 = function(monstre){
 	artefactText = '';
 	buildText = '';	
 }
+
+Game._quest18 = function(monstre){
+	dialogueText = "Vous voilà bien loin dans la forêt...\n et vos outils me paraissent en piteux état...\n Ecoutez, je veux bien vous réparer\n tous vos outils, mais pour ça,\n il me faut des ressources ! ";
+	supplyText = {'planche' : 30};				
+	recompenses = ["Game.hero.equipement['epee'].life = 100;", "Game.hero.equipement['epee'].life = 100;", "Game.hero.equipement['pioche'].life = 100;", "Game.hero.equipement['faux'].life = 100;"];	
+	artefactText = {'silex': 3, 'manche': 2};										//conditions de quete
+	buildText = '';
+	updateFermetureDialogue = '';
+	texteRecompense = 'Voilà le travail !\n\n N\'hésitez pas à revenir me voir\n pour vos outils !';
+}
  
 Game._clickMonstre = function() {
 	if(dialogue == 1){
@@ -183,8 +195,8 @@ Game._clickMonstre = function() {
 			var sousRessource = 150;
 		}else{
 			this.ctx.font = '18px Georgia';//marche sur les petits pc
-			var sousTexte = 170;
-			var sousRessource = 140;
+			var sousTexte = 270;
+			var sousRessource = 240;
 			
 		}
 		
@@ -282,7 +294,7 @@ Game._clickMonstre = function() {
 		}
 		
 		if(error == 0 && (supplyText!='' || artefactText!='' || buildText!='' ))
-			this.ctx.drawImage(Loader.getImage('ok'), width/4+190, height/4+20+100);
+			this.ctx.drawImage(Loader.getImage('ok'), width/4+290, height/4+20+200);
 
 	}
 }

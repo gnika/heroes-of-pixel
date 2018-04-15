@@ -33,7 +33,7 @@
 			var isSolid = 0;
 			var tile2 = abs2[i];
 						
-			if(tile2 != 129 && tile2 != 61 && tile2 != 84 && tile2 != 85)	//tuile de pont ou de route ou d'entrepot
+			if(tile2 != 174 && tile2 != 61 && tile2 != 84 && tile2 != 85)	//tuile de pont ou de route ou d'entrepot
 				isSolid = 1;
 			
 			arrTemp.push(isSolid);

@@ -271,6 +271,54 @@ allArtefacts['silex'] = {
 	'description_fr' : "Silex pour\n fabriquer des outils",
 	'description_en' : "EN Silex pour fabriquer des outils",
 }
+allArtefacts['pelle_artefact'] = {
+	'name'		 	 : 'pelle_artefact',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',	//pour la durée des artefacts utilisés
+	'inventaire'	 : 0,	//Pour les artefacts qu'on garde dans l'inventaire
+	'outils' : 'pelle',
+}
+allArtefacts['pioche_artefact'] = {
+	'name'		 	 : 'pioche_artefact',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',	//pour la durée des artefacts utilisés
+	'inventaire'	 : 0,	//Pour les artefacts qu'on garde dans l'inventaire
+	'outils'		 : 'pioche',
+}
+allArtefacts['epee_artefact'] = {
+	'name'		 	 : 'epee_artefact',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',	//pour la durée des artefacts utilisés
+	'inventaire'	 : 0,	//Pour les artefacts qu'on garde dans l'inventaire
+	'outils' : 'epee',
+}
+allArtefacts['faux_artefact'] = {
+	'name'		 	 : 'faux_artefact',
+	'attaque'		 : 0,
+	'defense'		 : 0,
+	'agilite'		 : 0,
+	'xp'	 		 : 0,
+	'exploration'	 : 0,
+	'supply'		 : '',
+	'duree'			 : '',	//pour la durée des artefacts utilisés
+	'inventaire'	 : 0,	//Pour les artefacts qu'on garde dans l'inventaire
+	'outils' 		 : 'faux',
+}
 allArtefacts['bois'] = {
 	'name'		 	 : 'bois',
 	'attaque'		 : 0,
@@ -316,7 +364,7 @@ allArtefacts['viande'] = {
 	'inventaire'	 : 0
 }
 
-function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploration, supply, duree, inventaire, image1, quete) {
+function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploration, supply, duree, inventaire, image1, quete, outils) {
 	this.map = map;
     this.xp = xp;
     this.attaque = attaque;
@@ -335,6 +383,7 @@ function Artefact(map, x, y, row, col, attaque, defense, agilite, xp, exploratio
     this.heure = 0;
     this.jour = 0;
     this.quete = 1;
+    this.outils = outils;
 }
 
 function generateArtefact(map, x, y, row, col, name){
@@ -349,7 +398,8 @@ function generateArtefact(map, x, y, row, col, name){
 														allArtefacts[name].duree, 
 														allArtefacts[name].inventaire, 
 														name,
-														allArtefacts[name].quete);
+														allArtefacts[name].quete,
+														allArtefacts[name].outils);
 	
 	artefacts[row+'-'+col] = this.nameArtefact;
 }

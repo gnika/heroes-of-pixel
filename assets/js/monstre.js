@@ -10,9 +10,9 @@ allMonsters['troll'] = {
 allMonsters['scorpion'] = {
 	'nom' 			 : 'scorpion',
 	'level'			 :	1,
-	'attaque'		 : [7, 9],
-	'defense'		 : [1, 5],
-	'regeneration'	 : 0.05,
+	'attaque'		 : [6, 7],
+	'defense'		 : [1, 2],
+	'regeneration'	 : 0.02,
 	'vitesse'		 : [10, 20],
 	'image'			 : 'scorpion'
 };

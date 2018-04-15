@@ -14,7 +14,7 @@ Game._drawMenu = function () {
 	this.ctx.font="20px Arial";
 	this.ctx.fillStyle = 'black';
 	this.ctx.drawImage(Loader.getImage('xp'), 15, 0);
-	this.ctx.fillText(this.hero.xp, 55, 25);
+	this.ctx.fillText(this.hero.supply.xp, 55, 25);
 	
 	this.ctx.drawImage(Loader.getImage('ecu'), 110, 0);
 	this.ctx.fillText(this.hero.supply.ecu, 150, 25);

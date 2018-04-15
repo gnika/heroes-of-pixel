@@ -36,6 +36,11 @@ Game.defineImages = function(){
 		Loader.loadImage('corde', 'assets/artefacts/corde.png'),
 		Loader.loadImage('cle', 'assets/artefacts/key.png'),
 		
+		Loader.loadImage('pelle_artefact', 'assets/artefacts/pelle.png'),
+		Loader.loadImage('pioche_artefact', 'assets/artefacts/pioche.png'),
+		Loader.loadImage('faux_artefact', 'assets/artefacts/faux.png'),
+		Loader.loadImage('epee_artefact', 'assets/artefacts/epee.png'),
+		
 		
 		// Loader.loadImage('hero', 'assets/character.png'),
 		// Loader.loadImage('hero2', 'assets/character2.png'),
@@ -83,6 +88,7 @@ Game.defineImages = function(){
 		Loader.loadImage('argent', 'assets/menu/silver_ingot.png'),
 		Loader.loadImage('bois', 'assets/menu/wood.png'),
 		Loader.loadImage('no_bois', 'assets/menu/no_wood.png'),
+		Loader.loadImage('no_xp', 'assets/menu/no_xp.png'),
 		Loader.loadImage('ecu', 'assets/menu/bourse.png'),
 		Loader.loadImage('farine', 'assets/menu/flour.png'),
 		Loader.loadImage('no_farine', 'assets/menu/no_flour.png'),

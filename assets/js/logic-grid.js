@@ -40,6 +40,8 @@ path							= [];
 paramX							= 0;
 paramY							= 0;
 directionAttaque				= '';
+lifeHero						= 60;
+clignote						= 0;
 
 
 
@@ -101,10 +103,15 @@ function objet(name, media, life, attaque){
 }
 
 function animation(map, x, y, imageName, etat){
+	var isArray = Array.isArray(imageName);
+	
 	this.map = map;
 	this.x = x;
     this.y = y;
-	this.image = Loader.getImage(imageName);
+	if(isArray == false)
+		this.image = Loader.getImage(imageName);
+	else
+		this.images = imageName;
 	this.etat = Loader.getImage(etat);
 }
 
@@ -172,11 +179,11 @@ Game.init = function () {
 	
 	objets['pelle'] = {'img':'pelle_bois', 'name':'pelle', 'life':100, 'possession':1, 'equipe':0};
 	objets['faux']  = {'img':'faux_bois', 'name':'faux', 'life':100, 'possession':1, 'equipe':0};
-	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':1, 'equipe':0};
+	objets['pioche']  = {'img':'pioche_bois', 'name':'pioche', 'life':100, 'possession':0, 'equipe':0};
 	objets['epee']  = {'img':'epee_bois', 'name':'epee', 'life':100, 'possession':1, 'equipe':0};
 	objets['road']  = {'img':'road_bois', 'name':'road', 'life':100, 'possession':1, 'equipe':0};
 	
-    this.hero = new Hero(map, 160, 160, 60, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
+    this.hero = new Hero(map, 160, 160, lifeHero, 60, 15, 5, 0, objets);//map - x - y - vie - attaque - defense - xp - objet
 	
 	save();//RECUPERATION DE LA SAUVEGARDE
 	
@@ -306,8 +313,8 @@ Game.init = function () {
 				dialogue = 0;
 			}
 
-			if( xClick > rect.width/4 +190 && xClick < 32 + rect.width/4 +190
-			&&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4 + 32+20+100){ //acceptQuete
+			if( xClick > rect.width/4 +290 && xClick < 32 + rect.width/4 +290
+			&&  yClick > rect.height/4+20+100 &&  yClick <  rect.height/4 + 32+20+200){ //acceptQuete
 				Game._questClickPay();
 			}
 		}
@@ -887,29 +894,46 @@ Game._drawGridMenu = function () {
 		if(Game.animBref<=DUREE_ANIMATION){
 				if(anim.etat !== null)
 					Game.ctx.drawImage(
-							anim.etat, // image
+						anim.etat, // image
+						0, // source x
+						0, // source y
+						map.tsize, // source width
+						map.tsize, // source height
+						anim.x-30-Game.camera.x,  // target x
+						anim.y-15-Game.camera.y-Game.animBref, 
+						map.tsize, // target width
+						map.tsize // target height
+					);
+							
+				if(typeof(anim.images) != "undefined"){
+					
+					var n = 0;
+					for(var i = 0; i < anim.images.length;i++){
+						Game.ctx.drawImage(
+							Loader.getImage(anim.images[i]), // image
 							0, // source x
 							0, // source y
 							map.tsize, // source width
 							map.tsize, // source height
-							anim.x-30-Game.camera.x,  // target x
+							anim.x-15-Game.camera.x-n,  // target x
 							anim.y-15-Game.camera.y-Game.animBref, 
 							map.tsize, // target width
 							map.tsize // target height
 						);
-						
-						
-				Game.ctx.drawImage(
-							anim.image, // image
-							0, // source x
-							0, // source y
-							map.tsize, // source width
-							map.tsize, // source height
-							anim.x-15-Game.camera.x,  // target x
-							anim.y-15-Game.camera.y-Game.animBref, 
-							map.tsize, // target width
-							map.tsize // target height
-						);
+						n = n - 20;
+					}
+				}else
+					Game.ctx.drawImage(
+						anim.image, // image
+						0, // source x
+						0, // source y
+						map.tsize, // source width
+						map.tsize, // source height
+						anim.x-15-Game.camera.x,  // target x
+						anim.y-15-Game.camera.y-Game.animBref, 
+						map.tsize, // target width
+						map.tsize // target height
+					);
 			Game.animBref++;
 			Game.animBref++;
 		}else{
@@ -970,12 +994,13 @@ Game.render = function () {
 					map.tsize // target height
 				);
 			
-	
-				Game.ctx.fillStyle="#FF0000";
-				Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 5);
+				if(monsters[key].attaque > 0){
+					Game.ctx.fillStyle="#FF0000";
+					Game.ctx.fillRect(2+monsters[key].x-Game.camera.x, monsters[key].y+70-Game.camera.y, monsters[key].life, 5);
+				}
 			}
 		}else{
-				Game.hero.xp = Game.hero.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
+				Game.hero.supply.xp = Game.hero.supply.xp +monsters[key].level*5;//XP A CHAQUE MONSTRE VAINCU EN FONCTION DU LEVEL DU MONSTRE
 				anim = new animation(map, monsters[key].x, monsters[key].y, 'xp');
 				
 				delete monsters[key];						

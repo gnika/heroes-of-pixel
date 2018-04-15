@@ -5,11 +5,11 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
     this.y = y;
     this.life = life;
     this.fatigue = fatigue;
-    this.xp = xp;
     this.width = map.tsize;
     this.height = map.tsize;
     this.attaque = attaque;
     this.defense = defense;
+    this.chance = 1;
     this.agilite = 10;
     this.attaqueEnCours = 60;
     this.exploration = 1;
@@ -35,6 +35,7 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		bijou:  	0,
 		planche:	0,
 		cochon: 	0,
+		xp:		 	0,
 		mais:		0
 		};
     this.image = Loader.getImage('hero');
@@ -110,18 +111,50 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		
         var equip 	= Game._getToolEquipe();
         var pos     = map.getRow(y)*map.rows+map.getCol(x);
+		
+		objets[equip].life = objets[equip].life - 1;
+		if(objets[equip].life == 0 ){
+			objets[equip].possession = 0;
+			return false;
+		}
+		
+		if(abs2[pos] == 144){//mange pomme
+			abs2[pos] = 145;
+			absobs2[pos] = 145;
+			this.life = this.life + 10;
+			if(this.life > 60)
+				this.life = 60;
+		}
 		// console.log(pos, abs1[pos], abs2[pos]);
 		
 		
 		var vertical = map.getCol(x);
 		var horizontal = map.getRow(y);
 		
+		if(equip == 'epee' && map.tileArtefact.includes(abs2[pos])){
+			abs2[pos] =abs2[pos]+1;
+			var decim = Math.floor(Math.random() * 100);
+			if ( decim > 71 - this.chance ){
+				var maxItem = Object.keys(allArtefacts).length;
+				var randomArt = Math.floor(Math.random() * (maxItem));
+				var i = 0;
+				Object.keys(allArtefacts).forEach(function(key) {
+					if(i == randomArt)
+						generateArtefact(map, x, y, map.getRow(x), map.getCol(y), key);
+					i++;
+				})
+			}
+			
+				
+		}
+		
 		//tiles
 		if( equip == 'road' && builds[vertical+'-'+horizontal] == null){
-			if(this.supply.ecu >= 2 && abs1[pos] == 2 && abs2[pos] == 0){ 		//A DECOMMENTER !!!!!
-				this.supply.ecu = Game.hero.ecu - 2; 		//A DECOMMENTER !!!!!
-				abs2[pos] = 129;
-				absobs2[pos] = 129;
+			if(this.supply.ecu >= 2 && this.supply.bois >= 2 && abs1[pos] == 2 && abs2[pos] == 0){ 	
+				this.supply.ecu = Game.hero.ecu - 2; 		
+				this.supply.bois = Game.hero.bois - 2; 		
+				abs2[pos] = 174;
+				absobs2[pos] = 174;
 			}
 		}
 		else if (abs2[pos] == 0 && abs1[pos] ==1 && equip == 'pelle') {
@@ -137,23 +170,30 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 			this.supply.argile = Game.hero.argile + 10;
 		} else if (abs2[pos] == 58  && equip == 'pelle'){
 			this.supply.argile = Game.hero.argile + 1;
-        }else if (abs2[pos] == 59 && abs1[pos] != 2 && equip == 'pioche') {
-			abs2[pos] = 60;
-			absobs2[pos] = 60;
+        }else if (map.tileRock.includes(abs2[pos]) && abs1[pos] != 2 && equip == 'pioche') {
+			if(abs2[pos] == 59){
+				abs2[pos] = 60;
+				absobs2[pos] = 60;
+			}else{
+				abs2[pos] = 0;
+				absobs2[pos] = 0;
+			}
 			this.supply.pierre = Game.hero.pierre + 10;
 		} 
 		// else if (abs2[pos] == 60  && equip == 'pioche'){
 			// this.supply.pierre = Game.hero.pierre + 1;
         // }
-		else if (abs1[pos] == 2  && equip == 'pelle'){
-			this.supply.ecu = Game.hero.ecu + 1;
-        }else if ((abs2[pos] == 8 || abs2[pos] == 81 || abs2[pos] == 82 || abs2[pos] == 83) && abs1[pos] == 1  && equip == 'faux') {
+		// else if (abs1[pos] == 2  && equip == 'pelle'){
+			// this.supply.ecu = Game.hero.ecu + 1;
+        // }
+		else if ( map.tileWood.includes(abs2[pos])  && equip == 'faux') {
             abs1[pos] = 2;
             abs2[pos] = 0;
             absobs1[pos] = 2;
             absobs2[pos] = 0;
 			this.supply.bois = Game.hero.bois + 5;
 			// console.log(Math.random());
+
 			if(((abs2[pos+1] == 0 || abs2[pos+1] == 8) && abs1[pos+1] == 1) && Math.random() > 0.93)	//scorpion apparait quand on défriche la forêt
 				generateMonstre(map, x+map.tsize, y, horizontal+1, vertical, 'scorpion', 2, 0, 1);
 			
@@ -192,12 +232,16 @@ function Hero(map, x, y, life, fatigue, attaque, defense, xp, equipement) {
 		}
 		
 		//animation quand on gagne une ressource
+		var animRessources = [];
 		Object.keys(this.supply).forEach(function(key) {
 			if(Game.hero.supply[key] > Game.hero[key])
 				anim = new animation(map, x, y, key, 'plus');
-			if(Game.hero.supply[key] < Game.hero[key])
-				anim = new animation(map, x, y, key, 'minus');
+			if(Game.hero.supply[key] < Game.hero[key]){
+				animRessources.push(key);				
+			}
 		})
+		if(animRessources.length > 0)
+			anim = new animation(map, x, y, animRessources, 'minus');
 		
 		if(this.attaqueEnCours  == 60 && Game._getToolEquipe() == 'epee')
 			directionAttaque = 'bas';
@@ -396,6 +440,9 @@ Hero.prototype.move = function (delta, dirx, diry, positionX, positionY, dirx2, 
 			this.exploration+= artefacts[rowX+'-'+colY].exploration;
 			this.agilite+= artefacts[rowX+'-'+colY].agilite;
 			this.xp+= artefacts[rowX+'-'+colY].xp;
+			
+			if(typeof(artefacts[rowX+'-'+colY].outils) != 'undefined')
+				objets[artefacts[rowX+'-'+colY].outils].possession = 1;//recupérer un outils
 			
 			for (var key in artefacts[rowX+'-'+colY].supply) {
 				Game.hero.supply[key]+= artefacts[rowX+'-'+colY].supply[key];
@@ -771,61 +818,75 @@ function renderHero(){
 		yForm4  = 36;
 	}
 	
-				
-	if(Game.animSprite <= DUREE_ANIMATION / 4 ){
-		Game.ctx.drawImage(
-			Game.hero.image,
-			x1,
-			y1,
-			xForm1,
-			yForm1,
-			Game.hero.screenX - Game.hero.width / 4,
-			Game.hero.screenY - Game.hero.height / 4,
-			xForm1,
-			yForm1
-		);
-	}
 	
-	if(Game.animSprite > DUREE_ANIMATION / 4 && Game.animSprite <= DUREE_ANIMATION / 3 ){
-		Game.ctx.drawImage(
-			Game.hero.image,
-			x2,
-			y2,
-			xForm2,
-			yForm2,
-			Game.hero.screenX - Game.hero.width / 4,
-			Game.hero.screenY - Game.hero.height / 4,
-			xForm2,
-			yForm2
-		);
-	}
+	Game.hero.clignote = 0;
+	if(Game.hero.life < lifeHero){
+		lifeHero = Game.hero.life;
+		if(clignote == 1)
+			clignote = 0;
+		else
+			clignote = 1;
+					
+	}else
+		clignote = 0;
 	
-	if(Game.animSprite > DUREE_ANIMATION / 3 && Game.animSprite <= DUREE_ANIMATION/2 ){
-		Game.ctx.drawImage(
-			Game.hero.image,
-			x3,
-			y3,
-			xForm3,
-			yForm3,
-			Game.hero.screenX - Game.hero.width / 4,
-			Game.hero.screenY - Game.hero.height / 4,
-			xForm3,
-			yForm3
-		);
-	}
-	
-	if(Game.animSprite > DUREE_ANIMATION / 2 && Game.animSprite <= DUREE_ANIMATION ){
-		Game.ctx.drawImage(
-			Game.hero.image,
-			x4,
-			y4,
-			xForm4,
-			yForm4,
-			Game.hero.screenX - Game.hero.width / 4,
-			Game.hero.screenY - Game.hero.height / 4,
-			xForm4,
-			yForm4
-		);
+	if(clignote == 0){
+		
+		if(Game.animSprite <= DUREE_ANIMATION / 4 ){
+			Game.ctx.drawImage(
+				Game.hero.image,
+				x1,
+				y1,
+				xForm1,
+				yForm1,
+				Game.hero.screenX - Game.hero.width / 4,
+				Game.hero.screenY - Game.hero.height / 4,
+				xForm1,
+				yForm1
+			);
+		}
+		
+		if(Game.animSprite > DUREE_ANIMATION / 4 && Game.animSprite <= DUREE_ANIMATION / 3 ){
+			Game.ctx.drawImage(
+				Game.hero.image,
+				x2,
+				y2,
+				xForm2,
+				yForm2,
+				Game.hero.screenX - Game.hero.width / 4,
+				Game.hero.screenY - Game.hero.height / 4,
+				xForm2,
+				yForm2
+			);
+		}
+		
+		if(Game.animSprite > DUREE_ANIMATION / 3 && Game.animSprite <= DUREE_ANIMATION/2 ){
+			Game.ctx.drawImage(
+				Game.hero.image,
+				x3,
+				y3,
+				xForm3,
+				yForm3,
+				Game.hero.screenX - Game.hero.width / 4,
+				Game.hero.screenY - Game.hero.height / 4,
+				xForm3,
+				yForm3
+			);
+		}
+		
+		if(Game.animSprite > DUREE_ANIMATION / 2 && Game.animSprite <= DUREE_ANIMATION ){
+			Game.ctx.drawImage(
+				Game.hero.image,
+				x4,
+				y4,
+				xForm4,
+				yForm4,
+				Game.hero.screenX - Game.hero.width / 4,
+				Game.hero.screenY - Game.hero.height / 4,
+				xForm4,
+				yForm4
+			);
+		}
 	}
 	
 

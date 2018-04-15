@@ -107,6 +107,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] =1;
 		caracteristique['portee'] =0;
 		caracteristique['recompense'] = {'fer': 10};
+		caracteristique['prixUpdate'] = {'xp': 5};
 		paramBuild['typeBatiment'] = [32, 33, 34, 35];
 		paramBuild['typeTile'] = [1, 88];
 		paramBuild['life'] = 60;
@@ -140,7 +141,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['showLife'] =1;
 		caracteristique['recompense'] = {'or': 10};
 		caracteristique['portee'] =0;
-		caracteristique['updateNiveau'] = {'ble': 20, 'or': 30};
+		caracteristique['prixUpdate'] = {'xp': 5};
 		paramBuild['typeBatiment'] = [48, 49, 50, 51];
 		paramBuild['typeTile'] = [62, 52];
 		paramBuild['life'] = 60;
@@ -171,6 +172,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['outilRecompense'] = 'faux';
 		caracteristique['maintenance'] = {'ecu': 10};
 		caracteristique['loseLife'] = 1;
+		caracteristique['prixUpdate'] = {'xp': 5};
 		supplyBuild['bois'] = 30;
 		supplyBuild['argile'] = 25;
 		paramBuild['typeBatiment'] = [36, 37, 38, 39];
@@ -201,6 +203,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['outilRecompense'] = 'faux';
 		caracteristique['maintenance'] = {'ecu': 15};
 		caracteristique['loseLife'] = 1;
+		caracteristique['prixUpdate'] = {'xp': 5};
 		supplyBuild['planche'] = 20;
 		supplyBuild['ecu'] = 25;
 		paramBuild['typeBatiment'] = [40, 41, 42, 43];
@@ -300,6 +303,7 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		caracteristique['attaque'] =0;
 		caracteristique['showLife'] =1;
 		caracteristique['portee'] =0;
+		caracteristique['prixUpdate'] = {'xp': 5};
 		paramBuild['typeBatiment'] = [28, 29, 30, 31];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 60;
@@ -358,20 +362,22 @@ function Building(map, x, y, row, col, life, name, batiment, caracteristique, ty
 		
 		caracteristique['showLife'] = 0;
 		// caracteristique['level'] = 1;
-		caracteristique['maintenance'] = {'ecu': 25};
-		caracteristique['updateNiveau'] = {'ble': 50, 'argile': 100};
-		caracteristique['recompense'] = {'mais': 400};
+		caracteristique['maintenance'] = {'ecu': 10};
+		caracteristique['updateNiveau'] = {'bois': 50};
+		caracteristique['recompense'] = {'mais': 10};
 		caracteristique['outilRecompense'] = 'faux';
+		caracteristique['prixUpdate'] = {'xp': 1};
 		caracteristique['loseLife'] = 1;
-		supplyBuild['ecu'] = 0;
+		supplyBuild['ecu'] = 20;
+		supplyBuild['bois'] = 20;
 		paramBuild['typeBatiment'] = [10, 11, 12, 13];
 		paramBuild['typeTile'] = [1, 0];
 		paramBuild['life'] = 3;
 		paramBuild['solid'] = 0;
 		
 		menussclickTitre = 'Champs de maïs';
-		description_fr = 'Le maïs mets 3 jours pour pousser\net permet de nourrir les cochons';
-		description_en = 'EN maïs mets 3 jours pour pousser\net permet de nourrir les cochons';
+		description_fr = 'Le maïs mets 3 voyages pour pousser\net permet de nourrir les cochons';
+		description_en = 'EN maïs mets 3 voyages pour pousser\net permet de nourrir les cochons';
 
 		allBuilding['culture_mais']  = {
 		 'caracteristique'	: caracteristique,
